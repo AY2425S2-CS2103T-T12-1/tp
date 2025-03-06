@@ -14,7 +14,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/dexterkwxn.png" width="200px">
 
 [[github](https://github.com/dexterkwxn)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Executive sub-GenAI Code Monkey
 
