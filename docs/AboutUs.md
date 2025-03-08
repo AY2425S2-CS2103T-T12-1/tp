@@ -17,15 +17,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Executive sub-GenAI Code Monkey
 
-### Jane Doe
+### Thaddeus Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lyhthaddeus.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/lyhthaddeus)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Underpaid Intern
+* Responsibilities: Brings Coffee
 
 ### Johnny Doe
 
