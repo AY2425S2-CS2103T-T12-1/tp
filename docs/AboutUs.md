@@ -27,14 +27,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Underpaid Intern
 * Responsibilities: Brings Coffee
 
-### Johnny Doe
+### Ng Wei En
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/weien02.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/weien02)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Group Deadweight
+* Responsibilities: Just vibing
 
 ### Jean Doe
 
