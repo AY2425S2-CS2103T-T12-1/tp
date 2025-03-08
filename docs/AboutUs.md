@@ -36,15 +36,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Group Deadweight
 * Responsibilities: Just vibing
 
-### Jean Doe
+### Liew Zhao Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zwliew.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/zwliew)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Jr. Intern
 
 ### Avinash Parthiban
 
