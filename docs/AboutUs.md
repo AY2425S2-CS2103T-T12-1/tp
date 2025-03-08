@@ -46,12 +46,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Avinash Parthiban
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/avinazz3.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/avinazz3)]
+[[portfolio](team/avinash.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Developer/100
+* Responsibilities: Messing up git commands
