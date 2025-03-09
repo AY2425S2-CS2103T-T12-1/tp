@@ -326,7 +326,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Contact**: An entry with details of a person of interest, i.e., a student, a teacher, or a teaching assistant
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Teaching assistant (TA)**: A person who assists in teaching a class; they are typically also a full-time student
+* **Head TA**: The teaching assistant(s) in charge of all other teaching assistants for a particular course 
+* **Tutorial**: Lessons that students attend which complement the content taught in lectures; typically taught by TAs
+* **Assignment/homework**: A set of deliverables that students have to submit regularly; typically comes with a grade
+* **Exam**: A formal test of a student's understanding of the content in a course; typically comes with a grade
 
 --------------------------------------------------------------------------------------------------------------------
 
