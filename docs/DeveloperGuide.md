@@ -9,6 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -16,6 +18,32 @@ title: Developer Guide
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Use Cases**
+
+### Adding a New Contact
+#### **Actors:** Teaching Assistant (TA)
+#### **Preconditions:**
+- The TA has the application installed.
+- The TA is on the main screen of the address book.
+
+#### **Steps:**
+1. The TA adds the contact details
+2. The TA sees the newly added contact in the address book.
+
+### Editing a Contact
+#### **Actors:** Teaching Assistant (TA)
+#### **Preconditions:**
+- The TA has an existing contact that needs to be updated.
+
+#### **Steps:**
+1. The TA searches for and selects the contact.
+1a. If the contact does not exist, perform **Adding a New Contact**.
+2. The TA modifies the necessary fields.
+3. The TA saves the changes.
+4. The system updates the contact information and displays the updated contact information.
 
 --------------------------------------------------------------------------------------------------------------------
 
