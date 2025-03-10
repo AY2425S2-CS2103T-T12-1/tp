@@ -9,6 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -313,7 +315,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Adding a person**
+
+**MSS**
+1. User adds the contact details
+2. User sees the newly added contact in the address book.
+
+   Use case ends.
+
+**Use case: Editing a Contact**
+
+**MSS**
+1. User searches for and selects the contact.
+2. User modifies the necessary fields.
+3. User saves the changes.
+4. The system updates the contact information and displays the updated contact information.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The contact does not exist.
+
+   * 1a1. User performs **Adding a person**
+
+     Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
