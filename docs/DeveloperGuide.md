@@ -337,9 +337,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The contact does not exist.
 
-   1a1. User performs **Adding a person**
+   * 1a1. User performs **Adding a person**
 
-   Use case resumes at step 2.
+     Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
