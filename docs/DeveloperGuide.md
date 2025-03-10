@@ -40,7 +40,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 #### **Steps:**
 1. The TA searches for and selects the contact.
+ 
 1a. If the contact does not exist, perform **Adding a New Contact**.
+
 2. The TA modifies the necessary fields.
 3. The TA saves the changes.
 4. The system updates the contact information and displays the updated contact information.
