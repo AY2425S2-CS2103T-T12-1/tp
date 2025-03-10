@@ -21,34 +21,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Use Cases**
-
-### Adding a New Contact
-#### **Actors:** Teaching Assistant (TA)
-#### **Preconditions:**
-- The TA has the application installed.
-- The TA is on the main screen of the address book.
-
-#### **Steps:**
-1. The TA adds the contact details
-2. The TA sees the newly added contact in the address book.
-
-### Editing a Contact
-#### **Actors:** Teaching Assistant (TA)
-#### **Preconditions:**
-- The TA has an existing contact that needs to be updated.
-
-#### **Steps:**
-1. The TA searches for and selects the contact.
- 
-1a. If the contact does not exist, perform **Adding a New Contact**.
-
-2. The TA modifies the necessary fields.
-3. The TA saves the changes.
-4. The system updates the contact information and displays the updated contact information.
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -343,7 +315,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Adding a person**
+
+**MSS**
+1. User adds the contact details
+2. User sees the newly added contact in the address book.
+
+   Use case ends.
+
+**Use case: Editing a Contact**
+
+**MSS**
+1. User searches for and selects the contact.
+2. User modifies the necessary fields.
+3. User saves the changes.
+4. The system updates the contact information and displays the updated contact information.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The contact does not exist.
+
+   1a1. User performs **Adding a person**
+
+   Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
