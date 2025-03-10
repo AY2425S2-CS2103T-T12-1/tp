@@ -339,7 +339,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    * 1a1. User performs **Adding a person**
 
-     Use case resumes at step 2.
+     Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
