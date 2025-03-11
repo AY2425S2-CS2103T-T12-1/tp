@@ -279,14 +279,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| `* * *`  | Teaching Assistant   | Add a new contact with details such as name, contact and role  | Quickly access their information when required  |
+| `* * *`  | Teaching Assistant   | Create and manage groups  |   Organize my contact based on my different responsibilities |
+| `* * *`  | Teaching Assistant   | See the list of contact in my class list | Easily access the information when required | 
+| `* * *`  | Teaching Assistant   | Delete a contact | Remove students who have dropped / transferred my class | 
+| `* * *`  | Teaching Assistant   | Update a contact's detail | Update my information of my contact to the latest up-to-date information |
+| `* *` | Teaching Assistant | Search for a contact by an identifier like name or role | I can quickly find a contact I need |
+| `* *` | Teaching Assistant | Fileter contacts by role such as student/ TA or Professor | Organize my address book more efficiently |
+| `* *` | Teaching Assistant | Mark certain contact with 'priority' | Quickly access te most important contacts |
+| `* *` | Teaching Assistant | Add notes to a contact | Easily remember important details about the contact |
+| `* *` | Teaching Assistant | Mark the attendance count of students | Keep track of attendence for grading |
+| `*` | Teaching Assistant | Import contact list from a CSV file | Avoid manually inputting each contact |
+| `*` | Teaching Assistant | Log interaction with students | Track who I have assisted and follow up if needed |
+| `*` | Teaching Assistant | See an image of my student | Remember their faces and names easier |
+| `*` | Teaching Assistant | Export my contact to a CSV file | Back up or share my contact list |
+| `*` | Teaching Assistant | Track my student's homework submission status | Mark their work for grading |
+| `*` | Teaching Assistant | Set reminders for specific contacts | Don't forget to follow up on important tasks |
+| `*` | Teaching Assistant | Track whether I marked my student's homework | Ensrure I do not miss out any work during marking |
+| `*` | Teaching Assistant | Track my students' grades | Assess my own teacing ability |
+| `*` | Teaching Assistant | See the dates of upcoming tutorials and exams | Make the necessary preparations before hand |
+| `*` | Teaching Assistant | See deadline for submission and other important dates | Remind my students to prepare for them |
+| `*` | Teaching Assistant | Track the progress for preparations of my teaching material | Ensure it is completed before tutorials |
+| `*` | Teaching Assistant | Plot a whisker plot of the current grade of my students | Track their learning progress and identify stuggling students |
 
 ### Use cases
 
