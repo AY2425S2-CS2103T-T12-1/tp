@@ -346,6 +346,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should not require an internet connection for all functionalities.
+5.  Should work well in multitasking scenarios, allowing TAs to switch between the app and other teaching tools (e.g., PDF readers, Excel) without performance degradation.
+6.  Should be lightweight, running smoothly on the same laptops TAs use for general university tasks, without any additional hardware.
+7.  Data should be backed up into a user-editable file format, making it easy to share across devices or with other TAs.
+8.  Should be easily upgradable, allowing new versions or features to be added without disrupting existing user data or workflows.
 
 *{More to be added}*
 
