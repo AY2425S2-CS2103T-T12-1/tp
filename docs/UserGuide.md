@@ -28,13 +28,15 @@ TAbby Dabby is a **desktop app for managing contacts, optimized for use via a Co
 
    - `list` : Lists all contacts.
 
-   - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the list of contacts.
 
    - `delete 3` : Deletes the 3rd contact shown in the current list.
 
    - `clear` : Deletes all contacts.
 
    - `exit` : Exits the app.
+
+   - `add-group n/CS2106 T10` : Adds a new group named `CS2106 T10` to the list of groups.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -156,6 +158,16 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+### Adding a new group : `add-group`
+
+Adds a new group to the list of groups.
+
+Format: `add-group n/GROUP_NAME`
+
+Examples:
+
+- `add-group n/CS2106 T10`
 
 ### Saving the data
 
