@@ -167,7 +167,23 @@ Format: `add-group n/GROUP_NAME`
 
 Examples:
 
-- `add-group n/CS2106 T10`
+- `add-group n/CS2106 T10` creates a group with name `CS2106 T10`.
+
+### Listing all groups : `list-group`
+
+Shows a list of all existing groups along with their information, i.e., indices and names.
+
+Format: `list-group`
+
+### Deleting an existing group : `delete-group`
+
+Deletes the specified group from the list of groups.
+
+Format: `delete-group INDEX`
+
+Examples:
+
+- `delete-group 1` deletes the group with index `1`.
 
 ### Saving the data
 
