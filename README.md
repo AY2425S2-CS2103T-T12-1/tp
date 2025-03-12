@@ -12,3 +12,4 @@
 - It is named `TAbby Dabby` because it rolls off the tongue and is designed to assist TAs (i.e. Teaching Assistants) with their administrative work.
 - For the detailed documentation of this project, see the **[TAbby Dabby Product Website](https://ay2425s2-cs2103t-t12-1.github.io/tp)**.
 - This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
+- We love CS2103 :D
