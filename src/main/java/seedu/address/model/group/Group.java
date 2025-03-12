@@ -1,13 +1,14 @@
 package seedu.address.model.group;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.ArrayList;
 
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Group in the address book.
@@ -18,7 +19,7 @@ public class Group {
     public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public String groupName;
+    private String groupName;
     private ArrayList<Person> groupMembers;
 
     /**
@@ -38,6 +39,16 @@ public class Group {
      */
     public static boolean isValidGroupName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public String getGroupName() {
+        return this.groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        requireNonNull(groupName);
+        checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
+        this.groupName = groupName;
     }
 
     @Override
@@ -71,7 +82,7 @@ public class Group {
     /**
      * Adds a person to the group.
      * Returns true if successful.
-     * 
+     *
      * @param p A valid Person object.
      */
     public void add(Person p) {
@@ -83,10 +94,10 @@ public class Group {
     }
 
     /**
-     * Remove a person to the group. 
+     * Remove a person to the group.
      * Returns true if successful.
-     * 
-     * @param p A valid Person object that exists in the group. 
+     *
+     * @param p A valid Person object that exists in the group.
      */
     public void remove(Person p) {
         for (int i = 0; i < this.groupMembers.size(); ++i) {

@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.group.exceptions.DuplicateGroupsException;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 
 /**
  * A list of groups that enforces uniqueness between its elements and does not allow nulls.
