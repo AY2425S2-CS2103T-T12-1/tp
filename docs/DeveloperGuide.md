@@ -281,8 +281,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | Teaching Assistant   | Add a new contact with details such as name, contact and role  | Quickly access their information when required  |
 | `* * *`  | Teaching Assistant   | Create and manage groups  |   Organize my contact based on my different responsibilities |
-| `* * *`  | Teaching Assistant   | See the list of contact in my class list | Easily access the information when required | 
-| `* * *`  | Teaching Assistant   | Delete a contact | Remove students who have dropped / transferred my class | 
+| `* * *`  | Teaching Assistant   | See the list of contact in my class list | Easily access the information when required |
+| `* * *`  | Teaching Assistant   | Delete a contact | Remove students who have dropped / transferred my class |
 | `* * *`  | Teaching Assistant   | Update a contact's detail | Update my information of my contact to the latest up-to-date information |
 | `* *` | Teaching Assistant | Search for a contact by an identifier like name or role | I can quickly find a contact I need |
 | `* *` | Teaching Assistant | Fileter contacts by role such as student/ TA or Professor | Organize my address book more efficiently |
@@ -374,7 +374,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Contact**: An entry with details of a person of interest, i.e., a student, a teacher, or a teaching assistant
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Teaching assistant (TA)**: A person who assists in teaching a class; they are typically also a full-time student
-* **Head TA**: The teaching assistant(s) in charge of all other teaching assistants for a particular course 
+* **Head TA**: The teaching assistant(s) in charge of all other teaching assistants for a particular course
 * **Tutorial**: Lessons that students attend which complement the content taught in lectures; typically taught by TAs
 * **Assignment/homework**: A set of deliverables that students have to submit regularly; typically comes with a grade
 * **Exam**: A formal test of a student's understanding of the content in a course; typically comes with a grade

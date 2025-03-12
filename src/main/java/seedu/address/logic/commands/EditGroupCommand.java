@@ -1,21 +1,17 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Edits the details of an existing group in the address book.
@@ -23,8 +19,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 public class EditGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "edit-group";
-
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
 
     private final Index index;
     private final String newGroupName;
@@ -38,7 +32,6 @@ public class EditGroupCommand extends Command {
             + PREFIX_NAME + "CS2103T T12-1 ";
 
     public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book.";
 
     /**
