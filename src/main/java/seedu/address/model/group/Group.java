@@ -34,6 +34,17 @@ public class Group {
         this.groupMembers = new ArrayList<>();
     }
 
+    public Group(String groupName, ArrayList<Person> groupMembers) {
+        requireNonNull(groupName);
+        checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
+        this.groupName = groupName;
+        if (groupMembers != null) {
+            this.groupMembers = groupMembers;
+        } else {
+            this.groupMembers = new ArrayList<>();
+        }
+    }
+
     /**
      * Returns true if a given string is a valid group name.
      */
@@ -49,6 +60,10 @@ public class Group {
         requireNonNull(groupName);
         checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
         this.groupName = groupName;
+    }
+
+    public ArrayList<Person> getGroupMembers() {
+        return groupMembers;
     }
 
     @Override

@@ -1,11 +1,21 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
+import seedu.address.model.person.*;
+import seedu.address.model.tag.Tag;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Edits the details of an existing group in the address book.
@@ -27,6 +37,10 @@ public class EditGroupCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "CS2103T T12-1 ";
 
+    public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book.";
+
     /**
      * Creates an EditGroupCommand to update a group's name.
      *
@@ -42,8 +56,30 @@ public class EditGroupCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(
-                String.format(MESSAGE_ARGUMENTS, index.getOneBased(), newGroupName));
+        requireNonNull(model);
+        List<Group> lastShownList = model.getFilteredGroupList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException("Invalid Group");
+        }
+
+        Group groupToEdit = lastShownList.get(index.getZeroBased());
+        Group editedGroup = createEditedGroup(groupToEdit, newGroupName);
+
+        if (model.hasGroup(editedGroup)) {
+            throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+        }
+
+        model.setGroup(groupToEdit, editedGroup);
+        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, newGroupName));
+
+    }
+
+    private static Group createEditedGroup(Group groupToEdit, String newGroupName) {
+        assert groupToEdit != null;
+
+        ArrayList<Person> list = groupToEdit.getGroupMembers();
+        return new Group(newGroupName, list);
     }
 
     @Override
