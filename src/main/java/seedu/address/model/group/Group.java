@@ -3,13 +3,15 @@ package seedu.address.model.group;
 import java.util.ArrayList;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Group in the address book.
- * A {@code Group} is an ordered list of members, ordered by order of insertion.
+ * A {@code Group} is an ordered list of unique members, ordered by order of insertion.
  */
 public class Group {
 
@@ -59,19 +61,43 @@ public class Group {
     }
 
     /**
-     * Adds a person to the group
+     * Returns true if the group contains an equivalent person as the given argument.
+     */
+    public boolean contains(Person toCheck) {
+        requireNonNull(toCheck);
+        return groupMembers.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Adds a person to the group.
+     * Returns true if successful.
      * 
      * @param p A valid Person object.
      */
-    public boolean addMember(Person p) {
-        try {
-            this.groupMembers.add(p);
-        } catch (Exception e) {
-            System.out.println(e);
-            return false;
+    public void add(Person p) {
+        requireNonNull(p);
+        if (contains(p)) {
+            throw new DuplicatePersonException();
         }
-        return true;
+        this.groupMembers.add(p);
     }
+
+    /**
+     * Remove a person to the group. 
+     * Returns true if successful.
+     * 
+     * @param p A valid Person object that exists in the group. 
+     */
+    public void remove(Person p) {
+        for (int i = 0; i < this.groupMembers.size(); ++i) {
+            if (this.groupMembers.get(i).equals(p)) {
+                this.groupMembers.remove(i);
+                return;
+            }
+        }
+        throw new PersonNotFoundException();
+    }
+
 
     public Person get(int i) {
         return this.groupMembers.get(i);
