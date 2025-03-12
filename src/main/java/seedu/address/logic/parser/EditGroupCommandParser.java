@@ -30,7 +30,8 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditGroupCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditGroupCommand.MESSAGE_USAGE), ive);
         }
 
         String newGroupName = argMultimap.getValue(PREFIX_NAME).orElse("");
