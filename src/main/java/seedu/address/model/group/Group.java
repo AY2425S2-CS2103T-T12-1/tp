@@ -9,23 +9,29 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
-
 /**
  * Represents a Group in the address book.
- * A {@code Group} is an ordered list of unique members, ordered by order of insertion.
+ * A {@code Group} consists of a unique name and an ordered list of unique members.
  */
 public class Group {
 
+    /** Message to indicate the constraints for group names. */
     public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric";
+
+    /** Regular expression to validate group names. */
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
+    /** The name of the group. */
     private String groupName;
+
+    /** The list of members in the group, stored in order of insertion. */
     private ArrayList<Person> groupMembers;
 
     /**
-     * Constructs a {@code Group}.
+     * Constructs a {@code Group} with a specified name.
+     * Initializes an empty list of group members.
      *
-     * @param groupName A valid tag name.
+     * @param groupName A valid group name.
      */
     public Group(String groupName) {
         requireNonNull(groupName);
@@ -35,22 +41,68 @@ public class Group {
     }
 
     /**
-     * Returns true if a given string is a valid group name.
+     * Constructs a {@code Group} with a specified name and an existing list of members.
+     *
+     * @param groupName A valid group name.
+     * @param groupMembers The list of members in the group.
+     */
+    public Group(String groupName, ArrayList<Person> groupMembers) {
+        requireNonNull(groupName);
+        checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
+        this.groupName = groupName;
+        if (groupMembers != null) {
+            this.groupMembers = groupMembers;
+        } else {
+            this.groupMembers = new ArrayList<>();
+        }
+    }
+
+    /**
+     * Checks if the given string is a valid group name.
+     *
+     * @param test The string to test.
+     * @return True if the name is valid, false otherwise.
      */
     public static boolean isValidGroupName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Gets the name of the group.
+     *
+     * @return The group's name.
+     */
     public String getGroupName() {
         return this.groupName;
     }
 
+    /**
+     * Sets a new name for the group.
+     *
+     * @param groupName The new name to assign to the group.
+     */
     public void setGroupName(String groupName) {
         requireNonNull(groupName);
         checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
         this.groupName = groupName;
     }
 
+    /**
+     * Retrieves the list of group members.
+     *
+     * @return An ArrayList of group members.
+     */
+    public ArrayList<Person> getGroupMembers() {
+        return groupMembers;
+    }
+
+    /**
+     * Checks whether this group is equal to another object.
+     * Two groups are considered equal if they have the same name.
+     *
+     * @param other The object to compare with.
+     * @return True if both groups have the same name, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -62,17 +114,25 @@ public class Group {
             return false;
         }
 
-        Group otherTag = (Group) other;
-        return groupName.equals(otherTag.groupName);
+        Group otherGroup = (Group) other;
+        return groupName.equals(otherGroup.groupName);
     }
 
+    /**
+     * Computes the hash code for this group based on its name.
+     *
+     * @return The hash code of the group.
+     */
     @Override
     public int hashCode() {
         return groupName.hashCode();
     }
 
     /**
-     * Returns true if the group contains an equivalent person as the given argument.
+     * Checks if the group contains a specific person.
+     *
+     * @param toCheck The person to check for membership in the group.
+     * @return True if the person exists in the group, false otherwise.
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
@@ -81,9 +141,10 @@ public class Group {
 
     /**
      * Adds a person to the group.
-     * Returns true if successful.
+     * Ensures that the person does not already exist in the group.
      *
-     * @param p A valid Person object.
+     * @param p The person to be added.
+     * @throws DuplicatePersonException If the person already exists in the group.
      */
     public void add(Person p) {
         requireNonNull(p);
@@ -94,10 +155,11 @@ public class Group {
     }
 
     /**
-     * Remove a person to the group.
-     * Returns true if successful.
+     * Removes a person from the group.
+     * Ensures that the person exists before attempting removal.
      *
-     * @param p A valid Person object that exists in the group.
+     * @param p The person to be removed.
+     * @throws PersonNotFoundException If the person is not found in the group.
      */
     public void remove(Person p) {
         for (int i = 0; i < this.groupMembers.size(); ++i) {
@@ -109,23 +171,32 @@ public class Group {
         throw new PersonNotFoundException();
     }
 
-
+    /**
+     * Retrieves a person at a specified index in the group.
+     *
+     * @param i The index of the person to retrieve.
+     * @return The person at the given index.
+     */
     public Person get(int i) {
         return this.groupMembers.get(i);
     }
 
     /**
-     * Returns the size of the group
+     * Gets the number of members in the group.
+     *
+     * @return The size of the group.
      */
     public int size() {
         return this.groupMembers.size();
     }
 
     /**
-     * Format state as text for viewing.
+     * Returns a string representation of the group in the format "[GroupName]".
+     *
+     * @return A formatted string representing the group.
      */
+    @Override
     public String toString() {
         return '[' + this.groupName + ']';
     }
 }
-

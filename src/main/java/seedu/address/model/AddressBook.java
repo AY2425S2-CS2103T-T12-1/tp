@@ -6,17 +6,21 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Represents an address book that stores a list of persons and groups.
+ * Ensures that no duplicate persons or groups exist based on identity comparisons.
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
+    /** The list of unique persons in the address book. */
     private final UniquePersonList persons;
+
+    /** The list of unique groups in the address book. */
     private final UniqueGroupList groups;
 
     /*
@@ -24,46 +28,57 @@ public class AddressBook implements ReadOnlyAddressBook {
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
+     * among constructors.
      */
     {
         persons = new UniquePersonList();
         groups = new UniqueGroupList();
     }
 
+    /**
+     * Constructs an empty AddressBook.
+     */
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Constructs an AddressBook using the data from an existing {@code ReadOnlyAddressBook}.
+     *
+     * @param toBeCopied The address book whose data should be copied.
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
+    //// List overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the person list with a new list of persons.
+     * Ensures that the new list does not contain duplicate persons.
+     *
+     * @param persons The new list of persons.
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code AddressBook} with new data.
+     *
+     * @param newData The new data to replace the current address book data.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
     }
 
-    //// person-level operations
+    //// Person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Checks if a person with the same identity as {@code person} exists in the address book.
+     *
+     * @param person The person to check.
+     * @return True if the person exists, false otherwise.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -71,34 +86,88 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a new person to the address book.
+     * Ensures that the person does not already exist in the address book.
+     *
+     * @param p The person to add.
      */
     public void addPerson(Person p) {
         persons.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces a target person with an edited person in the address book.
+     * Ensures that the target exists and that the edited person does not duplicate another existing person.
+     *
+     * @param target The person to be replaced.
+     * @param editedPerson The new person data.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes a person from the address book.
+     * Ensures that the person exists before removal.
+     *
+     * @param key The person to remove.
      */
     public void removePerson(Person key) {
         persons.remove(key);
     }
 
-    //// util methods
+    //// Group-level operations
 
+    /**
+     * Checks if a group with the same identity as {@code group} exists in the address book.
+     *
+     * @param group The group to check.
+     * @return True if the group exists, false otherwise.
+     */
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return groups.contains(group);
+    }
+
+    /**
+     * Replaces a target group with an edited group in the address book.
+     * Ensures that the target exists and the edited group does not duplicate another existing group.
+     *
+     * @param target The group to be replaced.
+     * @param editedGroup The new group data.
+     */
+    public void setGroup(Group target, Group editedGroup) {
+        requireNonNull(editedGroup);
+        groups.setGroup(target, editedGroup);
+    }
+
+    //// Utility methods
+
+    /**
+     * Returns an unmodifiable view of the list of persons.
+     *
+     * @return An observable list of persons.
+     */
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return persons.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of groups.
+     *
+     * @return An observable list of groups.
+     */
+    public ObservableList<Group> getGroupList() {
+        return groups.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Returns a string representation of the AddressBook object.
+     *
+     * @return A string describing the address book.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -106,18 +175,19 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .toString();
     }
 
-    @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
-    }
-
+    /**
+     * Checks if this AddressBook is equal to another object.
+     *
+     * @param other The other object to compare to.
+     * @return True if both objects are AddressBooks with the same persons list.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
+        // instanceof handles null cases
         if (!(other instanceof AddressBook)) {
             return false;
         }
@@ -126,6 +196,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.equals(otherAddressBook.persons);
     }
 
+    /**
+     * Returns the hash code of the AddressBook.
+     *
+     * @return The hash code based on the persons list.
+     */
     @Override
     public int hashCode() {
         return persons.hashCode();
