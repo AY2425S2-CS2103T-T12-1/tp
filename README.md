@@ -185,7 +185,3 @@ As a teaching assistant, I want to:
 **Outputs**: Successfully updated / Contact does not exist / Form validation error - (insert details).
 
 **Possible Errors**: Non-existent contact, email address does not contain "@", phone number contains chars other than + and digits, name/role cannot be CLEAR.
-
-## Contributing
-
-This project is a part of the [se-education.org](https://se-education.org) initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org) for more info.
