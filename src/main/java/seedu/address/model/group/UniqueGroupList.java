@@ -74,6 +74,21 @@ public class UniqueGroupList implements Iterable<Group> {
         internalList.setAll(groups);
     }
 
+    public void setGroup(Group target, Group editedGroup) {
+        requireAllNonNull(target, editedGroup);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new GroupNotFoundException();
+        }
+
+        if (!target.equals(editedGroup) && contains(editedGroup)) {
+            throw new DuplicateGroupsException();
+        }
+
+        internalList.set(index, editedGroup);
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
