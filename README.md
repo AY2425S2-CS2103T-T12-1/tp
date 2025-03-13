@@ -1,5 +1,5 @@
 
-# TAbby Dabby (AB3)
+# TAbby Dabby 
 [![Java CI](https://github.com/AY2425S2-CS2103T-T12-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S2-CS2103T-T12-1/tp/actions/workflows/gradle.yml)
 
 ![Ui](docs/images/Ui.png)
@@ -19,8 +19,6 @@ It comes with a reasonable level of user and developer documentation.
 It is named TAbby Dabby because it rolls off the tongue and is designed to assist TAs (i.e., Teaching Assistants) with their administrative work.
 
 For the detailed documentation of this project, see the [TAbby Dabby Product Website](https://se-education.org/addressbook-level3/).
-
-This project is a part of the [se-education.org](https://se-education.org) initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org) for more info.
 
 ## Features
 
