@@ -131,6 +131,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Removes a group from the address book.
+     * Ensures that the group exists before removal.
+     *
+     * @param key The group to remove.
+     */
+    public void removeGroup(Group key) {
+        groups.remove(key);
+    }
+
+    /**
      * Replaces a target group with an edited group in the address book.
      * Ensures that the target exists and the edited group does not duplicate another existing group.
      *
