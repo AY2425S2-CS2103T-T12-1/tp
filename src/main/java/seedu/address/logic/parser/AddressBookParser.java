@@ -19,6 +19,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -81,6 +82,9 @@ public class AddressBookParser {
 
         case EditGroupCommand.COMMAND_WORD:
             return new EditGroupCommandParser().parse(arguments);
+
+        case ListGroupCommand.COMMAND_WORD:
+            return new ListGroupCommand();
 
         case DeleteGroupCommand.COMMAND_WORD:
             return new DeleteGroupCommandParser().parse(arguments);

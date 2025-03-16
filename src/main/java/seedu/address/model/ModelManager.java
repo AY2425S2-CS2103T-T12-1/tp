@@ -131,9 +131,17 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Group List Accessors =============================================================
+
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         return filteredGroups;
+    }
+
+    @Override
+    public void updateFilteredGroupList(Predicate<Group> predicate) {
+        requireNonNull(predicate);
+        filteredGroups.setPredicate(predicate);
     }
 
     @Override
