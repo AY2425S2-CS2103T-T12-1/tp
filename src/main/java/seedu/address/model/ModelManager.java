@@ -151,6 +151,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteGroup(Group target) {
+        requireNonNull(target);
+        addressBook.removeGroup(target);
+    }
+
+    @Override
     public void setGroup(Group target, Group editedGroup) {
         requireAllNonNull(target, editedGroup);
 
