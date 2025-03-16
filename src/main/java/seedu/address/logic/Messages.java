@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,6 +20,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
+    public static final String MESSAGE_INVALID_GROUP_DISPLAYED_INDEX = "The group index provided is invalid";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -32,7 +35,7 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code group} for display to the user.
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
@@ -45,6 +48,17 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code person} for display to the user.
+     */
+    public static String format(Group group) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(group.getGroupName())
+                .append("; Members: ");
+        group.getGroupMembers().forEach(builder::append);
         return builder.toString();
     }
 
