@@ -5,23 +5,31 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a command that edits the details of an existing group in the address book.
  */
 public class EditGroupCommand extends Command {
 
-    /** The command word to trigger this command. */
+    /**
+     * The command word to trigger this command.
+     */
     public static final String COMMAND_WORD = "edit-group";
 
-    /** Usage message for the command. */
+    /**
+     * Usage message for the command.
+     */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the group identified "
             + "by the index number used in the displayed group list. "
             + "Existing values will be overwritten by the input values.\n"
@@ -30,29 +38,40 @@ public class EditGroupCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "CS2103T T12-1 ";
 
-    /** Success message for editing a group. */
+    /**
+     * Success message for editing a group.
+     */
     public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
 
-    /** Error message if a duplicate group exists in the address book. */
+    /**
+     * Error message if a duplicate group exists in the address book.
+     */
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book.";
 
-    /** Index of the group to be edited. */
+    /**
+     * Index of the group to be edited.
+     */
     private final Index index;
 
-    /** New name for the group. */
+    /**
+     * New name for the group.
+     */
     private final String newGroupName;
+
+    private final Set<Tag> tags;
 
     /**
      * Creates an EditGroupCommand to update a group's name.
      *
-     * @param index The index of the group to be edited.
+     * @param index        The index of the group to be edited.
      * @param newGroupName The new name for the group.
      */
-    public EditGroupCommand(Index index, String newGroupName) {
+    public EditGroupCommand(Index index, String newGroupName, Collection<Tag> tags) {
         requireAllNonNull(index, newGroupName);
 
         this.index = index;
         this.newGroupName = newGroupName;
+        this.tags = tags == null ? new HashSet<>() : new HashSet<>(tags);
     }
 
     /**
@@ -85,7 +104,7 @@ public class EditGroupCommand extends Command {
     /**
      * Creates a new Group object with the updated name while retaining the group members.
      *
-     * @param groupToEdit The existing group to be edited.
+     * @param groupToEdit  The existing group to be edited.
      * @param newGroupName The new name for the group.
      * @return A new Group object with the updated name and existing members.
      */
@@ -109,12 +128,12 @@ public class EditGroupCommand extends Command {
         }
 
         // instanceof handles null cases
-        if (!(other instanceof EditGroupCommand)) {
+        if (!(other instanceof EditGroupCommand otherCmd)) {
             return false;
         }
 
-        EditGroupCommand e = (EditGroupCommand) other;
-        return index.equals(e.index)
-                && newGroupName.equals(e.newGroupName);
+        return index.equals(otherCmd.index)
+                && newGroupName.equals(otherCmd.newGroupName)
+                && tags.equals(otherCmd.tags);
     }
 }

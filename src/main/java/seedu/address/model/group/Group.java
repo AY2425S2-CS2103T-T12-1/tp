@@ -4,10 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Group in the address book.
@@ -15,17 +22,27 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class Group {
 
-    /** Message to indicate the constraints for group names. */
+    /**
+     * Message to indicate the constraints for group names.
+     */
     public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric";
 
-    /** Regular expression to validate group names. */
+    /**
+     * Regular expression to validate group names.
+     */
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    /** The name of the group. */
+    /**
+     * The name of the group.
+     */
     private String groupName;
 
-    /** The list of members in the group, stored in order of insertion. */
-    private ArrayList<Person> groupMembers;
+    /**
+     * The list of members in the group, stored in order of insertion.
+     */
+    private final ArrayList<Person> groupMembers;
+
+    private final Set<Tag> tags;
 
     /**
      * Constructs a {@code Group} with a specified name.
@@ -34,27 +51,32 @@ public class Group {
      * @param groupName A valid group name.
      */
     public Group(String groupName) {
-        requireNonNull(groupName);
-        checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
-        this.groupName = groupName;
-        this.groupMembers = new ArrayList<>();
+        this(groupName, null, null);
     }
 
     /**
      * Constructs a {@code Group} with a specified name and an existing list of members.
      *
-     * @param groupName A valid group name.
+     * @param groupName    A valid group name.
      * @param groupMembers The list of members in the group.
      */
-    public Group(String groupName, ArrayList<Person> groupMembers) {
+    public Group(String groupName, Collection<Person> groupMembers) {
+        this(groupName, groupMembers, null);
+    }
+
+    /**
+     * Constructs a {@code Group} with a specified name, existing list of members, and a set of tags.
+     *
+     * @param groupName    A valid group name.
+     * @param groupMembers The collection of members in the group.
+     * @param tags         The collection of tags for the group.
+     */
+    public Group(String groupName, Collection<Person> groupMembers, Collection<Tag> tags) {
         requireNonNull(groupName);
         checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
         this.groupName = groupName;
-        if (groupMembers != null) {
-            this.groupMembers = groupMembers;
-        } else {
-            this.groupMembers = new ArrayList<>();
-        }
+        this.groupMembers = groupMembers == null ? new ArrayList<>() : new ArrayList<>(groupMembers);
+        this.tags = tags == null ? new HashSet<>() : new HashSet<>(tags);
     }
 
     /**
@@ -97,6 +119,14 @@ public class Group {
     }
 
     /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
+    /**
      * Checks whether this group is equal to another object.
      * Two groups are considered equal if they have the same name.
      *
@@ -110,12 +140,11 @@ public class Group {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Group)) {
+        if (!(other instanceof Group otherGroup)) {
             return false;
         }
 
-        Group otherGroup = (Group) other;
-        return groupName.equals(otherGroup.groupName);
+        return groupName.equals(otherGroup.groupName) && tags.equals(otherGroup.tags);
     }
 
     /**
@@ -125,7 +154,7 @@ public class Group {
      */
     @Override
     public int hashCode() {
-        return groupName.hashCode();
+        return Objects.hash(groupName, tags);
     }
 
     /**
@@ -197,6 +226,9 @@ public class Group {
      */
     @Override
     public String toString() {
-        return '[' + this.groupName + ']';
+        return new ToStringBuilder(this)
+                .add("name", groupName)
+                .add("tags", tags)
+                .toString();
     }
 }

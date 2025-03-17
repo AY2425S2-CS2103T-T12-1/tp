@@ -3,11 +3,15 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Collection;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.EditGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new {@code EditGroupCommand} object.
@@ -33,9 +37,8 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditGroupCommand.MESSAGE_USAGE), ive);
         }
-
         String newGroupName = argMultimap.getValue(PREFIX_NAME).orElse("");
-
-        return new EditGroupCommand(index, newGroupName);
+        Collection<Tag> tags = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).orElse(null);
+        return new EditGroupCommand(index, newGroupName, tags);
     }
 }
