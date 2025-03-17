@@ -33,41 +33,19 @@ public class ResultList {
     public ResultList(ObservableList<Person> persons, ObservableList<Group> groups) {
         this.persons = persons;
         this.groups = groups;
+
         // Start by showing persons by default.
         this.source = Source.Persons;
         this.results = FXCollections.observableArrayList(persons);
+
         persons.addListener((ListChangeListener<Person>) c -> {
-            if (this.source == Source.Groups) {
-                return;
-            }
-            while (c.next()) {
-                if (c.wasRemoved()) {
-                    results.remove(c.getFrom(), c.getFrom() + c.getRemovedSize());
-                }
-                if (c.wasAdded()) {
-                    results.addAll(c.getFrom(), c.getAddedSubList());
-                }
-                if (c.wasUpdated()) {
-                    results.removeAll(c.getRemoved());
-                    results.addAll(c.getAddedSubList());
-                }
+            if (this.source == Source.Persons) {
+                processListChange(c);
             }
         });
         groups.addListener((ListChangeListener<Group>) c -> {
-            if (this.source == Source.Persons) {
-                return;
-            }
-            while (c.next()) {
-                if (c.wasRemoved()) {
-                    results.remove(c.getFrom(), c.getFrom() + c.getRemovedSize());
-                }
-                if (c.wasAdded()) {
-                    results.addAll(c.getFrom(), c.getAddedSubList());
-                }
-                if (c.wasUpdated()) {
-                    results.removeAll(c.getRemoved());
-                    results.addAll(c.getAddedSubList());
-                }
+            if (this.source == Source.Groups) {
+                processListChange(c);
             }
         });
     }
@@ -82,5 +60,20 @@ public class ResultList {
         }
         this.source = source;
         results.setAll(source == Source.Persons ? persons : groups);
+    }
+
+    private void processListChange(ListChangeListener.Change<? extends Result> c) {
+        while (c.next()) {
+            if (c.wasRemoved()) {
+                results.remove(c.getFrom(), c.getFrom() + c.getRemovedSize());
+            }
+            if (c.wasAdded()) {
+                results.addAll(c.getFrom(), c.getAddedSubList());
+            }
+            if (c.wasUpdated()) {
+                results.removeAll(c.getRemoved());
+                results.addAll(c.getAddedSubList());
+            }
+        }
     }
 }
