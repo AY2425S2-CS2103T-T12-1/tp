@@ -10,17 +10,21 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.scene.layout.Region;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.GroupCard;
+import seedu.address.ui.Result;
+import seedu.address.ui.UiPart;
 
 /**
  * Represents a Group in the address book.
  * A {@code Group} consists of a unique name and an ordered list of unique members.
  */
-public class Group {
+public class Group implements Result {
 
     /**
      * Message to indicate the constraints for group names.
@@ -230,5 +234,10 @@ public class Group {
                 .add("name", groupName)
                 .add("tags", tags)
                 .toString();
+    }
+
+    @Override
+    public UiPart<Region> createCard(int displayedIndex) {
+        return new GroupCard(this, displayedIndex);
     }
 }
