@@ -107,4 +107,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
+
+    /**
+     * Adds the given group.
+     * The group must not already exist in the address book.
+     */
+    void addGroup(Group group);
 }
