@@ -63,10 +63,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the person list with a new list of persons.
-     * Ensures that the new list does not contain duplicate persons.
+     * Replaces the contents of the group list with a new list of groups.
+     * Ensures that the new list does not contain duplicate groups.
      *
-     * @param persons The new list of persons.
+     * @param groups The new list of groups.
      */
     public void setGroups(List<Group> groups) {
         this.groups.setGroups(groups);
