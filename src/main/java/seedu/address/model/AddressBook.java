@@ -152,6 +152,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.setGroup(target, editedGroup);
     }
 
+    /**
+     * Adds a group to the address book.
+     * The group must not already exist in the address book.
+     */
+    public void addGroup(Group g) {
+        groups.add(g);
+    }
+
     //// Utility methods
 
     /**

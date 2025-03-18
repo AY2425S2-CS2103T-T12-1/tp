@@ -179,6 +179,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addGroup(Group group) {
+        requireNonNull(group);
+        addressBook.addGroup(group);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
