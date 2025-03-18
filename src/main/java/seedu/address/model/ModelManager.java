@@ -193,6 +193,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deletePersonFromGroup(Person personToRemove, Group groupToRemoveFrom) {
+        requireAllNonNull(personToRemove, groupToRemoveFrom);
+        addressBook.deletePersonFromGroup(personToRemove, groupToRemoveFrom);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

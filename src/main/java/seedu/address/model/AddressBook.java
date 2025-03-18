@@ -184,6 +184,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPersonToGroup(Person personToAdd, Group groupToBeAddedTo) {
         groupToBeAddedTo.add(personToAdd);
     }
+
+    public void deletePersonFromGroup(Person personToRemove, Group groupToBeRemovedFrom) {
+        groupToBeRemovedFrom.remove(personToRemove);
+    }
+
     /**
      * Returns a string representation of the AddressBook object.
      *
