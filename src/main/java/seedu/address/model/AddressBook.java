@@ -63,6 +63,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the person list with a new list of persons.
+     * Ensures that the new list does not contain duplicate persons.
+     *
+     * @param persons The new list of persons.
+     */
+    public void setGroups(List<Group> groups) {
+        this.groups.setGroups(groups);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with new data.
      *
      * @param newData The new data to replace the current address book data.
@@ -70,6 +80,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setPersons(newData.getPersonList());
+        setGroups(newData.getGroupList());
     }
 
     //// Person-level operations
@@ -190,6 +201,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("groups", groups)
                 .toString();
     }
 
