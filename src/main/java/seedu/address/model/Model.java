@@ -7,14 +7,19 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
+import seedu.address.ui.Result;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
     /**
@@ -52,7 +57,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -79,8 +86,15 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Returns an unmodifiable view of the result list
+     */
+    ObservableList<Result> getResultList();
 
     boolean hasGroup(Group group);
 
@@ -92,18 +106,22 @@ public interface Model {
 
     void setGroup(Group target, Group editedGroup);
 
-    /** Returns a unmodifiable view of the filtered group list */
+    /**
+     * Returns a unmodifiable view of the filtered group list
+     */
     ObservableList<Group> getFilteredGroupList();
 
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
      * Updates the filter of filtered group list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
