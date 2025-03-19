@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all groups in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindGroupCommand extends Command {
@@ -18,7 +18,7 @@ public class FindGroupCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all groups with names containing any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " CS2103T T12";
+            + "Example: " + COMMAND_WORD + " CS2103T";
 
     private final GroupNameContainsKeywordsPredicate predicate;
 
