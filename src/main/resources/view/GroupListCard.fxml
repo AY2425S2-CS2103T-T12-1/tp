@@ -27,6 +27,15 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
+      <!-- Display member count -->
+      <Label fx:id="memberCount" styleClass="cell_small_label" text="\$memberCount" />
+      <!-- Display members -->
+      <FlowPane fx:id="members" styleClass="members-pane">
+        <padding>
+          <Insets top="2" bottom="2" />
+        </padding>
+      </FlowPane>
+      <!-- Display tags -->
       <FlowPane fx:id="tags" />
     </VBox>
   </GridPane>
