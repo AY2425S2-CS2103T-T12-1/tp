@@ -1,8 +1,7 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -61,6 +60,7 @@ public class GroupCard extends UiPart<Region> {
         // Display first 3 members
         displayTruncatedMembers();
     }
+
 
     /**
      * Displays the first MAX_MEMBERS_TO_DISPLAY members of the group,
