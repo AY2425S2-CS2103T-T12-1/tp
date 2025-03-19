@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -20,22 +19,21 @@ public class DeletePersonFromGroupCommand extends Command {
     public static final String COMMAND_WORD = "delete-from-group";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a person from the group. "
-            + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: "
             + COMMAND_WORD + " "
-            + PREFIX_PERSON + " 1 "
-            + PREFIX_GROUP + " 2";
+            + PREFIX_PERSON + " Alex Yeoh "
+            + PREFIX_GROUP + " Group 1";
 
     public static final String MESSAGE_SUCCESS = "Person removed from group: %1$s";
     public static final String MESSAGE_PERSON_NONEXIST = "This person does not exist in the group";
     /**
      * Index of Person to be added
      */
-    private final Index toAdd;
+    private final String toDelete;
     /**
      * Index of Group to be added to
      */
-    private final Index toBeAddedTo;
+    private final String toBeDeletedFrom;
 
     /**
      * Constructor for AddPersonToGroupCommand that takes two Index identifiers for
@@ -44,11 +42,11 @@ public class DeletePersonFromGroupCommand extends Command {
       * @param toAdd Index of Person to be added
      * @param toBeAddedTo Index of Group to be added to
      */
-    public DeletePersonFromGroupCommand(Index toAdd, Index toBeAddedTo) {
-        requireNonNull(toAdd);
-        requireNonNull(toBeAddedTo);
-        this.toAdd = toAdd;
-        this.toBeAddedTo = toBeAddedTo;
+    public DeletePersonFromGroupCommand(String toDelete, String toBeDeletedFrom) {
+        requireNonNull(toDelete);
+        requireNonNull(toBeDeletedFrom);
+        this.toDelete = toDelete;
+        this.toBeDeletedFrom = toBeDeletedFrom;
     }
 
     @Override
@@ -57,20 +55,31 @@ public class DeletePersonFromGroupCommand extends Command {
         List<Person> personList = model.getFilteredPersonList();
         List<Group> groupList = model.getFilteredGroupList();
 
-        if (toAdd.getZeroBased() >= personList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Person personToDelete = null;
+        Group groupToBeDeletedFrom = null;
+
+        for (Person person : personList) {
+            if (person.getName().fullName.equals(toDelete)) {
+                personToDelete = person;
+            }
+        }
+        for (Group group : groupList) {
+            if (group.getGroupName().equals(toBeDeletedFrom)) {
+                groupToBeDeletedFrom = group;
+            }
         }
 
-        if (toBeAddedTo.getZeroBased() >= groupList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+        if (personToDelete == null) {
+            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }
 
-        Person personToAdd = personList.get(toAdd.getZeroBased());
-        Group groupToBeAddedTo = groupList.get(toBeAddedTo.getZeroBased());
+        if (groupToBeDeletedFrom == null) {
+            throw new CommandException(Messages.MESSAGE_GROUP_NOT_FOUND);
+        }
 
-        if (groupToBeAddedTo.contains(personToAdd)) {
-            model.deletePersonFromGroup(personToAdd, groupToBeAddedTo);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToAdd)));
+        if (groupToBeDeletedFrom.contains(personToDelete)) {
+            model.deletePersonFromGroup(personToDelete, groupToBeDeletedFrom);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToDelete)));
         } else {
             throw new CommandException(MESSAGE_PERSON_NONEXIST);
         }
