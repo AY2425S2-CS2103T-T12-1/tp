@@ -131,6 +131,17 @@ public class Group implements Result {
     }
 
     /**
+     * Returns true if both groups have the same name.
+     * This defines a weaker notion of equality between two gorups.
+     */
+    public boolean isSameGroup(Group otherGroup) {
+        if (otherGroup == this) {
+            return true;
+        }
+        return otherGroup != null && otherGroup.getGroupName().equals(groupName);
+    }
+
+    /**
      * Checks whether this group is equal to another object.
      * Two groups are considered equal if they have the same name.
      *
