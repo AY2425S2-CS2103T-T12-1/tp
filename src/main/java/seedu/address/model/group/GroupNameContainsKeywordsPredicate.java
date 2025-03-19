@@ -33,8 +33,8 @@ public class GroupNameContainsKeywordsPredicate implements Predicate<Group> {
             return false;
         }
 
-        GroupNameContainsKeywordsPredicate otherGroupNameContainsKeywordsPredicate = (GroupNameContainsKeywordsPredicate) other;
-        return keywords.equals(otherGroupNameContainsKeywordsPredicate.keywords);
+        GroupNameContainsKeywordsPredicate otherPredicate = (GroupNameContainsKeywordsPredicate) other;
+        return keywords.equals(otherPredicate.keywords);
     }
 
     @Override
