@@ -39,8 +39,8 @@ public class DeletePersonFromGroupCommand extends Command {
      * Constructor for AddPersonToGroupCommand that takes two Index identifiers for
      * Person and Group
      *
-      * @param toAdd Index of Person to be added
-     * @param toBeAddedTo Index of Group to be added to
+      * @param toDelete Index of Person to be added
+     * @param toBeDeletedFrom Index of Group to be added to
      */
     public DeletePersonFromGroupCommand(String toDelete, String toBeDeletedFrom) {
         requireNonNull(toDelete);
