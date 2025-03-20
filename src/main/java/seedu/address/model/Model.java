@@ -137,4 +137,10 @@ public interface Model {
      * The person must not already exist in the group.
      */
     void addPersonToGroup(Person personToAdd, Group groupToBeAddedTo);
+
+    /**
+     * Removes the given person from the given group.
+     * The person must exist in the group.
+     */
+    void deletePersonFromGroup(Person personToRemove, Group groupToRemoveFrom);
 }
