@@ -42,5 +42,10 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ]
+  } ],
+  "groups" : [ {
+    "name" : "Group1",
+    "persons" : [ ],
+    "tags" : [ ]
   } ]
 }
