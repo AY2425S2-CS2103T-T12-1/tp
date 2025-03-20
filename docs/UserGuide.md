@@ -170,6 +170,15 @@ Examples:
 
 - `add-group n/CS2106 T10` creates a group with name `CS2106 T10`.
 
+### Listing all groups : `list-group`
+
+Shows a list of all existing groups along with their information, i.e., indices and names.
+
+Format: `list-group`
+
+Examples:
+![ResultOfList](images/listGroupResults.png)
+
 ### Editing a group : `edit-group`
 
 Edits an existing group.
@@ -187,14 +196,22 @@ Examples:
 - `edit-group 1 n/G13` Edits the name of the first group to be `G13`.
 - `edit-group 2 n/CS2101 G12 t/` Edits the name of the second group to be `CS2101 G12` and clears all existing tags.
 
-### Listing all groups : `list-group`
+### Locating a group by name : `find-group`
 
-Shows a list of all existing groups along with their information, i.e., indices and names.
+Finds groups whose names contain any of the given keywords.
 
-Format: `list-group`
+Format: `find-group KEYWORD [MORE_KEYWORDS]`
+
+- The search is case-insensitive. e.g `hans` will match `Hans`
+- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+- Only the name is searched.
+- Only full words will be matched e.g. `Han` will not match `Hans`
+- Groups matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-![ResultOfList](images/listGroupResults.png)
+
+- `find G13` could return groups with names like `G13`, `g13`, and `CS2101 g13`.
 
 ### Deleting an existing group : `delete-group`
 
@@ -225,23 +242,6 @@ Format: `delete-from-group P/PERSON_NAME g/GROUP_NAME`
 Examples:
 
 - `delete-from-group P/Alex Yeoh g/G13`.
-
-### Locating a group by name : `find-group`
-
-Finds groups whose names contain any of the given keywords.
-
-Format: `find-group KEYWORD [MORE_KEYWORDS]`
-
-- The search is case-insensitive. e.g `hans` will match `Hans`
-- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-- Only the name is searched.
-- Only full words will be matched e.g. `Han` will not match `Hans`
-- Groups matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-
-- `find G13` could return groups with names like `G13`, `g13`, and `CS2101 g13`.
 
 ### Saving the data
 
@@ -287,10 +287,10 @@ _Details coming soon ..._
 | **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **List**              | `list`                                                                                                                                                                |
 | **Add Group**         | `add-group n/GROUP_NAME` <br> e.g., `add-group n/G13`                                                                                                                 |
-| **Edit Group**        | `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​` <br> e.g., `edit-group 1 n/G13 t/ABC`                                                                                     |
 | **Delete Group**      | `delete-group INDEX` <br> e.g., `delete-group 1`                                                                                                                      |
-| **List Group**        | `list-group`                                                                                                                                                          |
+| **Edit Group**        | `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​` <br> e.g., `edit-group 1 n/G13 t/ABC`                                                                                     |
 | **Find Group**        | `find-group KEYWORD [MORE_KEYWORDS]` <br> e.g., `find-group G13`                                                                                                      |
+| **List Group**        | `list-group`                                                                                                                                                          |
 | **Add to Group**      | `add-to-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `add-to-group P/Alex Yeoh g/G13`                                                                                 |
 | **Delete from Group** | `delete-from-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `delete-from-group P/Alex Yeoh g/G13`                                                                       |
 | **Help**              | `help`                                                                                                                                                                |
