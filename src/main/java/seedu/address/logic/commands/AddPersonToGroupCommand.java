@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -31,11 +30,11 @@ public class AddPersonToGroupCommand extends Command {
     /**
      * Index of Person to be added
      */
-    private final Index toAdd;
+    private final String toAdd;
     /**
      * Index of Group to be added to
      */
-    private final Index toBeAddedTo;
+    private final String toBeAddedTo;
 
     /**
      * Constructor for AddPersonToGroupCommand that takes two Index identifiers for
@@ -44,7 +43,7 @@ public class AddPersonToGroupCommand extends Command {
       * @param toAdd Index of Person to be added
      * @param toBeAddedTo Index of Group to be added to
      */
-    public AddPersonToGroupCommand(Index toAdd, Index toBeAddedTo) {
+    public AddPersonToGroupCommand(String toAdd, String toBeAddedTo) {
         requireNonNull(toAdd);
         requireNonNull(toBeAddedTo);
         this.toAdd = toAdd;
@@ -56,17 +55,25 @@ public class AddPersonToGroupCommand extends Command {
         requireNonNull(model);
         List<Person> personList = model.getFilteredPersonList();
         List<Group> groupList = model.getFilteredGroupList();
-
-        if (toAdd.getZeroBased() >= personList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Person personToAdd = null;
+        Group groupToBeAddedTo = null;
+        for (Person person : personList) {
+            if (person.getName().fullName.equals(toAdd)) {
+                personToAdd = person;
+            }
+        }
+        for (Group group : groupList) {
+            if (group.getGroupName().equals(toBeAddedTo)) {
+                groupToBeAddedTo = group;
+            }
         }
 
-        if (toBeAddedTo.getZeroBased() >= groupList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+        if (personToAdd == null) {
+            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }
-
-        Person personToAdd = personList.get(toAdd.getZeroBased());
-        Group groupToBeAddedTo = groupList.get(toBeAddedTo.getZeroBased());
+        if (groupToBeAddedTo == null) {
+            throw new CommandException(Messages.MESSAGE_GROUP_NOT_FOUND);
+        }
 
         if (groupToBeAddedTo.contains(personToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

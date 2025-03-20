@@ -3,11 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
-import static seedu.address.logic.parser.ParserUtil.parseIndex;
 
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddPersonToGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 /**
@@ -30,10 +28,10 @@ public class AddPersonToGroupCommandParser implements Parser<AddPersonToGroupCom
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON, PREFIX_GROUP);
-        Index personIndex = parseIndex(argMultimap.getValue(PREFIX_PERSON).get());
-        Index groupIndex = parseIndex(argMultimap.getValue(PREFIX_GROUP).get());
+        String personName = argMultimap.getValue(PREFIX_PERSON).get();
+        String groupName = argMultimap.getValue(PREFIX_GROUP).get();
 
-        return new AddPersonToGroupCommand(personIndex, groupIndex);
+        return new AddPersonToGroupCommand(personName, groupName);
     }
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

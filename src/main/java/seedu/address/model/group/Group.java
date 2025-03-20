@@ -34,7 +34,7 @@ public class Group implements Result {
     /**
      * Regular expression to validate group names.
      */
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     /**
      * The name of the group.
@@ -128,6 +128,17 @@ public class Group implements Result {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns true if both groups have the same name.
+     * This defines a weaker notion of equality between two gorups.
+     */
+    public boolean isSameGroup(Group otherGroup) {
+        if (otherGroup == this) {
+            return true;
+        }
+        return otherGroup != null && otherGroup.getGroupName().equals(groupName);
     }
 
     /**
