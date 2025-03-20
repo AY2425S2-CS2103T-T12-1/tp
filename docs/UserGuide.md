@@ -133,7 +133,7 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
-
+GroupResults.png
 Deletes the specified person from the contact list.
 
 Format: `delete INDEX`
@@ -175,6 +175,9 @@ Shows a list of all existing groups along with their information, i.e., indices 
 
 Format: `list-group`
 
+Examples:
+![ResultOfList](images/listGroupResults.png) 
+
 ### Deleting an existing group : `delete-group`
 
 Deletes the specified group from the list of groups.
@@ -184,6 +187,36 @@ Format: `delete-group INDEX`
 Examples:
 
 - `delete-group 1` deletes the group with index `1`.
+
+### Adding Person to a group : `add-to-group`
+
+Adds a specified Person to a specified group.
+
+Format: `add-to-group P/PERSON_NAME g/GROUP_NAME`
+
+Examples:
+
+- `add-to-group P/Alex Yeoh g/G13`.
+
+### Removing Person from a group : `delete-from-group`
+
+Deletes a specified Person from a specified group.
+
+Format: `delete-from-group P/PERSON_NAME g/GROUP_NAME`
+
+Examples:
+
+- `delete-from-group P/Alex Yeoh g/G13`.
+
+### Find a group : `find-group`
+
+Finds a specified group based on group name.
+
+Format: `find-group GROUP_NAME`
+
+Examples:
+
+- `find-group G13`.
 
 ### Saving the data
 
@@ -228,4 +261,10 @@ _Details coming soon ..._
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **List**   | `list`                                                                                                                                                                |
+| **Add Group ** | `add-group n/GROUP_NAME` <br> e.g., `add-group n/G13` |
+| **Delete Group** | `delete-group INDEX` <br> e.g., `delete-group 1` |
+| **List Group** | `list-group` |
+| **Find Group | `find-group GROUP_NAME` <br> e.g., `find-group G13` |
+| **Add to Group** | `add-to-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `add-to-group P/Alex Yeoh g/G13` |
+| **Delete from Group** | `delete-from-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `delete-from-group P/Alex Yeoh g/G13` |
 | **Help**   | `help`                                                                                                                                                                |
