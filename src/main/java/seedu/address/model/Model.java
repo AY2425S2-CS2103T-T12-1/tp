@@ -131,4 +131,10 @@ public interface Model {
      * The group must not already exist in the address book.
      */
     void addGroup(Group group);
+
+    /**
+     * Adds the given person to the given group.
+     * The person must not already exist in the group.
+     */
+    void addPersonToGroup(Person personToAdd, Group groupToBeAddedTo);
 }

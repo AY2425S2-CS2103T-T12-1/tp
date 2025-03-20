@@ -186,6 +186,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addPersonToGroup(Person personToAdd, Group groupToBeAddedTo) {
+        requireAllNonNull(personToAdd, groupToBeAddedTo);
+        addressBook.addPersonToGroup(personToAdd, groupToBeAddedTo);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -201,5 +208,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }

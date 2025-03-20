@@ -23,6 +23,9 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_GROUP_DISPLAYED_INDEX = "The group index provided is invalid";
 
+    public static final String MESSAGE_PERSON_NOT_FOUND = "Person does not exist";
+    public static final String MESSAGE_GROUP_NOT_FOUND = "Group does not exist";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

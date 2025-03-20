@@ -192,6 +192,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return groups.asUnmodifiableObservableList();
     }
 
+    public void addPersonToGroup(Person personToAdd, Group groupToBeAddedTo) {
+        groupToBeAddedTo.add(personToAdd);
+    }
     /**
      * Returns a string representation of the AddressBook object.
      *
