@@ -21,8 +21,8 @@ public class AddPersonToGroupCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the group. "
             + "Example: "
             + COMMAND_WORD + " "
-            + PREFIX_PERSON + " Alex Yeoh "
-            + PREFIX_GROUP + " Group 1";
+            + PREFIX_PERSON + "Alex Yeoh "
+            + PREFIX_GROUP + "Group 1";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the group";
