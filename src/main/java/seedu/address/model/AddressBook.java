@@ -200,7 +200,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         groupToBeRemovedFrom.remove(personToRemove);
     }
 
-    /*
+    /**
      * Removes person from all groups they are in.
      */
     public void deletePersonFromAllGroups(Person personToRemove) {
