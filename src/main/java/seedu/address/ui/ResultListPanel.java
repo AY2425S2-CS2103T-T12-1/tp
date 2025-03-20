@@ -28,10 +28,6 @@ public class ResultListPanel extends UiPart<Region> {
         resultListView.setCellFactory(listView -> new ResultListViewCell());
     }
 
-    public void refresh() {
-        resultListView.refresh();
-    }
-
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Result}.
      */
