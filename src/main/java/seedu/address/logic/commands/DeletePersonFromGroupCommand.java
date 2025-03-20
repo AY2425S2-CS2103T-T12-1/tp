@@ -21,8 +21,8 @@ public class DeletePersonFromGroupCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a person from the group. "
             + "Example: "
             + COMMAND_WORD + " "
-            + PREFIX_PERSON + " Alex Yeoh "
-            + PREFIX_GROUP + " Group 1";
+            + PREFIX_PERSON + "Alex Yeoh "
+            + PREFIX_GROUP + "Group 1";
 
     public static final String MESSAGE_SUCCESS = "Person removed from group: %1$s";
     public static final String MESSAGE_PERSON_NONEXIST = "This person does not exist in the group";

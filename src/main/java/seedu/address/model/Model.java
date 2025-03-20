@@ -143,4 +143,9 @@ public interface Model {
      * The person must exist in the group.
      */
     void deletePersonFromGroup(Person personToRemove, Group groupToRemoveFrom);
+
+    /**
+     * Removes the given person from the all groups they were in.
+     */
+    void deletePersonFromAllGroups(Person personToRemove);
 }
