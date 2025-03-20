@@ -133,7 +133,7 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
-
+GroupResults.png
 Deletes the specified person from the contact list.
 
 Format: `delete INDEX`
@@ -174,6 +174,9 @@ Examples:
 Shows a list of all existing groups along with their information, i.e., indices and names.
 
 Format: `list-group`
+
+Examples:
+![ResultOfList](images/listGroupResults.png) 
 
 ### Deleting an existing group : `delete-group`
 
