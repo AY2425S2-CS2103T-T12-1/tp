@@ -1,0 +1,222 @@
+package seedu.address.model.group;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
+
+import javafx.scene.layout.Region;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.person.Person;
+import seedu.address.ui.Result;
+import seedu.address.ui.UiPart;
+
+/**
+ * Represents a GroupMemberDetail in the address book to associate a Person with a Group.
+ * A {@code GroupMemberDetail} consists of a person, group, attendance, and assignment grades.
+ */
+public class GroupMemberDetail implements Result {
+
+    /**
+     * Different roles of memebers in a group
+     */
+    public enum Role {
+        Student,
+        TeachingAssistant,
+        Lecturer
+    }
+
+    public static final int WEEKS_PER_SEMESTER = 13;
+
+    /**
+     * Message to indicate the constraints for week number
+     */
+    public static final String MESSAGE_CONSTRAINTS = String.format("Weeks should be between 1 and %d", WEEKS_PER_SEMESTER);
+
+    /**
+     * The {@code Person} whose detail is describing.
+     */
+    private Person person;
+
+    /**
+     * The {@code Group} that the person belongs to.
+     */
+    private Group group;
+
+    /**
+     * The {@code Role} that the person has.
+     */
+    private Role role;
+
+    /**
+     * The list of members in the group, stored in order of insertion.
+     */
+    private ArrayList<Boolean> attendance;
+
+    /**
+     * The grades of the assignments of this person in this group.
+     */
+    private HashMap<Assignment, Float> grades;
+
+    /**
+     * Constructs a {@code GroupMemberDetail} with a specified group member {@code Person}.
+     * Initializes an empty list of attendance.
+     * Assumes the person is a student
+     *
+     * @param Person A valid person.
+     * @param Group A valid group.
+     */
+    public GroupMemberDetail(Person person, Group group) {
+        this(person, group, Role.Student);
+    }
+    
+    /**
+     * Constructs a {@code GroupMemberDetail} with a specified group member {@code Person}.
+     * Initializes an empty list of attendance.
+     * Assumes the person is a student
+     *
+     * @param Person A valid person.
+     * @param Group A valid group.
+     * @param Role A valid role.
+     */
+    public GroupMemberDetail(Person person, Group group, Role role) {
+        requireAllNonNull(person, group, role);
+        this.person = person;
+        this.group = group;
+        this.role = role;
+        this.attendance = new ArrayList<>(WEEKS_PER_SEMESTER);
+        this.grades = new HashMap<>();
+    }
+
+    /**
+     * Checks if the week is between 1 and the number of weeks in a semester.
+     *
+     * @param test The week number to test.
+     * @return True if the week is valid, false otherwise.
+     */
+    public static boolean isValidWeek(int test) {
+        return test >= 1 || test <= WEEKS_PER_SEMESTER;
+    }
+
+    /**
+     * Gets the group.
+     * 
+     * @return The group associated with this object.
+     */
+    public Group getGroup() {
+        return this.group;
+    }
+
+    /**
+     * Gets the person.
+     * 
+     * @return The person associated with this object.
+     */
+    public Person getPerson() {
+        return this.person;
+    }
+
+    /**
+     * Gets the role.
+     * 
+     * @return The role of the person.
+     */
+    public Role getRole() {
+        return this.role;
+    }
+
+    /**
+     * Sets the role.
+     * 
+     * @param role The role of the person.
+     */
+    public void setRole(Role role) {
+        requireNonNull(role);
+        this.role = role;
+    }
+
+    /**
+     * Gets the attendance.
+     *
+     * @return The attendance.
+     */
+    public ArrayList<Boolean> getAttendance() {
+        return this.attendance;
+    }
+
+    /**
+     * Marks attendance for a particular week;
+     *
+     * @param week The week to mark the attendance
+     */
+    public void markAttendance(int week) {
+        checkArgument(isValidWeek(week), MESSAGE_CONSTRAINTS);
+        this.attendance.set(week-1, true);
+    }
+
+    /**
+     * Unmarks attendance for a particular week;
+     *
+     * @param week The week to unmark the attendance
+     */
+    public void unmarkAttendance(int week) {
+        checkArgument(isValidWeek(week), MESSAGE_CONSTRAINTS);
+        this.attendance.set(week-1, false);
+    }
+
+    /**
+     * Checks whether this group is equal to another object.
+     * Two groups are considered equal if they have the same name.
+     *
+     * @param other The object to compare with.
+     * @return True if both groups have the same name, false otherwise.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof GroupMemberDetail otherGroupMemberDetail)) {
+            return false;
+        }
+
+        return group.equals(otherGroupMemberDetail.getGroup()) && person.equals(otherGroupMemberDetail.getPerson());
+    }
+
+    /**
+     * Computes the hash code for this group based on its name.
+     *
+     * @return The hash code of the group.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(person, group);
+    }
+
+    /**
+     * Returns a string representation of the group in the format "[GroupName]".
+     *
+     * @return A formatted string representing the group.
+     */
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("person", person)
+                .add("group", group)
+                .add("attendance", attendance)
+                .add("role", role)
+                .toString();
+    }
+
+    @Override
+    public UiPart<Region> createCard(int displayedIndex) {
+        return null;
+    }
+}
+
