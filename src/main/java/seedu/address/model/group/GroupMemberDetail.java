@@ -35,7 +35,8 @@ public class GroupMemberDetail implements Result {
     /**
      * Message to indicate the constraints for week number
      */
-    public static final String MESSAGE_CONSTRAINTS = String.format("Weeks should be between 1 and %d", WEEKS_PER_SEMESTER);
+    public static final String MESSAGE_CONSTRAINTS = String.format(
+        "Weeks should be between 1 and %d", WEEKS_PER_SEMESTER);
 
     /**
      * The {@code Person} whose detail is describing.
@@ -73,7 +74,7 @@ public class GroupMemberDetail implements Result {
     public GroupMemberDetail(Person person, Group group) {
         this(person, group, Role.Student);
     }
-    
+
     /**
      * Constructs a {@code GroupMemberDetail} with a specified group member {@code Person}.
      * Initializes an empty list of attendance.
@@ -104,7 +105,7 @@ public class GroupMemberDetail implements Result {
 
     /**
      * Gets the group.
-     * 
+     *
      * @return The group associated with this object.
      */
     public Group getGroup() {
@@ -113,7 +114,7 @@ public class GroupMemberDetail implements Result {
 
     /**
      * Gets the person.
-     * 
+     *
      * @return The person associated with this object.
      */
     public Person getPerson() {
@@ -122,7 +123,7 @@ public class GroupMemberDetail implements Result {
 
     /**
      * Gets the role.
-     * 
+     *
      * @return The role of the person.
      */
     public Role getRole() {
@@ -131,7 +132,7 @@ public class GroupMemberDetail implements Result {
 
     /**
      * Sets the role.
-     * 
+     *
      * @param role The role of the person.
      */
     public void setRole(Role role) {
@@ -155,7 +156,7 @@ public class GroupMemberDetail implements Result {
      */
     public void markAttendance(int week) {
         checkArgument(isValidWeek(week), MESSAGE_CONSTRAINTS);
-        this.attendance.set(week-1, true);
+        this.attendance.set(week - 1, true);
     }
 
     /**
@@ -165,7 +166,7 @@ public class GroupMemberDetail implements Result {
      */
     public void unmarkAttendance(int week) {
         checkArgument(isValidWeek(week), MESSAGE_CONSTRAINTS);
-        this.attendance.set(week-1, false);
+        this.attendance.set(week - 1, false);
     }
 
     /**
