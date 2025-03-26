@@ -59,6 +59,11 @@ public class ArrayListSet<K> implements Set<K> {
         return keys.remove(o);
     }
 
+    public boolean remove(int index) {
+        keys.remove(index);
+        return true;
+    }
+
     @Override
     public boolean containsAll(Collection<?> c) {
         return keys.containsAll(c);
