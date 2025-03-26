@@ -60,7 +60,8 @@ public class Group implements Result {
     }
 
     /**
-     * Constructs a {@code Group} with a specified name and an existing list of members. Assumes groupMembers are students.
+     * Constructs a {@code Group} with a specified name and an existing list of members.
+     * Assumes groupMembers are students.
      *
      * @param groupName    A valid group name.
      * @param groupMembers The list of members in the group.
