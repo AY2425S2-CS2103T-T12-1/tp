@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -56,7 +55,7 @@ public class GroupMemberDetail implements Result {
     /**
      * The list of members in the group, stored in order of insertion.
      */
-    private ArrayList<Boolean> attendance;
+    private boolean[] attendance;
 
     /**
      * The grades of the assignments of this person in this group.
@@ -89,7 +88,7 @@ public class GroupMemberDetail implements Result {
         this.person = person;
         this.group = group;
         this.role = role;
-        this.attendance = new ArrayList<>(WEEKS_PER_SEMESTER);
+        this.attendance = new boolean[WEEKS_PER_SEMESTER];
         this.grades = new HashMap<>();
     }
 
@@ -145,7 +144,7 @@ public class GroupMemberDetail implements Result {
      *
      * @return The attendance.
      */
-    public ArrayList<Boolean> getAttendance() {
+    public boolean[] getAttendance() {
         return this.attendance;
     }
 
@@ -156,7 +155,7 @@ public class GroupMemberDetail implements Result {
      */
     public void markAttendance(int week) {
         checkArgument(isValidWeek(week), MESSAGE_CONSTRAINTS);
-        this.attendance.set(week - 1, true);
+        this.attendance[week - 1] = true;
     }
 
     /**
@@ -166,7 +165,7 @@ public class GroupMemberDetail implements Result {
      */
     public void unmarkAttendance(int week) {
         checkArgument(isValidWeek(week), MESSAGE_CONSTRAINTS);
-        this.attendance.set(week - 1, false);
+        this.attendance[week - 1] = true;
     }
 
     /**
