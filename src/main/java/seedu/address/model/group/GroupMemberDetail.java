@@ -165,7 +165,7 @@ public class GroupMemberDetail implements Result {
      */
     public void unmarkAttendance(int week) {
         checkArgument(isValidWeek(week), MESSAGE_CONSTRAINTS);
-        this.attendance[week - 1] = true;
+        this.attendance[week - 1] = false;
     }
 
     /**
