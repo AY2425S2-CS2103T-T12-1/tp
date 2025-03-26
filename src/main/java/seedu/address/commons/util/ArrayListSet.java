@@ -59,6 +59,15 @@ public class ArrayListSet<K> implements Set<K> {
         return keys.remove(o);
     }
 
+    /**
+     * Removes the element at the specified position in this list.
+     * Shifts any subsequent elements to the left (subtracts one from their
+     * indices).
+     *
+     * @param index the index of the element to be removed
+     * @return true
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
     public boolean remove(int index) {
         keys.remove(index);
         return true;
