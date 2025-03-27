@@ -2,13 +2,16 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.ArrayListMap;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupMemberDetail;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -22,18 +25,20 @@ class JsonAdaptedGroup {
 
     private final String name;
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final ArrayListMap<String, JsonAdaptedGroupMemberDetails> groupMembers = new ArrayListMap<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedGroup} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedGroup(@JsonProperty("name") String name, @JsonProperty("persons") List<JsonAdaptedPerson> persons,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedGroup(@JsonProperty("name") String name,
+                            @JsonProperty("persons") ArrayListMap<String, JsonAdaptedGroupMemberDetails>
+                                    persons,
+                            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         if (persons != null) {
-            this.persons.addAll(persons);
+            this.groupMembers.putAll(persons);
         }
         if (tags != null) {
             this.tags.addAll(tags);
@@ -45,9 +50,11 @@ class JsonAdaptedGroup {
      */
     public JsonAdaptedGroup(Group source) {
         name = source.getGroupName();
-        persons.addAll(source.getGroupMembers().stream()
-                .map(JsonAdaptedPerson::new)
-                .collect(Collectors.toList()));
+        for (Map.Entry<Person, GroupMemberDetail> entry : source.getGroupMembersMap().entrySet()) {
+            String key = entry.getKey().getName().fullName;
+            JsonAdaptedGroupMemberDetails value = new JsonAdaptedGroupMemberDetails(entry.getValue());
+            this.groupMembers.put(key, value);
+        }
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -59,9 +66,11 @@ class JsonAdaptedGroup {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Group toModelType() throws IllegalValueException {
-        final List<Person> modelPersons = new ArrayList<>();
-        for (JsonAdaptedPerson person : persons) {
-            modelPersons.add(person.toModelType());
+        final ArrayListMap<Person, GroupMemberDetail> modelGroupMembers = new ArrayListMap<>();
+        for (Map.Entry<String, JsonAdaptedGroupMemberDetails> entry : groupMembers.entrySet()) {
+            Person key = entry.getValue().toModelType().getPerson();
+            GroupMemberDetail value = entry.getValue().toModelType();
+            modelGroupMembers.put(key, value);
         }
 
         final List<Tag> modelTags = new ArrayList<>();
@@ -77,7 +86,7 @@ class JsonAdaptedGroup {
         }
         final String modelName = name;
 
-        return new Group(modelName, modelPersons, modelTags);
+        return new Group(modelName, modelGroupMembers, modelTags);
     }
 
 }

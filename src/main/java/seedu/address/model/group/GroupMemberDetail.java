@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashMap;
 import java.util.Objects;
 
 import javafx.scene.layout.Region;
+import seedu.address.commons.util.ArrayListMap;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
@@ -43,11 +43,6 @@ public class GroupMemberDetail implements Result {
     private Person person;
 
     /**
-     * The {@code Group} that the person belongs to.
-     */
-    private Group group;
-
-    /**
      * The {@code Role} that the person has.
      */
     private Role role;
@@ -60,18 +55,17 @@ public class GroupMemberDetail implements Result {
     /**
      * The grades of the assignments of this person in this group.
      */
-    private HashMap<Assignment, Float> grades;
+    private ArrayListMap<Assignment, Float> grades;
 
     /**
      * Constructs a {@code GroupMemberDetail} with a specified group member {@code Person}.
      * Initializes an empty list of attendance.
      * Assumes the person is a student
      *
-     * @param Person A valid person.
-     * @param Group A valid group.
+     * @param person A valid person.
      */
-    public GroupMemberDetail(Person person, Group group) {
-        this(person, group, Role.Student);
+    public GroupMemberDetail(Person person) {
+        this(person, Role.Student);
     }
 
     /**
@@ -79,17 +73,34 @@ public class GroupMemberDetail implements Result {
      * Initializes an empty list of attendance.
      * Assumes the person is a student
      *
-     * @param Person A valid person.
-     * @param Group A valid group.
-     * @param Role A valid role.
+     * @param person A valid person.
+     * @param role A valid role.
      */
-    public GroupMemberDetail(Person person, Group group, Role role) {
-        requireAllNonNull(person, group, role);
+    public GroupMemberDetail(Person person, Role role) {
+        requireAllNonNull(person, role);
         this.person = person;
-        this.group = group;
         this.role = role;
         this.attendance = new boolean[WEEKS_PER_SEMESTER];
-        this.grades = new HashMap<>();
+        this.grades = new ArrayListMap<>();
+    }
+
+    /**
+     * Constructs a {@code GroupMemberDetail} with a specified group member {@code Person}.
+     * Initializes an empty list of attendance.
+     * Assumes the person is a student
+     *
+     * @param person        A valid person.
+     * @param role          A valid role.
+     * @param attendance    A valid attendance array.
+     * @param grades        A valid grade map.
+     */
+    public GroupMemberDetail(Person person, Role role, boolean[] attendance,
+                             ArrayListMap<Assignment, Float> grades) {
+        requireAllNonNull(person, role, attendance, grades);
+        this.person = person;
+        this.role = role;
+        this.attendance = attendance;
+        this.grades = grades;
     }
 
     /**
@@ -100,15 +111,6 @@ public class GroupMemberDetail implements Result {
      */
     public static boolean isValidWeek(int test) {
         return test >= 1 || test <= WEEKS_PER_SEMESTER;
-    }
-
-    /**
-     * Gets the group.
-     *
-     * @return The group associated with this object.
-     */
-    public Group getGroup() {
-        return this.group;
     }
 
     /**
@@ -149,6 +151,15 @@ public class GroupMemberDetail implements Result {
     }
 
     /**
+     * Gets the grades.
+     *
+     * @return The grades.
+     */
+    public ArrayListMap<Assignment, Float> getGrades() {
+        return this.grades;
+    }
+
+    /**
      * Marks attendance for a particular week;
      *
      * @param week The week to mark the attendance
@@ -186,7 +197,7 @@ public class GroupMemberDetail implements Result {
             return false;
         }
 
-        return group.equals(otherGroupMemberDetail.getGroup()) && person.equals(otherGroupMemberDetail.getPerson());
+        return person.equals(otherGroupMemberDetail.getPerson());
     }
 
     /**
@@ -196,7 +207,7 @@ public class GroupMemberDetail implements Result {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(person, group);
+        return Objects.hash(person, role);
     }
 
     /**
@@ -208,7 +219,6 @@ public class GroupMemberDetail implements Result {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("person", person)
-                .add("group", group)
                 .add("attendance", attendance)
                 .add("role", role)
                 .toString();

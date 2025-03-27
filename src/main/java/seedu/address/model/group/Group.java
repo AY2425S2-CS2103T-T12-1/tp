@@ -56,7 +56,7 @@ public class Group implements Result {
      * @param groupName A valid group name.
      */
     public Group(String groupName) {
-        this(groupName, null, null);
+        this(groupName, (Collection<Person>) null, null);
     }
 
     /**
@@ -83,8 +83,23 @@ public class Group implements Result {
         this.groupName = groupName;
         this.groupMembers = new ArrayListMap<>();
         for (Person p : groupMembers) {
-            this.groupMembers.put(p, new GroupMemberDetail(p, this));
+            this.groupMembers.put(p, new GroupMemberDetail(p));
         }
+        this.tags = tags == null ? new HashSet<>() : new HashSet<>(tags);
+    }
+
+    /**
+     * Constructs a {@code Group} with a specified name, existing Map and set of tags.
+     *
+     * @param groupName     A valid group name.
+     * @param groupMembers  A map of Person as key to GroupMemberDetail as value.
+     * @param tags          The collection of tags for the group.
+     */
+    public Group(String groupName, ArrayListMap<Person, GroupMemberDetail> groupMembers, Collection<Tag> tags) {
+        requireNonNull(groupName);
+        checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
+        this.groupName = groupName;
+        this.groupMembers = groupMembers;
         this.tags = tags == null ? new HashSet<>() : new HashSet<>(tags);
     }
 
@@ -126,7 +141,11 @@ public class Group implements Result {
     public ArrayList<Person> getGroupMembers() {
         return new ArrayList<>(groupMembers.keySet());
     }
-
+    public ArrayListMap<Person, GroupMemberDetail> getGroupMembersMap() {
+        ArrayListMap<Person, GroupMemberDetail> copied = new ArrayListMap<>();
+        copied.putAll(this.groupMembers);
+        return copied;
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -200,7 +219,7 @@ public class Group implements Result {
         if (contains(p)) {
             throw new DuplicatePersonException();
         }
-        this.groupMembers.put(p, new GroupMemberDetail(p, this));
+        this.groupMembers.put(p, new GroupMemberDetail(p));
     }
 
     /**
