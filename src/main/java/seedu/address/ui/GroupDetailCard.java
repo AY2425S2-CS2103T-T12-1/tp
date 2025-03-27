@@ -6,6 +6,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.group.GroupMemberDetail;
 
+/**
+ * A UI component that displays information of a {@code GroupMemberDetail}.
+ */
 public class GroupDetailCard extends UiPart<Region> {
     private static final String FXML = "GroupDetailListCard.fxml";
     private static final int MAX_MEMBERS_TO_DISPLAY = 3;

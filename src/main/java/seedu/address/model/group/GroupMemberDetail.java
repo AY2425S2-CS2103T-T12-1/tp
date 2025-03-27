@@ -11,7 +11,6 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
-import seedu.address.ui.GroupCard;
 import seedu.address.ui.GroupDetailCard;
 import seedu.address.ui.Result;
 import seedu.address.ui.UiPart;
@@ -37,7 +36,7 @@ public class GroupMemberDetail implements Result {
      * Message to indicate the constraints for week number
      */
     public static final String MESSAGE_CONSTRAINTS = String.format(
-        "Weeks should be between 1 and %d", WEEKS_PER_SEMESTER);
+            "Weeks should be between 1 and %d", WEEKS_PER_SEMESTER);
 
     /**
      * The {@code Person} whose detail is describing.
@@ -70,7 +69,7 @@ public class GroupMemberDetail implements Result {
      * Assumes the person is a student
      *
      * @param Person A valid person.
-     * @param Group A valid group.
+     * @param Group  A valid group.
      */
     public GroupMemberDetail(Person person, Group group) {
         this(person, group, Role.Student);
@@ -82,8 +81,8 @@ public class GroupMemberDetail implements Result {
      * Assumes the person is a student
      *
      * @param Person A valid person.
-     * @param Group A valid group.
-     * @param Role A valid role.
+     * @param Group  A valid group.
+     * @param Role   A valid role.
      */
     public GroupMemberDetail(Person person, Group group, Role role) {
         requireAllNonNull(person, group, role);
