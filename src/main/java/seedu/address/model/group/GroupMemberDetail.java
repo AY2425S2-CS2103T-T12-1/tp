@@ -99,7 +99,7 @@ public class GroupMemberDetail implements Result {
      * @return True if the week is valid, false otherwise.
      */
     public static boolean isValidWeek(int test) {
-        return test >= 1 || test <= WEEKS_PER_SEMESTER;
+        return test >= 1 && test <= WEEKS_PER_SEMESTER;
     }
 
     /**
