@@ -82,8 +82,10 @@ public class Group implements Result {
         checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
         this.groupName = groupName;
         this.groupMembers = new ArrayListMap<>();
-        for (Person p : groupMembers) {
-            this.groupMembers.put(p, new GroupMemberDetail(p, this));
+        if (groupMembers != null) {
+            for (Person p : groupMembers) {
+                this.groupMembers.put(p, new GroupMemberDetail(p, this));
+            }
         }
         this.tags = tags == null ? new HashSet<>() : new HashSet<>(tags);
     }
@@ -254,6 +256,10 @@ public class Group implements Result {
         return this.groupMembers.size();
     }
 
+    public GroupMemberDetail getGroupMemberDetail(Person person) {
+        return groupMembers.get(person);
+    }
+
     /**
      * Returns a string representation of the group in the format "[GroupName]".
      *
@@ -270,5 +276,9 @@ public class Group implements Result {
     @Override
     public UiPart<Region> createCard(int displayedIndex) {
         return new GroupCard(this, displayedIndex);
+    }
+
+    public ArrayList<GroupMemberDetail> getGroupDetails() {
+        return groupMembers.values();
     }
 }

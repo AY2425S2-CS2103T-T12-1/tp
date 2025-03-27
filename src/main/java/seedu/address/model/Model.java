@@ -133,6 +133,13 @@ public interface Model {
     void addGroup(Group group);
 
     /**
+     * Shows all the details of the specified group.
+     *
+     * @param groupToShow The group whose details should be shown.
+     */
+    void showGroupDetails(Group groupToShow);
+
+    /**
      * Adds the given person to the given group.
      * The person must not already exist in the group.
      */
@@ -148,4 +155,14 @@ public interface Model {
      * Removes the given person from the all groups they were in.
      */
     void deletePersonFromAllGroups(Person personToRemove);
+
+    /**
+     * Retrieves a group matching the provided group name.
+     */
+    Group getGroup(String groupName);
+
+    /**
+     * Retrieves a person matching the provided person name.
+     */
+    Person getPerson(String personName);
 }

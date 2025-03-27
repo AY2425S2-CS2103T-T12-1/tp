@@ -1,13 +1,12 @@
 package seedu.address.commons.util;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * A Map implementation backed by ArrayLists and compares using Object#equals.
+ *
  * @param <K> The type of the keys in the map.
  * @param <V> The type of the values in the map.
  */
@@ -92,18 +91,18 @@ public class ArrayListMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public Set<K> keySet() {
+    public ArrayListSet<K> keySet() {
         return keys;
     }
 
     @Override
-    public Collection<V> values() {
+    public ArrayList<V> values() {
         return vals;
     }
 
     @Override
-    public Set<Entry<K, V>> entrySet() {
-        Set<Entry<K, V>> set = new HashSet<>();
+    public HashSet<Entry<K, V>> entrySet() {
+        HashSet<Entry<K, V>> set = new HashSet<>();
         for (int i = 0; i < keys.size(); i++) {
             set.add(Map.entry(keys.get(i), vals.get(i)));
         }

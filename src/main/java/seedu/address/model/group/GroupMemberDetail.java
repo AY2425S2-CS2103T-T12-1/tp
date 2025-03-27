@@ -11,6 +11,7 @@ import seedu.address.commons.util.ArrayListMap;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
+import seedu.address.ui.GroupDetailCard;
 import seedu.address.ui.Result;
 import seedu.address.ui.UiPart;
 
@@ -35,7 +36,7 @@ public class GroupMemberDetail implements Result {
      * Message to indicate the constraints for week number
      */
     public static final String MESSAGE_CONSTRAINTS = String.format(
-        "Weeks should be between 1 and %d", WEEKS_PER_SEMESTER);
+            "Weeks should be between 1 and %d", WEEKS_PER_SEMESTER);
 
     /**
      * The {@code Person} whose detail is describing.
@@ -66,7 +67,8 @@ public class GroupMemberDetail implements Result {
      * Initializes an empty list of attendance.
      * Assumes the person is a student
      *
-     * @param person A valid person.
+     * @param Person A valid person.
+     * @param Group  A valid group.
      */
     public GroupMemberDetail(Person person, Group group) {
         this(person, group, Role.Student);
@@ -77,9 +79,9 @@ public class GroupMemberDetail implements Result {
      * Initializes an empty list of attendance.
      * Assumes the person is a student
      *
-     * @param person A valid person.
-     * @param group A valid group.
-     * @param role A valid role.
+     * @param Person A valid person.
+     * @param Group  A valid group.
+     * @param Role   A valid role.
      */
     public GroupMemberDetail(Person person, Group group, Role role) {
         requireAllNonNull(person, role);
@@ -117,7 +119,7 @@ public class GroupMemberDetail implements Result {
      * @return True if the week is valid, false otherwise.
      */
     public static boolean isValidWeek(int test) {
-        return test >= 1 || test <= WEEKS_PER_SEMESTER;
+        return test >= 1 && test <= WEEKS_PER_SEMESTER;
     }
 
     /**
@@ -252,7 +254,7 @@ public class GroupMemberDetail implements Result {
 
     @Override
     public UiPart<Region> createCard(int displayedIndex) {
-        return null;
+        return new GroupDetailCard(this, displayedIndex);
     }
 }
 
