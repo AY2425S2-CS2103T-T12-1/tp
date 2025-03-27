@@ -6,11 +6,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupMemberDetail;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represents a command that unmarks a student's attendance for a particular group and week.
@@ -34,7 +36,7 @@ public class UnmarkAttendanceCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PERSON + "Jensen Huang "
             + PREFIX_GROUP + "CS2103T T12 "
-            + PREFIX_WEEK + "9";
+            + PREFIX_WEEK + "10";
 
     /**
      * Success message for command.
@@ -45,12 +47,13 @@ public class UnmarkAttendanceCommand extends Command {
     /**
      * Group Member Detail object to be updated.
      */
-    private final GroupMemberDetail groupMemberDetail;
+    private final String personName;
+    private final String groupName;
     private final int week;
 
 
     /**
-     * Creates a {@code UnarkAttendanceCommand} to unmark a student's attendance.
+     * Creates a {@code M=UnmarkAttendanceCommand} to unmark a student's attendance.
      *
      * @param personName The name of the student.
      * @param groupName  The name of the group the student belongs to.
@@ -58,8 +61,8 @@ public class UnmarkAttendanceCommand extends Command {
      */
     public UnmarkAttendanceCommand(String personName, String groupName, int week) {
         requireAllNonNull(personName, groupName, week);
-
-        this.groupMemberDetail = null;
+        this.personName = personName;
+        this.groupName = groupName;
         this.week = week;
     }
 
@@ -73,15 +76,33 @@ public class UnmarkAttendanceCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!groupMemberDetail.isValidWeek(week)) {
+
+        if (!GroupMemberDetail.isValidWeek(week)) {
             throw new CommandException("Week number must be between 1 and 13 (inclusive)!");
         }
-        throw new CommandException("Unimplemented!");
-        //String person = groupMemberDetail.getPerson().getName().toString();
-        //String group = groupMemberDetail.getGroup().getGroupName();
-        //groupMemberDetail.markAttendance(week);
-        //Add implementation for storage
-        return new CommandResult(String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, person, group, week));
+
+        Group group;
+        try {
+            group = model.getGroup(groupName);
+        } catch (GroupNotFoundException e) {
+            throw new CommandException("Group not found!");
+        }
+
+        Person person;
+        try {
+            person = model.getPerson(personName);
+        } catch (PersonNotFoundException e) {
+            throw new CommandException("Person not found!");
+        }
+
+        if (!group.contains(person)) {
+            throw new CommandException("Person does not exist in group!");
+        }
+
+        GroupMemberDetail groupMemberDetail = group.getGroupMemberDetail(person);
+        groupMemberDetail.unmarkAttendance(week);
+        // Add implementation for storage
+        return new CommandResult(String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, personName, groupName, week));
     }
 
 
@@ -89,7 +110,7 @@ public class UnmarkAttendanceCommand extends Command {
      * Checks if this command is equal to another object.
      *
      * @param other The other object to compare to.
-     * @return True if both objects are UnmarkAttendanceCommand instances with the same GroupMemberDetail and week number.
+     * @return True if both objects are equal.
      */
     @Override
     public boolean equals(Object other) {
@@ -98,11 +119,12 @@ public class UnmarkAttendanceCommand extends Command {
         }
 
         // instanceof handles null cases
-        if (!(other instanceof seedu.address.logic.commands.UnmarkAttendanceCommand otherCmd)) {
+        if (!(other instanceof UnmarkAttendanceCommand otherCmd)) {
             return false;
         }
 
-        return groupMemberDetail.equals(otherCmd.groupMemberDetail)
+        return personName.equals(otherCmd.personName)
+                && groupName.equals(otherCmd.groupName)
                 && week == otherCmd.week;
     }
 }

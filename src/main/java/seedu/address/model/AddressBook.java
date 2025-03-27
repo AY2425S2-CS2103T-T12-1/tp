@@ -8,8 +8,10 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represents an address book that stores a list of persons and groups.
@@ -128,6 +130,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    public Person getPerson(String personName) {
+        for (Person person : persons) {
+            if (person.getName().toString().equals(personName)) {
+                return person;
+            }
+        }
+        throw new PersonNotFoundException();
+    }
+
     //// Group-level operations
 
     /**
@@ -190,6 +201,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public ObservableList<Group> getGroupList() {
         return groups.asUnmodifiableObservableList();
+    }
+
+    public Group getGroup(String groupName) {
+        for (Group group : groups) {
+            if (group.getGroupName().equals(groupName)) {
+                return group;
+            }
+        }
+        throw new GroupNotFoundException();
     }
 
     public void addPersonToGroup(Person personToAdd, Group groupToBeAddedTo) {

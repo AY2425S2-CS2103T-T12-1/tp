@@ -8,7 +8,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupMemberDetail;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represents a command that marks a student's attendance for a particular group and week.
@@ -43,7 +47,8 @@ public class MarkAttendanceCommand extends Command {
     /**
      * Group Member Detail object to be updated.
      */
-    private final GroupMemberDetail groupMemberDetail;
+    private final String personName;
+    private final String groupName;
     private final int week;
 
 
@@ -56,8 +61,8 @@ public class MarkAttendanceCommand extends Command {
      */
     public MarkAttendanceCommand(String personName, String groupName, int week) {
         requireAllNonNull(personName, groupName, week);
-
-        this.groupMemberDetail = null;
+        this.personName = personName;
+        this.groupName = groupName;
         this.week = week;
     }
 
@@ -72,15 +77,32 @@ public class MarkAttendanceCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!groupMemberDetail.isValidWeek(week)) {
+        if (!GroupMemberDetail.isValidWeek(week)) {
             throw new CommandException("Week number must be between 1 and 13 (inclusive)!");
         }
-        throw new CommandException("Unimplemented!");
-        //String person = groupMemberDetail.getPerson().getName().toString();
-        //String group = groupMemberDetail.getGroup().getGroupName();
-        //groupMemberDetail.markAttendance(week);
-        //Add implementation for storage
-        //return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS, person, group, week));
+
+        Group group;
+        try {
+            group = model.getGroup(groupName);
+        } catch (GroupNotFoundException e) {
+            throw new CommandException("Group not found!");
+        }
+
+        Person person;
+        try {
+            person = model.getPerson(personName);
+        } catch (PersonNotFoundException e) {
+            throw new CommandException("Person not found!");
+        }
+
+        if (!group.contains(person)) {
+            throw new CommandException("Person does not exist in group!");
+        }
+
+        GroupMemberDetail groupMemberDetail = group.getGroupMemberDetail(person);
+        groupMemberDetail.markAttendance(week);
+        // Add implementation for storage
+        return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS, personName, groupName, week));
     }
 
 
@@ -101,7 +123,8 @@ public class MarkAttendanceCommand extends Command {
             return false;
         }
 
-        return groupMemberDetail.equals(otherCmd.groupMemberDetail)
+        return personName.equals(otherCmd.personName)
+                && groupName.equals(otherCmd.groupName)
                 && week == otherCmd.week;
     }
 }
