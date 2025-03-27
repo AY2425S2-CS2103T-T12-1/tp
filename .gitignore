@@ -7,6 +7,9 @@ src/main/resources/docs/
 /.idea/
 /out/
 /*.iml
+/.classpath
+/.project
+/.settings
 
 # Storage/log files
 /data/
@@ -25,4 +28,6 @@ docs/_site/
 .classpath
 .project
 .settings/
-bin/
+
+# Build files for FXML
+/bin/

@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
+import seedu.address.ui.Result;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Group> filteredGroups;
+    private final ResultList results;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,7 +39,9 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
+        results = new ResultList(filteredPersons, filteredGroups);
     }
+
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
@@ -125,10 +129,20 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Result} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Result> getResultList() {
+        return results.getObservableResults();
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        results.setSource(ResultList.Source.Persons);
     }
 
     //=========== Filtered Group List Accessors =============================================================
@@ -142,6 +156,7 @@ public class ModelManager implements Model {
     public void updateFilteredGroupList(Predicate<Group> predicate) {
         requireNonNull(predicate);
         filteredGroups.setPredicate(predicate);
+        results.setSource(ResultList.Source.Groups);
     }
 
     @Override
@@ -164,6 +179,34 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addGroup(Group group) {
+        requireNonNull(group);
+        addressBook.addGroup(group);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
+    public void addPersonToGroup(Person personToAdd, Group groupToBeAddedTo) {
+        requireAllNonNull(personToAdd, groupToBeAddedTo);
+        addressBook.addPersonToGroup(personToAdd, groupToBeAddedTo);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
+    public void deletePersonFromGroup(Person personToRemove, Group groupToRemoveFrom) {
+        requireAllNonNull(personToRemove, groupToRemoveFrom);
+        addressBook.deletePersonFromGroup(personToRemove, groupToRemoveFrom);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
+    public void deletePersonFromAllGroups(Person personToRemove) {
+        requireNonNull(personToRemove);
+        addressBook.deletePersonFromAllGroups(personToRemove);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -179,5 +222,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }

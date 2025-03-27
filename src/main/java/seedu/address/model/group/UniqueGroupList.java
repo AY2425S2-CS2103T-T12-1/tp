@@ -13,11 +13,11 @@ import seedu.address.model.group.exceptions.GroupNotFoundException;
 
 /**
  * A list of groups that enforces uniqueness between its elements and does not allow nulls.
- * A group is considered unique by comparing using {@code Group#equals(Object)}.
+ * A group is considered unique by comparing using {@code Group#isSameGroup(Group)}.
  *
  * Supports a minimal set of list operations.
  *
- * @see Group#equals(Object)
+ * @see Group#isSameGroup(Group)
  */
 public class UniqueGroupList implements Iterable<Group> {
 
@@ -30,7 +30,7 @@ public class UniqueGroupList implements Iterable<Group> {
      */
     public boolean contains(Group toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
+        return internalList.stream().anyMatch(toCheck::isSameGroup);
     }
 
     /**
@@ -82,7 +82,7 @@ public class UniqueGroupList implements Iterable<Group> {
             throw new GroupNotFoundException();
         }
 
-        if (!target.equals(editedGroup) && contains(editedGroup)) {
+        if (!target.isSameGroup(editedGroup) && contains(editedGroup)) {
             throw new DuplicateGroupsException();
         }
 
@@ -108,11 +108,10 @@ public class UniqueGroupList implements Iterable<Group> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UniqueGroupList)) {
+        if (!(other instanceof UniqueGroupList otherUniqueGroupList)) {
             return false;
         }
 
-        UniqueGroupList otherUniqueGroupList = (UniqueGroupList) other;
         return internalList.equals(otherUniqueGroupList.internalList);
     }
 
@@ -132,7 +131,7 @@ public class UniqueGroupList implements Iterable<Group> {
     private boolean groupsAreUnique(List<Group> groups) {
         for (int i = 0; i < groups.size() - 1; i++) {
             for (int j = i + 1; j < groups.size(); j++) {
-                if (groups.get(i).equals(groups.get(j))) {
+                if (groups.get(i).isSameGroup(groups.get(j))) {
                     return false;
                 }
             }

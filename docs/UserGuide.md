@@ -134,6 +134,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
+GroupResults.png
 Deletes the specified person from the contact list.
 
 Format: `delete INDEX`
@@ -175,6 +176,43 @@ Shows a list of all existing groups along with their information, i.e., indices 
 
 Format: `list-group`
 
+Examples:
+![ResultOfList](images/listGroupResults.png)
+
+### Editing a group : `edit-group`
+
+Edits an existing group.
+
+Format: `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​`
+
+- Edits the group at the specified `INDEX`. The index refers to the index number shown in the displayed group list. The index **must be a positive integer** 1, 2, 3, …​
+- At least one of the optional fields must be provided.
+- Existing values will be updated to the input values.
+- When editing tags, the existing tags of the group will be removed i.e adding of tags is not cumulative.
+- You can remove all the group’s tags by typing `t/` without specifying any tags after it.
+
+Examples:
+
+- `edit-group 1 n/G13` Edits the name of the first group to be `G13`.
+- `edit-group 2 n/CS2101 G12 t/` Edits the name of the second group to be `CS2101 G12` and clears all existing tags.
+
+### Locating a group by name : `find-group`
+
+Finds groups whose names contain any of the given keywords.
+
+Format: `find-group KEYWORD [MORE_KEYWORDS]`
+
+- The search is case-insensitive. e.g `hans` will match `Hans`
+- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+- Only the name is searched.
+- Only full words will be matched e.g. `Han` will not match `Hans`
+- Groups matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+
+- `find G13` could return groups with names like `G13`, `g13`, and `CS2101 g13`.
+
 ### Deleting an existing group : `delete-group`
 
 Deletes the specified group from the list of groups.
@@ -184,6 +222,26 @@ Format: `delete-group INDEX`
 Examples:
 
 - `delete-group 1` deletes the group with index `1`.
+
+### Adding Person to a group : `add-to-group`
+
+Adds a specified person to a specified group.
+
+Format: `add-to-group P/PERSON_NAME g/GROUP_NAME`
+
+Examples:
+
+- `add-to-group P/Alex Yeoh g/G13`.
+
+### Removing Person from a group : `delete-from-group`
+
+Deletes a specified person from a specified group.
+
+Format: `delete-from-group P/PERSON_NAME g/GROUP_NAME`
+
+Examples:
+
+- `delete-from-group P/Alex Yeoh g/G13`.
 
 ### Saving the data
 
@@ -220,12 +278,19 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                      |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                               |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**   | `list`                                                                                                                                                                |
-| **Help**   | `help`                                                                                                                                                                |
+| Action                | Format, Examples                                                                                                                                                      |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**             | `clear`                                                                                                                                                               |
+| **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **List**              | `list`                                                                                                                                                                |
+| **Add Group**         | `add-group n/GROUP_NAME` <br> e.g., `add-group n/G13`                                                                                                                 |
+| **Delete Group**      | `delete-group INDEX` <br> e.g., `delete-group 1`                                                                                                                      |
+| **Edit Group**        | `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​` <br> e.g., `edit-group 1 n/G13 t/ABC`                                                                                     |
+| **Find Group**        | `find-group KEYWORD [MORE_KEYWORDS]` <br> e.g., `find-group G13`                                                                                                      |
+| **List Group**        | `list-group`                                                                                                                                                          |
+| **Add to Group**      | `add-to-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `add-to-group P/Alex Yeoh g/G13`                                                                                 |
+| **Delete from Group** | `delete-from-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `delete-from-group P/Alex Yeoh g/G13`                                                                       |
+| **Help**              | `help`                                                                                                                                                                |

@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.Result;
 
 public class AddCommandTest {
 
@@ -155,6 +156,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Result> getResultList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -181,6 +187,26 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Group> getFilteredGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPersonToGroup(Person personToAdd, Group groupToBeAddedTo) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePersonFromGroup(Person personToRemove, Group groupToBeRemovedFrom) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePersonFromAllGroups(Person personToRemove) {
             throw new AssertionError("This method should not be called.");
         }
     }
