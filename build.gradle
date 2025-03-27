@@ -80,4 +80,8 @@ shadowJar {
     archiveFileName = 'TAbbyDabby.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
 defaultTasks 'clean', 'test'
