@@ -200,6 +200,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deletePersonFromAllGroups(Person personToRemove) {
+        requireNonNull(personToRemove);
+        addressBook.deletePersonFromAllGroups(personToRemove);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

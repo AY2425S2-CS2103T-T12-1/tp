@@ -201,6 +201,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Removes person from all groups they are in.
+     */
+    public void deletePersonFromAllGroups(Person personToRemove) {
+        for (Group group : groups) {
+            if (group.contains(personToRemove)) {
+                deletePersonFromGroup(personToRemove, group);
+            }
+        }
+    }
+
+    /**
      * Returns a string representation of the AddressBook object.
      *
      * @return A string describing the address book.

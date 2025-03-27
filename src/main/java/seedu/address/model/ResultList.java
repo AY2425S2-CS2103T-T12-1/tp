@@ -55,9 +55,6 @@ public class ResultList {
     }
 
     public void setSource(Source source) {
-        if (source == this.source) {
-            return;
-        }
         this.source = source;
         results.setAll(source == Source.Persons ? persons : groups);
     }

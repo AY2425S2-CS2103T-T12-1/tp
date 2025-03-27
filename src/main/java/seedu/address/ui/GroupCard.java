@@ -73,21 +73,29 @@ public class GroupCard extends UiPart<Region> {
         // Display count of members
         memberCount.setText(totalMembers + " members");
 
-        // If there are no members, return early
         if (totalMembers == 0) {
             return;
         }
 
-        // Determine how many members to display
-        int membersToShow = Math.min(totalMembers, MAX_MEMBERS_TO_DISPLAY);
+        // Create a single label with comma-separated names
+        StringBuilder memberListText = new StringBuilder();
 
-        // Add the first few members
+        // Add the first few members with commas
+        int membersToShow = Math.min(totalMembers, MAX_MEMBERS_TO_DISPLAY);
         for (int i = 0; i < membersToShow; i++) {
             Person person = groupMembers.get(i);
-            Label memberLabel = new Label(person.getName().fullName);
-            memberLabel.getStyleClass().add("member-label");
-            members.getChildren().add(memberLabel);
+            memberListText.append(person.getName().fullName);
+
+            // Add comma and space if not the last displayed member
+            if (i < membersToShow - 1) {
+                memberListText.append(", ");
+            }
         }
+
+        // Add the members label
+        Label memberLabel = new Label(memberListText.toString());
+        memberLabel.getStyleClass().add("member-label");
+        members.getChildren().add(memberLabel);
 
         // Add an indicator if there are more members than shown
         if (totalMembers > MAX_MEMBERS_TO_DISPLAY) {
