@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import java.util.Collection;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -17,6 +19,7 @@ public class ResultList {
     public enum Source {
         Persons,
         Groups,
+        GroupDetails,
     }
 
     private final ObservableList<Person> persons;
@@ -39,14 +42,10 @@ public class ResultList {
         this.results = FXCollections.observableArrayList(persons);
 
         persons.addListener((ListChangeListener<Person>) c -> {
-            if (this.source == Source.Persons) {
-                processListChange(c);
-            }
+            processListChange(c, Source.Persons);
         });
         groups.addListener((ListChangeListener<Group>) c -> {
-            if (this.source == Source.Groups) {
-                processListChange(c);
-            }
+            processListChange(c, Source.Groups);
         });
     }
 
@@ -56,10 +55,38 @@ public class ResultList {
 
     public void setSource(Source source) {
         this.source = source;
-        results.setAll(source == Source.Persons ? persons : groups);
+        switch (source) {
+        case Persons:
+            results.setAll(persons);
+            break;
+        case Groups:
+            results.setAll(groups);
+            break;
+        case GroupDetails:
+            // Use ResultList#setSource(Source, Collection<Result>) instead.
+        default:
+            throw new IllegalArgumentException("Invalid source");
+        }
     }
 
-    private void processListChange(ListChangeListener.Change<? extends Result> c) {
+    public void setSource(Source source, Collection<? extends Result> results) {
+        switch (source) {
+        case GroupDetails:
+            this.results.setAll(results);
+            break;
+        case Persons:
+        case Groups:
+            // Use ResultList#setSource(Source) instead.
+        default:
+            throw new IllegalArgumentException("Invalid source");
+        }
+        this.source = source;
+    }
+
+    private void processListChange(ListChangeListener.Change<? extends Result> c, Source expectedSource) {
+        if (this.source != expectedSource) {
+            return;
+        }
         while (c.next()) {
             if (c.wasRemoved()) {
                 results.remove(c.getFrom(), c.getFrom() + c.getRemovedSize());

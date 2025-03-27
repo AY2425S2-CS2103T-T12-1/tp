@@ -9,7 +9,8 @@ import java.util.Objects;
  * Repesents an assignment.
  */
 public class Assignment {
-
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric";
     /**
      * The assignment name.
      */
@@ -30,6 +31,18 @@ public class Assignment {
         requireAllNonNull(name, deadline);
         this.name = name;
         this.deadline = deadline;
+    }
+
+    public static boolean isValidName(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Date getDeadline() {
+        return this.deadline;
     }
 
     /**

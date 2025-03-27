@@ -4,13 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashMap;
 import java.util.Objects;
 
 import javafx.scene.layout.Region;
+import seedu.address.commons.util.ArrayListMap;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
+import seedu.address.ui.GroupDetailCard;
 import seedu.address.ui.Result;
 import seedu.address.ui.UiPart;
 
@@ -35,15 +36,14 @@ public class GroupMemberDetail implements Result {
      * Message to indicate the constraints for week number
      */
     public static final String MESSAGE_CONSTRAINTS = String.format(
-        "Weeks should be between 1 and %d", WEEKS_PER_SEMESTER);
+            "Weeks should be between 1 and %d", WEEKS_PER_SEMESTER);
 
     /**
      * The {@code Person} whose detail is describing.
      */
     private Person person;
-
     /**
-     * The {@code Group} that the person belongs to.
+     * The {@code Group} whose person belong to.
      */
     private Group group;
 
@@ -60,7 +60,7 @@ public class GroupMemberDetail implements Result {
     /**
      * The grades of the assignments of this person in this group.
      */
-    private HashMap<Assignment, Float> grades;
+    private ArrayListMap<Assignment, Float> grades;
 
     /**
      * Constructs a {@code GroupMemberDetail} with a specified group member {@code Person}.
@@ -68,7 +68,7 @@ public class GroupMemberDetail implements Result {
      * Assumes the person is a student
      *
      * @param Person A valid person.
-     * @param Group A valid group.
+     * @param Group  A valid group.
      */
     public GroupMemberDetail(Person person, Group group) {
         this(person, group, Role.Student);
@@ -80,16 +80,36 @@ public class GroupMemberDetail implements Result {
      * Assumes the person is a student
      *
      * @param Person A valid person.
-     * @param Group A valid group.
-     * @param Role A valid role.
+     * @param Group  A valid group.
+     * @param Role   A valid role.
      */
     public GroupMemberDetail(Person person, Group group, Role role) {
-        requireAllNonNull(person, group, role);
+        requireAllNonNull(person, role);
         this.person = person;
         this.group = group;
         this.role = role;
         this.attendance = new boolean[WEEKS_PER_SEMESTER];
-        this.grades = new HashMap<>();
+        this.grades = new ArrayListMap<>();
+    }
+
+    /**
+     * Constructs a {@code GroupMemberDetail} with a specified group member {@code Person}.
+     * Initializes an empty list of attendance.
+     * Assumes the person is a student.
+     * Used by storage
+     *
+     * @param person        A valid person.
+     * @param role          A valid role.
+     * @param attendance    A valid attendance array.
+     * @param grades        A valid grade map.
+     */
+    public GroupMemberDetail(Person person, Role role, boolean[] attendance,
+                             ArrayListMap<Assignment, Float> grades) {
+        requireAllNonNull(person, role, attendance, grades);
+        this.person = person;
+        this.role = role;
+        this.attendance = attendance;
+        this.grades = grades;
     }
 
     /**
@@ -103,6 +123,15 @@ public class GroupMemberDetail implements Result {
     }
 
     /**
+     * Gets the person.
+     *
+     * @return The person associated with this object.
+     */
+    public Person getPerson() {
+        return this.person;
+    }
+
+    /**
      * Gets the group.
      *
      * @return The group associated with this object.
@@ -112,12 +141,12 @@ public class GroupMemberDetail implements Result {
     }
 
     /**
-     * Gets the person.
+     * Sets the Group.
      *
-     * @return The person associated with this object.
+     * @param group A valid group.
      */
-    public Person getPerson() {
-        return this.person;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     /**
@@ -146,6 +175,15 @@ public class GroupMemberDetail implements Result {
      */
     public boolean[] getAttendance() {
         return this.attendance;
+    }
+
+    /**
+     * Gets the grades.
+     *
+     * @return The grades.
+     */
+    public ArrayListMap<Assignment, Float> getGrades() {
+        return this.grades;
     }
 
     /**
@@ -216,7 +254,7 @@ public class GroupMemberDetail implements Result {
 
     @Override
     public UiPart<Region> createCard(int displayedIndex) {
-        return null;
+        return new GroupDetailCard(this, displayedIndex);
     }
 }
 

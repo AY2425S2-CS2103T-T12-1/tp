@@ -45,7 +45,8 @@
   } ],
   "groups" : [ {
     "name" : "Group1",
-    "persons" : [ ],
-    "tags" : [ ]
+    "tags" : [ ],
+    "groupMembers" : {
+    }
   } ]
 }

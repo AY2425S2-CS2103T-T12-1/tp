@@ -133,6 +133,13 @@ public interface Model {
     void addGroup(Group group);
 
     /**
+     * Shows all the details of the specified group.
+     *
+     * @param groupToShow The group whose details should be shown.
+     */
+    void showGroupDetails(Group groupToShow);
+
+    /**
      * Adds the given person to the given group.
      * The person must not already exist in the group.
      */
