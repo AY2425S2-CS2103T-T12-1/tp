@@ -186,6 +186,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Group getGroup(String groupName) {
+        return addressBook.getGroup(groupName);
+    }
+
+    @Override
+    public Person getPerson(String personName) {
+        return addressBook.getPerson(personName);
+    }
+
+    @Override
     public void addPersonToGroup(Person personToAdd, Group groupToBeAddedTo) {
         requireAllNonNull(personToAdd, groupToBeAddedTo);
         addressBook.addPersonToGroup(personToAdd, groupToBeAddedTo);

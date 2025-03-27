@@ -235,6 +235,10 @@ public class Group implements Result {
         return this.groupMembers.size();
     }
 
+    public GroupMemberDetail getGroupMemberDetail(Person person) {
+        return groupMembers.get(person);
+    }
+
     /**
      * Returns a string representation of the group in the format "[GroupName]".
      *
