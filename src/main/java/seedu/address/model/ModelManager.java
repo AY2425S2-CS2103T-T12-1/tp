@@ -186,6 +186,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void showGroupDetails(Group groupToShow) {
+        requireNonNull(groupToShow);
+        var details = groupToShow.getGroupDetails();
+        results.setSource(ResultList.Source.GroupDetails, details);
+    }
+
+    @Override
     public Group getGroup(String groupName) {
         return addressBook.getGroup(groupName);
     }
