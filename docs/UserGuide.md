@@ -3,7 +3,12 @@ layout: page
 title: User Guide
 ---
 
-TAbby Dabby is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, it can get your contact management tasks done faster than traditional GUI apps.
+TAbby Dabby is a **desktop app designed for teaching assistants, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, it can get your administrative tasks done faster than traditional GUI apps.
+At a glance, TAbby Dabby allows teaching assistants to:
+
+- Manage contacts of students in their tutorial groups
+- Track student attendance
+- Track students' assignment scores
 
 - Table of Contents
 {:toc}
@@ -140,7 +145,7 @@ Deletes the specified person from the contact list.
 Format: `delete INDEX`
 
 - Deletes the person at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
+- The index refers to the index number shown in the last displayed person list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -185,7 +190,7 @@ Edits an existing group.
 
 Format: `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​`
 
-- Edits the group at the specified `INDEX`. The index refers to the index number shown in the displayed group list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the group at the specified `INDEX`. The index refers to the index number shown in the last displayed group list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the group will be removed i.e adding of tags is not cumulative.
@@ -219,29 +224,51 @@ Deletes the specified group from the list of groups.
 
 Format: `delete-group INDEX`
 
+- The index refers to the index number shown in the last displayed group list.
+
 Examples:
 
-- `delete-group 1` deletes the group with index `1`.
+- `delete-group 1` deletes the group with index `1` in the last shown group list.
 
-### Adding Person to a group : `add-to-group`
+### Adding a person to a group: `add-to-group`
 
 Adds a specified person to a specified group.
 
 Format: `add-to-group P/PERSON_NAME g/GROUP_NAME`
 
+- `PERSON_NAME` and `GROUP_NAME` are strings representing the names of a person and a group respectively.
+
 Examples:
 
-- `add-to-group P/Alex Yeoh g/G13`.
+- `add-to-group P/Alex Yeoh g/CS2101 T12` adds the person named `Alex Yeoh` to the group named `CS2101 T12`.
 
-### Removing Person from a group : `delete-from-group`
+### Removing a person from a group: `delete-from-group`
 
-Deletes a specified person from a specified group.
+Removes a specified person from a specified group.
 
 Format: `delete-from-group P/PERSON_NAME g/GROUP_NAME`
 
+- `PERSON_NAME` and `GROUP_NAME` are strings representing the names of a person and a group respectively.
+
 Examples:
 
-- `delete-from-group P/Alex Yeoh g/G13`.
+- `delete-from-group P/Alex Yeoh g/CS2101 T12` removes the person named `Alex Yeoh` from the group named `CS2101 T13`.
+
+### Showing group details: `show-group-details`
+
+Shows all the main details regarding a group.
+
+Format: `show-group-details INDEX`
+
+- Details include:
+  - Group Name and tags
+  - Number of group members
+  - Name, role, and attendance of every group member
+- The index refers to the index number shown in the last displayed group list.
+
+Examples:
+
+- `show-group-details 1` shows all the details of the group with index `1` in the last shown group list.
 
 ### Saving the data
 
@@ -278,19 +305,20 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                | Format, Examples                                                                                                                                                      |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**             | `clear`                                                                                                                                                               |
-| **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**              | `list`                                                                                                                                                                |
-| **Add Group**         | `add-group n/GROUP_NAME` <br> e.g., `add-group n/G13`                                                                                                                 |
-| **Delete Group**      | `delete-group INDEX` <br> e.g., `delete-group 1`                                                                                                                      |
-| **Edit Group**        | `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​` <br> e.g., `edit-group 1 n/G13 t/ABC`                                                                                     |
-| **Find Group**        | `find-group KEYWORD [MORE_KEYWORDS]` <br> e.g., `find-group G13`                                                                                                      |
-| **List Group**        | `list-group`                                                                                                                                                          |
-| **Add to Group**      | `add-to-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `add-to-group P/Alex Yeoh g/G13`                                                                                 |
-| **Delete from Group** | `delete-from-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `delete-from-group P/Alex Yeoh g/G13`                                                                       |
-| **Help**              | `help`                                                                                                                                                                |
+| Action                 | Format, Examples                                                                                                                                                      |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**              | `clear`                                                                                                                                                               |
+| **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **List**               | `list`                                                                                                                                                                |
+| **Add Group**          | `add-group n/GROUP_NAME` <br> e.g., `add-group n/G13`                                                                                                                 |
+| **Delete Group**       | `delete-group INDEX` <br> e.g., `delete-group 1`                                                                                                                      |
+| **Edit Group**         | `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​` <br> e.g., `edit-group 1 n/G13 t/ABC`                                                                                     |
+| **Find Group**         | `find-group KEYWORD [MORE_KEYWORDS]` <br> e.g., `find-group G13`                                                                                                      |
+| **List Group**         | `list-group`                                                                                                                                                          |
+| **Add to Group**       | `add-to-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `add-to-group P/Alex Yeoh g/CS2101 T12`                                                                          |
+| **Delete from Group**  | `delete-from-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `delete-from-group P/Alex Yeoh g/CS2101 T12`                                                                |
+| **Show Group Details** | `show-group-details INDEX` <br> e.g., `show-group-details 1`                                                                                                          |
+| **Help**               | `help`                                                                                                                                                                |

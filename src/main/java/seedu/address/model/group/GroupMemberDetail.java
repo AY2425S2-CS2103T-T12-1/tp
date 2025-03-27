@@ -11,6 +11,8 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
+import seedu.address.ui.GroupCard;
+import seedu.address.ui.GroupDetailCard;
 import seedu.address.ui.Result;
 import seedu.address.ui.UiPart;
 
@@ -216,7 +218,7 @@ public class GroupMemberDetail implements Result {
 
     @Override
     public UiPart<Region> createCard(int displayedIndex) {
-        return null;
+        return new GroupDetailCard(this, displayedIndex);
     }
 }
 

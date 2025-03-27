@@ -258,4 +258,8 @@ public class Group implements Result {
     public UiPart<Region> createCard(int displayedIndex) {
         return new GroupCard(this, displayedIndex);
     }
+
+    public ArrayList<GroupMemberDetail> getGroupDetails() {
+        return groupMembers.values();
+    }
 }
