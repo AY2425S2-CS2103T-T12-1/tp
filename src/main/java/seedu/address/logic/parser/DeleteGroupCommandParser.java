@@ -15,7 +15,7 @@ public class DeleteGroupCommandParser implements Parser<DeleteGroupCommand> {
      * and returns an {@code DeleteGroupCommand} object for execution.
      *
      * @param args The user input arguments as a {@code String}.
-     * @return An {@code DeleteGroupCommand} object containing the parsed index and new group name.
+     * @return An {@code DeleteGroupCommand} object containing the parsed index.
      * @throws ParseException If the user input does not conform to the expected format.
      */
     @Override

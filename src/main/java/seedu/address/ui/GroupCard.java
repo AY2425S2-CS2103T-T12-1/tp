@@ -12,7 +12,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Group}.
+ * A UI component that displays information of a {@code Group}.
  */
 public class GroupCard extends UiPart<Region> {
 
