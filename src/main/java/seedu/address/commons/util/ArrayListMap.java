@@ -62,6 +62,7 @@ public class ArrayListMap<K, V> implements Map<K, V> {
         if (index == -1) {
             keys.add(key);
             vals.add(value);
+            return null;
         }
         return vals.set(index, value);
     }

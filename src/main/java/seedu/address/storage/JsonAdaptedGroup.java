@@ -86,8 +86,11 @@ class JsonAdaptedGroup {
         }
         final String modelName = name;
 
-        return new Group(modelName, modelGroupMembers, modelTags);
+        Group modelGroup = new Group(modelName, modelGroupMembers, modelTags);
+        // Set all GroupMemberDetail.group to this
+        for (GroupMemberDetail value : modelGroupMembers.values()) {
+            value.setGroup(modelGroup);
+        }
+        return modelGroup;
     }
-
 }
-

@@ -41,6 +41,10 @@ public class GroupMemberDetail implements Result {
      * The {@code Person} whose detail is describing.
      */
     private Person person;
+    /**
+     * The {@code Group} whose person belong to.
+     */
+    private Group group;
 
     /**
      * The {@code Role} that the person has.
@@ -64,8 +68,8 @@ public class GroupMemberDetail implements Result {
      *
      * @param person A valid person.
      */
-    public GroupMemberDetail(Person person) {
-        this(person, Role.Student);
+    public GroupMemberDetail(Person person, Group group) {
+        this(person, group, Role.Student);
     }
 
     /**
@@ -74,11 +78,13 @@ public class GroupMemberDetail implements Result {
      * Assumes the person is a student
      *
      * @param person A valid person.
+     * @param group A valid group.
      * @param role A valid role.
      */
-    public GroupMemberDetail(Person person, Role role) {
+    public GroupMemberDetail(Person person, Group group, Role role) {
         requireAllNonNull(person, role);
         this.person = person;
+        this.group = group;
         this.role = role;
         this.attendance = new boolean[WEEKS_PER_SEMESTER];
         this.grades = new ArrayListMap<>();
@@ -87,7 +93,8 @@ public class GroupMemberDetail implements Result {
     /**
      * Constructs a {@code GroupMemberDetail} with a specified group member {@code Person}.
      * Initializes an empty list of attendance.
-     * Assumes the person is a student
+     * Assumes the person is a student.
+     * Used by storage
      *
      * @param person        A valid person.
      * @param role          A valid role.
@@ -120,6 +127,24 @@ public class GroupMemberDetail implements Result {
      */
     public Person getPerson() {
         return this.person;
+    }
+
+    /**
+     * Gets the group.
+     *
+     * @return The group associated with this object.
+     */
+    public Group getGroup() {
+        return this.group;
+    }
+
+    /**
+     * Sets the Group.
+     *
+     * @param group A valid group.
+     */
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     /**
@@ -197,7 +222,7 @@ public class GroupMemberDetail implements Result {
             return false;
         }
 
-        return person.equals(otherGroupMemberDetail.getPerson());
+        return group.equals(otherGroupMemberDetail.getGroup()) && person.equals(otherGroupMemberDetail.getPerson());
     }
 
     /**
@@ -207,7 +232,7 @@ public class GroupMemberDetail implements Result {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(person, role);
+        return Objects.hash(person, group);
     }
 
     /**
@@ -219,6 +244,7 @@ public class GroupMemberDetail implements Result {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("person", person)
+                .add("group", group)
                 .add("attendance", attendance)
                 .add("role", role)
                 .toString();

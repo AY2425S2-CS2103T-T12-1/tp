@@ -83,7 +83,7 @@ public class Group implements Result {
         this.groupName = groupName;
         this.groupMembers = new ArrayListMap<>();
         for (Person p : groupMembers) {
-            this.groupMembers.put(p, new GroupMemberDetail(p));
+            this.groupMembers.put(p, new GroupMemberDetail(p, this));
         }
         this.tags = tags == null ? new HashSet<>() : new HashSet<>(tags);
     }
@@ -219,7 +219,7 @@ public class Group implements Result {
         if (contains(p)) {
             throw new DuplicatePersonException();
         }
-        this.groupMembers.put(p, new GroupMemberDetail(p));
+        this.groupMembers.put(p, new GroupMemberDetail(p, this));
     }
 
     /**
