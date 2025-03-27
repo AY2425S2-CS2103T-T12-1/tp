@@ -8,6 +8,7 @@ import java.util.Set;
 
 /**
  * A Map implementation backed by ArrayLists and compares using Object#equals.
+ *
  * @param <K> The type of the keys in the map.
  * @param <V> The type of the values in the map.
  */
@@ -62,7 +63,7 @@ public class ArrayListMap<K, V> implements Map<K, V> {
         if (index == -1) {
             keys.add(key);
             vals.add(value);
-            index = keys.indexOf(key);
+            return null;
         }
         return vals.set(index, value);
     }

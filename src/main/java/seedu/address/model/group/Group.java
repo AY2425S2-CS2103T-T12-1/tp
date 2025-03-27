@@ -82,8 +82,10 @@ public class Group implements Result {
         checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
         this.groupName = groupName;
         this.groupMembers = new ArrayListMap<>();
-        for (Person p : groupMembers) {
-            this.groupMembers.put(p, new GroupMemberDetail(p, this));
+        if (groupMembers != null) {
+            for (Person p : groupMembers) {
+                this.groupMembers.put(p, new GroupMemberDetail(p, this));
+            }
         }
         this.tags = tags == null ? new HashSet<>() : new HashSet<>(tags);
     }
