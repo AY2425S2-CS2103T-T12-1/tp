@@ -252,8 +252,7 @@ Format: `delete-from-group P/PERSON_NAME g/GROUP_NAME`
 
 Examples:
 
-- `delete-from-group P/Alex Yeoh g/CS2101 T12` removes the person named `Alex Yeoh` from the group named `CS2101 T13`.
-
+- `delete-from-group P/Alex Yeoh g/CS2101 T12` removes the person named `Alex Yeoh` from the group named `CS2101 T12`.
 ### Showing group details: `show-group-details`
 
 Shows all the main details regarding a group.
