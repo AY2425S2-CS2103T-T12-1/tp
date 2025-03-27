@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.scene.layout.Region;
+import seedu.address.commons.util.ArrayListMap;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -42,9 +43,9 @@ public class Group implements Result {
     private String groupName;
 
     /**
-     * The list of members in the group, stored in order of insertion.
+     * The map of all members in the group.
      */
-    private final ArrayList<Person> groupMembers;
+    private final ArrayListMap<Person, GroupMemberDetail> groupMembers;
 
     private final Set<Tag> tags;
 
@@ -60,6 +61,7 @@ public class Group implements Result {
 
     /**
      * Constructs a {@code Group} with a specified name and an existing list of members.
+     * Assumes groupMembers are students.
      *
      * @param groupName    A valid group name.
      * @param groupMembers The list of members in the group.
@@ -79,7 +81,10 @@ public class Group implements Result {
         requireNonNull(groupName);
         checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
         this.groupName = groupName;
-        this.groupMembers = groupMembers == null ? new ArrayList<>() : new ArrayList<>(groupMembers);
+        this.groupMembers = new ArrayListMap<>();
+        for (Person p : groupMembers) {
+            this.groupMembers.put(p, new GroupMemberDetail(p, this));
+        }
         this.tags = tags == null ? new HashSet<>() : new HashSet<>(tags);
     }
 
@@ -119,7 +124,7 @@ public class Group implements Result {
      * @return An ArrayList of group members.
      */
     public ArrayList<Person> getGroupMembers() {
-        return groupMembers;
+        return new ArrayList<>(groupMembers.keySet());
     }
 
     /**
@@ -180,7 +185,7 @@ public class Group implements Result {
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
-        return groupMembers.stream().anyMatch(toCheck::isSamePerson);
+        return groupMembers.containsKey(toCheck);
     }
 
     /**
@@ -195,7 +200,7 @@ public class Group implements Result {
         if (contains(p)) {
             throw new DuplicatePersonException();
         }
-        this.groupMembers.add(p);
+        this.groupMembers.put(p, new GroupMemberDetail(p, this));
     }
 
     /**
@@ -206,13 +211,9 @@ public class Group implements Result {
      * @throws PersonNotFoundException If the person is not found in the group.
      */
     public void remove(Person p) {
-        for (int i = 0; i < this.groupMembers.size(); ++i) {
-            if (this.groupMembers.get(i).equals(p)) {
-                this.groupMembers.remove(i);
-                return;
-            }
+        if (groupMembers.remove(p) == null) {
+            throw new PersonNotFoundException();
         }
-        throw new PersonNotFoundException();
     }
 
     /**
@@ -222,7 +223,7 @@ public class Group implements Result {
      * @return The person at the given index.
      */
     public Person get(int i) {
-        return this.groupMembers.get(i);
+        return groupMembers.get(i).getPerson();
     }
 
     /**
