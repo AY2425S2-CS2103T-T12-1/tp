@@ -57,5 +57,7 @@ public class GroupDetailCard extends UiPart<Region> {
             attendanceSb.append("None");
         }
         attendance.setText(attendanceSb.toString());
+
+        // TODO: show assignment scores
     }
 }
