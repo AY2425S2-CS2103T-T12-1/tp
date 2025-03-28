@@ -4,21 +4,18 @@
 
 ![Ui](docs/images/Ui.png)
 
-This is a sample project for Software Engineering (SE) students.
+TAbby Dabby is a **desktop app designed for teaching assistants, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, it can get your administrative tasks done faster than traditional GUI apps.
+At a glance, TAbby Dabby allows teaching assistants to:
 
-Example usages:
-- as a starting point of a course project (as opposed to writing everything from scratch)
-- as a case study
-
-The project simulates an ongoing software project for a desktop application (called TAbby Dabby) used for managing contact details.
-
-It is written in OOP fashion. It provides a reasonably well-written code base bigger (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-
-It comes with a reasonable level of user and developer documentation.
+- Manage contacts of students in their tutorial groups
+- Track student attendance
+- Track students' assignment scores
 
 It is named TAbby Dabby because it rolls off the tongue and is designed to assist TAs (i.e., Teaching Assistants) with their administrative work.
 
 For the detailed documentation of this project, see the [TAbby Dabby Product Website](https://se-education.org/addressbook-level3/).
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 ## Features
 
