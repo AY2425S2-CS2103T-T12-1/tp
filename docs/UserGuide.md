@@ -253,6 +253,7 @@ Format: `delete-from-group P/PERSON_NAME g/GROUP_NAME`
 Examples:
 
 - `delete-from-group P/Alex Yeoh g/CS2101 T12` removes the person named `Alex Yeoh` from the group named `CS2101 T12`.
+
 ### Showing group details: `show-group-details`
 
 Shows all the main details regarding a group.
@@ -268,6 +269,40 @@ Format: `show-group-details INDEX`
 Examples:
 
 - `show-group-details 1` shows all the details of the group with index `1` in the last shown group list.
+
+### Marking attendance: `mark-attendance`
+Marks the attendance of the specified person in a given group for a particular week.
+
+Format: `mark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER`
+- `NAME` is the name of the student.
+- `GROUP_NAME` is the name of the group.
+- `WEEK_NUMBER` must be a positive integer between 1 and 13 (inclusive).
+
+Example:  
+- `mark-attendance P/Jensen Huang g/CS2103T T12 w/10` marks the attendance for Jensen Huang in CS2103T T12 for week 10.
+
+### Unmarking attendance: `unmark-attendance`
+Removes the attendance record of the specified person in a given group for a particular week.
+
+Format: `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER`
+- `NAME` is the name of the student.
+- `GROUP_NAME` is the name of the group.
+- `WEEK_NUMBER` must be a positive integer between 1 and 13 (inclusive).
+
+Example:  
+- `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10` unmarks the attendance for Jensen Huang in CS2103T T12 for week 10.
+
+### Showing attendance: `show-attendance`
+Displays the attendance record of the specified person in a given group.
+
+Format: `show-attendance P/NAME g/GROUP_NAME`
+- `NAME` is the name of the student.
+- `GROUP_NAME` is the name of the group.
+
+Example:  
+- `show-attendance P/Jensen Huang g/CS2103T T12` displays the attendance for Jensen Huang in CS2103T T12.
+
+---
 
 ### Saving the data
 
@@ -305,7 +340,7 @@ _Details coming soon ..._
 ## Command summary
 
 | Action                 | Format, Examples                                                                                                                                                      |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------------| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Clear**              | `clear`                                                                                                                                                               |
 | **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
@@ -320,4 +355,7 @@ _Details coming soon ..._
 | **Add to Group**       | `add-to-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `add-to-group P/Alex Yeoh g/CS2101 T12`                                                                          |
 | **Delete from Group**  | `delete-from-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `delete-from-group P/Alex Yeoh g/CS2101 T12`                                                                |
 | **Show Group Details** | `show-group-details INDEX` <br> e.g., `show-group-details 1`                                                                                                          |
+| **Mark Attendance**    | `mark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` |
+| **Unmark Attendance**  | `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` |
+| **Show Attendance**    | `show-attendance P/NAME g/GROUP_NAME` |
 | **Help**               | `help`                                                                                                                                                                |
