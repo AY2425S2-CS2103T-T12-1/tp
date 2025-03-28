@@ -20,15 +20,15 @@ At a glance, TAbby Dabby allows teaching assistants to:
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TAbby Dabby.
+3. Copy the file to the folder you want to use as the _home folder_ for your TAbby Dabby.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    - `list` : Lists all contacts.
@@ -43,7 +43,7 @@ At a glance, TAbby Dabby allows teaching assistants to:
 
    - `add-group n/CS2106 T10` : Adds a new group named `CS2106 T10` to the list of groups.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 ---
 
@@ -340,7 +340,7 @@ _Details coming soon ..._
 ## Command summary
 
 | Action                 | Format, Examples                                                                                                                                                      |
-|------------------------| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Clear**              | `clear`                                                                                                                                                               |
 | **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
@@ -355,7 +355,7 @@ _Details coming soon ..._
 | **Add to Group**       | `add-to-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `add-to-group P/Alex Yeoh g/CS2101 T12`                                                                          |
 | **Delete from Group**  | `delete-from-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `delete-from-group P/Alex Yeoh g/CS2101 T12`                                                                |
 | **Show Group Details** | `show-group-details INDEX` <br> e.g., `show-group-details 1`                                                                                                          |
-| **Mark Attendance**    | `mark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` |
-| **Unmark Attendance**  | `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` |
-| **Show Attendance**    | `show-attendance P/NAME g/GROUP_NAME` |
+| **Mark Attendance**    | `mark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g., `mark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                                    |
+| **Unmark Attendance**  | `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g., `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                                |
+| **Show Attendance**    | `show-attendance P/NAME g/GROUP_NAME`  <br> e.g., `show-attendance P/Jensen Huang g/CS2103T T12`                                                                 |
 | **Help**               | `help`                                                                                                                                                                |
