@@ -75,6 +75,7 @@ At a glance, TAbby Dabby allows teaching assistants to:
 
 Shows a message explaning how to access the help page.
 
+<!-- TODO: update this screenshot -->
 ![help message](images/helpMessage.png)
 
 Format: `help`
