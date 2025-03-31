@@ -43,6 +43,7 @@ ResultListPanel -down-> "*" GroupCard
 ResultListPanel -down-> "*" GroupDetailCard
 
 MainWindow -left-|> UiPart
+MainWindow -[hidden]-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
@@ -64,5 +65,7 @@ HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 
-MainWindow -[hidden]-|> UiPart
+PersonCard -[hidden]left- GroupCard
+GroupCard -[hidden]left- GroupDetailCard
+GroupDetailCard -[hidden]up- UiPart
 @enduml
