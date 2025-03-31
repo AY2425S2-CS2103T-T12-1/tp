@@ -1,7 +1,7 @@
 # TAbby Dabby
 
 [![Java CI](https://github.com/AY2425S2-CS2103T-T12-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S2-CS2103T-T12-1/tp/actions/workflows/gradle.yml)
-[![Codecov](https://app.codecov.io/gh/AY2425S2-CS2103T-T12-1/tp/config/badge)](https://app.codecov.io/gh/AY2425S2-CS2103T-T12-1/tp/config/badge)
+[![Codecov](https://codecov.io/gh/AY2425S2-CS2103T-T12-1/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/AY2425S2-CS2103T-T12-1/tp/branch/master/graph/badge.svg)
 
 ![Ui](docs/images/Ui.png)
 
