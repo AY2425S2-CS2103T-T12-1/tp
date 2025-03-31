@@ -75,7 +75,6 @@ At a glance, TAbby Dabby allows teaching assistants to:
 
 Shows a message explaning how to access the help page.
 
-<!-- TODO: update this screenshot -->
 ![help message](images/helpMessage.png)
 
 Format: `help`
@@ -83,6 +82,8 @@ Format: `help`
 ### Adding a person: `add`
 
 Adds a person to the person list.
+
+![Add command](images/AddCommand.png)
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -96,7 +97,7 @@ A person can have any number of tags (including 0)
 Examples:
 
 - `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077`
-- `add n/Jeff Bezos t/friend e/jeffb@amazon.com a/21 Lower Kent Ridge Rd, Singapore 119077`
+- `add n/Jeff Bezos p/12345678 t/friend e/jeffb@amazon.com a/21 Lower Kent Ridge Rd, Singapore 119077`
 
 ### Deleting a person: `delete`
 
@@ -155,8 +156,8 @@ Examples:
 
 - `find huang jensen` returns `huang jensen`, `jensen huang`, and `Jensen Huang`.
 - `find huang bezos` returns `Jensen Huang` and `Jeff Bezos`.
-  <!-- TODO: update this image to show Jensen Huang and Jeff Bezos -->
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+  ![Result for 'find huang bezos'](images/findHuangBezosResult.png)
 
 ### Deleting all persons: `clear`
 
@@ -223,8 +224,6 @@ Format: `list-group`
 
 Examples:
 
-<!-- TODO: update this image to the latest version -->
-
 ![ResultOfList](images/listGroupResults.png)
 
 ### Finding a group by name: `find-group`
@@ -241,8 +240,8 @@ Format: `find-group KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-- `find T12` returns `T12`, `t12`, and `CS2103T T12`.
-- `find t12 t13` returns `CS2103T T12` and `CS2103T T13`.
+- `find-group T12` returns `T12`, `t12`, and `CS2103T T12`.
+- `find-group t12 t13` returns `CS2103T T12` and `CS2103T T13`.
 
 ### Adding a person to a group: `add-to-group`
 
