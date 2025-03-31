@@ -357,23 +357,23 @@ Furthermore, certain edits can cause the TAbby Dabby to behave in unexpected way
 
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                    |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g.,- `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077` |
-| **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                 |
-| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Jensen Hu4ng e/jensenh@yahoo.com`                                         |
-| **List**               | `list`                                                                                                                                                              |
-| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find huang jensen`                                                                                                        |
-| **Clear**              | `clear`                                                                                                                                                             |
-| **Add Group**          | `add-group n/GROUP_NAME` <br> e.g., `add-group n/CS2103T T12`                                                                                                       |
-| **Delete Group**       | `delete-group INDEX` <br> e.g., `delete-group 1`                                                                                                                    |
-| **Edit Group**         | `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​` <br> e.g., `edit-group 1 n/CS2103 T12 t/study`                                                                          |
-| **List Group**         | `list-group`                                                                                                                                                        |
-| **Find Group**         | `find-group KEYWORD [MORE_KEYWORDS]` <br> e.g., `find-group CS2103T T12`                                                                                            |
-| **Add to Group**       | `add-to-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `add-to-group P/Jensen Huang g/CS2103T T12`                                                                    |
-| **Delete from Group**  | `delete-from-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `delete-from-group P/Jensen Huang g/CS2103T T12`                                                          |
-| **Show Group Details** | `show-group-details INDEX` <br> e.g., `show-group-details 1`                                                                                                        |
-| **Mark Attendance**    | `mark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g., `mark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                                  |
-| **Unmark Attendance**  | `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g., `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                              |
-| **Show Attendance**    | `show-attendance P/NAME g/GROUP_NAME` <br> e.g., `show-attendance P/Jensen Huang g/CS2103T T12`                                                                     |
-| **Help**               | `help`                                                                                                                                                              |
+| Action                 | Format, Examples                                                                                                                                                  |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077` |
+| **Delete**             | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                |
+| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/Jensen Hu4ng e/jensenh@yahoo.com`                                       |
+| **List**               | `list`                                                                                                                                                            |
+| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find huang jensen`                                                                                                       |
+| **Clear**              | `clear`                                                                                                                                                           |
+| **Add Group**          | `add-group n/GROUP_NAME` <br> e.g. `add-group n/CS2103T T12`                                                                                                      |
+| **Delete Group**       | `delete-group INDEX` <br> e.g. `delete-group 1`                                                                                                                   |
+| **Edit Group**         | `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​` <br> e.g. `edit-group 1 n/CS2103 T12 t/study`                                                                         |
+| **List Group**         | `list-group`                                                                                                                                                      |
+| **Find Group**         | `find-group KEYWORD [MORE_KEYWORDS]` <br> e.g. `find-group CS2103T T12`                                                                                           |
+| **Add to Group**       | `add-to-group P/PERSON_NAME g/GROUP_NAME` <br> e.g. `add-to-group P/Jensen Huang g/CS2103T T12`                                                                   |
+| **Delete from Group**  | `delete-from-group P/PERSON_NAME g/GROUP_NAME` <br> e.g. `delete-from-group P/Jensen Huang g/CS2103T T12`                                                         |
+| **Show Group Details** | `show-group-details INDEX` <br> e.g. `show-group-details 1`                                                                                                       |
+| **Mark Attendance**    | `mark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `mark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                                 |
+| **Unmark Attendance**  | `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                             |
+| **Show Attendance**    | `show-attendance P/NAME g/GROUP_NAME` <br> e.g. `show-attendance P/Jensen Huang g/CS2103T T12`                                                                    |
+| **Help**               | `help`                                                                                                                                                            |
