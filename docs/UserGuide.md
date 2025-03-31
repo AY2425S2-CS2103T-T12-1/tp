@@ -31,17 +31,17 @@ At a glance, TAbby Dabby allows teaching assistants to:
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   - `list` : Lists all contacts.
+   - `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077` : Adds a person named `Jensen Huang` to the list of persons.
 
-   - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the list of contacts.
+   - `delete 3` : Deletes the 3rd person shown in the current person list.
 
-   - `delete 3` : Deletes the 3rd contact shown in the current list.
+   - `list` : Lists all persons.
 
-   - `clear` : Deletes all contacts.
+   - `clear` : Deletes all persons.
+
+   - `add-group n/CS2103T T12` : Adds a new group named `CS2103T T12` to the list of groups.
 
    - `exit` : Exits the app.
-
-   - `add-group n/CS2106 T10` : Adds a new group named `CS2106 T10` to the list of groups.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -54,10 +54,10 @@ At a glance, TAbby Dabby allows teaching assistants to:
 **:information_source: Notes about the command format:**<br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Jensen Huang`.
 
 - Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/Jensen Huang t/friend` or as `n/Jensen Huang`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -71,7 +71,7 @@ At a glance, TAbby Dabby allows teaching assistants to:
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaning how to access the help page.
 
@@ -81,7 +81,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the contact list.
+Adds a person to the person list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -89,218 +89,240 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 A person can have any number of tags (including 0)
 </div>
 
+- Person names must be alphanumeric and can contain spaces, e.g., `Jensen Huang`, `Jeff Bezos`.
+- Person names must be unique.
+
 Examples:
 
-- `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-- `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+- `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077`
+- `add n/Jeff Bezos t/friend e/jeffb@amazon.com a/21 Lower Kent Ridge Rd, Singapore 119077`
 
-### Listing all persons : `list`
+### Deleting a person: `delete`
 
-Shows a list of all persons in the contact list.
+<!-- TODO: add an image depicting deleting a person -->
 
-Format: `list`
+Deletes the specified person from the person list.
 
-### Editing a person : `edit`
+Format: `delete INDEX`
 
-Edits an existing person in the contact list.
+- Deletes the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+- `list` followed by `delete 2` deletes the 2nd person in the person list.
+- `find Jensen` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Editing a person: `edit`
+
+Edits the specified person in the person list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-- You can remove all the person’s tags by typing `t/` without
-  specifying any tags after it.
+- When editing tags, the existing tags of the person will be removed, e.g., if the person at index `2` currently has the tag `frenemy`, and we run the command `edit 2 t/enemy`, the tag `frenemy` will be removed, and a new tag `enemy` will be added.
+- You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+- Person names must be alphanumeric and can contain spaces, e.g., `Jensen Huang`, `Jeff Bezos`.
+- Person names must be unique.
 
 Examples:
 
-- `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+- `edit 1 p/91234567 e/jensenh@yahoo.com` Edits the phone number and email address of the 1st person to be `91234567` and `jensenh@yahoo.com` respectively.
+- `edit 2 n/Jeff B3z0s t/` Edits the name of the 2nd person to be `Jeff B3z0s` and clears all existing tags.
+- `edit 2 n/Jeff B3z0s t/friend` Edits the name of the 2nd person to be `Jeff B3z0s`, clears all existing tags, and adds the tag `friend`.
 
-### Locating persons by name: `find`
+### Listing all persons: `list`
+
+Shows a list of all persons in the person list.
+
+Format: `list`
+
+### Finding persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-- The search is case-insensitive. e.g `hans` will match `Hans`
-- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+- The search is case-insensitive, e.g., `jensen` will match `Jensen`.
+- The order of the keywords does not matter. e.g. `Huang Jensen` will match `Jensen Huang`.
 - Only the name is searched.
-- Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- Only full words will be matched, e.g., `Jen` will not match `Jens`.
+- Persons matching at least one keyword will be returned (i.e. `OR` search), e.g., `Jensen Bezos` will return `Jensen Huang` and `Jeff Bezos`.
 
 Examples:
 
-- `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`<br>
+- `find huang jensen` returns `huang jensen`, `jensen huang`, and `Jensen Huang`.
+- `find huang bezos` returns `Jensen Huang` and `Jeff Bezos`.
+  <!-- TODO: update this image to show Jensen Huang and Jeff Bezos -->
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting all persons: `clear`
 
-GroupResults.png
-Deletes the specified person from the contact list.
-
-Format: `delete INDEX`
-
-- Deletes the person at the specified `INDEX`.
-- The index refers to the index number shown in the last displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-
-- `list` followed by `delete 2` deletes the 2nd person in the contact list.
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the contact list.
+Deletes all persons from the person list.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Adding a new group : `add-group`
+### Adding a new group: `add-group`
 
-Adds a new group to the list of groups.
+Adds a new group to the group list.
 
 Format: `add-group n/GROUP_NAME`
 
-Examples:
-
-- `add-group n/CS2106 T10` creates a group with name `CS2106 T10`.
-
-### Listing all groups : `list-group`
-
-Shows a list of all existing groups along with their information, i.e., indices and names.
-
-Format: `list-group`
+- Group names must be alphanumeric and can contain spaces, e.g., `CS2103T T12`, `CS2101 T13`.
+- Group names must be unique.
 
 Examples:
-![ResultOfList](images/listGroupResults.png)
 
-### Editing a group : `edit-group`
+- `add-group n/CS2103T T12` creates a group with name `CS2103T T12`.
 
-Edits an existing group.
+### Deleting a group: `delete-group`
+
+Deletes the specified group from the group list.
+
+Format: `delete-group INDEX`
+
+- Deletes the group at the specified `INDEX`. The index refers to the index number shown in the last displayed group list. The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+- `delete-group 1` deletes the group with index `1` in the last shown group list.
+
+### Editing a group: `edit-group`
+
+Edits the specified group in the group list.
 
 Format: `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​`
 
 - Edits the group at the specified `INDEX`. The index refers to the index number shown in the last displayed group list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the group will be removed i.e adding of tags is not cumulative.
+- When editing tags, the existing tags of the group will be removed, e.g., if the group at index `2` currently has the tag `gaming`, and we run the command `edit-group 2 t/study`, the tag `gaming` will be removed, and a new tag `study` will be added.
 - You can remove all the group’s tags by typing `t/` without specifying any tags after it.
+- Group names must be alphanumeric and can contain spaces, e.g., `CS2103T T12`, `CS2101 T13`.
+- Group names must be unique.
 
 Examples:
 
-- `edit-group 1 n/G13` Edits the name of the first group to be `G13`.
-- `edit-group 2 n/CS2101 G12 t/` Edits the name of the second group to be `CS2101 G12` and clears all existing tags.
+- `edit-group 1 n/CS2103T T12` Edits the name of the first group to be `CS2103T T12`.
+- `edit-group 2 n/CS2103T T12 t/` Edits the name of the second group to be `CS2103T T12` and clears all existing tags.
+- `edit-group 2 n/CS2103T T12 t/study t/friends` Edits the name of the second group to be `CS2103T T12`, clears all existing tags, and adds the tags `study` and `friends`.
 
-### Locating a group by name : `find-group`
+### Listing all groups: `list-group`
+
+Shows a list of all groups in the group list along with their information, e.g., indices and names.
+
+Format: `list-group`
+
+Examples:
+
+<!-- TODO: update this image to the latest version -->
+
+![ResultOfList](images/listGroupResults.png)
+
+### Finding a group by name: `find-group`
 
 Finds groups whose names contain any of the given keywords.
 
 Format: `find-group KEYWORD [MORE_KEYWORDS]`
 
-- The search is case-insensitive. e.g `hans` will match `Hans`
-- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+- The search is case-insensitive, e.g., `cs2103t t12` will match `CS2103T T12`.
+- The order of the keywords does not matter. e.g. `T12 CS2103T` will match `CS2103T T12`.
 - Only the name is searched.
-- Only full words will be matched e.g. `Han` will not match `Hans`
-- Groups matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- Only full words will be matched, e.g., `CS210` will not match `CS2103T`.
+- Persons matching at least one keyword will be returned (i.e. `OR` search), e.g., `CS2103T T13` will return `CS2103T T12` and `CS2101 T13`.
 
 Examples:
 
-- `find G13` could return groups with names like `G13`, `g13`, and `CS2101 g13`.
-
-### Deleting an existing group : `delete-group`
-
-Deletes the specified group from the list of groups.
-
-Format: `delete-group INDEX`
-
-- The index refers to the index number shown in the last displayed group list.
-
-Examples:
-
-- `delete-group 1` deletes the group with index `1` in the last shown group list.
+- `find T12` returns `T12`, `t12`, and `CS2103T T12`.
+- `find t12 t13` returns `CS2103T T12` and `CS2103T T13`.
 
 ### Adding a person to a group: `add-to-group`
 
-Adds a specified person to a specified group.
+Adds the specified person to the specified group.
 
 Format: `add-to-group P/PERSON_NAME g/GROUP_NAME`
 
-- `PERSON_NAME` and `GROUP_NAME` are strings representing the names of a person and a group respectively.
+- `PERSON_NAME` and `GROUP_NAME` are the names of a person and a group respectively.
 
 Examples:
 
-- `add-to-group P/Alex Yeoh g/CS2101 T12` adds the person named `Alex Yeoh` to the group named `CS2101 T12`.
+- `add-to-group P/Jensen Huang g/CS2103T T12` adds the person named `Jensen Huang` to the group named `CS2103T T12`.
 
 ### Removing a person from a group: `delete-from-group`
 
-Removes a specified person from a specified group.
+Removes the specified person from the specified group.
 
 Format: `delete-from-group P/PERSON_NAME g/GROUP_NAME`
 
-- `PERSON_NAME` and `GROUP_NAME` are strings representing the names of a person and a group respectively.
+- `PERSON_NAME` and `GROUP_NAME` are the names of a person and a group respectively.
 
 Examples:
 
-- `delete-from-group P/Alex Yeoh g/CS2101 T12` removes the person named `Alex Yeoh` from the group named `CS2101 T12`.
+- `delete-from-group P/Jensen Huang g/CS2103T T12` removes the person named `Jensen Huang` from the group named `CS2103T T12`.
 
 ### Showing group details: `show-group-details`
 
-Shows all the main details regarding a group.
+Shows all the core details regarding the specified group.
 
 Format: `show-group-details INDEX`
 
-- Details include:
-  - Group Name and tags
+- Shows details including:
+  - Group name and tags
   - Number of group members
   - Name, role, and attendance of every group member
-- The index refers to the index number shown in the last displayed group list.
+- The index refers to the index number shown in the last displayed group list. The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
 - `show-group-details 1` shows all the details of the group with index `1` in the last shown group list.
 
 ### Marking attendance: `mark-attendance`
-Marks the attendance of the specified person in a given group for a particular week.
+
+Marks the attendance of the specified person in the specified group for the specified week.
 
 Format: `mark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER`
+
 - `NAME` is the name of the student.
 - `GROUP_NAME` is the name of the group.
 - `WEEK_NUMBER` must be a positive integer between 1 and 13 (inclusive).
 
-Example:  
-- `mark-attendance P/Jensen Huang g/CS2103T T12 w/10` marks the attendance for Jensen Huang in CS2103T T12 for week 10.
+Example:
+
+- `mark-attendance P/Jensen Huang g/CS2103T T12 w/10` marks the attendance for `Jensen Huang` in `CS2103T T12` for week `10`.
 
 ### Unmarking attendance: `unmark-attendance`
-Removes the attendance record of the specified person in a given group for a particular week.
+
+Removes the attendance record of the specified person in the specified for the specified week.
 
 Format: `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER`
+
 - `NAME` is the name of the student.
 - `GROUP_NAME` is the name of the group.
 - `WEEK_NUMBER` must be a positive integer between 1 and 13 (inclusive).
 
-Example:  
-- `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10` unmarks the attendance for Jensen Huang in CS2103T T12 for week 10.
+Example:
+
+- `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10` unmarks the attendance for `Jensen Huang` in `CS2103T T12` for week `10`.
 
 ### Showing attendance: `show-attendance`
-Displays the attendance record of the specified person in a given group.
+
+Displays the attendance record of the specified person in the specified group.
 
 Format: `show-attendance P/NAME g/GROUP_NAME`
+
 - `NAME` is the name of the student.
 - `GROUP_NAME` is the name of the group.
 
-Example:  
-- `show-attendance P/Jensen Huang g/CS2103T T12` displays the attendance for Jensen Huang in CS2103T T12.
+Example:
+
+- `show-attendance P/Jensen Huang g/CS2103T T12` displays the attendance for `Jensen Huang` in `CS2103T T12`.
 
 ---
 
@@ -316,10 +338,6 @@ TAbby Dabby data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, TAbby Dabby will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the TAbby Dabby to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 ---
 
@@ -339,23 +357,23 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                      |
-|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**              | `clear`                                                                                                                                                               |
-| **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**               | `list`                                                                                                                                                                |
-| **Add Group**          | `add-group n/GROUP_NAME` <br> e.g., `add-group n/G13`                                                                                                                 |
-| **Delete Group**       | `delete-group INDEX` <br> e.g., `delete-group 1`                                                                                                                      |
-| **Edit Group**         | `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​` <br> e.g., `edit-group 1 n/G13 t/ABC`                                                                                     |
-| **Find Group**         | `find-group KEYWORD [MORE_KEYWORDS]` <br> e.g., `find-group G13`                                                                                                      |
-| **List Group**         | `list-group`                                                                                                                                                          |
-| **Add to Group**       | `add-to-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `add-to-group P/Alex Yeoh g/CS2101 T12`                                                                          |
-| **Delete from Group**  | `delete-from-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `delete-from-group P/Alex Yeoh g/CS2101 T12`                                                                |
-| **Show Group Details** | `show-group-details INDEX` <br> e.g., `show-group-details 1`                                                                                                          |
-| **Mark Attendance**    | `mark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g., `mark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                                    |
-| **Unmark Attendance**  | `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g., `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                                |
-| **Show Attendance**    | `show-attendance P/NAME g/GROUP_NAME`  <br> e.g., `show-attendance P/Jensen Huang g/CS2103T T12`                                                                 |
-| **Help**               | `help`                                                                                                                                                                |
+| Action                 | Format, Examples                                                                                                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g.,- `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077` |
+| **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                 |
+| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Jensen Hu4ng e/jensenh@yahoo.com`                                         |
+| **List**               | `list`                                                                                                                                                              |
+| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find huang jensen`                                                                                                        |
+| **Clear**              | `clear`                                                                                                                                                             |
+| **Add Group**          | `add-group n/GROUP_NAME` <br> e.g., `add-group n/CS2103T T12`                                                                                                       |
+| **Delete Group**       | `delete-group INDEX` <br> e.g., `delete-group 1`                                                                                                                    |
+| **Edit Group**         | `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​` <br> e.g., `edit-group 1 n/CS2103 T12 t/study`                                                                          |
+| **List Group**         | `list-group`                                                                                                                                                        |
+| **Find Group**         | `find-group KEYWORD [MORE_KEYWORDS]` <br> e.g., `find-group CS2103T T12`                                                                                            |
+| **Add to Group**       | `add-to-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `add-to-group P/Jensen Huang g/CS2103T T12`                                                                    |
+| **Delete from Group**  | `delete-from-group P/PERSON_NAME g/GROUP_NAME` <br> e.g., `delete-from-group P/Jensen Huang g/CS2103T T12`                                                          |
+| **Show Group Details** | `show-group-details INDEX` <br> e.g., `show-group-details 1`                                                                                                        |
+| **Mark Attendance**    | `mark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g., `mark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                                  |
+| **Unmark Attendance**  | `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g., `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                              |
+| **Show Attendance**    | `show-attendance P/NAME g/GROUP_NAME` <br> e.g., `show-attendance P/Jensen Huang g/CS2103T T12`                                                                     |
+| **Help**               | `help`                                                                                                                                                              |
