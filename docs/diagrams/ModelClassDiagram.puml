@@ -11,8 +11,10 @@ Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
+Class ResultList
 
 Class UniquePersonList
+Class UniqueGroupList
 Class Person
 Class Address
 Class Email
