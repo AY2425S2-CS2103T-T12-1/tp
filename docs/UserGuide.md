@@ -299,7 +299,7 @@ Example:
 
 ### Unmarking attendance: `unmark-attendance`
 
-Removes the attendance record of the specified person in the specified for the specified week.
+Removes the attendance record of the specified person in the specified group for the specified week.
 
 Format: `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER`
 
