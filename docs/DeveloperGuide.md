@@ -753,3 +753,41 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## Appendix: Effort
+
+The project required a considerable effort beyond the baseline AddressBook-Level3 (AB3), especially due to the introduction of a new domain entity: `Group`. While AB3 only deals with a flat structure of a single entity (`Person`), our project introduces a relational structure between `Group` and `Person`, along with additional responsibilities such as attendance tracking, role assignment, and performance logging through assignments.
+
+### Key Challenges and Effort
+
+- **Designing a New Entity Model**: Introducing `Group` was not a simple data addition — it required a full-fledged model (`Group.java`) capable of:
+    - Maintaining its own identity and validation rules.
+    - Tracking a collection of `Person` instances with unique roles and contextual data.
+    - Persisting group-member-specific data such as attendance and assignment grades.
+
+- **Extending Existing Entities**: To maintain separation of concerns, we introduced a new class `GroupMemberDetail.java` which bridges a `Person` and a `Group` and stores contextual information like:
+    - Weekly attendance (`boolean[13]` per student).
+    - Assignment grades (via a custom `ArrayListMap`).
+    - Roles (e.g., Student, Teaching Assistant, Lecturer).
+
+- **Cross-Entity Logic**: Unlike AB3’s flat command structure, many features required verifying the existence and relationship of both `Person` and `Group` during execution (e.g., `mark-attendance`, `add-to-group`, `show-attendance`).
+
+- **Storage Complexity**: Extending the storage layer to support nested structures like `Group -> GroupMemberDetail -> Person` required:
+    - Custom serialization and deserialization logic.
+    - Managing consistency between group membership and person identity.
+    - Updating the JSON format in a backward-compatible and testable way.
+
+- **UI Considerations**: We also needed to design new UI components like `GroupCard` and `GroupDetailCard` to present hierarchical data clearly, which required significant effort in FXML design and JavaFX integration.
+
+### Reuse and Adaptation
+
+- While the base `Person` and command structure were derived from AB3, at least **60–70%** of our implementation around Groups was written from scratch.
+- Reuse was mainly in utility classes (e.g., `ToStringBuilder`, `AppUtil`) and storage design patterns.
+- Our work in adapting the storage layer was influenced by the original `JsonSerializableAddressBook` class but extended heavily to handle nested structures.
+
+### Summary
+
+Implementing Groups added substantial architectural and technical complexity, transforming the app from a flat contact book into a lightweight group management system with role-based semantics, performance tracking, and detailed inter-entity relationships.
+
+This shift from simple CRUD operations to relational logic and multi-level storage increased the overall effort significantly beyond AB3’s scope.
+
