@@ -86,8 +86,8 @@ public class GroupCard extends UiPart<Region> {
             Person person = groupMembers.get(i);
             memberListText.append(person.getName().fullName);
 
-            // Add comma and space if not the last displayed member
-            if (i < membersToShow - 1) {
+            // Add comma and space if not the last member
+            if (i < totalMembers - 1) {
                 memberListText.append(", ");
             }
         }
