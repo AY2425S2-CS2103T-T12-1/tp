@@ -142,10 +142,53 @@ The `Model` component,
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+The `Storage` component is responsible for reading data from and writing data to the hard disk. It supports both user preferences and the address book data (contacts, tags, subjects, etc.).
+
+#### Responsibilities:
+
+- Save and retrieve the address book data as a JSON file.
+- Save and retrieve user preferences (e.g., GUI window size and location) as a JSON file.
+- Acts as a bridge between the Model and the filesystem.
+
+#### Structure:
+
+The component is split into two main areas:
+
+---
+
+#### **AddressBook Storage**
+
+- **`AddressBookStorage`**: Interface that defines the storage behavior for the address book.
+- **`JsonAddressBookStorage`**: Implements the interface and handles reading/writing from JSON files.
+- **`JsonSerializableAddressBook`**: Intermediate class used to convert between the model and its JSON representation.
+- **`JsonAdaptedPerson`**: Represents an individual contact in JSON format.
+    - Aggregates:
+        - **`JsonAdaptedTag`**: JSON-adapted version of tags assigned to a contact.
+        - **`JsonAdaptedSubject`**: JSON-adapted version of subjects linked to a contact.
+
+---
+
+#### **User Preferences Storage**
+
+- **`UserPrefsStorage`**: Interface for managing user-specific preferences (e.g., GUI settings).
+- **`JsonUserPrefsStorage`**: Reads from and writes to the preferences JSON file.
+
+---
+
+#### **Storage Manager**
+
+- **`StorageManager`**: Coordinates between both `AddressBookStorage` and `UserPrefsStorage`.
+    - Implements the `Storage` interface.
+    - Central point for all data save/load operations.
+    - Used by higher-level components like Logic and MainApp.
+
+---
+
+#### Design Highlights
+
+- Follows **interface-implementation separation** to allow easy switching of storage format in the future (e.g., from JSON to XML).
+- Ensures **separation of concerns** — model logic does not deal with file handling directly.
+- Encourages modularity and testability — each class can be tested independently.
 
 ### Common classes
 
