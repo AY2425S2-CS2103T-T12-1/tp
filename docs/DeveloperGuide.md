@@ -135,60 +135,56 @@ The `Model` component,
 
 </div>
 
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-The `Storage` component is responsible for reading data from and writing data to the hard disk. It supports both user preferences and the address book data (contacts, tags, subjects, etc.).
+The `Storage` component is responsible for persisting address book data and user preferences to the hard disk. It handles the conversion between in-memory objects and their file representations.
 
-#### Responsibilities:
+#### Structure
 
-- Save and retrieve the address book data as a JSON file.
-- Save and retrieve user preferences (e.g., GUI window size and location) as a JSON file.
-- Acts as a bridge between the Model and the filesystem.
+The Storage component is organized into two main areas:
 
-#### Structure:
+1. **AddressBook Storage**: Manages the reading and writing of address book data
+    - `AddressBookStorage` interface defines the operations
+    - `JsonAddressBookStorage` provides JSON-based implementation
+    - Uses `JsonSerializableAddressBook` as an intermediate representation
+    - Contains a hierarchy of JSON adapter classes that mirror the model structure:
+        * `JsonAdaptedGroup` represents groups in the address book
+        * `JsonAdaptedGroupMemberDetails` contains details about group membership
+        * `JsonAdaptedPerson` and `JsonAdaptedAssignment` linked to group member details
+        * `JsonAdaptedTag` represents tags associated with persons
 
-The component is split into two main areas:
+2. **UserPrefs Storage**: Manages the reading and writing of user preferences
+    - `UserPrefsStorage` interface defines the operations
+    - `JsonUserPrefsStorage` provides JSON-based implementation
 
----
+The `Storage` interface extends both `AddressBookStorage` and `UserPrefsStorage`, providing a unified API. `StorageManager` implements this interface and coordinates between both storage types.
 
-#### **AddressBook Storage**
+#### Key Operations
 
-- **`AddressBookStorage`**: Interface that defines the storage behavior for the address book.
-- **`JsonAddressBookStorage`**: Implements the interface and handles reading/writing from JSON files.
-- **`JsonSerializableAddressBook`**: Intermediate class used to convert between the model and its JSON representation.
-- **`JsonAdaptedPerson`**: Represents an individual contact in JSON format.
-    - Aggregates:
-        - **`JsonAdaptedTag`**: JSON-adapted version of tags assigned to a contact.
-        - **`JsonAdaptedSubject`**: JSON-adapted version of subjects linked to a contact.
+**Reading Data**:
+- Retrieves data via file paths specified in the storage implementations
+- Converts JSON data to model objects through the adapter class hierarchy
+- Returns `Optional` objects to handle cases where files don't exist
+- Throws `DataLoadingException` when data cannot be loaded properly
 
----
+**Writing Data**:
+- Accepts model objects and converts them to JSON format using adapter classes
+- Writes to specified file paths
+- Throws `IOException` when writing fails
+- Logs operations for debugging purposes
 
-#### **User Preferences Storage**
+#### Design Considerations
 
-- **`UserPrefsStorage`**: Interface for managing user-specific preferences (e.g., GUI settings).
-- **`JsonUserPrefsStorage`**: Reads from and writes to the preferences JSON file.
+* **Interface Segregation**: Separate interfaces allow for independent implementation and testing of different storage aspects
+* **Adapter Pattern**: JSON adapter classes separate model concerns from persistence details
+* **Complex Composition**: The JSON classes mirror the complex relationships in the model, including groups, group memberships, persons, assignments, and tags
+* **Dependency Injection**: `StorageManager` takes concrete storage implementations as constructor parameters, facilitating testing and flexibility
 
----
-
-#### **Storage Manager**
-
-- **`StorageManager`**: Coordinates between both `AddressBookStorage` and `UserPrefsStorage`.
-    - Implements the `Storage` interface.
-    - Central point for all data save/load operations.
-    - Used by higher-level components like Logic and MainApp.
-
----
-
-#### Design Highlights
-
-- Follows **interface-implementation separation** to allow easy switching of storage format in the future (e.g., from JSON to XML).
-- Ensures **separation of concerns** — model logic does not deal with file handling directly.
-- Encourages modularity and testability — each class can be tested independently.
+This design provides clean separation of concerns, allowing the model to remain focused on business logic while the storage component handles persistence details. The hierarchy of JSON adapter classes supports the address book's ability to manage not just persons and tags, but also groups, group memberships, and assignments.
 
 ### Common classes
 
@@ -346,20 +342,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*` | Teaching Assistant | Track the progress for preparations of my teaching material | Ensure it is completed before tutorials |
 | `*` | Teaching Assistant | Plot a whisker plot of the current grade of my students | Track their learning progress and identify stuggling students |
 
-### Use cases
+# AddressBook Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Delete a person**
+## Use case: UC01 - Delete a person
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to list persons
+2. AddressBook displays persons
+3. User requests to delete a specific person
+4. AddressBook deletes the person
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -369,311 +365,376 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. AddressBook indicates error.
 
       Use case resumes at step 2.
 
-**Use case: UC02 - Adding a person**
+## Use case: UC02 - Adding a person
 
 **MSS**
-1. User adds the contact details
-2. User sees the newly added contact in the address book.
-
-   Use case ends.
-
-**Use case: UC03 - Editing a Contact**
-
-**MSS**
-1. User searches for and selects the contact.
-2. User modifies the necessary fields.
-3. User saves the changes.
-4. The system updates the contact information and displays the updated contact information.
+1. User provides contact details
+2. AddressBook adds the contact
+3. AddressBook indicates success
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The contact does not exist.
+* 1a. The provided details are invalid.
+    * 1a1. AddressBook indicates error.
+    * 1a2. User provides valid details.
 
-   * 1a1. User performs **Adding a person**
+      Use case resumes from step 2.
 
-     Use case resumes at step 1.
+## Use case: UC03 - Editing a Contact
 
-**Use case: UC04 - Find a contact by name**
+**MSS**
+1. User requests to list persons
+2. AddressBook displays persons
+3. User requests to edit a specific person with new details
+4. AddressBook updates the contact information
+5. AddressBook indicates success
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. AddressBook indicates error.
+
+      Use case resumes at step 2.
+
+* 3b. The provided details are invalid.
+    * 3b1. AddressBook indicates error.
+    * 3b2. User provides valid details.
+
+      Use case resumes from step 4.
+
+## Use case: UC04 - Find a contact by name
 
 **Preconditions:**
 - The address book contains at least one person.
 
 **MSS:**
-1. User enters the `find` command with one or more keywords.
-2. System filters the address book and lists all persons whose names contain the keywords (case-insensitive).
-3. Matching persons are displayed with index numbers.
+1. User requests to find persons by keyword(s)
+2. AddressBook displays persons whose names contain the keyword(s)
 
    Use case ends.
 
 **Extensions:**
-2a. No person matches the keyword.
-- 2a1. System displays an empty list and a message like "0 persons listed."
+* 2a. No person matches the keyword(s).
+    * 2a1. AddressBook indicates no matches found.
 
-2b. User enters `find` without any keywords.
-- 2b1. System shows an error: "Invalid command format! Parameters: KEYWORD [MORE_KEYWORDS]..."
+      Use case ends.
 
-**Use case: UC05 - List all contacts**
+* 1a. User provides invalid search parameters.
+    * 1a1. AddressBook indicates error.
 
-**Preconditions:**
-- None.
+      Use case ends.
 
-**MSS:**
-1. User enters the `list` command.
-2. System retrieves all persons from the address book.
-3. System displays the list of persons.
-
-   Use case ends.
-
-**Use case: UC06 - Mark attendance for a student**
-
-**Preconditions:**
-- The student must be in the specified group.
-- Week number must be between 1 and 13.
+## Use case: UC05 - List all contacts
 
 **MSS:**
-1. User enters `mark-attendance` command with parameters: student name, group name, and week number.
-2. System verifies all parameters and group membership.
-3. System updates the attendance record for the given week.
-4. System displays a success message.
+1. User requests to list all persons
+2. AddressBook displays all persons
 
    Use case ends.
 
 **Extensions:**
-2a. Week number is outside valid range.
-- 2a1. System throws error: "Week number must be between 1 and 13 (inclusive)!"
+* 2a. The address book is empty.
+    * 2a1. AddressBook indicates no contacts exist.
 
-2b. Group name does not exist.
-- 2b1. System throws error: "Group not found!"
+      Use case ends.
 
-2c. Student name does not exist.
-- 2c1. System throws error: "Person not found!"
-
-2d. Student is not a member of the specified group.
-- 2d1. System throws error: "Person does not exist in group!"
-
-**Use case: UC07 - Unmark attendance for a student**
+## Use case: UC06 - Mark attendance for a student
 
 **Preconditions:**
-- The group and person must exist.
-- The person must be a member of the specified group.
-- The week number must be between 1 and 13.
+- The student exists
+- The group exists
+- The student is a member of the specified group
 
 **MSS:**
-1. User enters the `unmark-attendance` command with the person's name, group name, and week number.
-2. System verifies that the group and person exist.
-3. System checks if the person is in the specified group.
-4. System updates the attendance record for that person by unmarking the given week.
-5. System displays a success message.
+1. User requests to mark attendance with student name, group name, and week number
+2. AddressBook updates the attendance record
+3. AddressBook indicates success
 
    Use case ends.
 
 **Extensions:**
-2a. Week number is not between 1 and 13.
-- 2a1. System throws error: "Week number must be between 1 and 13 (inclusive)!"
+* 1a. Week number is invalid.
+    * 1a1. AddressBook indicates error.
 
-2b. Group name not found.
-- 2b1. System throws error: "Group not found!"
+      Use case ends.
 
-2c. Person name not found.
-- 2c1. System throws error: "Person not found!"
+* 1b. Group does not exist.
+    * 1b1. AddressBook indicates error.
 
-3a. Person is not part of the specified group.
-- 3a1. System throws error: "Person does not exist in group!"
+      Use case ends.
 
-**Use case: UC08 - Show a student's attendance in a group**
+* 1c. Student does not exist.
+    * 1c1. AddressBook indicates error.
+
+      Use case ends.
+
+* 1d. Student is not a member of the specified group.
+    * 1d1. AddressBook indicates error.
+
+      Use case ends.
+
+## Use case: UC07 - Unmark attendance for a student
 
 **Preconditions:**
-- Both the group and the person must exist.
-- The person must be a member of the group.
+- The student exists
+- The group exists
+- The student is a member of the specified group
 
 **MSS:**
-1. User enters `show-attendance /person NAME /group GROUP_NAME`.
-2. System retrieves the person and group.
-3. System checks if the person is a member of the group.
-4. System retrieves the person's attendance data.
-5. System displays a detailed breakdown of attendance across all weeks.
+1. User requests to unmark attendance with student name, group name, and week number
+2. AddressBook updates the attendance record
+3. AddressBook indicates success
 
    Use case ends.
 
 **Extensions:**
-2a. Group not found.
-- 2a1. System throws error: "Group not found!"
+* 1a. Week number is invalid.
+    * 1a1. AddressBook indicates error.
 
-2b. Person not found.
-- 2b1. System throws error: "Person not found!"
+      Use case ends.
 
-3a. Person not in the specified group.
-- 3a1. System throws error: "Person does not exist in group!"
+* 1b. Group does not exist.
+    * 1b1. AddressBook indicates error.
 
-**Use case: UC09 - Add a group**
+      Use case ends.
+
+* 1c. Student does not exist.
+    * 1c1. AddressBook indicates error.
+
+      Use case ends.
+
+* 1d. Student is not a member of the specified group.
+    * 1d1. AddressBook indicates error.
+
+      Use case ends.
+
+## Use case: UC08 - Show a student's attendance in a group
 
 **Preconditions:**
-- The group name is unique and does not already exist in the address book.
+- The student exists
+- The group exists
+- The student is a member of the group
 
 **MSS:**
-1. User enters the `add-group` command with a group name parameter.
-2. System checks if a group with the same name already exists.
-3. System creates the new group with an empty member list.
-4. System adds the group to the address book and confirms success.
+1. User requests attendance records for a specific student in a specific group
+2. AddressBook displays the attendance records
 
    Use case ends.
 
 **Extensions:**
-2a. A group with the same name already exists.
-- 2a1. System throws error: "This group already exists in the address book."
+* 1a. Group does not exist.
+    * 1a1. AddressBook indicates error.
 
-**Use case: UC10 - Delete a group**
+      Use case ends.
+
+* 1b. Student does not exist.
+    * 1b1. AddressBook indicates error.
+
+      Use case ends.
+
+* 1c. Student is not a member of the specified group.
+    * 1c1. AddressBook indicates error.
+
+      Use case ends.
+
+## Use case: UC09 - Add a group
 
 **Preconditions:**
-- The list of groups must be displayed (e.g., via `list` or `find-group` command).
-- The user knows the index of the group to delete.
+- The group name is unique
 
 **MSS:**
-1. User enters `delete-group INDEX`.
-2. System verifies that the index is valid.
-3. System deletes the group from the address book.
-4. System displays confirmation of deletion.
+1. User requests to create a new group with a specified name
+2. AddressBook creates the group
+3. AddressBook indicates success
 
    Use case ends.
 
 **Extensions:**
-2a. Index is invalid (out of range or not an integer).
-- 2a1. System throws error: "The group index provided is invalid."
+* 1a. A group with the same name already exists.
+    * 1a1. AddressBook indicates error.
 
-**Use case: UC11 - Edit a group**
+      Use case ends.
 
-**Preconditions:**
-- The list of groups must be displayed.
-- The user knows the index of the group to edit.
-- The new name must not already exist as another group.
+## Use case: UC10 - Delete a group
 
 **MSS:**
-1. User enters the `edit-group INDEX /name NEW_NAME` command.
-2. System verifies the index is valid.
-3. System checks that the new group name does not already exist.
-4. System updates the group's name while retaining its existing members.
-5. System confirms the update with a success message.
+1. User requests to list groups
+2. AddressBook displays groups
+3. User requests to delete a specific group
+4. AddressBook deletes the group
+5. AddressBook indicates success
 
    Use case ends.
 
 **Extensions:**
-2a. Invalid index provided.
-- 2a1. System throws error: "Invalid Group"
+* 2a. The list is empty.
 
-3a. New group name already exists in the address book.
-- 3a1. System throws error: "This group already exists in the address book."
+  Use case ends.
 
-**Use case: UC12 - Show group details**
+* 3a. The given index is invalid.
+    * 3a1. AddressBook indicates error.
 
-**Preconditions:**
-- The list of groups is already displayed using a `find-group` command.
+      Use case resumes at step 2.
+
+## Use case: UC11 - Edit a group
 
 **MSS:**
-1. User enters `show-group-details INDEX`.
-2. System retrieves the group from the current displayed list.
-3. System displays the group name and its member list in detail.
+1. User requests to list groups
+2. AddressBook displays groups
+3. User requests to edit a specific group with a new name
+4. AddressBook updates the group name
+5. AddressBook indicates success
 
    Use case ends.
 
 **Extensions:**
-2a. Index is invalid (e.g., out of range).
-- 2a1. System throws error: "The group index provided is invalid."
+* 2a. The list is empty.
 
-**Use case: UC13 - Find a group by name**
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. AddressBook indicates error.
+
+      Use case resumes at step 2.
+
+* 3b. The new group name already exists.
+    * 3b1. AddressBook indicates error.
+
+      Use case resumes at step 3.
+
+## Use case: UC12 - Show group details
+
+**MSS:**
+1. User requests to list groups
+2. AddressBook displays groups
+3. User requests details of a specific group
+4. AddressBook displays the group's name and member list
+
+   Use case ends.
+
+**Extensions:**
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. AddressBook indicates error.
+
+      Use case resumes at step 2.
+
+## Use case: UC13 - Find a group by name
 
 **Preconditions:**
 - At least one group exists in the address book.
 
 **MSS:**
-1. User enters the `find-group` command with one or more keywords.
-2. System filters and lists groups whose names contain the keywords.
-3. Groups are displayed with index numbers.
-
-   Use case ends.
-
-**Use case: UC14 - List all groups**
-
-**Preconditions:**
-- None.
-
-**MSS:**
-1. User enters the `list-group` command.
-2. System retrieves all groups from the address book.
-3. System displays the list of groups.
-
-   Use case ends.
-
-**Use case: UC15 - Add a person to a group**
-
-**Preconditions:**
-- Both the person and the group must exist.
-- The person is not already a member of the group.
-
-**MSS:**
-1. User enters `add-to-group /person NAME /group GROUP_NAME`.
-2. System locates the person and the group.
-3. System checks if the person is already in the group.
-4. System adds the person to the group.
-5. System displays a success message.
+1. User requests to find groups by keyword(s)
+2. AddressBook displays groups whose names contain the keyword(s)
 
    Use case ends.
 
 **Extensions:**
-2a. Person not found.
-- 2a1. System throws error: "This person does not exist."
+* 2a. No group matches the keyword(s).
+    * 2a1. AddressBook indicates no matches found.
 
-2b. Group not found.
-- 2b1. System throws error: "Group not found."
+      Use case ends.
 
-3a. Person already in the group.
-- 3a1. System throws error: "This person already exists in the group."
+* 1a. User provides invalid search parameters.
+    * 1a1. AddressBook indicates error.
 
-**Use case: UC16 - Remove a person from a group**
+      Use case ends.
 
-**Preconditions:**
-- Both the person and the group must already exist.
-- The person must be a member of the group.
+## Use case: UC14 - List all groups
 
 **MSS:**
-1. User enters `delete-from-group /person NAME /group GROUP_NAME`.
-2. System locates the person and the group.
-3. System verifies that the person is a member of the group.
-4. System removes the person from the group.
-5. System displays a success message.
+1. User requests to list all groups
+2. AddressBook displays all groups
 
    Use case ends.
 
 **Extensions:**
-2a. Person name does not match any in the system.
-- 2a1. System throws error: "This person does not exist."
+* 2a. No groups exist.
+    * 2a1. AddressBook indicates no groups exist.
 
-2b. Group name not found.
-- 2b1. System throws error: "Group not found."
+      Use case ends.
 
-3a. Person is not in the specified group.
-- 3a1. System throws error: "This person does not exist in the group."
-
-**Extensions:**
-2a. No group matches the keyword.
-- 2a1. System displays an empty list and a message like "0 groups listed."
-
-2b. User enters `find-group` without any keywords.
-- 2b1. System shows an error: "Invalid command format..."
-
-**Use case: UC17 - View help information**
+## Use case: UC15 - Add a person to a group
 
 **Preconditions:**
-- None.
+- The person exists
+- The group exists
+- The person is not already a member of the group
 
 **MSS:**
-1. User enters the `help` command.
-2. System opens a help window with usage instructions or documentation link.
+1. User requests to add a person to a group
+2. AddressBook adds the person to the group
+3. AddressBook indicates success
+
+   Use case ends.
+
+**Extensions:**
+* 1a. Person does not exist.
+    * 1a1. AddressBook indicates error.
+
+      Use case ends.
+
+* 1b. Group does not exist.
+    * 1b1. AddressBook indicates error.
+
+      Use case ends.
+
+* 1c. Person is already in the group.
+    * 1c1. AddressBook indicates error.
+
+      Use case ends.
+
+## Use case: UC16 - Remove a person from a group
+
+**Preconditions:**
+- The person exists
+- The group exists
+- The person is a member of the group
+
+**MSS:**
+1. User requests to remove a person from a group
+2. AddressBook removes the person from the group
+3. AddressBook indicates success
+
+   Use case ends.
+
+**Extensions:**
+* 1a. Person does not exist.
+    * 1a1. AddressBook indicates error.
+
+      Use case ends.
+
+* 1b. Group does not exist.
+    * 1b1. AddressBook indicates error.
+
+      Use case ends.
+
+* 1c. Person is not a member of the group.
+    * 1c1. AddressBook indicates error.
+
+      Use case ends.
+
+## Use case: UC17 - View help information
+
+**MSS:**
+1. User requests help information
+2. AddressBook displays help information
 
    Use case ends.
 
