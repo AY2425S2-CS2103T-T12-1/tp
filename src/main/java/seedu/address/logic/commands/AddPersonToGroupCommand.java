@@ -53,31 +53,8 @@ public class AddPersonToGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> personList = model.getFilteredPersonList();
-        List<Group> groupList = model.getFilteredGroupList();
-        Person personToAdd = null;
-        Group groupToBeAddedTo = null;
-        for (Person person : personList) {
-            if (person.getName().fullName.equals(toAdd)) {
-                personToAdd = person;
-            }
-        }
-        for (Group group : groupList) {
-            if (group.getGroupName().equals(toBeAddedTo)) {
-                groupToBeAddedTo = group;
-            }
-        }
-
-        if (personToAdd == null) {
-            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
-        }
-        if (groupToBeAddedTo == null) {
-            throw new CommandException(Messages.MESSAGE_GROUP_NOT_FOUND);
-        }
-
-        if (groupToBeAddedTo.contains(personToAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
+        Person personToAdd = model.getPerson(toAdd);
+        Group groupToBeAddedTo = model.getGroup(toBeAddedTo);
 
         model.addPersonToGroup(personToAdd, groupToBeAddedTo);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToAdd)));
