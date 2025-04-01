@@ -350,7 +350,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Delete a person**
 
 **MSS**
 
@@ -373,7 +373,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Adding a person**
+**Use case: UC02 - Adding a person**
 
 **MSS**
 1. User adds the contact details
@@ -381,7 +381,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: Editing a Contact**
+**Use case: UC03 - Editing a Contact**
 
 **MSS**
 1. User searches for and selects the contact.
@@ -398,6 +398,87 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * 1a1. User performs **Adding a person**
 
      Use case resumes at step 1.
+
+**Use case: UC04 - Find a contact by name**
+
+**Preconditions:**
+- The address book contains at least one person.
+
+**MSS:**
+1. User enters the `find` command with one or more keywords.
+2. System filters the address book and lists all persons whose names contain the keywords (case-insensitive).
+3. Matching persons are displayed with index numbers.
+
+   Use case ends.
+
+**Extensions:**
+2a. No person matches the keyword.
+- 2a1. System displays an empty list and a message like "0 persons listed."
+
+2b. User enters `find` without any keywords.
+- 2b1. System shows an error: "Invalid command format! Parameters: KEYWORD [MORE_KEYWORDS]..."
+
+**Use case: UC05 - Mark attendance for a student**
+
+**Preconditions:**
+- The student must be in the specified group.
+- Week number must be between 1 and 13.
+
+**MSS:**
+1. User enters `mark-attendance` command with parameters: student name, group name, and week number.
+2. System verifies all parameters and group membership.
+3. System updates the attendance record for the given week.
+4. System displays a success message.
+
+   Use case ends.
+
+**Extensions:**
+2a. Week number is outside valid range.
+- 2a1. System throws error: "Week number must be between 1 and 13 (inclusive)!"
+
+2b. Group name does not exist.
+- 2b1. System throws error: "Group not found!"
+
+2c. Student name does not exist.
+- 2c1. System throws error: "Person not found!"
+
+2d. Student is not a member of the specified group.
+- 2d1. System throws error: "Person does not exist in group!"
+
+**Use case: UC06 - Show group details**
+
+**Preconditions:**
+- The list of groups is already displayed using a `find-group` command.
+
+**MSS:**
+1. User enters `show-group-details INDEX`.
+2. System retrieves the group from the current displayed list.
+3. System displays the group name and its member list in detail.
+
+   Use case ends.
+
+**Extensions:**
+2a. Index is invalid (e.g., out of range).
+- 2a1. System throws error: "The group index provided is invalid."
+
+**Use case: UC07 - Find a group by name**
+
+**Preconditions:**
+- At least one group exists in the address book.
+
+**MSS:**
+1. User enters the `find-group` command with one or more keywords.
+2. System filters and lists groups whose names contain the keywords.
+3. Groups are displayed with index numbers.
+
+   Use case ends.
+
+**Extensions:**
+2a. No group matches the keyword.
+- 2a1. System displays an empty list and a message like "0 groups listed."
+
+2b. User enters `find-group` without any keywords.
+- 2b1. System shows an error: "Invalid command format..."
 
 ### Non-Functional Requirements
 
