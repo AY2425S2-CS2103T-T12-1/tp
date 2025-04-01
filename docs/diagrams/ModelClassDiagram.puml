@@ -11,14 +11,12 @@ Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
+Class ResultList
 
 Class UniquePersonList
+Class UniqueGroupList
 Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Class Group
 
 Class I #FFFFFF
 }
@@ -28,6 +26,7 @@ HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
 
+ModelManager -[hidden]down- I
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
@@ -36,19 +35,16 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
+AddressBook *--> "1" UniqueGroupList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+UniqueGroupList --> "~* all" Group
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+UniquePersonList -[hidden]right- I
+UniquePersonList -[hidden]left- UniqueGroupList
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
-
-ModelManager --> "~* filtered" Person
+ModelManager ---> "1" ResultList
+ResultList -up--> "~* filtered" Person
+ResultList -up--> "~* filtered" Group
+ResultList -[hidden]up- I
+Person -[hidden]left-> Group
 @enduml
