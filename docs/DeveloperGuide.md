@@ -418,7 +418,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2b. User enters `find` without any keywords.
 - 2b1. System shows an error: "Invalid command format! Parameters: KEYWORD [MORE_KEYWORDS]..."
 
-**Use case: UC05 - Mark attendance for a student**
+**Use case: UC05 - List all contacts**
+
+**Preconditions:**
+- None.
+
+**MSS:**
+1. User enters the `list` command.
+2. System retrieves all persons from the address book.
+3. System displays the list of persons.
+
+   Use case ends.
+
+**Use case: UC06 - Mark attendance for a student**
 
 **Preconditions:**
 - The student must be in the specified group.
@@ -445,7 +457,119 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2d. Student is not a member of the specified group.
 - 2d1. System throws error: "Person does not exist in group!"
 
-**Use case: UC06 - Show group details**
+**Use case: UC07 - Unmark attendance for a student**
+
+**Preconditions:**
+- The group and person must exist.
+- The person must be a member of the specified group.
+- The week number must be between 1 and 13.
+
+**MSS:**
+1. User enters the `unmark-attendance` command with the person's name, group name, and week number.
+2. System verifies that the group and person exist.
+3. System checks if the person is in the specified group.
+4. System updates the attendance record for that person by unmarking the given week.
+5. System displays a success message.
+
+   Use case ends.
+
+**Extensions:**
+2a. Week number is not between 1 and 13.
+- 2a1. System throws error: "Week number must be between 1 and 13 (inclusive)!"
+
+2b. Group name not found.
+- 2b1. System throws error: "Group not found!"
+
+2c. Person name not found.
+- 2c1. System throws error: "Person not found!"
+
+3a. Person is not part of the specified group.
+- 3a1. System throws error: "Person does not exist in group!"
+
+**Use case: UC08 - Show a student's attendance in a group**
+
+**Preconditions:**
+- Both the group and the person must exist.
+- The person must be a member of the group.
+
+**MSS:**
+1. User enters `show-attendance /person NAME /group GROUP_NAME`.
+2. System retrieves the person and group.
+3. System checks if the person is a member of the group.
+4. System retrieves the person's attendance data.
+5. System displays a detailed breakdown of attendance across all weeks.
+
+   Use case ends.
+
+**Extensions:**
+2a. Group not found.
+- 2a1. System throws error: "Group not found!"
+
+2b. Person not found.
+- 2b1. System throws error: "Person not found!"
+
+3a. Person not in the specified group.
+- 3a1. System throws error: "Person does not exist in group!"
+
+**Use case: UC09 - Add a group**
+
+**Preconditions:**
+- The group name is unique and does not already exist in the address book.
+
+**MSS:**
+1. User enters the `add-group` command with a group name parameter.
+2. System checks if a group with the same name already exists.
+3. System creates the new group with an empty member list.
+4. System adds the group to the address book and confirms success.
+
+   Use case ends.
+
+**Extensions:**
+2a. A group with the same name already exists.
+- 2a1. System throws error: "This group already exists in the address book."
+
+**Use case: UC10 - Delete a group**
+
+**Preconditions:**
+- The list of groups must be displayed (e.g., via `list` or `find-group` command).
+- The user knows the index of the group to delete.
+
+**MSS:**
+1. User enters `delete-group INDEX`.
+2. System verifies that the index is valid.
+3. System deletes the group from the address book.
+4. System displays confirmation of deletion.
+
+   Use case ends.
+
+**Extensions:**
+2a. Index is invalid (out of range or not an integer).
+- 2a1. System throws error: "The group index provided is invalid."
+
+**Use case: UC11 - Edit a group**
+
+**Preconditions:**
+- The list of groups must be displayed.
+- The user knows the index of the group to edit.
+- The new name must not already exist as another group.
+
+**MSS:**
+1. User enters the `edit-group INDEX /name NEW_NAME` command.
+2. System verifies the index is valid.
+3. System checks that the new group name does not already exist.
+4. System updates the group's name while retaining its existing members.
+5. System confirms the update with a success message.
+
+   Use case ends.
+
+**Extensions:**
+2a. Invalid index provided.
+- 2a1. System throws error: "Invalid Group"
+
+3a. New group name already exists in the address book.
+- 3a1. System throws error: "This group already exists in the address book."
+
+**Use case: UC12 - Show group details**
 
 **Preconditions:**
 - The list of groups is already displayed using a `find-group` command.
@@ -461,7 +585,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2a. Index is invalid (e.g., out of range).
 - 2a1. System throws error: "The group index provided is invalid."
 
-**Use case: UC07 - Find a group by name**
+**Use case: UC13 - Find a group by name**
 
 **Preconditions:**
 - At least one group exists in the address book.
@@ -473,12 +597,85 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Use case: UC14 - List all groups**
+
+**Preconditions:**
+- None.
+
+**MSS:**
+1. User enters the `list-group` command.
+2. System retrieves all groups from the address book.
+3. System displays the list of groups.
+
+   Use case ends.
+
+**Use case: UC15 - Add a person to a group**
+
+**Preconditions:**
+- Both the person and the group must exist.
+- The person is not already a member of the group.
+
+**MSS:**
+1. User enters `add-to-group /person NAME /group GROUP_NAME`.
+2. System locates the person and the group.
+3. System checks if the person is already in the group.
+4. System adds the person to the group.
+5. System displays a success message.
+
+   Use case ends.
+
+**Extensions:**
+2a. Person not found.
+- 2a1. System throws error: "This person does not exist."
+
+2b. Group not found.
+- 2b1. System throws error: "Group not found."
+
+3a. Person already in the group.
+- 3a1. System throws error: "This person already exists in the group."
+
+**Use case: UC16 - Remove a person from a group**
+
+**Preconditions:**
+- Both the person and the group must already exist.
+- The person must be a member of the group.
+
+**MSS:**
+1. User enters `delete-from-group /person NAME /group GROUP_NAME`.
+2. System locates the person and the group.
+3. System verifies that the person is a member of the group.
+4. System removes the person from the group.
+5. System displays a success message.
+
+   Use case ends.
+
+**Extensions:**
+2a. Person name does not match any in the system.
+- 2a1. System throws error: "This person does not exist."
+
+2b. Group name not found.
+- 2b1. System throws error: "Group not found."
+
+3a. Person is not in the specified group.
+- 3a1. System throws error: "This person does not exist in the group."
+
 **Extensions:**
 2a. No group matches the keyword.
 - 2a1. System displays an empty list and a message like "0 groups listed."
 
 2b. User enters `find-group` without any keywords.
 - 2b1. System shows an error: "Invalid command format..."
+
+**Use case: UC17 - View help information**
+
+**Preconditions:**
+- None.
+
+**MSS:**
+1. User enters the `help` command.
+2. System opens a help window with usage instructions or documentation link.
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
