@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-TAbby Dabby is a **desktop app designed for teaching assistants, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, it can get your administrative tasks done faster than traditional GUI apps.
-At a glance, TAbby Dabby allows teaching assistants to:
+TAbby Dabby is a **desktop app designed for teaching assistants, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, it can get your administrative tasks done faster than traditional GUI apps.
+At a glance, TAbby Dabby allows you to:
 
 - Manage contacts of students in their tutorial groups
 - Track student attendance
@@ -18,7 +18,7 @@ At a glance, TAbby Dabby allows teaching assistants to:
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   **Mac users:** Ensure you have the precise JDK version specified [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 2. Download the latest `TAbbyDabby.jar` file from [here](https://github.com/AY2425S2-CS2103T-T12-1/tp/releases).
 
@@ -53,27 +53,29 @@ At a glance, TAbby Dabby allows teaching assistants to:
 
 **:information_source: Notes about the command format:**<br>
 
-- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Jensen Huang`.
+- Items in `UPPER_CASE` are compulsory fields you have to fill in.<br>
+  e.g. in `add n/NAME`, `NAME` is a parameter which you can fill in as `add n/Jensen Huang`.
 
 - Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/Jensen Huang t/friend` or as `n/Jensen Huang`.
+  e.g You can fill in `n/NAME [t/TAG]` as `n/Jensen Huang t/friend` or as `n/Jensen Huang`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-- Parameters can be in any order.<br>
+- You can fill in fields in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+- Redundant parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+- If you type a command with a wrong format, TAbby Dabby will display an example to guide you to re-input the command correctly.
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 ### Viewing help: `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -116,12 +118,12 @@ Examples:
 
 ### Editing a person: `edit`
 
-Edits the specified person in the person list.
+Edits the details of the specified person in the person list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-- At least one of the optional fields must be provided.
+- Edits the details of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- You must fill in at least one of the optional fields.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed, e.g., if the person at index `2` currently has the tag `frenemy`, and we run the command `edit 2 t/enemy`, the tag `frenemy` will be removed, and a new tag `enemy` will be added.
 - You can remove all the person’s tags by typing `t/` without specifying any tags after it.
@@ -165,12 +167,6 @@ Deletes all persons from the person list.
 
 Format: `clear`
 
-### Exiting the program: `exit`
-
-Exits the program.
-
-Format: `exit`
-
 ### Adding a new group: `add-group`
 
 Adds a new group to the group list.
@@ -198,11 +194,11 @@ Examples:
 
 ### Editing a group: `edit-group`
 
-Edits the specified group in the group list.
+Edits the specified group details in the group list.
 
 Format: `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​`
 
-- Edits the group at the specified `INDEX`. The index refers to the index number shown in the last displayed group list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the group details at the specified `INDEX`. The index refers to the index number shown in the last displayed group list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the group will be removed, e.g., if the group at index `2` currently has the tag `gaming`, and we run the command `edit-group 2 t/study`, the tag `gaming` will be removed, and a new tag `study` will be added.
@@ -324,15 +320,21 @@ Example:
 
 - `show-attendance P/Jensen Huang g/CS2103T T12` displays the attendance for `Jensen Huang` in `CS2103T T12`.
 
+### Exiting the program: `exit`
+
+Exits the program.
+
+Format: `exit`
+
 ---
 
 ### Saving the data
 
-TAbby Dabby data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TAbby Dabby's data is saved in your computer's hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-TAbby Dabby data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+You can find TAbby Dabby's data as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TAbby Dabby will discard all data and start with a new set of preloaded data at the next run.
@@ -346,21 +348,22 @@ Therefore, edit the data file only if you are confident that you can update it c
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAbby Dabby home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAbby Dabby home folder.<br>
+:bulb: **Refresher:** You can find the data file in TAbby Dabby's home folder at /data/addressbook.json.
 
 ---
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimised Help Window.
 
 ---
 
 ## Command summary
 
 | Action                 | Format, Examples                                                                                                                                                  |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077` |
 | **Delete**             | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                |
 | **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/Jensen Huang e/jensenh@yahoo.com`                                       |
@@ -379,3 +382,4 @@ Therefore, edit the data file only if you are confident that you can update it c
 | **Unmark Attendance**  | `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                             |
 | **Show Attendance**    | `show-attendance P/NAME g/GROUP_NAME` <br> e.g. `show-attendance P/Jensen Huang g/CS2103T T12`                                                                    |
 | **Help**               | `help`                                                                                                                                                            |
+| **Exit**               | `exit`                                                                                                                                                            |
