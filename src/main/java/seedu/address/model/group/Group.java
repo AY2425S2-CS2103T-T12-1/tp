@@ -3,6 +3,7 @@ package seedu.address.model.group;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -14,6 +15,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.util.ArrayListMap;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -47,6 +49,7 @@ public class Group implements Result {
      * The map of all members in the group.
      */
     private final ArrayListMap<Person, GroupMemberDetail> groupMembers;
+
     /**
      * The list of all assignments in the group.
      */
@@ -104,11 +107,29 @@ public class Group implements Result {
      * @param tags          The collection of tags for the group.
      */
     public Group(String groupName, ArrayListMap<Person, GroupMemberDetail> groupMembers, Collection<Tag> tags) {
+        this(groupName, groupMembers, tags, null);
+    }
+
+    /**
+     * Constructs a {@code Group} with a specified name, existing Map and set of tags.
+     *
+     * @param groupName     A valid group name.
+     * @param groupMembers  A map of Person as key to GroupMemberDetail as value.
+     * @param tags          The collection of tags for the group.
+     * @param assignments   The collection of tags for the group.
+     */
+    public Group(
+            String groupName,
+            ArrayListMap<Person,
+                    GroupMemberDetail> groupMembers,
+            Collection<Tag> tags,
+            Collection<Assignment> assignments) {
         requireNonNull(groupName);
         checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
         this.groupName = groupName;
         this.groupMembers = groupMembers;
         this.tags = tags == null ? new HashSet<>() : new HashSet<>(tags);
+        this.assignments = assignments == null ? new ArrayList<>() : new ArrayList<>(assignments);
     }
 
     /**
@@ -265,6 +286,73 @@ public class Group implements Result {
     public GroupMemberDetail getGroupMemberDetail(Person person) {
         return groupMembers.get(person);
     }
+
+    /**
+     * Gets the {@code Assignment} specified by name. If no such assignment is found, returns null.
+     *
+     * @param assignmentName The name of the assignment
+     * @return The desired assignment if found
+     */
+    public Assignment getAssignment(String assignmentName) {
+        for (Assignment a: assignments) {
+            if (a.getName().equals(assignmentName)) {
+                return a;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets all {@code Assignment} in the group
+     *
+     * @return All assignments in the group.
+     */
+    public ArrayList<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    /**
+     * Checks if the group contains the {@code Assignment} specified by name.
+     *
+     * @param assignmentName The name of the assignment
+     * @return True if the Assignment exists and false otherwise.
+     */
+    public boolean containsAssignment(String assignmentName) {
+        for (Assignment a: assignments) {
+            if (a.getName().equals(assignmentName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Adds the assignment to the group.
+     *
+     * @param assignmentName The assignment name.
+     * @param deadline A {@code LocalDate} object specifying the assignment deadline.
+     */
+    public void addAssignment(String assignmentName, LocalDate deadline) {
+        Assignment assignment = new Assignment(assignmentName, deadline);
+        assignments.add(assignment);
+    }
+
+    /**
+     * Removes an assignment from the group.
+     *
+     * @param assignmentName The assignment name to be removed.
+     */
+    public void removeAssignment(String assignmentName) throws AssignmentNotFoundException {
+        for (Assignment a: assignments) {
+            if (a.getName().equals(assignmentName)) {
+                assignments.remove(a);
+                return;
+            }
+        }
+        throw new AssignmentNotFoundException();
+    }
+
+
 
     /**
      * Returns a string representation of the group in the format "[GroupName]".
