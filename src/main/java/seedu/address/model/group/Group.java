@@ -13,6 +13,7 @@ import java.util.Set;
 import javafx.scene.layout.Region;
 import seedu.address.commons.util.ArrayListMap;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -46,6 +47,10 @@ public class Group implements Result {
      * The map of all members in the group.
      */
     private final ArrayListMap<Person, GroupMemberDetail> groupMembers;
+    /**
+     * The list of all assignments in the group.
+     */
+    private final ArrayList<Assignment> assignments;
 
     private final Set<Tag> tags;
 
@@ -88,6 +93,7 @@ public class Group implements Result {
             }
         }
         this.tags = tags == null ? new HashSet<>() : new HashSet<>(tags);
+        this.assignments = new ArrayList<>();
     }
 
     /**
