@@ -26,7 +26,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
                     AddGroupCommand.MESSAGE_USAGE));
         }
 
-        String groupName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
+        String groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_NAME).get());
 
         return new AddGroupCommand(groupName);
     }

@@ -37,7 +37,10 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditGroupCommand.MESSAGE_USAGE), ive);
         }
-        String newGroupName = argMultimap.getValue(PREFIX_NAME).orElse("");
+        String newGroupName = "";
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            newGroupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_NAME).get());
+        }
         Collection<Tag> tags = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).orElse(null);
         return new EditGroupCommand(index, newGroupName, tags);
     }
