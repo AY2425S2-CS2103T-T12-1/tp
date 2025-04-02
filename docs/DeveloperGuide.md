@@ -124,8 +124,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Person`, `Group` and `GroupMemberDetails` objects (which are contained in a `UniquePersonList` and `UniqueGroupList` object).
+* stores the currently 'selected' `Person` or `Group` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -135,6 +135,11 @@ The `Model` component,
 
 </div>
 
+* `Group` class contains an `ArrayListMap` object which acts similarly to a Map
+* The `Person` objects are stored in the `Group` object as 'keys' of the `ArrayListMap` within `Group` object
+* The values of the `ArrayListMap` would be the corresponding `GroupMemberDetail` object
+
+<img src = "images/PersonInGroupDiagram.png" width="450" />
 
 ### Storage component
 
@@ -156,6 +161,27 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Adding a person to a group
+
+The sequence diagram below illustrate the process of adding a Person to a Group by writing the command `add-to-group P/ p g/ g`.
+1. First the command will go through the standard logic sequence. Creating a Unique Command parser to parse input data to create
+a `AddPersonToGroupCommand` object
+2. The `LogicManger` then execute the command by calling `execute(m)
+3. `AddPersonToGroupCommand` will get the `Person` object to be added and the `Group` object to be added to from `Model`
+4. Lastly, the `addPersonToGroup` method will be called to add the `Person` object into the `Group` object.
+5. A `CommandResult` is returned for `Ui` purpose
+
+![AddPersonToGroupSequenceDiagram-Logic](images/AddPersonToGroupSequenceDiagram-Logic.png)
+
+The `Group` object will create a new `GroupMemberDetail` object tied to the newly added `Person` object and stored into the Map as a key-value pair.
+6. After `addPersonToGroup` is called, the `Model` will call on the `VersionedAddressBook` to which adds `p:Person` to `g:Group`
+7. `Group` will create a new `GroupMemberDetails` object that corresponds to `p:Person` object
+8. Both the `p:Person` and the newly created `GroupMemberDetails` objects will be stored in an `ArrayListMap` within the `Group` object
+
+![AddPersonToGroupSeqeunceDiagram-Model](images/AddPersonToGroupSequenceDiagram-Model.png)
+
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -415,7 +441,8 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      * Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      * Person that was deleted from the list should also be removed from all group it was previously part of. Can be verified using `list-group` to see all the groups.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -432,3 +459,22 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Manging Persons in Group
+
+1. Adding a Person to a Group
+   1. Prerequisites: `p:Person` is not a member of `g:Group`
+   2. Test case: `add-to-group P/ p g/ g` <br>
+      Expected: Person should show up inside `g:Group` when using either `list-group` or `find-group` commands
+2. Adding a Person who already exist in the Group
+   1. Prerequisite: `p:Person` is already a member of `g:Group`
+   2. Test case: `add-to-group P/ p g/ g` <br>
+      Expected: Error message indicating `p:Person` is already in `g:Group`. No duplicate entry should be created.
+3. Deleting a Person from a Group
+   1. Prerequisites: `p:Person` is already a member of `g:Group`
+   2. Test case: `delete-from-group P/ p g/ g` <br>
+      Expected: Person should no longer show up inside `g:Group` when using either `list-group` or `find-group` commands
+4. Deleting a Person who is not a member of Group
+   1. Prerequisite: `p:Person` is not a member of `g:Group`
+   2. Test case: `delete-from-group P/ p g/ g` <br>
+      Expected: Error message indicating `p:Person` does not exist in `g:Group`

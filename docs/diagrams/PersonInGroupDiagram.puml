@@ -1,0 +1,33 @@
+@startuml
+
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+AddressBook *-right-> "1" UniqueGroupList
+AddressBook *-right-> "1" UniquePersonList
+UniqueGroupList -[hidden]down- UniqueGroupList
+UniqueGroupList -[hidden]down- UniquePersonList
+
+UniqueGroupList -right-> "*" Group
+UniquePersonList -down-> Person
+
+Group *--> Person : "Key"
+Group *--> GroupMemberDetails : "Value"
+
+Person *--> Name
+Person *--> Phone
+Person *--> Email
+Person *--> Address
+GroupMemberDetails *--> Person
+GroupMemberDetails *--> Group
+
+enum Role {
+    TA
+    Student
+    Professor
+}
+GroupMemberDetails *--> Role
+
+@enduml
