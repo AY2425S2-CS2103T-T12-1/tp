@@ -1,0 +1,112 @@
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.time.LocalDate;
+
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
+
+/**
+ * Adds a new assignment to the specified group.
+ */
+public class AddAssignmentCommand extends Command {
+
+    /**
+     * The command word to trigger this command.
+     */
+    public static final String COMMAND_WORD = "add-assignment";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a new assignment to the specified group. "
+            + "Parameters: "
+            + PREFIX_NAME + "ASSIGNMENT NAME "
+            + PREFIX_GROUP + "GROUP "
+            + PREFIX_DATE + "DEADLINE\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "HW 1 "
+            + PREFIX_GROUP + "CS2103T T12-1 "
+            + PREFIX_DATE + "21-04-2025\n";
+
+    private static final String MESSAGE_SUCCESS = "New assignment added to group %s: %s";
+
+    /**
+     * Name of the new assignment to be added.
+     */
+    private final String name;
+
+    /**
+     * Name of the group to be added to.
+     */
+    private final String groupName;
+
+    /**
+     * Deadline of the assignment
+     */
+    private final LocalDate deadline;
+
+    /**
+     * Creates an AddAssignmentCommand to add a new assignment with the specified name, group, and deadline.
+     *
+     * @param name The name of the assignment to be added.
+     * @param groupName The name of the group to be added.
+     * @param deadline The deadline of the assignment.
+     */
+    public AddAssignmentCommand(String name, String groupName, LocalDate deadline) {
+        requireAllNonNull(name, groupName, deadline);
+        this.name = name;
+        this.groupName = groupName;
+        this.deadline = deadline;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+
+        // Create a new group with the given name and an empty list of members
+        Assignment assignmentToAdd = new Assignment(name, deadline);
+
+        Group group;
+        try {
+            group = model.getGroup(groupName);
+        } catch (GroupNotFoundException e) {
+            throw new CommandException("Group not found!");
+        }
+
+        // Add group to the model
+        model.addAssignmentToGroup(assignmentToAdd, group);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, name));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddAssignmentCommand otherAddAssignmentCommand)) {
+            return false;
+        }
+
+        return name.equals(otherAddAssignmentCommand.name) && groupName.equals(otherAddAssignmentCommand.groupName);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .add("groupName", groupName)
+                .add("deadline", deadline)
+                .toString();
+    }
+}
+

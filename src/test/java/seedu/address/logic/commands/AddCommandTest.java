@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -212,6 +213,11 @@ public class AddCommandTest {
 
         @Override
         public void deletePersonFromAllGroups(Person personToRemove) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAssignmentToGroup(Assignment assignment, Group group) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,13 +16,13 @@ import seedu.address.model.person.Name;
 public class JsonAdaptedAssignment {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
     private String name;
-    private Date deadline;
+    private LocalDate deadline;
 
     /**
      * Creates a {@code JsonAdaptedAssignment} from the given details.
      */
     @JsonCreator
-    public JsonAdaptedAssignment(@JsonProperty("name") String name, @JsonProperty("date") Date deadline) {
+    public JsonAdaptedAssignment(@JsonProperty("name") String name, @JsonProperty("date") LocalDate deadline) {
         this.name = name;
         this.deadline = deadline;
     }
@@ -46,7 +46,7 @@ public class JsonAdaptedAssignment {
             throw new IllegalValueException(Assignment.MESSAGE_CONSTRAINTS);
         }
         final String modelName = name;
-        final Date modelDate = deadline;
+        final LocalDate modelDate = deadline;
         return new Assignment(modelName, modelDate);
     }
 }

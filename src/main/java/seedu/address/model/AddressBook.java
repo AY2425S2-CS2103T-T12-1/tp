@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
@@ -229,6 +230,13 @@ public class AddressBook implements ReadOnlyAddressBook {
                 deletePersonFromGroup(personToRemove, group);
             }
         }
+    }
+
+    /**
+     * Adds assignment to the group specified.
+     */
+    public void addAssignmentToGroup(Assignment assignmentToAdd, Group group) {
+        group.addAssignment(assignmentToAdd);
     }
 
     /**

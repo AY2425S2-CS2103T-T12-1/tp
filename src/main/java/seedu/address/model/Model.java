@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.ui.Result;
@@ -155,6 +156,11 @@ public interface Model {
      * Removes the given person from the all groups they were in.
      */
     void deletePersonFromAllGroups(Person personToRemove);
+
+    /**
+     * Removes the given person from the all groups they were in.
+     */
+    void addAssignmentToGroup(Assignment assignmenttoAdd, Group group);
 
     /**
      * Retrieves a group matching the provided group name.

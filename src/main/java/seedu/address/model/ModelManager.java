@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.ui.Result;
@@ -220,6 +221,13 @@ public class ModelManager implements Model {
     public void deletePersonFromAllGroups(Person personToRemove) {
         requireNonNull(personToRemove);
         addressBook.deletePersonFromAllGroups(personToRemove);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
+    public void addAssignmentToGroup(Assignment assignmentToAdd, Group group) {
+        requireAllNonNull(assignmentToAdd, group);
+        addressBook.addAssignmentToGroup(assignmentToAdd, group);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
