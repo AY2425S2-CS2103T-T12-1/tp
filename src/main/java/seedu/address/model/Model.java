@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -155,6 +156,16 @@ public interface Model {
      * Removes the given person from the all groups they were in.
      */
     void deletePersonFromAllGroups(Person personToRemove);
+
+    /**
+     * Add an assignment to the group specified.
+     */
+    void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group);
+
+    /**
+     * Removes the specified assignment.
+     */
+    void removeAssignmentFromGroup(String assignmentName, Group group);
 
     /**
      * Retrieves a group matching the provided group name.

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -220,6 +221,20 @@ public class ModelManager implements Model {
     public void deletePersonFromAllGroups(Person personToRemove) {
         requireNonNull(personToRemove);
         addressBook.deletePersonFromAllGroups(personToRemove);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
+    public void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group) {
+        requireAllNonNull(assignmentName, deadline, group);
+        addressBook.addAssignmentToGroup(assignmentName, deadline, group);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
+    public void removeAssignmentFromGroup(String assignmentName, Group group) {
+        requireAllNonNull(assignmentName, group);
+        addressBook.removeAssignmentFromGroup(assignmentName, group);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
