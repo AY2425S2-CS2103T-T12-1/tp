@@ -124,8 +124,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Person`, `Group` and `GroupMemberDetails` objects (which are contained in a `UniquePersonList` and `UniqueGroupList` object).
+* stores the currently 'selected' `Person` or `Group` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -134,7 +134,12 @@ The `Model` component,
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
+</br>
 
+* `Group` class contains an `ArrayListMap` object which acts similarly to a Map
+* The `Person` objects are stored in the `Group` object as 'keys' of the `ArrayListMap`
+* The values of the `ArrayListMap` would be the corresponding `GroupMemberDetail` object
+![PersonGroup](images/PersonInGroupDiagram.png)
 
 ### Storage component
 
@@ -158,10 +163,16 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Adding a person to a group
+
+The sequence diagram below illustrate the process of adding a Person to a Group by writing the command `add-to-group P/ p g/ g`.
+
 ![AddPersonToGroupSequenceDiagram-Logic](images/AddPersonToGroupSequenceDiagram-Logic.png)
+
+The `Group` object will create a new `GroupMemberDetail` object tied to the newly added `Person` object and stored into the Map as a key-value pair.
+
 ![AddPersonToGroupSeqeunceDiagram-Model](images/AddPersonToGroupSequenceDiagram-Model.png)
 
-![PersonGroup](images/PersonInGroupDiagram.png)
+
 
 ### \[Proposed\] Undo/redo feature
 
