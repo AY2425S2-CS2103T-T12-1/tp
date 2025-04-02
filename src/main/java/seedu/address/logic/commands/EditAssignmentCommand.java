@@ -73,7 +73,11 @@ public class EditAssignmentCommand extends Command {
         requireAllNonNull(name, groupName);
         this.name = name;
         this.groupName = groupName;
-        this.newName = newName;
+        if (name.equals(newName)) {
+            this.newName = null;
+        } else {
+            this.newName = newName;
+        }
         this.deadline = deadline;
     }
 
@@ -96,7 +100,7 @@ public class EditAssignmentCommand extends Command {
             throw new CommandException(d.getMessage());
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, newName));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, newName == null ? name : newName));
     }
 
     @Override
