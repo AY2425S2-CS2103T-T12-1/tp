@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
@@ -68,7 +69,11 @@ public class GradeAssignmentCommand extends Command {
         } catch (GroupNotFoundException e) {
             throw new CommandException("Group not found!");
         }
-        model.gradeAssignment(person, group, this.assignmentName, this.score);
+        try {
+            model.gradeAssignment(person, group, this.assignmentName, this.score);
+        } catch (AssignmentNotFoundException e) {
+            throw new CommandException("Assignment not in group!");
+        }
         return new CommandResult(String.format(MESSAGE_GRADE_ASSIGNMENT_SUCCESS, assignmentName, personName,
                 groupName, score));
     }
