@@ -20,7 +20,6 @@ public class Assignment {
      * The assignment deadline.
      */
     private Date deadline;
-
     /**
      * Constructs a {@code Assignment}.
      *
@@ -44,7 +43,6 @@ public class Assignment {
     public Date getDeadline() {
         return this.deadline;
     }
-
     /**
      * Computes the hash code for this assignment based on its name and group.
      *
