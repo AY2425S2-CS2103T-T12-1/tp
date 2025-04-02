@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import javafx.scene.layout.Region;
@@ -211,7 +212,9 @@ public class GroupMemberDetail implements Result {
      */
     public void gradeAssignment(Assignment assignment, Float score) {
         Float penalty = assignment.getPenalty();
-        score = score * penalty;
+        if (LocalDate.now().isAfter(assignment.getDeadline())) {
+            score = score * penalty;
+        }
         grades.put(assignment, score);
     }
 
