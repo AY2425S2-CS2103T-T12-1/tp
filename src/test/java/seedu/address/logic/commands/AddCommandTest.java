@@ -232,6 +232,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void markAttendance(Person person, Group group, int week) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unmarkAttendance(Person person, Group group, int week) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Group getGroup(String groupName) {
             throw new AssertionError("This method should not be called.");
         }

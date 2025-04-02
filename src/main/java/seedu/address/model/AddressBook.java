@@ -258,6 +258,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Mark attendance of person in group.
+     */
+    public void markAttendance(Person person, Group group, int week) {
+        group.markAttendance(person, week);
+    }
+
+    /**
+     * Unmark attendance of person in group.
+     */
+    public void unmarkAttendance(Person person, Group group, int week) {
+        group.unmarkAttendance(person, week);
+    }
+
+    /**
      * Returns a string representation of the AddressBook object.
      *
      * @return A string describing the address book.
