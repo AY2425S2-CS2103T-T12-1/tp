@@ -173,6 +173,16 @@ public interface Model {
     void gradeAssignment(Person person, Group group, String assignmentName, Float score);
 
     /**
+     * Mark attendance of a person in a group.
+     */
+    void markAttendance(Person person, Group group, int week);
+
+    /**
+     * Unmark attendance of a person in a group.
+     */
+    void unmarkAttendance(Person person, Group group, int week);
+
+    /**
      * Retrieves a group matching the provided group name.
      */
     Group getGroup(String groupName);

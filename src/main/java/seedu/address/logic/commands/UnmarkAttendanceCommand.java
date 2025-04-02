@@ -77,10 +77,6 @@ public class UnmarkAttendanceCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!GroupMemberDetail.isValidWeek(week)) {
-            throw new CommandException("Week number must be between 1 and 13 (inclusive)!");
-        }
-
         Group group;
         try {
             group = model.getGroup(groupName);
@@ -95,13 +91,16 @@ public class UnmarkAttendanceCommand extends Command {
             throw new CommandException("Person not found!");
         }
 
-        if (!group.contains(person)) {
+        if (!GroupMemberDetail.isValidWeek(week)) {
+            throw new CommandException("Week number must be between 1 and 13 (inclusive)!");
+        }
+
+        try {
+            model.unmarkAttendance(person, group, week);
+        } catch (PersonNotFoundException e) {
             throw new CommandException("Person does not exist in group!");
         }
 
-        GroupMemberDetail groupMemberDetail = group.getGroupMemberDetail(person);
-        groupMemberDetail.unmarkAttendance(week);
-        // Add implementation for storage
         return new CommandResult(String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, personName, groupName, week));
     }
 

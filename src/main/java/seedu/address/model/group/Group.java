@@ -352,6 +352,35 @@ public class Group implements Result {
         throw new AssignmentNotFoundException();
     }
 
+    /**
+     * Marks attendance of a person for a specified week.
+     *
+     * @param person The person to mark the attendance
+     * @param week A valid week.
+     * @throws PersonNotFoundException
+     */
+    public void markAttendance(Person person, int week) throws PersonNotFoundException {
+        if (!groupMembers.containsKey(person)) {
+            throw new PersonNotFoundException();
+        }
+        GroupMemberDetail groupMemberDetail = groupMembers.get(person);
+        groupMemberDetail.markAttendance(week);
+    }
+
+    /**
+     * Unmarks attendance of a person for a specified week.
+     *
+     * @param person The person to mark the attendance
+     * @param week A valid week.
+     * @throws PersonNotFoundException
+     */
+    public void unmarkAttendance(Person person, int week) throws PersonNotFoundException {
+        if (!groupMembers.containsKey(person)) {
+            throw new PersonNotFoundException();
+        }
+        GroupMemberDetail groupMemberDetail = groupMembers.get(person);
+        groupMemberDetail.unmarkAttendance(week);
+    }
 
 
     /**
