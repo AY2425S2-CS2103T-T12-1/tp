@@ -4,14 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Map;
 import java.util.Objects;
 
 import javafx.scene.layout.Region;
 import seedu.address.commons.util.ArrayListMap;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.ui.GroupDetailCard;
 import seedu.address.ui.Result;
@@ -211,14 +209,8 @@ public class GroupMemberDetail implements Result {
     /**
      * Assigns a specified grade to an Assignment
      */
-    public void gradeAssignment(String assignmentName, Float score) {
-        for (Map.Entry<Assignment, Float> entry : grades.entrySet()) {
-            if (entry.getKey().getName().equals(assignmentName)) {
-                entry.setValue(score);
-                return;
-            }
-        }
-        throw new AssignmentNotFoundException();
+    public void gradeAssignment(Assignment assignment, Float score) {
+        grades.put(assignment, score);
     }
 
     /**

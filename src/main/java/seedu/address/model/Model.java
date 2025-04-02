@@ -168,6 +168,11 @@ public interface Model {
     void removeAssignmentFromGroup(String assignmentName, Group group);
 
     /**
+     * Grades a specified assignment by the given grade.
+     */
+    void gradeAssignment(Person person, Group group, String assignmentName, Float score);
+
+    /**
      * Retrieves a group matching the provided group name.
      */
     Group getGroup(String groupName);

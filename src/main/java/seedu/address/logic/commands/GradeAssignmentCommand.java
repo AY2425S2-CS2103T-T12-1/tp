@@ -9,9 +9,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupMemberDetail;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represent a command that will grade a student's assignment for that group
@@ -55,10 +58,19 @@ public class GradeAssignmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person person = model.getPerson(personName);
-        Group group = model.getGroup(groupName);
-        GroupMemberDetail groupMemberDetail = group.getGroupMemberDetail(person);
-        groupMemberDetail.gradeAssignment(this.assignmentName, this.score);
+        Person person;
+        try {
+            person = model.getPerson(personName);
+        } catch (PersonNotFoundException e) {
+            throw new CommandException("Person not found!");
+        }
+        Group group;
+        try {
+            group = model.getGroup(groupName);
+        } catch (GroupNotFoundException e) {
+            throw new CommandException("Group not found!");
+        }
+        model.gradeAssignment(person, group, this.assignmentName, this.score);
         return new CommandResult(String.format(MESSAGE_GRADE_ASSIGNMENT_SUCCESS, assignmentName, personName,
                 groupName, score));
     }
