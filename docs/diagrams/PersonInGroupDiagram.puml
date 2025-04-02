@@ -24,8 +24,8 @@ GroupMemberDetails *--> Person
 GroupMemberDetails *--> Group
 
 enum Role {
-    TA 
-    Student 
+    TA
+    Student
     Professor
 }
 GroupMemberDetails *--> Role
