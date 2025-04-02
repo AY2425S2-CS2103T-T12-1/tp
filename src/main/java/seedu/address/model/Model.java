@@ -1,11 +1,11 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.ui.Result;
@@ -158,9 +158,14 @@ public interface Model {
     void deletePersonFromAllGroups(Person personToRemove);
 
     /**
-     * Removes the given person from the all groups they were in.
+     * Add an assignment to the group specified.
      */
-    void addAssignmentToGroup(Assignment assignmenttoAdd, Group group);
+    void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group);
+
+    /**
+     * Removes the specified assignment.
+     */
+    void removeAssignmentFromGroup(String assignmentName, Group group);
 
     /**
      * Retrieves a group matching the provided group name.

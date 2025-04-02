@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -22,7 +23,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -217,7 +217,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addAssignmentToGroup(Assignment assignment, Group group) {
+        public void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeAssignmentFromGroup(String assignmentName, Group group) {
             throw new AssertionError("This method should not be called.");
         }
 

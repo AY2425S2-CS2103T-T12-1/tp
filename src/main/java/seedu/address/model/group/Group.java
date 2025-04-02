@@ -3,6 +3,7 @@ package seedu.address.model.group;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -14,6 +15,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.util.ArrayListMap;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -327,10 +329,27 @@ public class Group implements Result {
     /**
      * Adds the assignment to the group.
      *
-     * @param assignment An {@code Assignment} object.
+     * @param assignmentName The assignment name.
+     * @param deadline A {@code LocalDate} object specifying the assignment deadline.
      */
-    public void addAssignment(Assignment assignment) {
+    public void addAssignment(String assignmentName, LocalDate deadline) {
+        Assignment assignment = new Assignment(assignmentName, deadline);
         assignments.add(assignment);
+    }
+
+    /**
+     * Removes an assignment from the group.
+     *
+     * @param assignmentName The assignment name to be removed.
+     */
+    public void removeAssignment(String assignmentName) throws AssignmentNotFoundException {
+        for (Assignment a: assignments) {
+            if (a.getName().equals(assignmentName)) {
+                assignments.remove(a);
+                return;
+            }
+        }
+        throw new AssignmentNotFoundException();
     }
 
 

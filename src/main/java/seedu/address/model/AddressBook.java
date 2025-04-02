@@ -2,11 +2,11 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
@@ -235,8 +235,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds assignment to the group specified.
      */
-    public void addAssignmentToGroup(Assignment assignmentToAdd, Group group) {
-        group.addAssignment(assignmentToAdd);
+    public void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group) {
+        group.addAssignment(assignmentName, deadline);
+    }
+
+    /**
+     * Deletes assignment from the group specified.
+     */
+    public void removeAssignmentFromGroup(String assignmentName, Group group) {
+        group.removeAssignment(assignmentName);
     }
 
     /**

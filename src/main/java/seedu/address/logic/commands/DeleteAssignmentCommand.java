@@ -2,68 +2,57 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-
-import java.time.LocalDate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 
 /**
- * Adds a new assignment to the specified group.
+ * Deletes the specified assignment.
  */
-public class AddAssignmentCommand extends Command {
+public class DeleteAssignmentCommand extends Command {
 
     /**
      * The command word to trigger this command.
      */
-    public static final String COMMAND_WORD = "add-assignment";
+    public static final String COMMAND_WORD = "delete-assignment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a new assignment to the specified group. "
+            + ": Deletes the specified assignment. "
             + "Parameters: "
             + PREFIX_NAME + "ASSIGNMENT NAME "
             + PREFIX_GROUP + "GROUP "
-            + PREFIX_DATE + "DEADLINE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "HW 1 "
-            + PREFIX_GROUP + "CS2103T T12-1 "
-            + PREFIX_DATE + "21-04-2025\n";
+            + PREFIX_GROUP + "CS2103T T12-1\n";
 
-    private static final String MESSAGE_SUCCESS = "New assignment added to group %s: %s";
+    private static final String MESSAGE_SUCCESS = "Assignment %s deleted from group %s.";
 
     /**
-     * Name of the new assignment to be added.
+     * Name of the assignment to be deleted.
      */
     private final String name;
 
     /**
-     * Name of the group to be added to.
+     * Name of the group the assignment belongs in.
      */
     private final String groupName;
 
     /**
-     * Deadline of the assignment
-     */
-    private final LocalDate deadline;
-
-    /**
-     * Creates an AddAssignmentCommand to add a new assignment with the specified name, group, and deadline.
+     * Creates a DeleteAssignmentCommand to add a new assignment with the specified name, group, and deadline.
      *
      * @param name The name of the assignment to be added.
      * @param groupName The name of the group to be added.
-     * @param deadline The deadline of the assignment.
      */
-    public AddAssignmentCommand(String name, String groupName, LocalDate deadline) {
-        requireAllNonNull(name, groupName, deadline);
+    public DeleteAssignmentCommand(String name, String groupName) {
+        requireAllNonNull(name, groupName);
         this.name = name;
         this.groupName = groupName;
-        this.deadline = deadline;
     }
 
     @Override
@@ -77,8 +66,13 @@ public class AddAssignmentCommand extends Command {
             throw new CommandException("Group not found!");
         }
 
-        model.addAssignmentToGroup(name, deadline, group);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, name));
+        try {
+            model.removeAssignmentFromGroup(name, group);
+        } catch (AssignmentNotFoundException e) {
+            throw new CommandException("Assignment not found!");
+        }
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, name, groupName));
     }
 
     @Override
@@ -88,11 +82,12 @@ public class AddAssignmentCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddAssignmentCommand otherAddAssignmentCommand)) {
+        if (!(other instanceof DeleteAssignmentCommand otherDeleteAssignmentCommand)) {
             return false;
         }
 
-        return name.equals(otherAddAssignmentCommand.name) && groupName.equals(otherAddAssignmentCommand.groupName);
+        return name.equals(otherDeleteAssignmentCommand.name)
+                && groupName.equals(otherDeleteAssignmentCommand.groupName);
     }
 
     @Override
@@ -100,8 +95,8 @@ public class AddAssignmentCommand extends Command {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("groupName", groupName)
-                .add("deadline", deadline)
                 .toString();
     }
 }
+
 
