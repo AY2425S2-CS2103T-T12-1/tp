@@ -33,6 +33,21 @@ public class Assignment {
         this.deadline = deadline;
     }
 
+    /**
+     * Edits the assignment details.
+     *
+     * @param name The assignment name.
+     * @param deadline deadline of the assignment.
+     */
+    public void editAssignment(String name, LocalDate deadline) {
+        if (name != null) {
+            this.name = name;
+        }
+        if (deadline != null) {
+            this.deadline = deadline;
+        }
+    }
+
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
     }

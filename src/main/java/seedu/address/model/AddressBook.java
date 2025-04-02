@@ -249,6 +249,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Edits specified assignment from the specified group.
+     * @param assignmentName The assignment name.
+     * @param newName The new assignment name.
+     * @param deadline A {@code LocalDate} object specifying the assignment deadline.
+     * @param group A {@code Group} object specifying the group which the assignment is under.
+     */
+    public void editAssignment(String assignmentName, String newName, LocalDate deadline, Group group) {
+        group.editAssignment(assignmentName, newName, deadline);
+    }
+
+    /**
      * Grades an assignment specified with the relevant score
      */
     public void gradeAssignment(Person person, Group group, String assignmentName, Float score) {

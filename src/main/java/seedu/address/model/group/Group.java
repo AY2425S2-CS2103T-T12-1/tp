@@ -16,6 +16,7 @@ import seedu.address.commons.util.ArrayListMap;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
+import seedu.address.model.assignment.exceptions.DuplicateAssignmentsException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -352,7 +353,25 @@ public class Group implements Result {
         throw new AssignmentNotFoundException();
     }
 
-
+    /**
+     * Edits the specified assignment.
+     *
+     * @param assignmentName The assignment name of the assignment to be edited.
+     * @param newName The new name of the assignment.
+     * @param deadline A {@code LocalDate} object specifying the assignment deadline.
+     */
+    public void editAssignment(String assignmentName, String newName, LocalDate deadline) {
+        for (Assignment a: assignments) {
+            if (a.getName().equals(newName)) {
+                throw new DuplicateAssignmentsException();
+            }
+            if (a.getName().equals(assignmentName)) {
+                a.editAssignment(newName, deadline);
+                return;
+            }
+        }
+        throw new AssignmentNotFoundException();
+    }
 
     /**
      * Returns a string representation of the group in the format "[GroupName]".
