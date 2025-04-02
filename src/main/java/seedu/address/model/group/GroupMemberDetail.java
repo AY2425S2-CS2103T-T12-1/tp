@@ -207,6 +207,13 @@ public class GroupMemberDetail implements Result {
     }
 
     /**
+     * Assigns a specified grade to an Assignment
+     */
+    public void gradeAssignment(Assignment assignment, Float score) {
+        grades.put(assignment, score);
+    }
+
+    /**
      * Checks whether this group is equal to another object.
      * Two groups are considered equal if they have the same name.
      *

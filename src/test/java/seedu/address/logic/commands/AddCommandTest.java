@@ -227,6 +227,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void gradeAssignment(Person person, Group group, String assignmentName, Float score) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Group getGroup(String groupName) {
             throw new AssertionError("This method should not be called.");
         }

@@ -44,7 +44,6 @@ public class Assignment {
     public LocalDate getDeadline() {
         return this.deadline;
     }
-
     /**
      * Computes the hash code for this assignment based on its name and group.
      *

@@ -239,6 +239,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void gradeAssignment(Person person, Group group, String assignmentName, Float score) {
+        requireAllNonNull(person, group, assignmentName, score);
+        addressBook.gradeAssignment(person, group, assignmentName, score);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

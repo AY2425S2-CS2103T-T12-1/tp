@@ -7,7 +7,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupMemberDetail;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
@@ -244,6 +246,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeAssignmentFromGroup(String assignmentName, Group group) {
         group.removeAssignment(assignmentName);
+    }
+
+    /**
+     * Grades an assignment specified with the relevant score
+     */
+    public void gradeAssignment(Person person, Group group, String assignmentName, Float score) {
+        GroupMemberDetail personDetail = group.getGroupMemberDetail(person);
+        Assignment assignment = group.getAssignment(assignmentName);
+        personDetail.gradeAssignment(assignment, score);
     }
 
     /**

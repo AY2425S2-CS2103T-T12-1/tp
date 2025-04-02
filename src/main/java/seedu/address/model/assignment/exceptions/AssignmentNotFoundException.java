@@ -1,6 +1,8 @@
 package seedu.address.model.assignment.exceptions;
 
 /**
- * Signals that the operation is unable to find the specified assignment.
+ * Signals that the operation was unable to find the Assignment
  */
-public class AssignmentNotFoundException extends RuntimeException{}
+public class AssignmentNotFoundException extends RuntimeException{
+
+}

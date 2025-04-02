@@ -121,7 +121,7 @@ public class Group implements Result {
     public Group(
             String groupName,
             ArrayListMap<Person,
-            GroupMemberDetail> groupMembers,
+                    GroupMemberDetail> groupMembers,
             Collection<Tag> tags,
             Collection<Assignment> assignments) {
         requireNonNull(groupName);
