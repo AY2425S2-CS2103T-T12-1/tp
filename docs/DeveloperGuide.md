@@ -158,10 +158,10 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Adding a person to a group
-![AddPersonToGroupSequenceDiagram-Logic](https://github.com/lyhthaddeus/tp/blob/UML/docs/images/AddPersonToGroupSequenceDiagram-Logic.png)
-![AddPersonToGroupSeqeunceDiagram-Model](https://github.com/lyhthaddeus/tp/blob/UML/docs/images/AddPersonToGroupSequenceDiagram-Model.png)
+![AddPersonToGroupSequenceDiagram-Logic](images/AddPersonToGroupSequenceDiagram-Logic.png)
+![AddPersonToGroupSeqeunceDiagram-Model](images/AddPersonToGroupSequenceDiagram-Model.png)
 
-![PersonGroup](https://github.com/lyhthaddeus/tp/blob/UML/docs/images/PersonInGroupDiagram.png)
+![PersonGroup](images/PersonInGroupDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
