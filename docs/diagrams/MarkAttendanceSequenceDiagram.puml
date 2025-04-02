@@ -35,7 +35,7 @@ create MarkAttendanceCommand
 MarkAttendanceCommandParser -> MarkAttendanceCommand
 activate MarkAttendanceCommand
 
-MarkAttendanceCommand --> MarkAttendanceCommandParser : 
+MarkAttendanceCommand --> MarkAttendanceCommandParser :
 deactivate MarkAttendanceCommand
 
 MarkAttendanceCommandParser --> AddressBookParser : d

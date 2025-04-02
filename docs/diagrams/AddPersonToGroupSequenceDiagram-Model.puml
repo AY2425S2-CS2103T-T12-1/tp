@@ -29,7 +29,7 @@ deactivate GroupMemberDetails
 Group -> ArrayListMap : put(p), GroupMemberDetails)
 activate ArrayListMap
 
-ArrayListMap --> Group 
+ArrayListMap --> Group
 deactivate ArrayListMap
 
 Group --> VersionedAddressBook
