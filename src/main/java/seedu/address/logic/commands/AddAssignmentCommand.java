@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LATE_PENALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.time.LocalDate;
@@ -29,7 +30,8 @@ public class AddAssignmentCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "ASSIGNMENT NAME "
             + PREFIX_GROUP + "GROUP "
-            + PREFIX_DATE + "DEADLINE\n"
+            + PREFIX_DATE + "DEADLINE"
+            + "[" + PREFIX_LATE_PENALTY + "LATE PENALTY]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "HW 1 "
             + PREFIX_GROUP + "CS2103T T12-1 "
@@ -53,17 +55,23 @@ public class AddAssignmentCommand extends Command {
     private final LocalDate deadline;
 
     /**
+     * Grade penalty for late submission, default value is 1.0.
+     */
+    private final Float penalty;
+
+    /**
      * Creates an AddAssignmentCommand to add a new assignment with the specified name, group, and deadline.
      *
      * @param name The name of the assignment to be added.
      * @param groupName The name of the group to be added.
      * @param deadline The deadline of the assignment.
      */
-    public AddAssignmentCommand(String name, String groupName, LocalDate deadline) {
+    public AddAssignmentCommand(String name, String groupName, LocalDate deadline, Float penalty) {
         requireAllNonNull(name, groupName, deadline);
         this.name = name;
         this.groupName = groupName;
         this.deadline = deadline;
+        this.penalty = penalty == null ? 1.0F : penalty;
     }
 
     @Override
@@ -77,7 +85,7 @@ public class AddAssignmentCommand extends Command {
             throw new CommandException("Group not found!");
         }
 
-        model.addAssignmentToGroup(name, deadline, group);
+        model.addAssignmentToGroup(name, deadline, group, penalty);
         return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, name));
     }
 

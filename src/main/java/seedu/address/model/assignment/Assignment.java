@@ -20,6 +20,10 @@ public class Assignment {
      * The assignment deadline.
      */
     private LocalDate deadline;
+    /**
+     * Penalty for grading should there be late submission.
+     */
+    private Float penalty;
 
     /**
      * Constructs a {@code Assignment}.
@@ -27,10 +31,11 @@ public class Assignment {
      * @param name The assignment name.
      * @param deadline deadline of the assignment.
      */
-    public Assignment(String name, LocalDate deadline) {
-        requireAllNonNull(name, deadline);
+    public Assignment(String name, LocalDate deadline, Float penalty) {
+        requireAllNonNull(name, deadline, penalty);
         this.name = name;
         this.deadline = deadline;
+        this.penalty = penalty;
     }
 
     public static boolean isValidName(String test) {
@@ -43,6 +48,9 @@ public class Assignment {
 
     public LocalDate getDeadline() {
         return this.deadline;
+    }
+    public Float getPenalty() {
+        return this.penalty;
     }
     /**
      * Computes the hash code for this assignment based on its name and group.

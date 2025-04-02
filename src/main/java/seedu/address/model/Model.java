@@ -160,7 +160,7 @@ public interface Model {
     /**
      * Add an assignment to the group specified.
      */
-    void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group);
+    void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group, Float penalty);
 
     /**
      * Removes the specified assignment.
@@ -181,4 +181,9 @@ public interface Model {
      * Retrieves a person matching the provided person name.
      */
     Person getPerson(String personName);
+
+    /**
+     * Retrieves the grade of a specified assignment.
+     */
+    Float getGrade(Person person, Group group, String assignmentName);
 }
