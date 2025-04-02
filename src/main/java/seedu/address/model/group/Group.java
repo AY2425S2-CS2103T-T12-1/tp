@@ -293,13 +293,13 @@ public class Group implements Result {
      * @param assignmentName The name of the assignment
      * @return The desired assignment if found
      */
-    public Assignment getAssignment(String assignmentName) {
+    public Assignment getAssignment(String assignmentName) throws AssignmentNotFoundException {
         for (Assignment a: assignments) {
             if (a.getName().equals(assignmentName)) {
                 return a;
             }
         }
-        return null;
+        throw new AssignmentNotFoundException();
     }
 
     /**
