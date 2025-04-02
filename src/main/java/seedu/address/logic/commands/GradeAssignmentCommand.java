@@ -32,7 +32,8 @@ public class GradeAssignmentCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PERSON + "John Doe "
             + PREFIX_GROUP + "CS2103T "
-            + PREFIX_ASSIGNMENT + "Submit UML";
+            + PREFIX_ASSIGNMENT + "HW 1"
+            + PREFIX_SCORE + "100";
     public static final String MESSAGE_GRADE_ASSIGNMENT_SUCCESS = "Graded Assignment %s for %s, %s with %f score";
     private final String personName;
     private final String groupName;
