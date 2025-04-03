@@ -88,6 +88,7 @@ class JsonAdaptedGroup {
                 modelGroupMembers.put(person, groupMemberDetail);
             } catch (PersonNotFoundException e) {
                 // Person not found in addressbook, remove from group as well.
+                continue;
             }
         }
 
