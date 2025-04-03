@@ -10,11 +10,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ArrayListMap;
+import seedu.address.model.AddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupMemberDetail;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -75,12 +77,18 @@ class JsonAdaptedGroup {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Group toModelType() throws IllegalValueException {
+    public Group toModelType(AddressBook addressBook) throws IllegalValueException {
         final ArrayListMap<Person, GroupMemberDetail> modelGroupMembers = new ArrayListMap<>();
         for (Map.Entry<String, JsonAdaptedGroupMemberDetails> entry : groupMembers.entrySet()) {
-            Person key = entry.getValue().toModelType().getPerson();
-            GroupMemberDetail value = entry.getValue().toModelType();
-            modelGroupMembers.put(key, value);
+            String personName = entry.getKey();
+            GroupMemberDetail groupMemberDetail = entry.getValue().toModelType();
+            Person person;
+            try {
+                person = addressBook.getPerson(personName);
+                modelGroupMembers.put(person, groupMemberDetail);
+            } catch (PersonNotFoundException e) {
+                // Person not found in addressbook, remove from group as well.
+            }
         }
 
         final List<Tag> modelTags = new ArrayList<>();

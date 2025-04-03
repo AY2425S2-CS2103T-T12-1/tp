@@ -59,6 +59,11 @@ public class ArrayListSet<K> implements Set<K> {
         return keys.remove(o);
     }
 
+    public void set(K k, K l) {
+        int index = indexOf(k);
+        keys.set(index, l);
+    }
+
     /**
      * Removes the element at the specified position in this list.
      * Shifts any subsequent elements to the left (subtracts one from their
