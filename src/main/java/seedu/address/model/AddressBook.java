@@ -22,10 +22,14 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    /** The list of unique persons in the address book. */
+    /**
+     * The list of unique persons in the address book.
+     */
     private final UniquePersonList persons;
 
-    /** The list of unique groups in the address book. */
+    /**
+     * The list of unique groups in the address book.
+     */
     private final UniqueGroupList groups;
 
     /*
@@ -43,7 +47,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Constructs an empty AddressBook.
      */
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Constructs an AddressBook using the data from an existing {@code ReadOnlyAddressBook}.
@@ -115,7 +120,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces a target person with an edited person in the address book.
      * Ensures that the target exists and that the edited person does not duplicate another existing person.
      *
-     * @param target The person to be replaced.
+     * @param target       The person to be replaced.
      * @param editedPerson The new person data.
      */
     public void setPerson(Person target, Person editedPerson) {
@@ -169,7 +174,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces a target group with an edited group in the address book.
      * Ensures that the target exists and the edited group does not duplicate another existing group.
      *
-     * @param target The group to be replaced.
+     * @param target      The group to be replaced.
      * @param editedGroup The new group data.
      */
     public void setGroup(Group target, Group editedGroup) {
@@ -265,7 +270,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         Assignment assignment = group.getAssignment(assignmentName);
         return personDetail.getAssignmentGrade(assignment);
     }
-      
+
     /**
      * Mark attendance of person in group.
      */
