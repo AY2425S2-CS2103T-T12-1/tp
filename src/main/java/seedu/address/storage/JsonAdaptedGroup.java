@@ -85,10 +85,11 @@ class JsonAdaptedGroup {
         final ArrayListMap<Person, GroupMemberDetail> modelGroupMembers = new ArrayListMap<>();
         for (Map.Entry<String, JsonAdaptedGroupMemberDetails> entry : groupMembers.entrySet()) {
             String personName = entry.getKey();
-            GroupMemberDetail groupMemberDetail = entry.getValue().toModelType();
+            GroupMemberDetail groupMemberDetail;
             Person person;
             try {
                 person = addressBook.getPerson(personName);
+                groupMemberDetail = entry.getValue().toModelType(person);
                 modelGroupMembers.put(person, groupMemberDetail);
             } catch (PersonNotFoundException e) {
                 // Person not found in addressbook, remove from group as well.
