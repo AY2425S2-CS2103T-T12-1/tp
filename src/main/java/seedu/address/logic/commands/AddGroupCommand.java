@@ -31,7 +31,7 @@ public class AddGroupCommand extends Command {
             + PREFIX_NAME + "NAME "
             + "[" + PREFIX_TAG + "TAGS]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "CS2103T T12-1"
+            + PREFIX_NAME + "CS2103T T12"
             + PREFIX_TAG + "CS Mod";
 
     private static final String MESSAGE_SUCCESS = "New group added: %1$s";
