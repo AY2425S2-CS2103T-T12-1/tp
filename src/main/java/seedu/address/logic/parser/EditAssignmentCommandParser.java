@@ -5,43 +5,51 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LATE_PENALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_NAME;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddAssignmentCommand;
+import seedu.address.logic.commands.EditAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new AddAssignmentCommand object.
+ * Parses input arguments and creates a new EditAssignmentCommand object.
  */
-public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> {
+public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddAssignmentCommand
-     * and returns an AddAssignmentCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditAssignmentCommand
+     * and returns an EditAssignmentCommand object for execution.
      * @throws ParseException if the user input does not conform to the expected format
      */
-    public AddAssignmentCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUP,
+    public EditAssignmentCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUP, PREFIX_NEW_NAME,
                 PREFIX_DATE, PREFIX_LATE_PENALTY);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GROUP, PREFIX_DATE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GROUP)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddAssignmentCommand.MESSAGE_USAGE));
+                    EditAssignmentCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUP, PREFIX_DATE, PREFIX_LATE_PENALTY);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUP, PREFIX_NEW_NAME, PREFIX_DATE);
         String assignmentName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
-        String groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP).get());
-        LocalDate deadline = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        String groupName = ParserUtil.parseName(argMultimap.getValue(PREFIX_GROUP).get()).toString();
+        String newName = null;
+        if (argMultimap.getValue(PREFIX_NEW_NAME).isPresent()) {
+            newName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NEW_NAME).get()).toString();
+        }
+        LocalDate deadline = null;
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            deadline = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        }
         Float penalty = null;
         if (argMultimap.getValue(PREFIX_LATE_PENALTY).isPresent()) {
             penalty = Float.parseFloat(argMultimap.getValue(PREFIX_LATE_PENALTY).get());
         }
 
-        return new AddAssignmentCommand(assignmentName, groupName, deadline, penalty);
+        return new EditAssignmentCommand(assignmentName, groupName, newName, deadline, penalty);
     }
 
     /**
@@ -52,4 +60,3 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
-

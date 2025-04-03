@@ -243,6 +243,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void editAssignment(String assignmentName, String newName, LocalDate deadline, Group group, Float penalty) {
+        requireAllNonNull(assignmentName, group);
+        addressBook.editAssignment(assignmentName, newName, deadline, group, penalty);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
     public void gradeAssignment(Person person, Group group, String assignmentName, Float score) {
         requireAllNonNull(person, group, assignmentName, score);
         addressBook.gradeAssignment(person, group, assignmentName, score);
