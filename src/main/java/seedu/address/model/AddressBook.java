@@ -265,6 +265,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         Assignment assignment = group.getAssignment(assignmentName);
         return personDetail.getAssignmentGrade(assignment);
     }
+      
+    /**
+     * Mark attendance of person in group.
+     */
+    public void markAttendance(Person person, Group group, int week) {
+        group.markAttendance(person, week);
+    }
+
+    /**
+     * Unmark attendance of person in group.
+     */
+    public void unmarkAttendance(Person person, Group group, int week) {
+        group.unmarkAttendance(person, week);
+    }
 
     /**
      * Returns a string representation of the AddressBook object.

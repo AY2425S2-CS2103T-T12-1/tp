@@ -8,7 +8,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Adds a Person to a Group
@@ -28,33 +30,43 @@ public class AddPersonToGroupCommand extends Command {
     /**
      * Index of Person to be added
      */
-    private final String toAdd;
+    private final String personName;
     /**
      * Index of Group to be added to
      */
-    private final String toBeAddedTo;
+    private final String groupName;
 
     /**
      * Constructor for AddPersonToGroupCommand that takes two Index identifiers for
      * Person and Group
      *
-      * @param toAdd Index of Person to be added
-     * @param toBeAddedTo Index of Group to be added to
+      * @param personName Index of Person to be added
+     * @param groupName Index of Group to be added to
      */
-    public AddPersonToGroupCommand(String toAdd, String toBeAddedTo) {
-        requireNonNull(toAdd);
-        requireNonNull(toBeAddedTo);
-        this.toAdd = toAdd;
-        this.toBeAddedTo = toBeAddedTo;
+    public AddPersonToGroupCommand(String personName, String groupName) {
+        requireNonNull(personName);
+        requireNonNull(groupName);
+        this.personName = personName;
+        this.groupName = groupName;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person personToAdd = model.getPerson(toAdd);
-        Group groupToBeAddedTo = model.getGroup(toBeAddedTo);
+        Person person;
+        try {
+            person = model.getPerson(this.personName);
+        } catch (PersonNotFoundException e) {
+            throw new CommandException("Person not found!");
+        }
+        Group group;
+        try {
+            group = model.getGroup(groupName);
+        } catch (GroupNotFoundException e) {
+            throw new CommandException("Group not found!");
+        }
 
-        model.addPersonToGroup(personToAdd, groupToBeAddedTo);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToAdd)));
+        model.addPersonToGroup(person, group);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(person)));
     }
 }

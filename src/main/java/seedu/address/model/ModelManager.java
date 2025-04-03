@@ -252,6 +252,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void markAttendance(Person person, Group group, int week) {
+        requireAllNonNull(person, group, week);
+        addressBook.markAttendance(person, group, week);
+    }
+
+    @Override
+    public void unmarkAttendance(Person person, Group group, int week) {
+        requireAllNonNull(person, group, week);
+        addressBook.unmarkAttendance(person, group, week);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
