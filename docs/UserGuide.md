@@ -320,6 +320,34 @@ Example:
 
 - `show-attendance P/Jensen Huang g/CS2103T T12` displays the attendance for `Jensen Huang` in `CS2103T T12`.
 
+### Adding an assignment: `add-assignment`
+
+Adds a new assignment to the specified group.
+
+Format: `add-assignment g/GROUP_NAME n/ASSIGNMENT_NAME d/DEADLINE`
+
+- `GROUP_NAME` is the name of the group.
+- `ASSIGNMENT_NAME` is the name of the assignment.
+- `DEADLINE` must be in the format `YYYY-MM-DD`, e.g., `2025-04-03`.
+
+Example:
+
+- `add-assignment g/CS2103T T12 n/CA3 UG d/2025-04-03` adds an assignment named `CA3 UG` to the group `CS2103T T12` with a deadline of `2025-04-03`.
+
+### Editing an assignment: `edit-assignment`
+
+Edits an assignment in the specified group.
+
+Format: `add-assignment g/GROUP_NAME n/ASSIGNMENT_NAME d/DEADLINE`
+
+- `GROUP_NAME` is the name of the group.
+- `ASSIGNMENT_NAME` is the name of the assignment.
+- `DEADLINE` must be in the format `YYYY-MM-DD`, e.g., `2025-04-03`.
+
+Example:
+
+- `add-assignment g/CS2103T T12 n/CA3 UG d/2025-04-03` adds an assignment named `CA3 UG` to the group `CS2103T T12` with a deadline of `2025-04-03`.
+
 ### Exiting the program: `exit`
 
 Exits the program.
@@ -363,7 +391,7 @@ Therefore, edit the data file only if you are confident that you can update it c
 ## Command summary
 
 | Action                 | Format, Examples                                                                                                                                                  |
-|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077` |
 | **Delete**             | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                |
 | **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/Jensen Huang e/jensenh@yahoo.com`                                       |
@@ -381,5 +409,9 @@ Therefore, edit the data file only if you are confident that you can update it c
 | **Mark Attendance**    | `mark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `mark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                                 |
 | **Unmark Attendance**  | `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                             |
 | **Show Attendance**    | `show-attendance P/NAME g/GROUP_NAME` <br> e.g. `show-attendance P/Jensen Huang g/CS2103T T12`                                                                    |
+| **Add Assignment**     | `add-assignment g/GROUP_NAME n/ASSIGNMENT_NAME d/DEADLINE` <br> e.g. `add-assignment g/CS2103T T12 n/CA3 UG d/2025-04-03`                                         |
+| **Edit Assignment**    | `edit-assignment g/GROUP_NAME [n/ASSIGNMENT_NAME] [d/DEADLINE]` <br> e.g. `edit-assignment g/CS2103T T12 n/CA3 UG d/2025-04-03`                                   |
+| **Delete Assignment**  | `delete-assignment g/GROUP_NAME n/ASSIGNMENT_NAME` <br> e.g. `delete-assignment g/CS2103T T12 n/CA3 UG`                                                           |
+| **Grade Assignment**   | `grade-assignment g/GROUP_NAME n/ASSIGNMENT_NAME s/SCORE` <br> e.g. `grade-assignment g/CS2103T T12 n/CA3 UG s/0.87`                                              |
 | **Help**               | `help`                                                                                                                                                            |
 | **Exit**               | `exit`                                                                                                                                                            |
