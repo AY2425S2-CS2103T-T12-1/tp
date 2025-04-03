@@ -389,6 +389,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 2.
 
 ### Use case: UC03 - Editing a Contact
+{:.no_toc}
 
 **MSS**
 1. User requests to list persons
@@ -417,6 +418,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 4.
 
 ### Use case: UC04 - Find a contact by name
+{:.no_toc}
 
 **Preconditions:**
 - The address book contains at least one person.
@@ -439,6 +441,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ### Use case: UC05 - List all contacts
+{:.no_toc}
 
 **MSS:**
 1. User requests to list all persons
@@ -453,6 +456,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ### Use case: UC06 - Mark attendance for a student
+{:.no_toc}
 
 **Preconditions:**
 - The student exists
@@ -488,6 +492,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ### Use case: UC07 - Unmark attendance for a student
+{:.no_toc}
 
 **Preconditions:**
 - The student exists
@@ -523,6 +528,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ### Use case: UC08 - Show a student's attendance in a group
+{:.no_toc}
 
 **Preconditions:**
 - The student exists
@@ -552,6 +558,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ### Use case: UC09 - Add a group
+{:.no_toc}
 
 **Preconditions:**
 - The group name is unique
@@ -570,6 +577,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ### Use case: UC10 - Delete a group
+{:.no_toc}
 
 **MSS:**
 1. User requests to list groups
@@ -591,6 +599,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 ### Use case: UC11 - Edit a group
+{:.no_toc}
 
 **MSS:**
 1. User requests to list groups
@@ -617,6 +626,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 ### Use case: UC12 - Show group details
+{:.no_toc}
 
 **MSS:**
 1. User requests to list groups
@@ -637,6 +647,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 ### Use case: UC13 - Find a group by name
+{:.no_toc}
 
 **Preconditions:**
 - At least one group exists in the address book.
@@ -659,6 +670,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ### Use case: UC14 - List all groups
+{:.no_toc}
 
 **MSS:**
 1. User requests to list all groups
@@ -673,6 +685,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ### Use case: UC15 - Add a person to a group
+{:.no_toc}
 
 **Preconditions:**
 - The person exists
@@ -703,6 +716,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ### Use case: UC16 - Remove a person from a group
+{:.no_toc}
 
 **Preconditions:**
 - The person exists
@@ -733,6 +747,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ### Use case: UC17 - View help information
+{:.no_toc}
 
 **MSS:**
 1. User requests help information
@@ -817,7 +832,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## Appendix: Effort
+## **Appendix: Effort**
 
 The project required a considerable effort beyond the baseline AddressBook-Level3 (AB3), especially due to the introduction of a new domain entity: `Group`. While AB3 only deals with a flat structure of a single entity (`Person`), our project introduces a relational structure between `Group` and `Person`, along with additional responsibilities such as attendance tracking, role assignment, and performance logging through assignments.
 
@@ -833,7 +848,7 @@ The project required a considerable effort beyond the baseline AddressBook-Level
     - Assignment grades (via a custom `ArrayListMap`).
     - Roles (e.g., Student, Teaching Assistant, Lecturer).
 
-- **Cross-Entity Logic**: Unlike AB3’s flat command structure, many features required verifying the existence and relationship of both `Person` and `Group` during execution (e.g., `mark-attendance`, `add-to-group`, `show-attendance`).
+- **Cross-Entity Logic**: Unlike AB3's flat command structure, many features required verifying the existence and relationship of both `Person` and `Group` during execution (e.g., `mark-attendance`, `add-to-group`, `show-attendance`).
 
 - **Storage Complexity**: Extending the storage layer to support nested structures like `Group -> GroupMemberDetail -> Person` required:
     - Custom serialization and deserialization logic.
@@ -852,5 +867,13 @@ The project required a considerable effort beyond the baseline AddressBook-Level
 
 Implementing Groups added substantial architectural and technical complexity, transforming the app from a flat contact book into a lightweight group management system with role-based semantics, performance tracking, and detailed inter-entity relationships.
 
+This shift from simple CRUD operations to relational logic and multi-level storage increased the overall effort significantly beyond AB3's scope.
+
 This shift from simple CRUD operations to relational logic and multi-level storage increased the overall effort significantly beyond AB3’s scope.
+
+## **Appendix: Planned Enhancements** 
+
+To be updated at a later time.
+
+
 
