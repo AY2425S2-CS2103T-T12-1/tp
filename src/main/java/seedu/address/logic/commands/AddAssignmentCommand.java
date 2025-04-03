@@ -27,7 +27,7 @@ public class AddAssignmentCommand extends Command {
     public static final String COMMAND_WORD = "add-assignment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a new assignment to the specified group. "
+            + ": Edits the details of the specified assignment in the specified group. "
             + "Parameters: "
             + PREFIX_NAME + "ASSIGNMENT NAME "
             + PREFIX_GROUP + "GROUP "
