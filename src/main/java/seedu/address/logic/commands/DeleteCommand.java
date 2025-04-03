@@ -44,7 +44,6 @@ public class DeleteCommand extends Command {
         model.deletePersonFromAllGroups(personToDelete);
         model.deletePerson(personToDelete);
 
-
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 

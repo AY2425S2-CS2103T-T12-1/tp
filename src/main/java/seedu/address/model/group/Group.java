@@ -332,8 +332,8 @@ public class Group implements Result {
      * @param assignmentName The assignment name.
      * @param deadline A {@code LocalDate} object specifying the assignment deadline.
      */
-    public void addAssignment(String assignmentName, LocalDate deadline) {
-        Assignment assignment = new Assignment(assignmentName, deadline);
+    public void addAssignment(String assignmentName, LocalDate deadline, Float penalty) {
+        Assignment assignment = new Assignment(assignmentName, deadline, penalty);
         assignments.add(assignment);
     }
 

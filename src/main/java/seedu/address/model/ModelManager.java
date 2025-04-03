@@ -204,6 +204,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Float getGrade(Person person, Group group, String assignmentName) {
+        requireAllNonNull(person, group, assignmentName);
+        return addressBook.getGrade(person, group, assignmentName);
+    }
+
+    @Override
     public void addPersonToGroup(Person personToAdd, Group groupToBeAddedTo) {
         requireAllNonNull(personToAdd, groupToBeAddedTo);
         addressBook.addPersonToGroup(personToAdd, groupToBeAddedTo);
@@ -223,9 +229,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group) {
-        requireAllNonNull(assignmentName, deadline, group);
-        addressBook.addAssignmentToGroup(assignmentName, deadline, group);
+    public void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group, Float penalty) {
+        requireAllNonNull(assignmentName, deadline, group, penalty);
+        addressBook.addAssignmentToGroup(assignmentName, deadline, group, penalty);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
