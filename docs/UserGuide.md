@@ -347,7 +347,7 @@ Example:
 
 - `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025 l/0.875` adds an assignment named `HW 1` to the group `CS2103T T12` with a deadline of `21-04-2025` and a late penalty multiplier of `87.5%`.
 
-### Deleting an assignment in a group: `add-assignment`
+### Deleting an assignment in a group: `delete-assignment`
 
 Deletes an assignment in the specified group.
 
@@ -436,5 +436,8 @@ Therefore, edit the data file only if you are confident that you can update it c
 | **Mark Attendance**    | `mark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `mark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                                 |
 | **Unmark Attendance**  | `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                             |
 | **Show Attendance**    | `show-attendance P/NAME g/GROUP_NAME` <br> e.g. `show-attendance P/Jensen Huang g/CS2103T T12`                                                                    |
+| **Add Assignment**     | `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE l/LATE_PENALTY` <br> e.g. `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025 l/0.875`                    |
+| **Delete Assignment**  | `delete-assignment n/ASSIGNMENT_NAME g/GROUP_NAME` <br> e.g. `delete-assignment n/HW 1 g/CS2103T T12`                                                             |
+| **Grade Assignment**   | `grade-assignment P/PERSON_NAME g/GROUP_NAME A/ASSIGNMENT_NAME s/FLOAT_SCORE` <br> e.g. `grade-assignment P/Jensen Huang g/CS2103T T12 A/HW 1 s/70.3`             |
 | **Help**               | `help`                                                                                                                                                            |
 | **Exit**               | `exit`                                                                                                                                                            |
