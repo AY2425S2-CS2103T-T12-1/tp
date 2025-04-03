@@ -214,14 +214,12 @@ public class ModelManager implements Model {
     public void deletePersonFromGroup(Person personToRemove, Group groupToRemoveFrom) {
         requireAllNonNull(personToRemove, groupToRemoveFrom);
         addressBook.deletePersonFromGroup(personToRemove, groupToRemoveFrom);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override
     public void deletePersonFromAllGroups(Person personToRemove) {
         requireNonNull(personToRemove);
         addressBook.deletePersonFromAllGroups(personToRemove);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override
