@@ -32,11 +32,14 @@ public class UnmarkAttendanceCommand extends Command {
      * Usage message for the command.
      */
     public static final String MESSAGE_USAGE = String.format("""
-                    %s: Removes the attendance record of the specified person in the specified group for the specified week.
+                    %s: Removes the attendance record of the specified person in the"""
+                    + """
+                     specified group for the specified week.
                     Parameters: %sPERSON_NAME %sGROUP_NAME %sWEEK_NUMBER
                     Example: %s %sJensen Huang %sCS2103T T12 %s10
                     """,
-            COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP, PREFIX_WEEK, COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP, PREFIX_WEEK);
+            COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP, PREFIX_WEEK, COMMAND_WORD, PREFIX_PERSON,
+            PREFIX_GROUP, PREFIX_WEEK);
 
 
     /**

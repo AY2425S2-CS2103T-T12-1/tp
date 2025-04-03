@@ -257,6 +257,7 @@ public class ModelManager implements Model {
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
+    @Override
     public boolean isAssignmentInGroup(String assignmentName, Group group) {
         requireAllNonNull(assignmentName, group);
         return addressBook.isAssignmentInGroup(assignmentName, group);

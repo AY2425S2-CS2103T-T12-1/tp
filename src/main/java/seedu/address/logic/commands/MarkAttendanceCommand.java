@@ -36,7 +36,8 @@ public class MarkAttendanceCommand extends Command {
                     Parameters: %sPERSON_NAME %sGROUP_NAME %sWEEK_NUMBER
                     Example: %s %sJensen Huang %sCS2103T T12 %s10
                     """,
-            COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP, PREFIX_WEEK, COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP, PREFIX_WEEK);
+            COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP, PREFIX_WEEK, COMMAND_WORD, PREFIX_PERSON,
+            PREFIX_GROUP, PREFIX_WEEK);
 
     /**
      * Success message for command.

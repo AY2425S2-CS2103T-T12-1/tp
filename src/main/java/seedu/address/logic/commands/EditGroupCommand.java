@@ -35,7 +35,9 @@ public class EditGroupCommand extends Command {
             %s: Edits the specified group details in the group list.
             Parameters: INDEX [%sGROUP_NAME] [%sTAG]...
             Notes:
-            * INDEX refers to the index number of the group in the last displayed group list. It must be a positive integer 1, 2, 3,
+            * INDEX refers to the index number of the group in the last displayed group list."""
+            + """
+             It must be a positive integer 1, 2, 3,
             * Existing values will be updated to the input values.
             Example: %s 1 %sCS2103T T12 t/study
             """, COMMAND_WORD, PREFIX_NAME, PREFIX_TAG, COMMAND_WORD, PREFIX_NAME);
@@ -48,7 +50,8 @@ public class EditGroupCommand extends Command {
     /**
      * Error message if a duplicate group exists in the address book.
      */
-    public static final String MESSAGE_DUPLICATE_GROUP = "Another group with the same name already exists in the address book!";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Another group with the same name "
+            + "already exists in the address book!";
 
     /**
      * Index of the group to be edited.

@@ -25,7 +25,9 @@ public class ShowGroupDetailsCommand extends Command {
               * Group name and tags
               * Number of group members
               * Name, role, and attendance of every group member
-            * INDEX refers to the index number of the group in the last displayed group list. It must be a positive integer, i.e., 1, 2, 3, ...
+            * INDEX refers to the index number of the group in the last displayed group list."""
+            + """
+             It must be a positive integer, i.e., 1, 2, 3, ...
             Example: %s 2
             """, COMMAND_WORD, COMMAND_WORD);
 

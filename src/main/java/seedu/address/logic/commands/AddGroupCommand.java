@@ -33,7 +33,8 @@ public class AddGroupCommand extends Command {
             COMMAND_WORD, PREFIX_NAME, PREFIX_TAG, COMMAND_WORD, PREFIX_NAME, PREFIX_TAG);
 
     private static final String MESSAGE_SUCCESS = "New group added: %1$s";
-    private static final String MESSAGE_DUPLICATE_GROUP = "Another group with the same name already exists in the address book!";
+    private static final String MESSAGE_DUPLICATE_GROUP = "Another group with the same name"
+            + " already exists in the address book!";
 
     /**
      * Name of the new group to be added.

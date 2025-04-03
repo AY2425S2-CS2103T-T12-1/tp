@@ -20,7 +20,9 @@ public class DeletePersonFromGroupCommand extends Command {
     public static final String COMMAND_WORD = "delete-from-group";
 
     public static final String MESSAGE_USAGE = String.format("""
-                    %s: Removes the specified person from the specified group. Useful for removing a student who is no longer in the tutorial group.
+                    %s: Removes the specified person from the specified group. Useful for"""
+                    + """
+                     removing a student who is no longer in the tutorial group.
                     Parameters: %s %sPERSON_NAME %sGROUP_NAME
                     Example: %s %sJensen Huang %sCS2103T T12
                     """,

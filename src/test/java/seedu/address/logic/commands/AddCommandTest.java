@@ -234,6 +234,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isAssignmentInGroup(String assignmentName, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void gradeAssignment(Person person, Group group, String assignmentName, Float score) {
             throw new AssertionError("This method should not be called.");
         }
@@ -261,6 +266,11 @@ public class AddCommandTest {
         @Override
         public Float getGrade(Person person, Group group, String assignmentName) {
             throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean isPersonInGroup(Person person, Group group) {
+            return false;
         }
     }
 

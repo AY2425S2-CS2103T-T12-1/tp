@@ -14,7 +14,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.exceptions.DuplicateAssignmentsException;
+import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 
@@ -33,8 +33,8 @@ public class AddAssignmentCommand extends Command {
                     Parameters: %sASSIGNMENT_NAME %sGROUP_NAME %sDEADLINE [%sLATE_PENALTY]
                     Example: %s %sHW 1 %sCS2103T T12 %s21-04-2025 %s0.875
                     """,
-            COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP, PREFIX_DATE, PREFIX_LATE_PENALTY, COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP,
-            PREFIX_DATE, PREFIX_LATE_PENALTY);
+            COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP, PREFIX_DATE, PREFIX_LATE_PENALTY, COMMAND_WORD, PREFIX_NAME,
+            PREFIX_GROUP, PREFIX_DATE, PREFIX_LATE_PENALTY);
 
     private static final String MESSAGE_SUCCESS = "Added new assignment to group!\nGroup: %s\nAssignment: %s";
 
@@ -91,7 +91,7 @@ public class AddAssignmentCommand extends Command {
         try {
             Assignment assignment = model.addAssignmentToGroup(name, deadline, group, penalty);
             return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, assignment));
-        } catch (DuplicateAssignmentsException d) {
+        } catch (DuplicateAssignmentException d) {
             throw new CommandException(d.getMessage());
         }
     }

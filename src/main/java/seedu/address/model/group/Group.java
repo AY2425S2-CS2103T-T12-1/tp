@@ -17,7 +17,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
-import seedu.address.model.assignment.exceptions.DuplicateAssignmentsException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -346,15 +345,10 @@ public class Group implements Result {
      * @param deadline       A {@code LocalDate} object specifying the assignment deadline.
      */
     public Assignment addAssignment(String assignmentName, LocalDate deadline, Float penalty) {
-        for (Assignment a : assignments) {
-            if (a.getName().equals(assignmentName)) {
-                throw new DuplicateAssignmentsException();
-            }
-        }
-        Assignment assignment = new Assignment(assignmentName, deadline, penalty);
         if (containsAssignment(assignmentName)) {
             throw new DuplicateAssignmentException();
         }
+        Assignment assignment = new Assignment(assignmentName, deadline, penalty);
         assignments.add(assignment);
         return assignment;
     }
@@ -384,7 +378,7 @@ public class Group implements Result {
     public void editAssignment(String assignmentName, String newName, LocalDate deadline, Float penalty) {
         for (Assignment a : assignments) {
             if (a.getName().equals(newName)) {
-                throw new DuplicateAssignmentsException();
+                throw new DuplicateAssignmentException();
             }
             if (a.getName().equals(assignmentName)) {
                 a.editAssignment(newName, deadline, penalty);

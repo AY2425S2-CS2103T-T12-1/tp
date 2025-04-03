@@ -39,7 +39,9 @@ public class EditCommand extends Command {
                     %s: Edits the details of the specified person in the person list.
                     Parameters: INDEX [%sNAME] [%sPHONE] [%sEMAIL] [%sADDRESS] [%sTAG]...
                     Notes:
-                    * INDEX refers to the index number of the person in the last displayed person list. It must be a positive integer 1, 2, 3,
+                    * INDEX refers to the index number of the person in the last displayed person list."""
+                    + """
+                     It must be a positive integer 1, 2, 3,
                     * Existing values will be updated to the input values.
                     Example: %s 1 %s91234567 %sjensenh@yahoo.com
                     """,
@@ -48,7 +50,8 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited person:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "Another person with the same name already exists in the address book!";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Another person with the same name "
+            + "already exists in the address book!";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

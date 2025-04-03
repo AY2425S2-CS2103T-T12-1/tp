@@ -21,11 +21,15 @@ public class DeleteGroupCommand extends Command {
     public static final String COMMAND_WORD = "delete-group";
 
     public static final String MESSAGE_USAGE = String.format("""
-            %s: Deletes the specified group from the group list. Useful for removing a tutorial group that is no longer needed.
-            Parameters: INDEX (must be a positive integer)
-            Note: INDEX refers to the index number of the group in the last displayed group list. It must be a positive integer, i.e., 1, 2, 3, ...
-            Example: %s 2
-            """,
+                    %s: Deletes the specified group from the group list. Useful for removing a tutorial group"""
+                    + """
+                     that is no longer needed.
+                    Parameters: INDEX (must be a positive integer)
+                    Note: INDEX refers to the index number of the group in the last displayed group list."""
+                    + """
+                     It must be a positive integer, i.e., 1, 2, 3, ...
+                    Example: %s 2
+                    """,
             COMMAND_WORD, COMMAND_WORD);
 
     private static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted group:\n%1$s";
