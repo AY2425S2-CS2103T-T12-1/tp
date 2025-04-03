@@ -204,6 +204,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Float getGrade(Person person, Group group, String assignmentName) {
+        requireAllNonNull(person, group, assignmentName);
+        return addressBook.getGrade(person, group, assignmentName);
+    }
+
+    @Override
     public void addPersonToGroup(Person personToAdd, Group groupToBeAddedTo) {
         requireAllNonNull(personToAdd, groupToBeAddedTo);
         addressBook.addPersonToGroup(personToAdd, groupToBeAddedTo);
@@ -214,20 +220,18 @@ public class ModelManager implements Model {
     public void deletePersonFromGroup(Person personToRemove, Group groupToRemoveFrom) {
         requireAllNonNull(personToRemove, groupToRemoveFrom);
         addressBook.deletePersonFromGroup(personToRemove, groupToRemoveFrom);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override
     public void deletePersonFromAllGroups(Person personToRemove) {
         requireNonNull(personToRemove);
         addressBook.deletePersonFromAllGroups(personToRemove);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override
-    public void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group) {
-        requireAllNonNull(assignmentName, deadline, group);
-        addressBook.addAssignmentToGroup(assignmentName, deadline, group);
+    public void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group, Float penalty) {
+        requireAllNonNull(assignmentName, deadline, group, penalty);
+        addressBook.addAssignmentToGroup(assignmentName, deadline, group, penalty);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
@@ -243,6 +247,18 @@ public class ModelManager implements Model {
         requireAllNonNull(person, group, assignmentName, score);
         addressBook.gradeAssignment(person, group, assignmentName, score);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
+    public void markAttendance(Person person, Group group, int week) {
+        requireAllNonNull(person, group, week);
+        addressBook.markAttendance(person, group, week);
+    }
+
+    @Override
+    public void unmarkAttendance(Person person, Group group, int week) {
+        requireAllNonNull(person, group, week);
+        addressBook.unmarkAttendance(person, group, week);
     }
 
     @Override

@@ -160,7 +160,7 @@ public interface Model {
     /**
      * Add an assignment to the group specified.
      */
-    void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group);
+    void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group, Float penalty);
 
     /**
      * Removes the specified assignment.
@@ -173,6 +173,16 @@ public interface Model {
     void gradeAssignment(Person person, Group group, String assignmentName, Float score);
 
     /**
+     * Mark attendance of a person in a group.
+     */
+    void markAttendance(Person person, Group group, int week);
+
+    /**
+     * Unmark attendance of a person in a group.
+     */
+    void unmarkAttendance(Person person, Group group, int week);
+
+    /**
      * Retrieves a group matching the provided group name.
      */
     Group getGroup(String groupName);
@@ -181,4 +191,9 @@ public interface Model {
      * Retrieves a person matching the provided person name.
      */
     Person getPerson(String personName);
+
+    /**
+     * Retrieves the grade of a specified assignment.
+     */
+    Float getGrade(Person person, Group group, String assignmentName);
 }
