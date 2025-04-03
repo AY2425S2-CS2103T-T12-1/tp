@@ -44,12 +44,16 @@ public class Assignment {
      * @param name The assignment name.
      * @param deadline deadline of the assignment.
      */
-    public void editAssignment(String name, LocalDate deadline) {
+    public void editAssignment(String name, LocalDate deadline, Float penalty) {
         if (name != null) {
             this.name = name;
         }
         if (deadline != null) {
             this.deadline = deadline;
+        }
+
+        if (penalty != null) {
+            this.penalty = penalty;
         }
     }
 

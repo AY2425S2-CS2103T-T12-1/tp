@@ -360,13 +360,13 @@ public class Group implements Result {
      * @param newName The new name of the assignment.
      * @param deadline A {@code LocalDate} object specifying the assignment deadline.
      */
-    public void editAssignment(String assignmentName, String newName, LocalDate deadline) {
+    public void editAssignment(String assignmentName, String newName, LocalDate deadline, Float penalty) {
         for (Assignment a: assignments) {
             if (a.getName().equals(newName)) {
                 throw new DuplicateAssignmentsException();
             }
             if (a.getName().equals(assignmentName)) {
-                a.editAssignment(newName, deadline);
+                a.editAssignment(newName, deadline, penalty);
                 return;
             }
         }

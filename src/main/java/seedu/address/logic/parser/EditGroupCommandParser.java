@@ -38,17 +38,17 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
                     EditGroupCommand.MESSAGE_USAGE), ive);
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TAG);
-      
+
         String newGroupName = "";
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             newGroupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_NAME).get());
         }
-      
+
         Collection<Tag> tags = null;
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             tags = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).get();
         }
-      
+
         return new EditGroupCommand(index, newGroupName, tags);
     }
 }

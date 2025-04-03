@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LATE_PENALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_NAME;
 
@@ -33,12 +34,14 @@ public class EditAssignmentCommand extends Command {
             + PREFIX_NAME + "ASSIGNMENT NAME "
             + PREFIX_GROUP + "GROUP ["
             + PREFIX_NEW_NAME + "NEW NAME] ["
-            + PREFIX_DATE + "DEADLINE]\n"
+            + PREFIX_DATE + "DEADLINE] "
+            + "[" + PREFIX_LATE_PENALTY + "LATE PENALTY]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "HW 1 "
             + PREFIX_GROUP + "CS2103T T12 "
             + PREFIX_NEW_NAME + "Assignment 1 "
-            + PREFIX_DATE + "21-04-2025\n";
+            + PREFIX_DATE + "21-04-2025 "
+            + PREFIX_LATE_PENALTY + "0.5\n";
 
     private static final String MESSAGE_SUCCESS = "Assignment in group %s has been edited: %s";
 
@@ -62,6 +65,11 @@ public class EditAssignmentCommand extends Command {
      */
     private final LocalDate deadline;
 
+    /**
+     * Late penalty for assignment.
+     */
+    private final Float penalty;
+
 
     /**
      * Creates an EditAssignmentCommand to edit an assignment.
@@ -69,7 +77,7 @@ public class EditAssignmentCommand extends Command {
      * @param name The name of the assignment to be added.
      * @param groupName The name of the group to be added.
      */
-    public EditAssignmentCommand(String name, String groupName, String newName, LocalDate deadline) {
+    public EditAssignmentCommand(String name, String groupName, String newName, LocalDate deadline, Float penalty) {
         requireAllNonNull(name, groupName);
         this.name = name;
         this.groupName = groupName;
@@ -79,6 +87,7 @@ public class EditAssignmentCommand extends Command {
             this.newName = newName;
         }
         this.deadline = deadline;
+        this.penalty = penalty;
     }
 
     @Override
@@ -91,9 +100,8 @@ public class EditAssignmentCommand extends Command {
             throw new CommandException("Group not found!");
         }
 
-
         try {
-            model.editAssignment(name, newName, deadline, group);
+            model.editAssignment(name, newName, deadline, group, penalty);
         } catch (AssignmentNotFoundException e) {
             throw new CommandException("Assignment not found!");
         } catch (DuplicateAssignmentsException d) {

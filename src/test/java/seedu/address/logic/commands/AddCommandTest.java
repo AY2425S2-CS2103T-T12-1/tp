@@ -227,7 +227,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public void editAssignment(String assignmentName, String newName, LocalDate deadline, Group group) {
+        public void editAssignment(String assignmentName, String newName, LocalDate deadline, Group group,
+                Float penalty) {
             throw new AssertionError("This method should not be called.");
         }
 

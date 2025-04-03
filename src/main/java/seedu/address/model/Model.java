@@ -170,7 +170,7 @@ public interface Model {
     /**
      * Edits the specified assignment.
      */
-    void editAssignment(String assignmentName, String newName, LocalDate deadline, Group group);
+    void editAssignment(String assignmentName, String newName, LocalDate deadline, Group group, Float penalty);
 
     /**
      * Grades a specified assignment by the given grade.

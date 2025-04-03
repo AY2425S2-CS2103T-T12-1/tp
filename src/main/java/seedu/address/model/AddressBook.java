@@ -260,8 +260,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param deadline A {@code LocalDate} object specifying the assignment deadline.
      * @param group A {@code Group} object specifying the group which the assignment is under.
      */
-    public void editAssignment(String assignmentName, String newName, LocalDate deadline, Group group) {
-        group.editAssignment(assignmentName, newName, deadline);
+    public void editAssignment(String assignmentName, String newName, LocalDate deadline, Group group, Float penalty) {
+        group.editAssignment(assignmentName, newName, deadline, penalty);
     }
 
     /**

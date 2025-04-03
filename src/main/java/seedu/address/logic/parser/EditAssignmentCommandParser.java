@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LATE_PENALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_NAME;
 
@@ -24,7 +25,7 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
      */
     public EditAssignmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUP, PREFIX_NEW_NAME,
-                PREFIX_DATE);
+                PREFIX_DATE, PREFIX_LATE_PENALTY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GROUP)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -43,8 +44,12 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             deadline = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         }
+        Float penalty = null;
+        if (argMultimap.getValue(PREFIX_LATE_PENALTY).isPresent()) {
+            penalty = Float.parseFloat(argMultimap.getValue(PREFIX_LATE_PENALTY).get());
+        }
 
-        return new EditAssignmentCommand(assignmentName, groupName, newName, deadline);
+        return new EditAssignmentCommand(assignmentName, groupName, newName, deadline, penalty);
     }
 
     /**
