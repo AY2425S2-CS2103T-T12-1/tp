@@ -28,9 +28,9 @@ class JsonAdaptedGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
 
-    private final String name;
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedGroup.class);
 
-    private final Logger logger = LogsCenter.getLogger(JsonAdaptedGroup.class);
+    private final String name;
 
     private final ArrayListMap<String, JsonAdaptedGroupMemberDetails> groupMembers = new ArrayListMap<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -92,7 +92,8 @@ class JsonAdaptedGroup {
                 modelGroupMembers.put(person, groupMemberDetail);
             } catch (PersonNotFoundException e) {
                 // Person not found in addressbook, remove from group as well.
-                logger.info("Person in Group datafile not found in Address Book:" + personName + ". Removing from Group data.");
+                logger.info("Person in Group datafile not found in Address Book:" + personName
+                        + ". Removing from Group data.");
                 continue;
             }
         }
