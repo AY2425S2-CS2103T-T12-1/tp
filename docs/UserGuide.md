@@ -347,6 +347,22 @@ Example:
 
 - `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025 l/0.875` adds an assignment named `HW 1` to the group `CS2103T T12` with a deadline of `21-04-2025` and a late penalty multiplier of `87.5%`.
 
+### Adding an assignment in a group: `add-assignment`
+
+Edits an assignment in the specified group.
+
+Format: `edit-assignment n/ASSIGNMENT NAME g/GROUP [N/NEW NAME] [d/DEADLINE] [l/LATE PENALTY]`
+
+- `ASSIGNMENT_NAME` is the name of the assignment.
+- `GROUP_NAME` is the name of the group.
+- `NEW NAME` is the new name of the assignment.
+- `DEADLINE` is the new deadline of the assignment in the format `DD-MM-YYYY`.
+- `LATE_PENALTY` is a decimal between `0.0` and `1.0` (inclusive) representing the new penalty multiplier for late submissions.
+
+Example:
+
+- `edit-assignment n/HW 1 g/CS2103T T12 N/Assignment 1 d/21-04-2025 l/0.5` renames an assignment named `HW 1` in the group `CS2103T T12` to `Assignment 1` with a deadline of `21-04-2025` and a late penalty multiplier of `50.0%`.
+
 ### Deleting an assignment in a group: `delete-assignment`
 
 Deletes an assignment in the specified group.
@@ -418,7 +434,7 @@ Therefore, edit the data file only if you are confident that you can update it c
 ## Command summary
 
 | Action                 | Format, Examples                                                                                                                                                  |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------------| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077` |
 | **Delete**             | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                |
 | **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/Jensen Huang e/jensenh@yahoo.com`                                       |
@@ -437,6 +453,7 @@ Therefore, edit the data file only if you are confident that you can update it c
 | **Unmark Attendance**  | `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                             |
 | **Show Attendance**    | `show-attendance P/NAME g/GROUP_NAME` <br> e.g. `show-attendance P/Jensen Huang g/CS2103T T12`                                                                    |
 | **Add Assignment**     | `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE l/LATE_PENALTY` <br> e.g. `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025 l/0.875`                    |
+| **Edit Assignment**    | `edit-assignment n/ASSIGNMENT NAME g/GROUP [N/NEW NAME] [d/DEADLINE] [l/LATE PENALTY]` <br> e.g. `edit-assignment n/HW 1 g/CS2103T T12 N/Assignment 1 d/21-04-2025 l/0.5`  
 | **Delete Assignment**  | `delete-assignment n/ASSIGNMENT_NAME g/GROUP_NAME` <br> e.g. `delete-assignment n/HW 1 g/CS2103T T12`                                                             |
 | **Grade Assignment**   | `grade-assignment P/PERSON_NAME g/GROUP_NAME A/ASSIGNMENT_NAME s/FLOAT_SCORE` <br> e.g. `grade-assignment P/Jensen Huang g/CS2103T T12 A/HW 1 s/70.3`             |
 | **Help**               | `help`                                                                                                                                                            |
