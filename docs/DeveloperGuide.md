@@ -869,11 +869,6 @@ Implementing Groups added substantial architectural and technical complexity, tr
 
 This shift from simple CRUD operations to relational logic and multi-level storage increased the overall effort significantly beyond AB3's scope.
 
-This shift from simple CRUD operations to relational logic and multi-level storage increased the overall effort significantly beyond AB3’s scope.
-
 ## **Appendix: Planned Enhancements** 
 
 To be updated at a later time.
-
-
-
