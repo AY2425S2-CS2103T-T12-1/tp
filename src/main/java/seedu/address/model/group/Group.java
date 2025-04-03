@@ -334,6 +334,11 @@ public class Group implements Result {
      * @param deadline A {@code LocalDate} object specifying the assignment deadline.
      */
     public void addAssignment(String assignmentName, LocalDate deadline, Float penalty) {
+        for (Assignment a: assignments) {
+            if (a.getName().equals(assignmentName)) {
+                throw new DuplicateAssignmentsException();
+            }
+        }
         Assignment assignment = new Assignment(assignmentName, deadline, penalty);
         assignments.add(assignment);
     }

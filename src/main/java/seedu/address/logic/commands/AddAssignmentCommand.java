@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.exceptions.DuplicateAssignmentsException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 
@@ -84,8 +85,12 @@ public class AddAssignmentCommand extends Command {
         } catch (GroupNotFoundException e) {
             throw new CommandException("Group not found!");
         }
+        try {
+            model.addAssignmentToGroup(name, deadline, group, penalty);
+        } catch (DuplicateAssignmentsException d) {
+            throw new CommandException(d.getMessage());
+        }
 
-        model.addAssignmentToGroup(name, deadline, group, penalty);
         return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, name));
     }
 
