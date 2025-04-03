@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_GROUP_NOT_FOUND;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_WEEK_NUM;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_IN_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
@@ -27,16 +31,16 @@ public class UnmarkAttendanceCommand extends Command {
     /**
      * Usage message for the command.
      */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unmarks the attendance of the person identified "
-            + "by their name, their group and the week.\n"
-            + "Parameters: "
-            + PREFIX_PERSON + "NAME "
-            + PREFIX_GROUP + "GROUP NAME "
-            + PREFIX_WEEK + "WEEK NUMBER\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PERSON + "Jensen Huang "
-            + PREFIX_GROUP + "CS2103T T12 "
-            + PREFIX_WEEK + "10";
+    public static final String MESSAGE_USAGE = String.format("""
+                    %s: Removes the attendance record of the specified person in the"""
+                    + """
+                     specified group for the specified week.
+                    Parameters: %sPERSON_NAME %sGROUP_NAME %sWEEK_NUMBER
+                    Example: %s %sJensen Huang %sCS2103T T12 %s10
+                    """,
+            COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP, PREFIX_WEEK, COMMAND_WORD, PREFIX_PERSON,
+            PREFIX_GROUP, PREFIX_WEEK);
+
 
     /**
      * Success message for command.
@@ -71,7 +75,7 @@ public class UnmarkAttendanceCommand extends Command {
      *
      * @param model The model in which the command should be executed.
      * @return A CommandResult indicating the outcome of the command execution.
-     * @throws CommandException  if week number is invalid
+     * @throws CommandException if week number is invalid
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -81,24 +85,24 @@ public class UnmarkAttendanceCommand extends Command {
         try {
             group = model.getGroup(groupName);
         } catch (GroupNotFoundException e) {
-            throw new CommandException("Group not found!");
+            throw new CommandException(MESSAGE_GROUP_NOT_FOUND);
         }
 
         Person person;
         try {
             person = model.getPerson(personName);
         } catch (PersonNotFoundException e) {
-            throw new CommandException("Person not found!");
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
         if (!GroupMemberDetail.isValidWeek(week)) {
-            throw new CommandException("Week number must be between 1 and 13 (inclusive)!");
+            throw new CommandException(MESSAGE_INVALID_WEEK_NUM);
         }
 
         try {
             model.unmarkAttendance(person, group, week);
         } catch (PersonNotFoundException e) {
-            throw new CommandException("Person does not exist in group!");
+            throw new CommandException(MESSAGE_PERSON_NOT_IN_GROUP);
         }
 
         return new CommandResult(String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, personName, groupName, week));

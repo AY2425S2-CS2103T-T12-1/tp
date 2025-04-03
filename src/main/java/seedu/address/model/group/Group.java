@@ -16,7 +16,7 @@ import seedu.address.commons.util.ArrayListMap;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
-import seedu.address.model.assignment.exceptions.DuplicateAssignmentsException;
+import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -103,9 +103,9 @@ public class Group implements Result {
     /**
      * Constructs a {@code Group} with a specified name, existing Map and set of tags.
      *
-     * @param groupName     A valid group name.
-     * @param groupMembers  A map of Person as key to GroupMemberDetail as value.
-     * @param tags          The collection of tags for the group.
+     * @param groupName    A valid group name.
+     * @param groupMembers A map of Person as key to GroupMemberDetail as value.
+     * @param tags         The collection of tags for the group.
      */
     public Group(String groupName, ArrayListMap<Person, GroupMemberDetail> groupMembers, Collection<Tag> tags) {
         this(groupName, groupMembers, tags, null);
@@ -114,10 +114,10 @@ public class Group implements Result {
     /**
      * Constructs a {@code Group} with a specified name, existing Map and set of tags.
      *
-     * @param groupName     A valid group name.
-     * @param groupMembers  A map of Person as key to GroupMemberDetail as value.
-     * @param tags          The collection of tags for the group.
-     * @param assignments   The collection of tags for the group.
+     * @param groupName    A valid group name.
+     * @param groupMembers A map of Person as key to GroupMemberDetail as value.
+     * @param tags         The collection of tags for the group.
+     * @param assignments  The collection of tags for the group.
      */
     public Group(
             String groupName,
@@ -171,6 +171,7 @@ public class Group implements Result {
     public ArrayList<Person> getGroupMembers() {
         return new ArrayList<>(groupMembers.keySet());
     }
+
     public ArrayListMap<Person, GroupMemberDetail> getGroupMembersMap() {
         ArrayListMap<Person, GroupMemberDetail> copied = new ArrayListMap<>();
         copied.putAll(this.groupMembers);
@@ -309,7 +310,7 @@ public class Group implements Result {
      * @return The desired assignment if found
      */
     public Assignment getAssignment(String assignmentName) throws AssignmentNotFoundException {
-        for (Assignment a: assignments) {
+        for (Assignment a : assignments) {
             if (a.getName().equals(assignmentName)) {
                 return a;
             }
@@ -333,28 +334,23 @@ public class Group implements Result {
      * @return True if the Assignment exists and false otherwise.
      */
     public boolean containsAssignment(String assignmentName) {
-        for (Assignment a: assignments) {
-            if (a.getName().equals(assignmentName)) {
-                return true;
-            }
-        }
-        return false;
+        return assignments.stream()
+                .anyMatch(a -> a.getName().equals(assignmentName));
     }
 
     /**
      * Adds the assignment to the group.
      *
      * @param assignmentName The assignment name.
-     * @param deadline A {@code LocalDate} object specifying the assignment deadline.
+     * @param deadline       A {@code LocalDate} object specifying the assignment deadline.
      */
-    public void addAssignment(String assignmentName, LocalDate deadline, Float penalty) {
-        for (Assignment a: assignments) {
-            if (a.getName().equals(assignmentName)) {
-                throw new DuplicateAssignmentsException();
-            }
+    public Assignment addAssignment(String assignmentName, LocalDate deadline, Float penalty) {
+        if (containsAssignment(assignmentName)) {
+            throw new DuplicateAssignmentException();
         }
         Assignment assignment = new Assignment(assignmentName, deadline, penalty);
         assignments.add(assignment);
+        return assignment;
     }
 
     /**
@@ -363,7 +359,7 @@ public class Group implements Result {
      * @param assignmentName The assignment name to be removed.
      */
     public void removeAssignment(String assignmentName) throws AssignmentNotFoundException {
-        for (Assignment a: assignments) {
+        for (Assignment a : assignments) {
             if (a.getName().equals(assignmentName)) {
                 assignments.remove(a);
                 return;
@@ -376,13 +372,13 @@ public class Group implements Result {
      * Edits the specified assignment.
      *
      * @param assignmentName The assignment name of the assignment to be edited.
-     * @param newName The new name of the assignment.
-     * @param deadline A {@code LocalDate} object specifying the assignment deadline.
+     * @param newName        The new name of the assignment.
+     * @param deadline       A {@code LocalDate} object specifying the assignment deadline.
      */
     public void editAssignment(String assignmentName, String newName, LocalDate deadline, Float penalty) {
-        for (Assignment a: assignments) {
+        for (Assignment a : assignments) {
             if (a.getName().equals(newName)) {
-                throw new DuplicateAssignmentsException();
+                throw new DuplicateAssignmentException();
             }
             if (a.getName().equals(assignmentName)) {
                 a.editAssignment(newName, deadline, penalty);
@@ -391,11 +387,12 @@ public class Group implements Result {
         }
         throw new AssignmentNotFoundException();
     }
+
     /**
      * Marks attendance of a person for a specified week.
      *
      * @param person The person to mark the attendance
-     * @param week A valid week.
+     * @param week   A valid week.
      * @throws PersonNotFoundException
      */
     public void markAttendance(Person person, int week) throws PersonNotFoundException {
@@ -410,7 +407,7 @@ public class Group implements Result {
      * Unmarks attendance of a person for a specified week.
      *
      * @param person The person to mark the attendance
-     * @param week A valid week.
+     * @param week   A valid week.
      * @throws PersonNotFoundException
      */
     public void unmarkAttendance(Person person, int week) throws PersonNotFoundException {
