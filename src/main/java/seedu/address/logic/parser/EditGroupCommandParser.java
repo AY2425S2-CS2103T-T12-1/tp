@@ -19,12 +19,15 @@ import seedu.address.model.tag.Tag;
 public class EditGroupCommandParser implements Parser<EditGroupCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the {@code EditGroupCommand}
+     * Parses the given {@code String} of arguments in the context of the
+     * {@code EditGroupCommand}
      * and returns an {@code EditGroupCommand} object for execution.
      *
      * @param args The user input arguments as a {@code String}.
-     * @return An {@code EditGroupCommand} object containing the parsed index and new group name.
-     * @throws ParseException If the user input does not conform to the expected format.
+     * @return An {@code EditGroupCommand} object containing the parsed index and
+     *         new group name.
+     * @throws ParseException If the user input does not conform to the expected
+     *                        format.
      */
     public EditGroupCommand parse(String args) throws ParseException {
         requireNonNull(args);
