@@ -130,7 +130,8 @@ public class AddressBook implements ReadOnlyAddressBook {
             try {
                 group.setGroupMember(target, editedPerson);
             } catch (PersonNotFoundException e) {
-                
+                // Group does not contain the person affected.
+                continue;
             }
         }
     }
