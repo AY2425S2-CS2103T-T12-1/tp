@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <FlowPane fx:id="tags"/>
+    <Label fx:id="name" styleClass="detail_card" text="\$name"/>
+    <Label fx:id="numStudent" styleClass="detail_card" text="\$numStudent"/>
+    <Label fx:id="numTa" styleClass="detail_card" text="\$numTa"/>
+    <Label fx:id="numProf" styleClass="detail_card" text="\$numProf"/>
+    <Label fx:id="numAssignment" styleClass="detail_card" text="\$numAssignment"/>
+</VBox>

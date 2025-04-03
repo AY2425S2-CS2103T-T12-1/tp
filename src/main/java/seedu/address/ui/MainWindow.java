@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultListPanel resultListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private DetailBox detailBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane detailBoxPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -122,6 +127,30 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        hideGroupDetails();
+    }
+
+    /**
+     * Toggle show on the detail box to show it.
+     */
+    public void showGroupDetails(Group group) {
+        if (detailBox == null) {
+            detailBox = new DetailBox(group);
+            detailBoxPlaceholder.getChildren().add(detailBox.getRoot());
+        } else {
+            detailBox.update(group); // Add an update method in DetailBox to refresh its content
+        }
+        detailBoxPlaceholder.setVisible(true);
+        detailBoxPlaceholder.setManaged(true);
+    }
+
+    /**
+     * Toggle hide on the details box so that it does not show.
+     */
+    public void hideGroupDetails() {
+        detailBoxPlaceholder.setVisible(false);
+        detailBoxPlaceholder.setManaged(false);
     }
 
     /**
@@ -181,6 +210,13 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowGroupDetails()) {
+                Group groupToShow = commandResult.getGroupToShow();
+                showGroupDetails(groupToShow);
+            } else {
+                hideGroupDetails();
             }
 
             return commandResult;

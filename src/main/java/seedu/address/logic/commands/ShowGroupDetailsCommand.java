@@ -56,6 +56,7 @@ public class ShowGroupDetailsCommand extends Command {
 
         Group groupToShow = lastShownList.get(targetIndex.getZeroBased());
         model.showGroupDetails(groupToShow);
-        return new CommandResult(String.format(MESSAGE_SHOW_GROUP_DETAILS_SUCCESS, Messages.format(groupToShow)));
+        return new CommandResult(String.format(MESSAGE_SHOW_GROUP_DETAILS_SUCCESS, Messages.format(groupToShow)),
+                true, groupToShow);
     }
 }
