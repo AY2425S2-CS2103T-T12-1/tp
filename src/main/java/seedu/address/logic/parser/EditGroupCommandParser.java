@@ -25,7 +25,7 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
      *
      * @param args The user input arguments as a {@code String}.
      * @return An {@code EditGroupCommand} object containing the parsed index and
-     *         new group name.
+     *     new group name.
      * @throws ParseException If the user input does not conform to the expected
      *                        format.
      */
