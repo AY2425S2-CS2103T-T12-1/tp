@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.ui.Result;
@@ -159,8 +160,10 @@ public interface Model {
 
     /**
      * Add an assignment to the group specified.
+     *
+     * @return The created assignment
      */
-    void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group, Float penalty);
+    Assignment addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group, Float penalty);
 
     /**
      * Removes the specified assignment.
@@ -171,6 +174,14 @@ public interface Model {
      * Edits the specified assignment.
      */
     void editAssignment(String assignmentName, String newName, LocalDate deadline, Group group, Float penalty);
+
+    /**
+     * Returns true if the assignment is in the group.
+     * @param assignmentName Assignment to check
+     * @param group Group to check
+     * @return true if the assignment is in the group, false otherwise
+     */
+    boolean isAssignmentInGroup(String assignmentName, Group group);
 
     /**
      * Grades a specified assignment by the given grade.
@@ -201,4 +212,12 @@ public interface Model {
      * Retrieves the grade of a specified assignment.
      */
     Float getGrade(Person person, Group group, String assignmentName);
+
+    /**
+     * Returns true if the person is in the group.
+     * @param person Person to check
+     * @param group Group to check
+     * @return true if the person is in the group, false otherwise
+     */
+    boolean isPersonInGroup(Person person, Group group);
 }

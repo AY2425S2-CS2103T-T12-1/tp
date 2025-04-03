@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_GROUP_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -22,14 +23,12 @@ public class DeleteAssignmentCommand extends Command {
      */
     public static final String COMMAND_WORD = "delete-assignment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the specified assignment. "
-            + "Parameters: "
-            + PREFIX_NAME + "ASSIGNMENT NAME "
-            + PREFIX_GROUP + "GROUP "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "HW 1 "
-            + PREFIX_GROUP + "CS2103T T12-1\n";
+    public static final String MESSAGE_USAGE = String.format("""
+                    %s: Deletes an assignment in the specified group.
+                    Parameters: %sASSIGNMENT_NAME %sGROUP_NAME
+                    Example: %s %sHW 1 %sCS2103T T12
+                    """,
+            COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP, COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP);
 
     private static final String MESSAGE_SUCCESS = "Assignment %s deleted from group %s.";
 
@@ -46,7 +45,7 @@ public class DeleteAssignmentCommand extends Command {
     /**
      * Creates a DeleteAssignmentCommand to add a new assignment with the specified name, group, and deadline.
      *
-     * @param name The name of the assignment to be added.
+     * @param name      The name of the assignment to be added.
      * @param groupName The name of the group to be added.
      */
     public DeleteAssignmentCommand(String name, String groupName) {
@@ -63,13 +62,13 @@ public class DeleteAssignmentCommand extends Command {
         try {
             group = model.getGroup(groupName);
         } catch (GroupNotFoundException e) {
-            throw new CommandException("Group not found!");
+            throw new CommandException(MESSAGE_GROUP_NOT_FOUND);
         }
 
         try {
             model.removeAssignmentFromGroup(name, group);
         } catch (AssignmentNotFoundException e) {
-            throw new CommandException("Assignment not found!");
+            throw new CommandException("Assignment not found in the group!");
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, name, groupName));

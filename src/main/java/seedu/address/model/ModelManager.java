@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.ui.Result;
@@ -210,6 +211,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isPersonInGroup(Person person, Group group) {
+        requireAllNonNull(person, group);
+        return group.contains(person);
+    }
+
+    @Override
     public void addPersonToGroup(Person personToAdd, Group groupToBeAddedTo) {
         requireAllNonNull(personToAdd, groupToBeAddedTo);
         addressBook.addPersonToGroup(personToAdd, groupToBeAddedTo);
@@ -229,10 +236,11 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group, Float penalty) {
+    public Assignment addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group, Float penalty) {
         requireAllNonNull(assignmentName, deadline, group, penalty);
-        addressBook.addAssignmentToGroup(assignmentName, deadline, group, penalty);
+        Assignment assignment = addressBook.addAssignmentToGroup(assignmentName, deadline, group, penalty);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        return assignment;
     }
 
     @Override
@@ -247,6 +255,11 @@ public class ModelManager implements Model {
         requireAllNonNull(assignmentName, group);
         addressBook.editAssignment(assignmentName, newName, deadline, group, penalty);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    public boolean isAssignmentInGroup(String assignmentName, Group group) {
+        requireAllNonNull(assignmentName, group);
+        return addressBook.isAssignmentInGroup(assignmentName, group);
     }
 
     @Override

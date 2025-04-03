@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_GROUP_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LATE_PENALTY;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.exceptions.DuplicateAssignmentsException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
@@ -26,19 +28,15 @@ public class AddAssignmentCommand extends Command {
      */
     public static final String COMMAND_WORD = "add-assignment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the details of the specified assignment in the specified group. "
-            + "Parameters: "
-            + PREFIX_NAME + "ASSIGNMENT NAME "
-            + PREFIX_GROUP + "GROUP "
-            + PREFIX_DATE + "DEADLINE"
-            + "[" + PREFIX_LATE_PENALTY + "LATE PENALTY]\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "HW 1 "
-            + PREFIX_GROUP + "CS2103T T12-1 "
-            + PREFIX_DATE + "21-04-2025\n";
+    public static final String MESSAGE_USAGE = String.format("""
+                    %s: Adds a new assignment in the specified group.
+                    Parameters: %sASSIGNMENT_NAME %sGROUP_NAME %sDEADLINE [%sLATE_PENALTY]
+                    Example: %s %sHW 1 %sCS2103T T12 %s21-04-2025 %s0.875
+                    """,
+            COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP, PREFIX_DATE, PREFIX_LATE_PENALTY, COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP,
+            PREFIX_DATE, PREFIX_LATE_PENALTY);
 
-    private static final String MESSAGE_SUCCESS = "New assignment added to group %s: %s";
+    private static final String MESSAGE_SUCCESS = "Added new assignment to group!\nGroup: %s\nAssignment: %s";
 
     /**
      * Name of the new assignment to be added.
@@ -63,9 +61,9 @@ public class AddAssignmentCommand extends Command {
     /**
      * Creates an AddAssignmentCommand to add a new assignment with the specified name, group, and deadline.
      *
-     * @param name The name of the assignment to be added.
+     * @param name      The name of the assignment to be added.
      * @param groupName The name of the group to be added.
-     * @param deadline The deadline of the assignment.
+     * @param deadline  The deadline of the assignment.
      */
     public AddAssignmentCommand(String name, String groupName, LocalDate deadline, Float penalty) {
         requireAllNonNull(name, groupName, deadline);
@@ -83,15 +81,19 @@ public class AddAssignmentCommand extends Command {
         try {
             group = model.getGroup(groupName);
         } catch (GroupNotFoundException e) {
-            throw new CommandException("Group not found!");
+            throw new CommandException(MESSAGE_GROUP_NOT_FOUND);
         }
+
+        if (model.isAssignmentInGroup(name, group)) {
+            throw new CommandException("Another assignment with the same name already exists in group!");
+        }
+
         try {
-            model.addAssignmentToGroup(name, deadline, group, penalty);
+            Assignment assignment = model.addAssignmentToGroup(name, deadline, group, penalty);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, assignment));
         } catch (DuplicateAssignmentsException d) {
             throw new CommandException(d.getMessage());
         }
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, name));
     }
 
     @Override

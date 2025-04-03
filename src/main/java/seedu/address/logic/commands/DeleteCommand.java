@@ -18,12 +18,15 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE = String.format("""
+            %s: Deletes the specified person from the person list. Useful for removing the details of someone who is no longer a student.
+            Parameters: INDEX (must be a positive integer)
+            Note: INDEX refers to the index number of the person in the last displayed person list. It must be a positive integer, i.e., 1, 2, 3, ...
+            Example: %s 2
+            """,
+        COMMAND_WORD, COMMAND_WORD);
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted person:\n%1$s";
 
     private final Index targetIndex;
 

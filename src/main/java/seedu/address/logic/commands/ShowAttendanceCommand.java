@@ -26,14 +26,12 @@ public class ShowAttendanceCommand extends Command {
     /**
      * Usage message for the command.
      */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the attendance of the person identified "
-            + "by their name and their group.\n"
-            + "Parameters: "
-            + "[" + PREFIX_PERSON + "NAME] "
-            + "[" + PREFIX_GROUP + "GROUP NAME]\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PERSON + "Jensen Huang "
-            + PREFIX_GROUP + "CS2103T T12";
+    public static final String MESSAGE_USAGE = String.format("""
+            %s: Displays the attendance record of the specified person in the specified group.
+            Parameters: %sPERSON_NAME %sGROUP_NAME
+            Example: %s %sJensen Huang %sCS2103T T12
+            """,
+            COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP, COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP);
 
     /**
      * Success message for command.
