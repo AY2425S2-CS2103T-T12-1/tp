@@ -347,11 +347,23 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.hashCode();
     }
 
+    /**
+     * Edit the group
+     */
     public void editGroup(Group target, EditGroupDescriptor editGroupDescriptor) {
+        if (!editGroupDescriptor.isAnyFieldEdited()) {
+            return;
+        }
         target.editSelf(editGroupDescriptor);
     }
 
+    /**
+     * Edit the person
+     */
     public void editPerson(Person target, EditPersonDescriptor editPersonDescriptor) {
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            return;
+        }
         target.editSelf(editPersonDescriptor);
     }
 }
