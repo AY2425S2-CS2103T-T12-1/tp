@@ -347,6 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
 ## Use case: UC01 - Delete a person
+{:.no_toc}
 
 **MSS**
 
@@ -370,6 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 ## Use case: UC02 - Adding a person
+{:.no_toc}
 
 **MSS**
 1. User provides contact details
