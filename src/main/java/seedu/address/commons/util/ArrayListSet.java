@@ -109,4 +109,10 @@ public class ArrayListSet<K> implements Set<K> {
     public K get(int index) {
         return keys.get(index);
     }
+
+    public void set(K k, K l) {
+        int index = indexOf(k);
+        keys.set(index, l);
+    }
+
 }

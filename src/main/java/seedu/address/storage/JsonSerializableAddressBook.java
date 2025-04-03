@@ -62,7 +62,7 @@ class JsonSerializableAddressBook {
             addressBook.addPerson(person);
         }
         for (JsonAdaptedGroup jsonAdaptedGroup : groups) {
-            Group group = jsonAdaptedGroup.toModelType();
+            Group group = jsonAdaptedGroup.toModelType(addressBook);
             if (addressBook.hasGroup(group)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
             }

@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +22,6 @@ public class JsonAdaptedGroupMemberDetails {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "GroupMember's %s field is missing!";
 
-    private JsonAdaptedPerson person;
     private Role role;
     private List<Boolean> attendance = new ArrayList<>();
     private ArrayListMap<String, Float> grades = new ArrayListMap<>();
@@ -30,14 +31,12 @@ public class JsonAdaptedGroupMemberDetails {
      * Constructs a {@code JsonAdaptedGroupMemberDetails} from the given details.
      */
     @JsonCreator
-    public JsonAdaptedGroupMemberDetails(@JsonProperty("person") JsonAdaptedPerson person,
-                                         @JsonProperty("Role") Role role,
+    public JsonAdaptedGroupMemberDetails(@JsonProperty("Role") Role role,
                                          @JsonProperty("attendance") List<Boolean> attendance,
                                          @JsonProperty("grades")
                                          ArrayListMap<String, Float> grades,
                                          @JsonProperty("assignments")
                                          ArrayListMap<String, JsonAdaptedAssignment> assignments) {
-        this.person = person;
         this.role = role;
         if (attendance != null) {
             this.attendance.addAll(attendance);
@@ -54,7 +53,6 @@ public class JsonAdaptedGroupMemberDetails {
      * Converts a given {@code GroupMemberDetail} into this class for Jackson use.
      */
     public JsonAdaptedGroupMemberDetails(GroupMemberDetail source) {
-        this.person = new JsonAdaptedPerson(source.getPerson());
         this.role = source.getRole();
         for (boolean attendance : source.getAttendance()) {
             this.attendance.add(attendance);
@@ -72,11 +70,9 @@ public class JsonAdaptedGroupMemberDetails {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public GroupMemberDetail toModelType() throws IllegalValueException {
-        if (this.person == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
-        }
-        Person modelPerson = this.person.toModelType();
+    public GroupMemberDetail toModelType(Person person) throws IllegalValueException {
+        requireNonNull(person);
+        Person modelPerson = person;
         Role modelRole = this.role;
         boolean[] modelAttendance = new boolean[GroupMemberDetail.WEEKS_PER_SEMESTER];
         for (int i = 0; i < GroupMemberDetail.WEEKS_PER_SEMESTER; i++) {

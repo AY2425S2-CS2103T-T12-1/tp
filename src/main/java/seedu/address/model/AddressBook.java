@@ -126,6 +126,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
         persons.setPerson(target, editedPerson);
+        for (Group group : groups) {
+            if (group.contains(target)) {
+                group.setGroupMember(target, editedPerson);
+            }
+        }
     }
 
     /**

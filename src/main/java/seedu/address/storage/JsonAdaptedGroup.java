@@ -3,18 +3,22 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ArrayListMap;
+import seedu.address.model.AddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupMemberDetail;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,6 +27,8 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
+
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedGroup.class);
 
     private final String name;
 
@@ -75,12 +81,22 @@ class JsonAdaptedGroup {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Group toModelType() throws IllegalValueException {
+    public Group toModelType(AddressBook addressBook) throws IllegalValueException {
         final ArrayListMap<Person, GroupMemberDetail> modelGroupMembers = new ArrayListMap<>();
         for (Map.Entry<String, JsonAdaptedGroupMemberDetails> entry : groupMembers.entrySet()) {
-            Person key = entry.getValue().toModelType().getPerson();
-            GroupMemberDetail value = entry.getValue().toModelType();
-            modelGroupMembers.put(key, value);
+            String personName = entry.getKey();
+            GroupMemberDetail groupMemberDetail;
+            Person person;
+            try {
+                person = addressBook.getPerson(personName);
+                groupMemberDetail = entry.getValue().toModelType(person);
+                modelGroupMembers.put(person, groupMemberDetail);
+            } catch (PersonNotFoundException e) {
+                // Person not found in addressbook, remove from group as well.
+                logger.info("Person in Group datafile not found in Address Book:" + personName
+                        + ". Removing from Group data.");
+                continue;
+            }
         }
 
         final List<Tag> modelTags = new ArrayList<>();

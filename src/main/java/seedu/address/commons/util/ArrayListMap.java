@@ -84,6 +84,10 @@ public class ArrayListMap<K, V> implements Map<K, V> {
         }
     }
 
+    public void replaceKey(K k, K l) {
+        keys.set(k, l);
+    }
+
     @Override
     public void clear() {
         keys.clear();

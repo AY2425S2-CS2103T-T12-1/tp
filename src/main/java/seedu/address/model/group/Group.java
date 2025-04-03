@@ -175,6 +175,20 @@ public class Group implements Result {
         copied.putAll(this.groupMembers);
         return copied;
     }
+
+    /**
+     * Replaces the old person with new edited person while keeping the GroupMemberDetails.
+     *
+     * @param target
+     * @param editedPerson
+     */
+    public void setGroupMember(Person target, Person editedPerson) throws PersonNotFoundException {
+        if (!contains(target)) {
+            throw new PersonNotFoundException();
+        }
+        groupMembers.replaceKey(target, editedPerson);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
