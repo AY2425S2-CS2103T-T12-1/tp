@@ -29,8 +29,8 @@ public class ShowAttendanceCommandParser implements Parser<ShowAttendanceCommand
                     ShowAttendanceCommand.MESSAGE_USAGE));
         }
 
-        String personName = argMultimap.getValue(PREFIX_PERSON).get();
-        String groupName = argMultimap.getValue(PREFIX_GROUP).get();
+        String personName = ParserUtil.parseName(argMultimap.getValue(PREFIX_PERSON).get()).toString();
+        String groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP).get());
 
         return new ShowAttendanceCommand(personName, groupName);
     }

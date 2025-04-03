@@ -34,7 +34,7 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUP, PREFIX_DATE, PREFIX_LATE_PENALTY);
         String assignmentName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
-        String groupName = ParserUtil.parseName(argMultimap.getValue(PREFIX_GROUP).get()).toString();
+        String groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP).get());
         LocalDate deadline = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Float penalty = null;
         if (argMultimap.getValue(PREFIX_LATE_PENALTY).isPresent()) {

@@ -30,7 +30,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
 
-        String groupName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
+        String groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_NAME).get());
         Set<Tag> taglist = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         return new AddGroupCommand(groupName, taglist);

@@ -38,7 +38,7 @@ public class Group implements Result {
     /**
      * Regular expression to validate group names.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum} ]*";
 
     /**
      * The name of the group.
