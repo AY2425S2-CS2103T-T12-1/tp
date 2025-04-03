@@ -7,6 +7,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditGroupCommand.EditGroupDescriptor;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupMemberDetail;
@@ -343,5 +345,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    public void editGroup(Group target, EditGroupDescriptor editGroupDescriptor) {
+        target.editSelf(editGroupDescriptor);
+    }
+
+    public void editPerson(Person target, EditPersonDescriptor editPersonDescriptor) {
+        target.editSelf(editPersonDescriptor);
     }
 }

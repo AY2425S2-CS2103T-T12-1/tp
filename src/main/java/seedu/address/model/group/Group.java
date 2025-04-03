@@ -14,6 +14,7 @@ import java.util.Set;
 import javafx.scene.layout.Region;
 import seedu.address.commons.util.ArrayListMap;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.EditGroupCommand.EditGroupDescriptor;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.assignment.exceptions.DuplicateAssignmentsException;
@@ -56,7 +57,7 @@ public class Group implements Result {
      */
     private final ArrayList<Assignment> assignments;
 
-    private final Set<Tag> tags;
+    private Set<Tag> tags;
 
     /**
      * Constructs a {@code Group} with a specified name.
@@ -442,5 +443,13 @@ public class Group implements Result {
 
     public ArrayList<GroupMemberDetail> getGroupDetails() {
         return groupMembers.values();
+    }
+
+    /**
+     * Edit self based on editGroupDescriptor.
+     */
+    public void editSelf(EditGroupDescriptor editGroupDescriptor) {
+        this.groupName = editGroupDescriptor.getGroupName().orElse(this.getGroupName());
+        this.tags = editGroupDescriptor.getTagList().orElse(this.getTags());
     }
 }

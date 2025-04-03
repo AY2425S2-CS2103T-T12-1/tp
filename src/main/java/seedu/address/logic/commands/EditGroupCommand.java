@@ -5,12 +5,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
@@ -52,26 +54,19 @@ public class EditGroupCommand extends Command {
      * Index of the group to be edited.
      */
     private final Index index;
-
-    /**
-     * New name for the group.
-     */
-    private final String newGroupName;
-
-    private final Set<Tag> tags;
+    private final EditGroupDescriptor editGroupDescriptor;
 
     /**
      * Creates an EditGroupCommand to update a group's name.
      *
      * @param index        The index of the group to be edited.
-     * @param newGroupName The new name for the group.
+     * @param editGroupDescriptor The descriptor of the group to be edited.
      */
-    public EditGroupCommand(Index index, String newGroupName, Collection<Tag> tags) {
-        requireAllNonNull(index, newGroupName);
+    public EditGroupCommand(Index index, EditGroupDescriptor editGroupDescriptor) {
+        requireAllNonNull(index, editGroupDescriptor);
 
         this.index = index;
-        this.newGroupName = newGroupName;
-        this.tags = tags == null ? new HashSet<>() : new HashSet<>(tags);
+        this.editGroupDescriptor = editGroupDescriptor;
     }
 
     /**
@@ -91,28 +86,24 @@ public class EditGroupCommand extends Command {
         }
 
         Group groupToEdit = lastShownList.get(index.getZeroBased());
-        Group editedGroup = createEditedGroup(groupToEdit, newGroupName, tags);
 
-        if (model.hasGroup(editedGroup)) {
-            throw new CommandException(MESSAGE_DUPLICATE_GROUP);
-        }
-
-        model.setGroup(groupToEdit, editedGroup);
-        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, newGroupName));
+        model.editGroup(groupToEdit, editGroupDescriptor);
+        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editGroupDescriptor.getGroupName()));
     }
 
     /**
      * Creates a new Group object with the updated name while retaining the group members.
      *
      * @param groupToEdit  The existing group to be edited.
-     * @param newGroupName The new name for the group.
+     * @param editGroupDescriptor The new descriptor for the group.
      * @return A new Group object with the updated name and existing members.
      */
-    private static Group createEditedGroup(Group groupToEdit, String newGroupName, Collection<Tag> tags) {
+    private static Group createEditedGroup(Group groupToEdit, EditGroupDescriptor editGroupDescriptor) {
         assert groupToEdit != null;
-
-        ArrayList<Person> list = groupToEdit.getGroupMembers();
-        return new Group(newGroupName, list, tags);
+        String groupName = editGroupDescriptor.getGroupName().orElse(groupToEdit.getGroupName());
+        ArrayList<Person> personArrayList = groupToEdit.getGroupMembers();
+        Set<Tag> taglist = editGroupDescriptor.getTagList().orElse(groupToEdit.getTags());
+        return new Group(groupName, personArrayList, taglist);
     }
 
     /**
@@ -133,7 +124,46 @@ public class EditGroupCommand extends Command {
         }
 
         return index.equals(otherCmd.index)
-                && newGroupName.equals(otherCmd.newGroupName)
-                && tags.equals(otherCmd.tags);
+                && editGroupDescriptor.equals(otherCmd.editGroupDescriptor);
+    }
+
+    /**
+     * Stores the details to edit the group with. Each non-empty field value will replace the
+     * corresponding field value of the group.
+      */
+    public static class EditGroupDescriptor {
+        private String groupName;
+        private Set<Tag> tagList;
+        public EditGroupDescriptor() {}
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public EditGroupDescriptor(EditGroupDescriptor toCopy) {
+            setGroupName(toCopy.groupName);
+            setTagList(toCopy.tagList);
+        }
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(groupName, tagList);
+        }
+        public void setGroupName(String groupName) {
+            this.groupName = groupName;
+        }
+        public Optional<String> getGroupName() {
+            return Optional.ofNullable(groupName);
+        }
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTagList(Set<Tag> taglist) {
+            this.tagList = taglist != null ? new HashSet<>(taglist) : null;
+        }
+        public Optional<Set<Tag>> getTagList() {
+            return (tagList != null) ? Optional.of(Collections.unmodifiableSet(tagList)) : Optional.empty();
+        }
     }
 }

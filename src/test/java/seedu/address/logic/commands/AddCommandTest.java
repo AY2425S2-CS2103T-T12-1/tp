@@ -152,6 +152,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void editPerson(Person target, EditCommand.EditPersonDescriptor editPersonDescriptor) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -184,6 +189,11 @@ public class AddCommandTest {
         @Override
         public void setGroup(Group target, Group editedGroup) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void editGroup(Group target, EditGroupCommand.EditGroupDescriptor editGroupDescriptor) {
+            throw new AssertionError("This method should not be called");
         }
 
         @Override
