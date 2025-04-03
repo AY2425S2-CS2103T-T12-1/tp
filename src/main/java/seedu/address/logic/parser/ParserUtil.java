@@ -14,6 +14,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -54,6 +55,21 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses the String group name and validated it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given String violated Message Constraints for Group Name
+     */
+    public static String parseGroupName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!Group.isValidGroupName(trimmedName)) {
+            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedName;
     }
 
     /**

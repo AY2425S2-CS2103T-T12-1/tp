@@ -217,7 +217,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group) {
+        public void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group, Float penalty) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -237,6 +237,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void markAttendance(Person person, Group group, int week) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unmarkAttendance(Person person, Group group, int week) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Group getGroup(String groupName) {
             throw new AssertionError("This method should not be called.");
         }
@@ -244,6 +254,11 @@ public class AddCommandTest {
         @Override
         public Person getPerson(String personName) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Float getGrade(Person person, Group group, String assignmentName) {
+            throw new AssertionError("This method should not be called");
         }
     }
 

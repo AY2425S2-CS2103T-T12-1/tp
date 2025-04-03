@@ -91,7 +91,7 @@ public class EditGroupCommand extends Command {
         }
 
         Group groupToEdit = lastShownList.get(index.getZeroBased());
-        Group editedGroup = createEditedGroup(groupToEdit, newGroupName);
+        Group editedGroup = createEditedGroup(groupToEdit, newGroupName, tags);
 
         if (model.hasGroup(editedGroup)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
@@ -108,11 +108,11 @@ public class EditGroupCommand extends Command {
      * @param newGroupName The new name for the group.
      * @return A new Group object with the updated name and existing members.
      */
-    private static Group createEditedGroup(Group groupToEdit, String newGroupName) {
+    private static Group createEditedGroup(Group groupToEdit, String newGroupName, Collection<Tag> tags) {
         assert groupToEdit != null;
 
         ArrayList<Person> list = groupToEdit.getGroupMembers();
-        return new Group(newGroupName, list);
+        return new Group(newGroupName, list, tags);
     }
 
     /**

@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
@@ -21,17 +22,18 @@ public class GradeAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "grade-assignment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Grade the assignment of Person in a Group"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Grade the assignment of Person in a Group "
             + "by their name, their group and the assignment name as well as a float score"
             + "Parameters: "
-            + "[" + PREFIX_PERSON + "NAME] "
-            + "[" + PREFIX_GROUP + "GROUP NAME] "
-            + "[" + PREFIX_ASSIGNMENT + "ASSIGNMENT NAME] "
-            + "[" + PREFIX_SCORE + "SCORE]\n"
+            + PREFIX_PERSON + "NAME "
+            + PREFIX_GROUP + "GROUP NAME "
+            + PREFIX_ASSIGNMENT + "ASSIGNMENT NAME "
+            + PREFIX_SCORE + "SCORE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PERSON + "John Doe "
             + PREFIX_GROUP + "CS2103T "
-            + PREFIX_ASSIGNMENT + "Submit UML";
+            + PREFIX_ASSIGNMENT + "HW 1 "
+            + PREFIX_SCORE + "70.3";
     public static final String MESSAGE_GRADE_ASSIGNMENT_SUCCESS = "Graded Assignment %s for %s, %s with %f score";
     private final String personName;
     private final String groupName;
@@ -68,9 +70,14 @@ public class GradeAssignmentCommand extends Command {
         } catch (GroupNotFoundException e) {
             throw new CommandException("Group not found!");
         }
-        model.gradeAssignment(person, group, this.assignmentName, this.score);
+        try {
+            model.gradeAssignment(person, group, this.assignmentName, this.score);
+        } catch (AssignmentNotFoundException e) {
+            throw new CommandException("Assignment not in group!");
+        }
+        Float finalScore = model.getGrade(person, group, this.assignmentName);
         return new CommandResult(String.format(MESSAGE_GRADE_ASSIGNMENT_SUCCESS, assignmentName, personName,
-                groupName, score));
+                groupName, finalScore));
     }
 
     @Override

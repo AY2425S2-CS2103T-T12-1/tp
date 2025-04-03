@@ -36,8 +36,8 @@ public class UnmarkAttendanceCommandParser implements Parser<UnmarkAttendanceCom
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON, PREFIX_GROUP, PREFIX_WEEK);
-        String personName = argMultimap.getValue(PREFIX_PERSON).get();
-        String groupName = argMultimap.getValue(PREFIX_GROUP).get();
+        String personName = ParserUtil.parseName(argMultimap.getValue(PREFIX_PERSON).get()).toString();
+        String groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP).get());
         int week = Integer.parseInt(argMultimap.getValue(PREFIX_WEEK).get());
         return new UnmarkAttendanceCommand(personName, groupName, week);
     }

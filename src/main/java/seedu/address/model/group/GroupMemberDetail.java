@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import javafx.scene.layout.Region;
@@ -20,7 +21,6 @@ import seedu.address.ui.UiPart;
  * A {@code GroupMemberDetail} consists of a person, group, attendance, and assignment grades.
  */
 public class GroupMemberDetail implements Result {
-
     /**
      * Different roles of memebers in a group
      */
@@ -207,10 +207,22 @@ public class GroupMemberDetail implements Result {
     }
 
     /**
-     * Assigns a specified grade to an Assignment
+     * Assigns a specified grade to an Assignment.
+     * Calculates a simple penalty for late submission
      */
     public void gradeAssignment(Assignment assignment, Float score) {
+        Float penalty = assignment.getPenalty();
+        if (LocalDate.now().isAfter(assignment.getDeadline())) {
+            score = score * penalty;
+        }
         grades.put(assignment, score);
+    }
+
+    /**
+     * Gets the grade for the specified assignment.
+     */
+    public Float getAssignmentGrade(Assignment assignment) {
+        return this.grades.get(assignment);
     }
 
     /**

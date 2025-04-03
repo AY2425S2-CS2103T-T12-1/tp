@@ -36,9 +36,9 @@ public class GradeAssignmentCommandParser implements Parser<GradeAssignmentComma
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON, PREFIX_GROUP, PREFIX_ASSIGNMENT, PREFIX_SCORE);
-        String personName = argMultimap.getValue(PREFIX_PERSON).get();
-        String groupName = argMultimap.getValue(PREFIX_GROUP).get();
-        String assignmentName = argMultimap.getValue(PREFIX_ASSIGNMENT).get();
+        String personName = ParserUtil.parseName(argMultimap.getValue(PREFIX_PERSON).get()).toString();
+        String groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP).get());
+        String assignmentName = ParserUtil.parseName(argMultimap.getValue(PREFIX_ASSIGNMENT).get()).toString();
         Float score = Float.parseFloat(argMultimap.getValue(PREFIX_SCORE).get());
         return new GradeAssignmentCommand(personName, groupName, assignmentName, score);
 

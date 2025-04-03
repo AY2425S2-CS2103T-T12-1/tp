@@ -39,7 +39,7 @@ public class Group implements Result {
     /**
      * Regular expression to validate group names.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum} ]*";
 
     /**
      * The name of the group.
@@ -294,13 +294,13 @@ public class Group implements Result {
      * @param assignmentName The name of the assignment
      * @return The desired assignment if found
      */
-    public Assignment getAssignment(String assignmentName) {
+    public Assignment getAssignment(String assignmentName) throws AssignmentNotFoundException {
         for (Assignment a: assignments) {
             if (a.getName().equals(assignmentName)) {
                 return a;
             }
         }
-        return null;
+        throw new AssignmentNotFoundException();
     }
 
     /**
@@ -333,8 +333,8 @@ public class Group implements Result {
      * @param assignmentName The assignment name.
      * @param deadline A {@code LocalDate} object specifying the assignment deadline.
      */
-    public void addAssignment(String assignmentName, LocalDate deadline) {
-        Assignment assignment = new Assignment(assignmentName, deadline);
+    public void addAssignment(String assignmentName, LocalDate deadline, Float penalty) {
+        Assignment assignment = new Assignment(assignmentName, deadline, penalty);
         assignments.add(assignment);
     }
 
@@ -372,6 +372,36 @@ public class Group implements Result {
         }
         throw new AssignmentNotFoundException();
     }
+    /**
+     * Marks attendance of a person for a specified week.
+     *
+     * @param person The person to mark the attendance
+     * @param week A valid week.
+     * @throws PersonNotFoundException
+     */
+    public void markAttendance(Person person, int week) throws PersonNotFoundException {
+        if (!groupMembers.containsKey(person)) {
+            throw new PersonNotFoundException();
+        }
+        GroupMemberDetail groupMemberDetail = groupMembers.get(person);
+        groupMemberDetail.markAttendance(week);
+    }
+
+    /**
+     * Unmarks attendance of a person for a specified week.
+     *
+     * @param person The person to mark the attendance
+     * @param week A valid week.
+     * @throws PersonNotFoundException
+     */
+    public void unmarkAttendance(Person person, int week) throws PersonNotFoundException {
+        if (!groupMembers.containsKey(person)) {
+            throw new PersonNotFoundException();
+        }
+        GroupMemberDetail groupMemberDetail = groupMembers.get(person);
+        groupMemberDetail.unmarkAttendance(week);
+    }
+
 
     /**
      * Returns a string representation of the group in the format "[GroupName]".
