@@ -3,11 +3,13 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ArrayListMap;
 import seedu.address.model.AddressBook;
@@ -27,6 +29,8 @@ class JsonAdaptedGroup {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
 
     private final String name;
+
+    private final Logger logger = LogsCenter.getLogger(JsonAdaptedGroup.class);
 
     private final ArrayListMap<String, JsonAdaptedGroupMemberDetails> groupMembers = new ArrayListMap<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -88,6 +92,7 @@ class JsonAdaptedGroup {
                 modelGroupMembers.put(person, groupMemberDetail);
             } catch (PersonNotFoundException e) {
                 // Person not found in addressbook, remove from group as well.
+                logger.info("Person in Group datafile not found in Address Book:" + personName + ". Removing from Group data.");
                 continue;
             }
         }

@@ -127,11 +127,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
         persons.setPerson(target, editedPerson);
         for (Group group : groups) {
-            try {
+            if (group.contains(target)) {
                 group.setGroupMember(target, editedPerson);
-            } catch (PersonNotFoundException e) {
-                // Group does not contain the person affected.
-                continue;
             }
         }
     }
