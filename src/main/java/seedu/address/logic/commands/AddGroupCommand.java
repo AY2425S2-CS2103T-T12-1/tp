@@ -26,17 +26,15 @@ public class AddGroupCommand extends Command {
      */
     public static final String COMMAND_WORD = "add-group";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a new group to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + "[" + PREFIX_TAG + "TAGS]\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "CS2103T T12"
-            + PREFIX_TAG + "CS Mod";
+    public static final String MESSAGE_USAGE = String.format("""
+                    %s: Adds a new group to the group list. Useful for adding new tutorial groups.
+                    Parameters: %sGROUP_NAME [%sTAG]...
+                    Example: %s %sCS2103T T12 %sCS""",
+            COMMAND_WORD, PREFIX_NAME, PREFIX_TAG, COMMAND_WORD, PREFIX_NAME, PREFIX_TAG);
 
     private static final String MESSAGE_SUCCESS = "New group added: %1$s";
-    private static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";
+    private static final String MESSAGE_DUPLICATE_GROUP = "Another group with the same name"
+            + " already exists in the address book!";
 
     /**
      * Name of the new group to be added.

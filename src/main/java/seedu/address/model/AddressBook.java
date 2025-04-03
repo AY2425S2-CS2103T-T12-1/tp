@@ -249,8 +249,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds assignment to the group specified.
      */
-    public void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group, Float penalty) {
-        group.addAssignment(assignmentName, deadline, penalty);
+    public Assignment addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group, Float penalty) {
+        return group.addAssignment(assignmentName, deadline, penalty);
     }
 
     /**
@@ -269,6 +269,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void editAssignment(String assignmentName, String newName, LocalDate deadline, Group group, Float penalty) {
         group.editAssignment(assignmentName, newName, deadline, penalty);
+    }
+
+    /**
+     * Checks if the assignment is in the group specified.
+     */
+    public boolean isAssignmentInGroup(String assignmentName, Group group) {
+        return group.containsAssignment(assignmentName);
     }
 
     /**

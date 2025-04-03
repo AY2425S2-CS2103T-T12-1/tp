@@ -14,7 +14,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
-import seedu.address.model.assignment.exceptions.DuplicateAssignmentsException;
+import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 
@@ -104,7 +104,7 @@ public class EditAssignmentCommand extends Command {
             model.editAssignment(name, newName, deadline, group, penalty);
         } catch (AssignmentNotFoundException e) {
             throw new CommandException("Assignment not found!");
-        } catch (DuplicateAssignmentsException d) {
+        } catch (DuplicateAssignmentException d) {
             throw new CommandException(d.getMessage());
         }
 

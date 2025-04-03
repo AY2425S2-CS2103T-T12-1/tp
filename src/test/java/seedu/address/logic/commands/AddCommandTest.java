@@ -23,6 +23,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -227,7 +228,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group, Float penalty) {
+        public Assignment addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group, Float penalty) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -239,6 +240,11 @@ public class AddCommandTest {
         @Override
         public void editAssignment(String assignmentName, String newName, LocalDate deadline, Group group,
                 Float penalty) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isAssignmentInGroup(String assignmentName, Group group) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -270,6 +276,11 @@ public class AddCommandTest {
         @Override
         public Float getGrade(Person person, Group group, String assignmentName) {
             throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean isPersonInGroup(Person person, Group group) {
+            return false;
         }
     }
 

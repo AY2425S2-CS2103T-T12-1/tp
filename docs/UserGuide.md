@@ -84,8 +84,7 @@ Format: `help`
 ### Adding a person: `add`
 
 Adds a person to the person list.
-
-![Add command](images/AddCommand.png)
+Useful for adding details of your students.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -98,23 +97,28 @@ A person can have any number of tags (including 0)
 
 Examples:
 
-- `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077`
+- `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077 t/friends`
 - `add n/Jeff Bezos p/12345678 t/friend e/jeffb@amazon.com a/21 Lower Kent Ridge Rd, Singapore 119077`
+
+Example of result of `add` command:
+
+![Add command](images/AddCommand.png)
 
 ### Deleting a person: `delete`
 
 <!-- TODO: add an image depicting deleting a person -->
 
 Deletes the specified person from the person list.
+Useful for removing the details of someone who is no longer a student.
 
 Format: `delete INDEX`
 
-- Deletes the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- `INDEX` refers to the index number of the person in the last displayed person list. It **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd person in the person list.
-- `find Jensen` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+- `list` followed by `delete 2` deletes the second person in the person list.
+- `find Jensen` followed by `delete 1` deletes the first person in the results of the `find` command.
 
 ### Editing a person: `edit`
 
@@ -122,7 +126,7 @@ Edits the details of the specified person in the person list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-- Edits the details of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- `INDEX` refers to the index number of the person in the last displayed person list. It **must be a positive integer** 1, 2, 3, …​
 - You must fill in at least one of the optional fields.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed, e.g., if the person at index `2` currently has the tag `frenemy`, and we run the command `edit 2 t/enemy`, the tag `frenemy` will be removed, and a new tag `enemy` will be added.
@@ -133,8 +137,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 Examples:
 
 - `edit 1 p/91234567 e/jensenh@yahoo.com` Edits the phone number and email address of the 1st person to be `91234567` and `jensenh@yahoo.com` respectively.
-- `edit 2 n/Jeff B3z0s t/` Edits the name of the 2nd person to be `Jeff B3z0s` and clears all existing tags.
-- `edit 2 n/Jeff B3z0s t/friend` Edits the name of the 2nd person to be `Jeff B3z0s`, clears all existing tags, and adds the tag `friend`.
+- `edit 2 n/Jeff Bezos t/` Edits the name of the 2nd person to be `Jeff Bezos` and clears all existing tags.
+- `edit 2 n/Jeff Bezos t/friend` Edits the name of the 2nd person to be `Jeff Bezos`, clears all existing tags, and adds the tag `friend`.
 
 ### Listing all persons: `list`
 
@@ -144,9 +148,9 @@ Format: `list`
 
 ### Finding persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain any of the specified keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 - The search is case-insensitive, e.g., `jensen` will match `Jensen`.
 - The order of the keywords does not matter. e.g. `Huang Jensen` will match `Jensen Huang`.
@@ -159,7 +163,9 @@ Examples:
 - `find huang jensen` returns `huang jensen`, `jensen huang`, and `Jensen Huang`.
 - `find huang bezos` returns `Jensen Huang` and `Jeff Bezos`.
 
-  ![Result for 'find huang bezos'](images/findHuangBezosResult.png)
+Example of result of `find huang bezos` command:
+
+![Result for 'find huang bezos'](images/findHuangBezosResult.png)
 
 ### Deleting all persons: `clear`
 
@@ -170,27 +176,33 @@ Format: `clear`
 ### Adding a new group: `add-group`
 
 Adds a new group to the group list.
+Useful for adding new tutorial groups.
 
-Format: `add-group n/GROUP_NAME`
+Format: `add-group n/GROUP_NAME [t/TAG]...`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A group can have any number of tags (including 0)
+</div>
 
 - Group names must be alphanumeric and can contain spaces, e.g., `CS2103T T12`, `CS2101 T13`.
 - Group names must be unique.
 
 Examples:
 
-- `add-group n/CS2103T T12` creates a group with name `CS2103T T12`.
+- `add-group n/CS2103T T12 t/CS` creates a group with name `CS2103T T12` and the tag `CS`.
 
 ### Deleting a group: `delete-group`
 
 Deletes the specified group from the group list.
+Useful for removing a tutorial group that is no longer needed.
 
 Format: `delete-group INDEX`
 
-- Deletes the group at the specified `INDEX`. The index refers to the index number shown in the last displayed group list. The index **must be a positive integer** 1, 2, 3, …​
+- `INDEX` refers to the index number of the group in the last displayed group list. It **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
-- `delete-group 1` deletes the group with index `1` in the last shown group list.
+- `delete-group 2` deletes the group with index `2` in the last shown group list.
 
 ### Editing a group: `edit-group`
 
@@ -198,7 +210,7 @@ Edits the specified group details in the group list.
 
 Format: `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​`
 
-- Edits the group details at the specified `INDEX`. The index refers to the index number shown in the last displayed group list. The index **must be a positive integer** 1, 2, 3, …​
+- `INDEX` refers to the index number of the group in the last displayed group list. It **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the group will be removed, e.g., if the group at index `2` currently has the tag `gaming`, and we run the command `edit-group 2 t/study`, the tag `gaming` will be removed, and a new tag `study` will be added.
@@ -218,7 +230,7 @@ Shows a list of all groups in the group list along with their information, e.g.,
 
 Format: `list-group`
 
-Examples:
+Example of the result of the `list-group` command:
 
 ![ResultOfList](images/listGroupResults.png)
 
@@ -265,7 +277,7 @@ Examples:
 
 ### Showing group details: `show-group-details`
 
-Shows all the core details regarding the specified group.
+Shows the key details regarding the specified group.
 
 Format: `show-group-details INDEX`
 
@@ -277,15 +289,15 @@ Format: `show-group-details INDEX`
 
 Examples:
 
-- `show-group-details 1` shows all the details of the group with index `1` in the last shown group list.
+- `show-group-details 2` shows all the details of the group with index `2` in the last shown group list.
 
-### Marking attendance: `mark-attendance`
+### Marking the attendance of a person: `mark-attendance`
 
 Marks the attendance of the specified person in the specified group for the specified week.
 
-Format: `mark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER`
+Format: `mark-attendance P/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER`
 
-- `NAME` is the name of the student.
+- `PERSON_NAME` is the name of the student.
 - `GROUP_NAME` is the name of the group.
 - `WEEK_NUMBER` must be a positive integer between 1 and 13 (inclusive).
 
@@ -293,7 +305,7 @@ Example:
 
 - `mark-attendance P/Jensen Huang g/CS2103T T12 w/10` marks the attendance for `Jensen Huang` in `CS2103T T12` for week `10`.
 
-### Unmarking attendance: `unmark-attendance`
+### Unmarking the attendance of a person: `unmark-attendance`
 
 Removes the attendance record of the specified person in the specified group for the specified week.
 
@@ -307,7 +319,7 @@ Example:
 
 - `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10` unmarks the attendance for `Jensen Huang` in `CS2103T T12` for week `10`.
 
-### Showing attendance: `show-attendance`
+### Showing the attendance records for a person: `show-attendance`
 
 Displays the attendance record of the specified person in the specified group.
 
@@ -319,6 +331,49 @@ Format: `show-attendance P/NAME g/GROUP_NAME`
 Example:
 
 - `show-attendance P/Jensen Huang g/CS2103T T12` displays the attendance for `Jensen Huang` in `CS2103T T12`.
+
+### Adding an assignment in a group: `add-assignment`
+
+Adds a new assignment in the specified group.
+
+Format: `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE l/LATE_PENALTY`
+
+- `ASSIGNMENT_NAME` is the name of the assignment.
+- `GROUP_NAME` is the name of the group.
+- `DEADLINE` is the deadline of the assignment in the format `DD-MM-YYYY`.
+- `LATE_PENALTY` is a decimal between `0.0` and `1.0` (inclusive) representing the penalty multiplier for late submissions.
+
+Example:
+
+- `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025 l/0.875` adds an assignment named `HW 1` to the group `CS2103T T12` with a deadline of `21-04-2025` and a late penalty multiplier of `87.5%`.
+
+### Deleting an assignment in a group: `add-assignment`
+
+Deletes an assignment in the specified group.
+
+Format: `delete-assignment n/ASSIGNMENT_NAME g/GROUP_NAME`
+
+- `ASSIGNMENT_NAME` is the name of the assignment.
+- `GROUP_NAME` is the name of the group.
+
+Example:
+
+- `delete-assignment n/HW 1 g/CS2103T T12` deletes the assignment named `HW 1` in the group `CS2103T T12`.
+
+### Grading an assignment in a group: `grade-assignment`
+
+Grades the assignment submission by a person in a group.
+
+Format: `delete-assignment P/PERSON_NAME g/GROUP_NAME A/ASSIGNMENT_NAME s/FLOAT_SCORE`
+
+- `ASSIGNMENT_NAME` is the name of the assignment.
+- `PERSON_NAME` is the name of the person.
+- `GROUP_NAME` is the name of the group.
+- `FLOAT_SCORE` is a decimal representing the score of the assignment submission.
+
+Example:
+
+- `grade-assignment P/Jensen Huang g/CS2103T T12 A/HW 1 s/70.3` grades the assignment `HW 1` for `Jensen Huang` in `CS2103T T12` with a score of `70.3`.
 
 ### Exiting the program: `exit`
 
@@ -363,7 +418,7 @@ Therefore, edit the data file only if you are confident that you can update it c
 ## Command summary
 
 | Action                 | Format, Examples                                                                                                                                                  |
-|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077` |
 | **Delete**             | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                |
 | **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/Jensen Huang e/jensenh@yahoo.com`                                       |
