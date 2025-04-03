@@ -22,18 +22,14 @@ public class GradeAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "grade-assignment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Grade the assignment of Person in a Group "
-            + "by their name, their group and the assignment name as well as a float score"
-            + "Parameters: "
-            + PREFIX_PERSON + "NAME "
-            + PREFIX_GROUP + "GROUP NAME "
-            + PREFIX_ASSIGNMENT + "ASSIGNMENT NAME "
-            + PREFIX_SCORE + "SCORE\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PERSON + "John Doe "
-            + PREFIX_GROUP + "CS2103T "
-            + PREFIX_ASSIGNMENT + "HW 1 "
-            + PREFIX_SCORE + "70.3";
+    public static final String MESSAGE_USAGE = String.format("""
+                    %s: Grades the assignment submission by a person in a group.
+                    Parameters: %sPERSON_NAME %sGROUP_NAME %sASSIGNMENT_NAME %sFLOAT_SCORE
+                    Example: %s %sJensen Huang %sCS2103T T12 %sHW 1 %s70.3
+                    """,
+            COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP, PREFIX_ASSIGNMENT, PREFIX_SCORE,
+            COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP, PREFIX_ASSIGNMENT, PREFIX_SCORE);
+
     public static final String MESSAGE_GRADE_ASSIGNMENT_SUCCESS = "Graded Assignment %s for %s, %s with %f score";
     private final String personName;
     private final String groupName;
@@ -43,10 +39,10 @@ public class GradeAssignmentCommand extends Command {
     /**
      * Creates a {@code GradeAssignmentCommand} to grade student assignment.
      *
-     * @param personName        Name of the person.
-     * @param groupName         Name of the group.
-     * @param assignmentName    Name of the assignment.
-     * @param score             Score that person obtained.
+     * @param personName     Name of the person.
+     * @param groupName      Name of the group.
+     * @param assignmentName Name of the assignment.
+     * @param score          Score that person obtained.
      */
     public GradeAssignmentCommand(String personName, String groupName, String assignmentName, Float score) {
         requireAllNonNull(personName, groupName, assignmentName, score);
@@ -55,6 +51,7 @@ public class GradeAssignmentCommand extends Command {
         this.assignmentName = assignmentName;
         this.score = score;
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_IN_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 
@@ -18,14 +19,14 @@ import seedu.address.model.person.Person;
 public class DeletePersonFromGroupCommand extends Command {
     public static final String COMMAND_WORD = "delete-from-group";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a person from the group. "
-            + "Example: "
-            + COMMAND_WORD + " "
-            + PREFIX_PERSON + "Alex Yeoh "
-            + PREFIX_GROUP + "Group 1";
+    public static final String MESSAGE_USAGE = String.format("""
+                    %s: Removes the specified person from the specified group. Useful for removing a student who is no longer in the tutorial group.
+                    Parameters: %s %sPERSON_NAME %sGROUP_NAME
+                    Example: %s %sJensen Huang %sCS2103T T12
+                    """,
+            COMMAND_WORD, COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP, COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP);
 
-    public static final String MESSAGE_SUCCESS = "Person removed from group: %1$s";
-    public static final String MESSAGE_PERSON_NONEXIST = "This person does not exist in the group";
+    public static final String MESSAGE_SUCCESS = "Removed person from group:\n%1$s";
     /**
      * Index of Person to be added
      */
@@ -39,7 +40,7 @@ public class DeletePersonFromGroupCommand extends Command {
      * Constructor for AddPersonToGroupCommand that takes two Index identifiers for
      * Person and Group
      *
-      * @param toDelete Index of Person to be added
+     * @param toDelete        Index of Person to be added
      * @param toBeDeletedFrom Index of Group to be added to
      */
     public DeletePersonFromGroupCommand(String toDelete, String toBeDeletedFrom) {
@@ -81,7 +82,7 @@ public class DeletePersonFromGroupCommand extends Command {
             model.deletePersonFromGroup(personToDelete, groupToBeDeletedFrom);
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToDelete)));
         } else {
-            throw new CommandException(MESSAGE_PERSON_NONEXIST);
+            throw new CommandException(MESSAGE_PERSON_NOT_IN_GROUP);
         }
     }
 }

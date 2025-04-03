@@ -18,14 +18,17 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 public class AddPersonToGroupCommand extends Command {
     public static final String COMMAND_WORD = "add-to-group";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the group. "
-            + "Example: "
-            + COMMAND_WORD + " "
-            + PREFIX_PERSON + "Alex Yeoh "
-            + PREFIX_GROUP + "Group 1";
+    public static final String MESSAGE_USAGE = String.format("""
+            %s: Adds the specified person to the specified group.
+            Parameters: %sPERSON_NAME %sGROUP_NAME
+            Example: add-to-group P/Jensen Huang g/CS2103T T12
+            """, COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP);
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the group";
+    public static final String MESSAGE_SUCCESS = """
+            Added person to group:
+            Person: %1$s
+            Group: %2$s""";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the group!";
 
     /**
      * Index of Person to be added
@@ -66,7 +69,11 @@ public class AddPersonToGroupCommand extends Command {
             throw new CommandException("Group not found!");
         }
 
+        if (model.isPersonInGroup(person, group)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
         model.addPersonToGroup(person, group);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(person)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(person), Messages.format(group)));
     }
 }

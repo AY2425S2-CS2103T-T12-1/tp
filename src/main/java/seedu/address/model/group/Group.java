@@ -16,6 +16,7 @@ import seedu.address.commons.util.ArrayListMap;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
+import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -332,12 +333,8 @@ public class Group implements Result {
      * @return True if the Assignment exists and false otherwise.
      */
     public boolean containsAssignment(String assignmentName) {
-        for (Assignment a: assignments) {
-            if (a.getName().equals(assignmentName)) {
-                return true;
-            }
-        }
-        return false;
+        return assignments.stream()
+                .anyMatch(a -> a.getName().equals(assignmentName));
     }
 
     /**
@@ -346,9 +343,13 @@ public class Group implements Result {
      * @param assignmentName The assignment name.
      * @param deadline A {@code LocalDate} object specifying the assignment deadline.
      */
-    public void addAssignment(String assignmentName, LocalDate deadline, Float penalty) {
+    public Assignment addAssignment(String assignmentName, LocalDate deadline, Float penalty) {
         Assignment assignment = new Assignment(assignmentName, deadline, penalty);
+        if (containsAssignment(assignmentName)) {
+            throw new DuplicateAssignmentException();
+        }
         assignments.add(assignment);
+        return assignment;
     }
 
     /**

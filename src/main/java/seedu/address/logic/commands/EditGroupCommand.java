@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,13 +31,14 @@ public class EditGroupCommand extends Command {
     /**
      * Usage message for the command.
      */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the group identified "
-            + "by the index number used in the displayed group list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NAME + "CS2103T T12-1 ";
+    public static final String MESSAGE_USAGE = String.format("""
+            %s: Edits the specified group details in the group list.
+            Parameters: INDEX [%sGROUP_NAME] [%sTAG]...
+            Notes:
+            * INDEX refers to the index number of the group in the last displayed group list. It must be a positive integer 1, 2, 3,
+            * Existing values will be updated to the input values.
+            Example: %s 1 %sCS2103T T12 t/study
+            """, COMMAND_WORD, PREFIX_NAME, PREFIX_TAG, COMMAND_WORD, PREFIX_NAME);
 
     /**
      * Success message for editing a group.
@@ -46,7 +48,7 @@ public class EditGroupCommand extends Command {
     /**
      * Error message if a duplicate group exists in the address book.
      */
-    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Another group with the same name already exists in the address book!";
 
     /**
      * Index of the group to be edited.

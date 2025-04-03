@@ -2,6 +2,7 @@ package seedu.address.model.assignment;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -28,7 +29,7 @@ public class Assignment {
     /**
      * Constructs a {@code Assignment}.
      *
-     * @param name The assignment name.
+     * @param name     The assignment name.
      * @param deadline deadline of the assignment.
      */
     public Assignment(String name, LocalDate deadline, Float penalty) {
@@ -49,9 +50,11 @@ public class Assignment {
     public LocalDate getDeadline() {
         return this.deadline;
     }
+
     public Float getPenalty() {
         return this.penalty;
     }
+
     /**
      * Computes the hash code for this assignment based on its name and group.
      *
@@ -60,5 +63,10 @@ public class Assignment {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return MessageFormat.format("Assignment'{'name=''{0}'', deadline={1}, penalty={2}'}'", name, deadline, penalty);
     }
 }
