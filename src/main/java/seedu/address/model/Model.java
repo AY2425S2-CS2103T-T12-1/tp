@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditGroupCommand.EditGroupDescriptor;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
@@ -87,6 +89,7 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+    void editPerson(Person target, EditPersonDescriptor editPersonDescriptor);
 
     /**
      * Returns an unmodifiable view of the filtered person list
@@ -107,6 +110,7 @@ public interface Model {
     void deleteGroup(Group target);
 
     void setGroup(Group target, Group editedGroup);
+    void editGroup(Group target, EditGroupDescriptor editGroupDescriptor);
 
     /**
      * Returns a unmodifiable view of the filtered group list

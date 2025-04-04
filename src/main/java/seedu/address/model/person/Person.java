@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javafx.scene.layout.Region;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.PersonCard;
 import seedu.address.ui.Result;
@@ -21,13 +22,13 @@ import seedu.address.ui.UiPart;
 public class Person implements Result {
 
     // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
+    private Name name;
+    private Phone phone;
+    private Email email;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private Address address;
+    private Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -44,17 +45,29 @@ public class Person implements Result {
     public Name getName() {
         return name;
     }
+    public void setName(Name name) {
+        this.name = name;
+    }
 
     public Phone getPhone() {
         return phone;
+    }
+    public void setPhone(Phone phone) {
+        this.phone = phone;
     }
 
     public Email getEmail() {
         return email;
     }
+    public void setEmail(Email email) {
+        this.email = email;
+    }
 
     public Address getAddress() {
         return address;
+    }
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     /**
@@ -63,6 +76,9 @@ public class Person implements Result {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 
     /**
@@ -121,5 +137,16 @@ public class Person implements Result {
     @Override
     public UiPart<Region> createCard(int displayedIndex) {
         return new PersonCard(this, displayedIndex);
+    }
+
+    /**
+     * Edits own parameter based on the editPersonDescriptor
+     */
+    public void editSelf(EditCommand.EditPersonDescriptor editPersonDescriptor) {
+        this.name = editPersonDescriptor.getName().orElse(this.getName());
+        this.phone = editPersonDescriptor.getPhone().orElse(this.getPhone());
+        this.address = editPersonDescriptor.getAddress().orElse(this.getAddress());
+        this.email = editPersonDescriptor.getEmail().orElse(this.getEmail());
+        this.tags = editPersonDescriptor.getTags().orElse(this.getTags());
     }
 }

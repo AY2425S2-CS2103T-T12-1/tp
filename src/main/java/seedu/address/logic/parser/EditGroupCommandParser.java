@@ -5,13 +5,11 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Collection;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.EditGroupCommand;
+import seedu.address.logic.commands.EditGroupCommand.EditGroupDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new {@code EditGroupCommand} object.
@@ -42,16 +40,16 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TAG);
 
-        String newGroupName = "";
+        EditGroupDescriptor editGroupDescriptor = new EditGroupDescriptor();
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            newGroupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_NAME).get());
+            editGroupDescriptor.setGroupName(ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_NAME).get()));
         }
 
-        Collection<Tag> tags = null;
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            tags = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).get();
+            editGroupDescriptor.setTagList(ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).get());
         }
 
-        return new EditGroupCommand(index, newGroupName, tags);
+        return new EditGroupCommand(index, editGroupDescriptor);
     }
 }
