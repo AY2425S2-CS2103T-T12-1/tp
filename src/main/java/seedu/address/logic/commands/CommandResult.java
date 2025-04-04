@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.group.Group;
 
 /**
  * Represents the result of a command execution.
@@ -18,6 +19,10 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
+    /** Whether the detailBox should be shown */
+    private final boolean showGroupDetails;
+    /** The group to be shown */
+    private final Group groupToShow;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -26,6 +31,8 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showGroupDetails = false;
+        this.groupToShow = null;
     }
 
     /**
@@ -34,6 +41,17 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
+    }
+
+    /**
+     * Construct a {@code CommandResult} with the specified {@code Group} to show.
+     */
+    public CommandResult(String feedbackToUSer, boolean showGroupDetails, Group groupToShow) {
+        this.groupToShow = groupToShow;
+        this.showGroupDetails = showGroupDetails;
+        this.feedbackToUser = feedbackToUSer;
+        this.showHelp = false;
+        this.exit = false;
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +64,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isShowGroupDetails() {
+        return showGroupDetails;
+    }
+
+    public Group getGroupToShow() {
+        return groupToShow;
     }
 
     @Override
