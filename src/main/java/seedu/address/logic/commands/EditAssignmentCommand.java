@@ -28,20 +28,13 @@ public class EditAssignmentCommand extends Command {
      */
     public static final String COMMAND_WORD = "edit-assignment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a new assignment to the specified group. "
-            + "Parameters: "
-            + PREFIX_NAME + "ASSIGNMENT NAME "
-            + PREFIX_GROUP + "GROUP ["
-            + PREFIX_NEW_NAME + "NEW NAME] ["
-            + PREFIX_DATE + "DEADLINE] "
-            + "[" + PREFIX_LATE_PENALTY + "LATE PENALTY]\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "HW 1 "
-            + PREFIX_GROUP + "CS2103T T12 "
-            + PREFIX_NEW_NAME + "Assignment 1 "
-            + PREFIX_DATE + "21-04-2025 "
-            + PREFIX_LATE_PENALTY + "0.5\n";
+    public static final String MESSAGE_USAGE = String.format("""
+                    %s: Edits the assignment in the specified group.
+                    Parameters: %sASSIGNMENT_NAME %sGROUP_NAME [%sNEW_NAME] [%sDEADLINE] [%sLATE_PENALTY]
+                    Example: %s %sHW 1 %sCS2103T T12 %sHW 1 %s21-04-2025 %s0.5
+                    """,
+            COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP, PREFIX_NEW_NAME, PREFIX_DATE, PREFIX_LATE_PENALTY,
+            COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP, PREFIX_NEW_NAME, PREFIX_DATE, PREFIX_LATE_PENALTY);
 
     private static final String MESSAGE_SUCCESS = "Assignment in group %s has been edited: %s";
 
@@ -74,7 +67,7 @@ public class EditAssignmentCommand extends Command {
     /**
      * Creates an EditAssignmentCommand to edit an assignment.
      *
-     * @param name The name of the assignment to be added.
+     * @param name      The name of the assignment to be added.
      * @param groupName The name of the group to be added.
      */
     public EditAssignmentCommand(String name, String groupName, String newName, LocalDate deadline, Float penalty) {
