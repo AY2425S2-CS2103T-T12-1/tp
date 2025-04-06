@@ -169,8 +169,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 #### Examples
 
-- `find huang jensen` returns `huang jensen`, `jensen huang`, and `Jensen Huang`.
-- `find huang bezos` returns `Jensen Huang` and `Jeff Bezos`.
+- `find huang jensen` may output `huang jensen`, `jensen huang`, and `Jensen Huang`.
+- `find huang bezos` may output `Jensen Huang` and `Jeff Bezos`.
 
 #### Expected output
 
@@ -267,8 +267,8 @@ Format: `find-group KEYWORD [MORE_KEYWORDS]`
 
 #### Examples
 
-- `find-group T12` returns `T12`, `t12`, and `CS2103T T12`.
-- `find-group t12 t13` returns `CS2103T T12` and `CS2103T T13`.
+- `find-group T12` may output `T12`, `t12`, and `CS2103T T12`.
+- `find-group t12 t13` may output `CS2103T T12` and `CS2103T T13`.
 
 ### Adding a person to a group: `add-to-group`
 
