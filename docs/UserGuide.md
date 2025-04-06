@@ -279,6 +279,7 @@ Format: `add-to-group n/PERSON_NAME g/GROUP_NAME`
 #### Notes
 
 - `PERSON_NAME` and `GROUP_NAME` are the names of a person and a group respectively.
+- For now, the person is assumed to be a student. We plan to support the addition of co-TAs and lecturers in the future.
 
 #### Examples
 
