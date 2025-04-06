@@ -193,6 +193,7 @@ public class Group implements Result {
             throw new PersonNotFoundException();
         }
         groupMembers.replaceKey(target, editedPerson);
+        groupMembers.computeIfPresent(editedPerson, (k, v) -> v.copy(editedPerson));
     }
 
     /**

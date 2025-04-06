@@ -71,7 +71,7 @@ public class GroupMemberDetail implements Result {
      * @param Group  A valid group.
      */
     public GroupMemberDetail(Person person, Group group) {
-        this(person, group, Role.Student);
+        this(person, group, Role.Student, new boolean[WEEKS_PER_SEMESTER]);
     }
 
     /**
@@ -83,13 +83,17 @@ public class GroupMemberDetail implements Result {
      * @param Group  A valid group.
      * @param Role   A valid role.
      */
-    public GroupMemberDetail(Person person, Group group, Role role) {
+    public GroupMemberDetail(Person person, Group group, Role role, boolean[] attendance) {
         requireAllNonNull(person, role);
         this.person = person;
         this.group = group;
         this.role = role;
-        this.attendance = new boolean[WEEKS_PER_SEMESTER];
+        this.attendance = attendance;
         this.grades = new ArrayListMap<>();
+    }
+
+    public GroupMemberDetail copy(Person newPerson) {
+        return new GroupMemberDetail(newPerson, this.group, this.role, this.attendance);
     }
 
     /**
