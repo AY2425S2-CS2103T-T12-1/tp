@@ -51,6 +51,9 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             tags = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).get();
         }
+        if (newGroupName == null && tags == null) {
+            throw new ParseException("At least one field to edit must be provided."); // EditCommand.MESSAGE_NOT_EDITED
+        }
 
         return new EditGroupCommand(index, newGroupName, tags);
     }
