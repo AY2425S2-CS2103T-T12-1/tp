@@ -118,7 +118,7 @@ public class EditGroupCommand extends Command {
         assert groupToEdit != null;
 
         ArrayList<Person> list = groupToEdit.getGroupMembers();
-        return new Group(newGroupName, list, tags);
+        return groupToEdit.createEditedGroup(newGroupName, tags);
     }
 
     /**

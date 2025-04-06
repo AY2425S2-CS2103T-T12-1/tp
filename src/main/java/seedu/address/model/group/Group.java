@@ -133,6 +133,10 @@ public class Group implements Result {
         this.assignments = assignments == null ? new ArrayList<>() : new ArrayList<>(assignments);
     }
 
+    public Group createEditedGroup(String newGroupName, Collection<Tag> tags) {
+        return new Group(newGroupName, groupMembers, tags, assignments);
+    }
+
     /**
      * Checks if the given string is a valid group name.
      *
