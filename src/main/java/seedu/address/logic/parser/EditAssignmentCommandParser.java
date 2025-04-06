@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_NAME;
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.EditAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -46,7 +47,10 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
         }
         Float penalty = null;
         if (argMultimap.getValue(PREFIX_LATE_PENALTY).isPresent()) {
-            penalty = Float.parseFloat(argMultimap.getValue(PREFIX_LATE_PENALTY).get());
+            penalty = ParserUtil.parsePenalty(argMultimap.getValue(PREFIX_LATE_PENALTY).get());
+        }
+        if (!CollectionUtil.isAnyNonNull(newName, deadline, penalty)) {
+            throw new ParseException(EditAssignmentCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditAssignmentCommand(assignmentName, groupName, newName, deadline, penalty);

@@ -36,6 +36,7 @@ public class EditAssignmentCommand extends Command {
             COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP, PREFIX_NEW_NAME, PREFIX_DATE, PREFIX_LATE_PENALTY,
             COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP, PREFIX_NEW_NAME, PREFIX_DATE, PREFIX_LATE_PENALTY);
 
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     private static final String MESSAGE_SUCCESS = "Assignment in group %s has been edited: %s";
 
     /**
