@@ -177,6 +177,11 @@ public class ParserUtil {
         return date;
     }
 
+    /**
+     * Parses {@code String} into a {@code Float} satisfying penalty constraints (between 0 and 1 inclusive).
+     *
+     * @throws ParseException if the penalty value is not valid.
+     */
     public static Float parsePenalty(String penaltyString) throws ParseException {
         requireNonNull(penaltyString);
         try {
