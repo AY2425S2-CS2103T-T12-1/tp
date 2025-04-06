@@ -47,7 +47,7 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
         }
         Float penalty = null;
         if (argMultimap.getValue(PREFIX_LATE_PENALTY).isPresent()) {
-            penalty = ParserUtil.parsePenalty(argMultimap.getValue(PREFIX_LATE_PENALTY).get());
+            penalty = Float.parseFloat(argMultimap.getValue(PREFIX_LATE_PENALTY).get());
         }
         if (!CollectionUtil.isAnyNonNull(newName, deadline, penalty)) {
             throw new ParseException(EditAssignmentCommand.MESSAGE_NOT_EDITED);
