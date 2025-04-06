@@ -42,7 +42,7 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TAG);
 
-        String newGroupName = "";
+        String newGroupName = null;
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             newGroupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_NAME).get());
         }

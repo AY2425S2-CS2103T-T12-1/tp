@@ -72,7 +72,7 @@ public class EditGroupCommand extends Command {
      * @param newGroupName The new name for the group.
      */
     public EditGroupCommand(Index index, String newGroupName, Collection<Tag> tags) {
-        requireAllNonNull(index, newGroupName);
+        requireAllNonNull(index);
 
         this.index = index;
         this.newGroupName = newGroupName;
@@ -96,14 +96,15 @@ public class EditGroupCommand extends Command {
         }
 
         Group groupToEdit = lastShownList.get(index.getZeroBased());
-        Group editedGroup = createEditedGroup(groupToEdit, newGroupName, tags);
+        String groupName = newGroupName == null ? groupToEdit.getGroupName() : newGroupName;
+        Group editedGroup = createEditedGroup(groupToEdit, groupName, tags);
 
         if (model.hasGroup(editedGroup)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
 
         model.setGroup(groupToEdit, editedGroup);
-        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, newGroupName));
+        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, groupName));
     }
 
     /**
