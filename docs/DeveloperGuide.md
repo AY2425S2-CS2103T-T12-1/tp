@@ -1029,5 +1029,3 @@ Currently, `mark-attendance` only allows the attendance of a single student and 
 
 ### Display groups that students are in
 When listing students currently, the list does not show which groups they are in. We plan to add this information in for this command so that tutors can see which group each student belongs to without going through all the groups he is in charge of.
-
-### Phone number validation

@@ -339,32 +339,30 @@ Example:
 
 Adds a new assignment in the specified group.
 
-Format: `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE l/LATE_PENALTY`
+Format: `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE`
 
 - `ASSIGNMENT_NAME` is the name of the assignment.
 - `GROUP_NAME` is the name of the group.
 - `DEADLINE` is the deadline of the assignment in the format `DD-MM-YYYY`.
-- `LATE_PENALTY` is a decimal between `0.0` and `1.0` (inclusive) representing the penalty multiplier for late submissions.
 
 Example:
 
-- `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025 l/0.875` adds an assignment named `HW 1` to the group `CS2103T T12` with a deadline of `21-04-2025` and a late penalty multiplier of `87.5%`.
+- `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025` adds an assignment named `HW 1` to the group `CS2103T T12` with a deadline of `21-04-2025`.
 
 ### Editing an assignment in a group: `edit-assignment`
 
 Edits details of the specified assignment in the specified group.
 
-Format: `edit-assignment n/ASSIGNMENT_NAME g/GROUP [N/NEW NAME] [d/DEADLINE] [l/LATE PENALTY]`
+Format: `edit-assignment n/ASSIGNMENT_NAME g/GROUP [N/NEW NAME] [d/DEADLINE]`
 
 - `ASSIGNMENT_NAME` is the name of the assignment.
 - `GROUP_NAME` is the name of the group.
 - `NEW NAME` is the new name of the assignment.
 - `DEADLINE` is the new deadline of the assignment in the format `DD-MM-YYYY`.
-- `LATE_PENALTY` is a decimal between `0.0` and `1.0` (inclusive) representing the new penalty multiplier for late submissions.
 
 Example:
 
-- `edit-assignment n/HW 1 g/CS2103T T12 N/Assignment 1 d/21-04-2025 l/0.5` renames the assignment named `HW 1` in the group `CS2103T T12` to `Assignment 1` with a deadline of `21-04-2025` and a late penalty multiplier of `50.0%`.
+- `edit-assignment n/HW 1 g/CS2103T T12 N/Assignment 1 d/21-04-2025` renames the assignment named `HW 1` in the group `CS2103T T12` to `Assignment 1` with a deadline of `21-04-2025`.
 
 ### Deleting an assignment in a group: `delete-assignment`
 
@@ -378,21 +376,6 @@ Format: `delete-assignment n/ASSIGNMENT_NAME g/GROUP_NAME`
 Example:
 
 - `delete-assignment n/HW 1 g/CS2103T T12` deletes the assignment named `HW 1` in the group `CS2103T T12`.
-
-### Grading an assignment in a group: `grade-assignment`
-
-Grades the assignment submission by a person in a group.
-
-Format: `delete-assignment P/PERSON_NAME g/GROUP_NAME A/ASSIGNMENT_NAME s/FLOAT_SCORE`
-
-- `ASSIGNMENT_NAME` is the name of the assignment.
-- `PERSON_NAME` is the name of the person.
-- `GROUP_NAME` is the name of the group.
-- `FLOAT_SCORE` is a decimal representing the score of the assignment submission.
-
-Example:
-
-- `grade-assignment P/Jensen Huang g/CS2103T T12 A/HW 1 s/70.3` grades the assignment `HW 1` for `Jensen Huang` in `CS2103T T12` with a score of `70.3`.
 
 ### Exiting the program: `exit`
 
@@ -455,9 +438,8 @@ Therefore, edit the data file only if you are confident that you can update it c
 | **Mark Attendance**    | `mark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `mark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                                         |
 | **Unmark Attendance**  | `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                                     |
 | **Show Attendance**    | `show-attendance P/NAME g/GROUP_NAME` <br> e.g. `show-attendance P/Jensen Huang g/CS2103T T12`                                                                            |
-| **Add Assignment**     | `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE l/LATE_PENALTY` <br> e.g. `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025 l/0.875`                            |
-| **Edit Assignment**    | `edit-assignment n/ASSIGNMENT NAME g/GROUP [N/NEW NAME] [d/DEADLINE] [l/LATE PENALTY]` <br> e.g. `edit-assignment n/HW 1 g/CS2103T T12 N/Assignment 1 d/21-04-2025 l/0.5` |
+| **Add Assignment**     | `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE` <br> e.g. `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025`                            |
+| **Edit Assignment**    | `edit-assignment n/ASSIGNMENT NAME g/GROUP [N/NEW NAME] [d/DEADLINE]` <br> e.g. `edit-assignment n/HW 1 g/CS2103T T12 N/Assignment 1 d/21-04-2025` |
 | **Delete Assignment**  | `delete-assignment n/ASSIGNMENT_NAME g/GROUP_NAME` <br> e.g. `delete-assignment n/HW 1 g/CS2103T T12`                                                                     |
-| **Grade Assignment**   | `grade-assignment P/PERSON_NAME g/GROUP_NAME A/ASSIGNMENT_NAME s/FLOAT_SCORE` <br> e.g. `grade-assignment P/Jensen Huang g/CS2103T T12 A/HW 1 s/70.3`                     |
 | **Help**               | `help`                                                                                                                                                                    |
 | **Exit**               | `exit`                                                                                                                                                                    |
