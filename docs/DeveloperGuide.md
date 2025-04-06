@@ -1007,4 +1007,26 @@ This shift from simple CRUD operations to relational logic and multi-level stora
 
 ## **Appendix: Planned Enhancements**
 
-To be updated at a later time.
+Team size: 5
+
+### Submission and grading of assignments
+Currently we have a way to add, delete and edit assignments, but no support for submission and grading of assignments, making the assignments feature rather useless at this point. Hence we have a planned enhancement to support submission and grading of assignments so that the assignment features make sense. This includes submission deadlines, which will add a specific submission time as a deadline rather than the current date deadline. The submission feature will allow TAs to record down the time that students submitted their assignments (which could be automated), and the grading feature will allow TAs to grade the students work, recording the grades down in the application.
+
+### Display of assignment data
+Currently assignments cannot be viewed as there is not much to be done with them without a grading feature. We plan to make them displayable together with the implementation of grading of assignments in the future so that the information is meaningful. This will be done via some sort of `list-assignments` command that will show what assignments are in the group, and for each student if they have submitted or not.
+
+### Nicer UI and output of command feedback
+Currently shows JSON output which is informative and clear for a technically inclined person, but does not look as nice on the UI. Future plan is to enhance the output format to be more visually appealing alongside a UI visual upgrade to display both person and group lists side-by-side for better information tracking. We also intend to make the feedback window dynamically sized so that error messages fit within the box and users will not need to scroll through, thus reducing friction when inputting wrong commands.
+
+### Support for TA and Professor Roles
+Currently all persons in the application are assumed to be students which is most important to track for a TA. We plan to add support for TA and Professor roles which would facilitate the feature on grading and submission of assignments. 
+
+### Listing Students in Sorted Name Order
+Currently students in groups are indexed arbitrarily. For a future enhancement, we intend to list them in sorted name order for easier lookup.
+
+### Marking attendance of Multiple students at once
+Right now our attendance marking is done one student at a time, which can be time consuming for large classes. We intend to allow the function to mark multiple students' attendance at once for a more efficient experience. The command would be something like `mark-all-attendance g/GROUP w/WEEK n/PERSON1 [n/PERSON2 n/PERSON3 ...]`.
+
+### Display groups that students are in
+When listing students currently, the list does not show which groups they are in. We plan to add this information in for this command so that tutors can see which group each student belongs to without going through all the groups he is in charge of.
+
