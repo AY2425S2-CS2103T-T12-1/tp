@@ -28,7 +28,6 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATE = "Date is not in dd-MM-yyyy format.";
-    public static final String MESSAGE_INVALID_PENALTY = "Penalty must be between 0 and 1 inclusive";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -175,23 +174,5 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
         return date;
-    }
-
-    /**
-     * Parses {@code String} into a {@code Float} satisfying penalty constraints (between 0 and 1 inclusive).
-     *
-     * @throws ParseException if the penalty value is not valid.
-     */
-    public static Float parsePenalty(String penaltyString) throws ParseException {
-        requireNonNull(penaltyString);
-        try {
-            float value = Float.parseFloat(penaltyString.trim());
-            if (value < 0.0f || value > 1.0f) {
-                throw new ParseException(MESSAGE_INVALID_PENALTY);
-            }
-            return value;
-        } catch (NumberFormatException e) {
-            throw new ParseException("Invalid float format: " + penaltyString);
-        }
     }
 }
