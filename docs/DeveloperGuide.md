@@ -1021,7 +1021,7 @@ Currently shows JSON output which is informative and clear for a technically inc
 ### Support for TA and Professor Roles
 Currently all persons in the application are assumed to be students which is most important to track for a TA. We plan to add support for TA and Professor roles which would facilitate the feature on grading and submission of assignments. 
 
-### Listing Students in Sorted Name Order
+### Listing students in sorted name order
 Currently students in groups are indexed arbitrarily. For a future enhancement, we intend to list them in sorted name order for easier lookup.
 
 ### Marking the attendance of multiple students for multiple weeks at once
