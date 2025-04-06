@@ -68,7 +68,7 @@ At a glance, TAbby Dabby allows you to:
 - Redundant parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-- Unless stated otherwise, all NAME-related fields are case-sensitive. This includes `n/`, `g/`, and `P/` fields.<br>
+- Unless stated otherwise, all NAME-related fields are case-sensitive. This includes the `n/` and `g/` fields.<br>
   e.g. `n/Jensen Huang` and `n/jensen huang` are different.
 
 - If you type a command with a wrong format, TAbby Dabby will display an example to guide you to re-input the command correctly.
@@ -274,7 +274,7 @@ Format: `find-group KEYWORD [MORE_KEYWORDS]`
 
 Adds the specified person to the specified group.
 
-Format: `add-to-group P/PERSON_NAME g/GROUP_NAME`
+Format: `add-to-group n/PERSON_NAME g/GROUP_NAME`
 
 #### Notes
 
@@ -282,13 +282,13 @@ Format: `add-to-group P/PERSON_NAME g/GROUP_NAME`
 
 #### Examples
 
-- `add-to-group P/Jensen Huang g/CS2103T T12` adds the person named `Jensen Huang` to the group named `CS2103T T12`.
+- `add-to-group n/Jensen Huang g/CS2103T T12` adds the person named `Jensen Huang` to the group named `CS2103T T12`.
 
 ### Removing a person from a group: `delete-from-group`
 
 Removes the specified person from the specified group.
 
-Format: `delete-from-group P/PERSON_NAME g/GROUP_NAME`
+Format: `delete-from-group n/PERSON_NAME g/GROUP_NAME`
 
 #### Notes
 
@@ -296,7 +296,7 @@ Format: `delete-from-group P/PERSON_NAME g/GROUP_NAME`
 
 #### Examples
 
-- `delete-from-group P/Jensen Huang g/CS2103T T12` removes the person named `Jensen Huang` from the group named `CS2103T T12`.
+- `delete-from-group n/Jensen Huang g/CS2103T T12` removes the person named `Jensen Huang` from the group named `CS2103T T12`.
 
 #### Expected output
 
@@ -327,7 +327,7 @@ Format: `show-group-details INDEX`
 
 Marks the attendance of the specified person in the specified group for the specified week.
 
-Format: `mark-attendance P/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER`
+Format: `mark-attendance n/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER`
 
 #### Notes
 
@@ -337,7 +337,7 @@ Format: `mark-attendance P/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER`
 
 #### Examples
 
-- `mark-attendance P/Jensen Huang g/CS2103T T12 w/10` marks the attendance for `Jensen Huang` in `CS2103T T12` for week `10`.
+- `mark-attendance n/Jensen Huang g/CS2103T T12 w/10` marks the attendance for `Jensen Huang` in `CS2103T T12` for week `10`.
 
 #### Expected output
 
@@ -347,17 +347,17 @@ Format: `mark-attendance P/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER`
 
 Removes the attendance record of the specified person in the specified group for the specified week.
 
-Format: `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER`
+Format: `unmark-attendance n/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER`
 
 #### Notes
 
-- `NAME` is the name of the student.
+- `PERSON_NAME` is the name of the student.
 - `GROUP_NAME` is the name of the group.
 - `WEEK_NUMBER` must be a positive integer between 1 and 13 (inclusive).
 
 #### Examples
 
-- `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10` unmarks the attendance for `Jensen Huang` in `CS2103T T12` for week `10`.
+- `unmark-attendance n/Jensen Huang g/CS2103T T12 w/10` unmarks the attendance for `Jensen Huang` in `CS2103T T12` for week `10`.
 
 #### Expected output
 
@@ -367,16 +367,16 @@ Format: `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER`
 
 Displays the attendance record of the specified person in the specified group.
 
-Format: `show-attendance P/NAME g/GROUP_NAME`
+Format: `show-attendance n/PERSON_NAME g/GROUP_NAME`
 
 #### Notes
 
-- `NAME` is the name of the student.
+- `PERSON_NAME` is the name of the student.
 - `GROUP_NAME` is the name of the group.
 
 #### Examples
 
-- `show-attendance P/Jensen Huang g/CS2103T T12` displays the attendance for `Jensen Huang` in `CS2103T T12`.
+- `show-attendance n/Jensen Huang g/CS2103T T12` displays the attendance for `Jensen Huang` in `CS2103T T12`.
 
 ### Adding an assignment in a group: `add-assignment`
 
@@ -468,27 +468,27 @@ Therefore, edit the data file only if you are confident that you can update it c
 
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                          |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077`         |
-| **Delete**             | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                        |
-| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/Jensen Huang e/jensenh@yahoo.com`                                               |
-| **List**               | `list`                                                                                                                                                                    |
-| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find huang jensen`                                                                                                               |
-| **Clear**              | `clear`                                                                                                                                                                   |
-| **Add Group**          | `add-group n/GROUP_NAME` <br> e.g. `add-group n/CS2103T T12`                                                                                                              |
-| **Delete Group**       | `delete-group INDEX` <br> e.g. `delete-group 1`                                                                                                                           |
-| **Edit Group**         | `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​` <br> e.g. `edit-group 1 n/CS2103 T12 t/study`                                                                                 |
-| **List Group**         | `list-group`                                                                                                                                                              |
-| **Find Group**         | `find-group KEYWORD [MORE_KEYWORDS]` <br> e.g. `find-group CS2103T T12`                                                                                                   |
-| **Add to Group**       | `add-to-group P/PERSON_NAME g/GROUP_NAME` <br> e.g. `add-to-group P/Jensen Huang g/CS2103T T12`                                                                           |
-| **Delete from Group**  | `delete-from-group P/PERSON_NAME g/GROUP_NAME` <br> e.g. `delete-from-group P/Jensen Huang g/CS2103T T12`                                                                 |
-| **Show Group Details** | `show-group-details INDEX` <br> e.g. `show-group-details 1`                                                                                                               |
-| **Mark Attendance**    | `mark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `mark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                                         |
-| **Unmark Attendance**  | `unmark-attendance P/NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `unmark-attendance P/Jensen Huang g/CS2103T T12 w/10`                                                     |
-| **Show Attendance**    | `show-attendance P/NAME g/GROUP_NAME` <br> e.g. `show-attendance P/Jensen Huang g/CS2103T T12`                                                                            |
-| **Add Assignment**     | `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE` <br> e.g. `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025`                            |
-| **Edit Assignment**    | `edit-assignment n/ASSIGNMENT NAME g/GROUP [N/NEW NAME] [d/DEADLINE]` <br> e.g. `edit-assignment n/HW 1 g/CS2103T T12 N/Assignment 1 d/21-04-2025` |
-| **Delete Assignment**  | `delete-assignment n/ASSIGNMENT_NAME g/GROUP_NAME` <br> e.g. `delete-assignment n/HW 1 g/CS2103T T12`                                                                     |
-| **Help**               | `help`                                                                                                                                                                    |
-| **Exit**               | `exit`                                                                                                                                                                    |
+| Action                 | Format, Examples                                                                                                                                                  |
+| ---------------------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077` |
+| **Delete**             | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                |
+| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/Jensen Huang e/jensenh@yahoo.com`                                       |
+| **List**               | `list`                                                                                                                                                            |
+| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find huang jensen`                                                                                                       |
+| **Clear**              | `clear`                                                                                                                                                           |
+| **Add Group**          | `add-group n/GROUP_NAME` <br> e.g. `add-group n/CS2103T T12`                                                                                                      |
+| **Delete Group**       | `delete-group INDEX` <br> e.g. `delete-group 1`                                                                                                                   |
+| **Edit Group**         | `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​` <br> e.g. `edit-group 1 n/CS2103 T12 t/study`                                                                         |
+| **List Group**         | `list-group`                                                                                                                                                      |
+| **Find Group**         | `find-group KEYWORD [MORE_KEYWORDS]` <br> e.g. `find-group CS2103T T12`                                                                                           |
+| **Add to Group**       | `add-to-group n/PERSON_NAME g/GROUP_NAME` <br> e.g. `add-to-group n/Jensen Huang g/CS2103T T12`                                                                   |
+| **Delete from Group**  | `delete-from-group n/PERSON_NAME g/GROUP_NAME` <br> e.g. `delete-from-group n/Jensen Huang g/CS2103T T12`                                                         |
+| **Show Group Details** | `show-group-details INDEX` <br> e.g. `show-group-details 1`                                                                                                       |
+| **Mark Attendance**    | `mark-attendance n/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `mark-attendance n/Jensen Huang g/CS2103T T12 w/10`                                          |
+| **Unmark Attendance**  | `unmark-attendance n/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `unmark-attendance n/Jensen Huang g/CS2103T T12 w/10`                                      |
+| **Show Attendance**    | `show-attendance n/PERSON_NAME g/GROUP_NAME` <br> e.g. `show-attendance n/Jensen Huang g/CS2103T T12`                                                             |
+| **Add Assignment**     | `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE` <br> e.g. `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025`                                           |
+| **Edit Assignment**    | `edit-assignment n/ASSIGNMENT NAME g/GROUP [N/NEW NAME] [d/DEADLINE]` <br> e.g. `edit-assignment n/HW 1 g/CS2103T T12 N/Assignment 1 d/21-04-2025`                |
+| **Delete Assignment**  | `delete-assignment n/ASSIGNMENT_NAME g/GROUP_NAME` <br> e.g. `delete-assignment n/HW 1 g/CS2103T T12`                                                             |
+| **Help**               | `help`                                                                                                                                                            |
+| **Exit**               | `exit`                                                                                                                                                            |

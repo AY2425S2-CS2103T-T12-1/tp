@@ -209,7 +209,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Adding a person to a group
 
-The sequence diagram below illustrate the process of adding a Person to a Group by writing the command `add-to-group P/ p g/ g`.
+The sequence diagram below illustrate the process of adding a Person to a Group by writing the command `add-to-group n/ p g/ g`.
 
 1. First the command will go through the standard logic sequence. Creating a Unique Command parser to parse input data to create
    a `AddPersonToGroupCommand` object
@@ -950,19 +950,19 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a Person to a Group
    1. Prerequisites: `p:Person` is not a member of `g:Group`
-   2. Test case: `add-to-group P/ p g/ g` <br>
+   2. Test case: `add-to-group n/ p g/ g` <br>
       Expected: Person should show up inside `g:Group` when using either `list-group` or `find-group` commands
 2. Adding a Person who already exist in the Group
    1. Prerequisite: `p:Person` is already a member of `g:Group`
-   2. Test case: `add-to-group P/ p g/ g` <br>
+   2. Test case: `add-to-group n/ p g/ g` <br>
       Expected: Error message indicating `p:Person` is already in `g:Group`. No duplicate entry should be created.
 3. Deleting a Person from a Group
    1. Prerequisites: `p:Person` is already a member of `g:Group`
-   2. Test case: `delete-from-group P/ p g/ g` <br>
+   2. Test case: `delete-from-group n/ p g/ g` <br>
       Expected: Person should no longer show up inside `g:Group` when using either `list-group` or `find-group` commands
 4. Deleting a Person who is not a member of Group
    1. Prerequisite: `p:Person` is not a member of `g:Group`
-   2. Test case: `delete-from-group P/ p g/ g` <br>
+   2. Test case: `delete-from-group n/ p g/ g` <br>
       Expected: Error message indicating `p:Person` does not exist in `g:Group`
 
 ## **Appendix: Effort**

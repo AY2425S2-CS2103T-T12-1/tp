@@ -12,7 +12,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_GROUP = new Prefix("g/");
-    public static final Prefix PREFIX_PERSON = new Prefix("P/");
+    public static final Prefix PREFIX_PERSON = PREFIX_NAME; // Alias for person name
     public static final Prefix PREFIX_WEEK = new Prefix("w/");
     public static final Prefix PREFIX_ASSIGNMENT = new Prefix("A/");
     public static final Prefix PREFIX_SCORE = new Prefix("s/");

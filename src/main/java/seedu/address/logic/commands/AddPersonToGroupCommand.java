@@ -21,7 +21,7 @@ public class AddPersonToGroupCommand extends Command {
     public static final String MESSAGE_USAGE = String.format("""
             %s: Adds the specified person to the specified group.
             Parameters: %sPERSON_NAME %sGROUP_NAME
-            Example: add-to-group P/Jensen Huang g/CS2103T T12
+            Example: add-to-group n/Jensen Huang g/CS2103T T12
             """, COMMAND_WORD, PREFIX_PERSON, PREFIX_GROUP);
 
     public static final String MESSAGE_SUCCESS = """
