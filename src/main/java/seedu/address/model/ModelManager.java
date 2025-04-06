@@ -227,6 +227,7 @@ public class ModelManager implements Model {
     public void deletePersonFromGroup(Person personToRemove, Group groupToRemoveFrom) {
         requireAllNonNull(personToRemove, groupToRemoveFrom);
         addressBook.deletePersonFromGroup(personToRemove, groupToRemoveFrom);
+        showGroupDetails(groupToRemoveFrom);
     }
 
     @Override
