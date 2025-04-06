@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LATE_PENALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_NAME;
 
@@ -30,12 +29,13 @@ public class EditAssignmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = String.format("""
                     %s: Edits the assignment in the specified group.
-                    Parameters: %sASSIGNMENT_NAME %sGROUP_NAME [%sNEW_NAME] [%sDEADLINE] [%sLATE_PENALTY]
-                    Example: %s %sHW 1 %sCS2103T T12 %sHW 1 %s21-04-2025 %s0.5
+                    Parameters: %sASSIGNMENT_NAME %sGROUP_NAME [%sNEW_NAME] [%sDEADLINE]
+                    Example: %s %sHW 1 %sCS2103T T12 %sHW 1 %s21-04-2025
                     """,
-            COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP, PREFIX_NEW_NAME, PREFIX_DATE, PREFIX_LATE_PENALTY,
-            COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP, PREFIX_NEW_NAME, PREFIX_DATE, PREFIX_LATE_PENALTY);
+            COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP, PREFIX_NEW_NAME, PREFIX_DATE,
+            COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP, PREFIX_NEW_NAME, PREFIX_DATE);
 
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     private static final String MESSAGE_SUCCESS = "Assignment in group %s has been edited: %s";
 
     /**
