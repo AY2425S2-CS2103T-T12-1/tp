@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_GROUP_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LATE_PENALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.time.LocalDate;
@@ -30,11 +29,11 @@ public class AddAssignmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = String.format("""
                     %s: Adds a new assignment in the specified group.
-                    Parameters: %sASSIGNMENT_NAME %sGROUP_NAME %sDEADLINE [%sLATE_PENALTY]
-                    Example: %s %sHW 1 %sCS2103T T12 %s21-04-2025 %s0.875
+                    Parameters: %sASSIGNMENT_NAME %sGROUP_NAME %sDEADLINE
+                    Example: %s %sHW 1 %sCS2103T T12 %s21-04-2025
                     """,
-            COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP, PREFIX_DATE, PREFIX_LATE_PENALTY, COMMAND_WORD, PREFIX_NAME,
-            PREFIX_GROUP, PREFIX_DATE, PREFIX_LATE_PENALTY);
+            COMMAND_WORD, PREFIX_NAME, PREFIX_GROUP, PREFIX_DATE, COMMAND_WORD, PREFIX_NAME,
+            PREFIX_GROUP, PREFIX_DATE);
 
     private static final String MESSAGE_SUCCESS = "Added new assignment to group!\nGroup: %s\nAssignment: %s";
 
