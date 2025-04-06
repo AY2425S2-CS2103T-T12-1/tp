@@ -99,7 +99,7 @@ public class EditGroupCommand extends Command {
         String groupName = newGroupName == null ? groupToEdit.getGroupName() : newGroupName;
         Group editedGroup = createEditedGroup(groupToEdit, groupName, tags);
 
-        if (model.hasGroup(editedGroup)) {
+        if (!groupToEdit.isSameGroup(editedGroup) && model.hasGroup(editedGroup)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
 
