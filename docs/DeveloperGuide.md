@@ -1010,7 +1010,7 @@ This shift from simple CRUD operations to relational logic and multi-level stora
 Team size: 5
 
 ### Submission and grading of assignments
-Currently we have a way to add, delete and edit assignments, but no support for submission and grading of assignments, making the assignments feature rather useless at this point. Hence we have a planned enhancement to support submission and grading of assignments so that the assignment features make sense. This includes submission deadlines, which will add a specific submission time as a deadline rather than the current date deadline. The submission feature will allow TAs to record down the time that students submitted their assignments (which could be automated), and the grading feature will allow TAs to grade the students work, recording the grades down in the application.
+Currently, the app allows TAs to add, delete and edit assignments, but there is no support for submission and grading of assignments. We plan to allow TAs to add and grade student submissions for assignments. TAs will also be able to add submission deadlines and set penalties for late submissions. Ultimately, the goal is for TAs to be able to create assignment deadlines, record down their students' time of submission, and grade students' work while also penalizing late submissions.
 
 ### Display of assignment data
 Currently assignments cannot be viewed as there is not much to be done with them without a grading feature. We plan to make them displayable together with the implementation of grading of assignments in the future so that the information is meaningful. This will be done via some sort of `list-assignments` command that will show what assignments are in the group, and for each student if they have submitted or not.
