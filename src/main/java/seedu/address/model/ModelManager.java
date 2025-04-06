@@ -274,12 +274,14 @@ public class ModelManager implements Model {
     public void markAttendance(Person person, Group group, int week) {
         requireAllNonNull(person, group, week);
         addressBook.markAttendance(person, group, week);
+        showGroupDetails(group);
     }
 
     @Override
     public void unmarkAttendance(Person person, Group group, int week) {
         requireAllNonNull(person, group, week);
         addressBook.unmarkAttendance(person, group, week);
+        showGroupDetails(group);
     }
 
     @Override
