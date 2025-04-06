@@ -24,7 +24,7 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
      */
     public AddAssignmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUP,
-                PREFIX_DATE, PREFIX_LATE_PENALTY);
+                PREFIX_DATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GROUP, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {

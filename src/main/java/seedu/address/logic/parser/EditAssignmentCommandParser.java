@@ -26,7 +26,7 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
      */
     public EditAssignmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUP, PREFIX_NEW_NAME,
-                PREFIX_DATE, PREFIX_LATE_PENALTY);
+                PREFIX_DATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GROUP)
                 || !argMultimap.getPreamble().isEmpty()) {

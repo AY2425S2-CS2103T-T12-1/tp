@@ -86,6 +86,6 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return MessageFormat.format("Assignment'{'name=''{0}'', deadline={1}, penalty={2}'}'", name, deadline, penalty);
+        return MessageFormat.format("Assignment'{'name=''{0}'', deadline={1}'}'", name, deadline);
     }
 }
