@@ -38,7 +38,7 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         LocalDate deadline = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Float penalty = null;
         if (argMultimap.getValue(PREFIX_LATE_PENALTY).isPresent()) {
-            penalty = ParserUtil.parsePenalty(argMultimap.getValue(PREFIX_LATE_PENALTY).get());
+            penalty = Float.parseFloat(argMultimap.getValue(PREFIX_LATE_PENALTY).get());
         }
 
         return new AddAssignmentCommand(assignmentName, groupName, deadline, penalty);
