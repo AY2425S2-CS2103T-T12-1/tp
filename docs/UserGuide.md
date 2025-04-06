@@ -68,6 +68,9 @@ At a glance, TAbby Dabby allows you to:
 - Redundant parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+- Unless stated otherwise, all NAME-related fields are case-sensitive. This includes `n/`, `g/`, and `P/` fields.<br>
+  e.g. `n/Jensen Huang` and `n/jensen huang` are different.
+
 - If you type a command with a wrong format, TAbby Dabby will display an example to guide you to re-input the command correctly.
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
