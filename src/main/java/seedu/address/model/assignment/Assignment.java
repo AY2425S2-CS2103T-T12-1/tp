@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 public class Assignment {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Assignment names must be non-empty and alphanumeric";
     /**
      * The assignment name.
      */
