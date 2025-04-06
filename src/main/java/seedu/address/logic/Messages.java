@@ -70,12 +70,12 @@ public class Messages {
                 .append("\nTags: [");
         group.getTags().forEach(builder::append);
         builder.append("]\nMembers: [\n");
-        group.getGroupMembersMap().forEach((key, value) -> builder.append(key)
-                .append(" (")
+        group.getGroupMembersMap().forEach((key, value) -> builder.append(Messages.format(key))
+                .append("; Role: ")
                 .append(value.getRole())
-                .append(", ")
+                .append(", Attendance: ")
                 .append(Arrays.toString(value.getAttendance()))
-                .append(");\n"));
+                .append("\n"));
         builder.append("]");
         return builder.toString();
     }
