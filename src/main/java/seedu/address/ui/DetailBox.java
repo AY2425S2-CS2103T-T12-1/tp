@@ -66,6 +66,7 @@ public class DetailBox extends UiPart<Region> {
         numTa.setText("No. TAs: " + numTAs);
         numProf.setText("No. Professors: " + numLecturer);
         numAssignment.setText("No. Assignments: " + group.getAssignments().size());
+        tags.getChildren().clear();
         group.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
