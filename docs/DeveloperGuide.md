@@ -931,6 +931,7 @@ testers are expected to do more *exploratory* testing.
    - `add-group n/G12`
 
    - `add-group n/G13 t/CS2103`
+   - Expected result: The two groups are added and can be seen when running the `list-group` command.
 
 ### Manging Persons in Group
 
