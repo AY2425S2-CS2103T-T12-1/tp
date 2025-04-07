@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -37,7 +36,7 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format("%s\n%s", ive.getMessage(),
                     EditGroupCommand.MESSAGE_USAGE), ive);
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TAG);
