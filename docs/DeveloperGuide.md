@@ -363,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Teaching Assistant | Track the progress for preparations of my teaching material   | Ensure it is completed before tutorials                                  |
 | `*`      | Teaching Assistant | Plot a whisker plot of the current grade of my students       | Track their learning progress and identify stuggling students            |
 
-## Use cases
+## **Use cases**
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
