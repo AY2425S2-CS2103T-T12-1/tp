@@ -943,7 +943,7 @@ testers are expected to do more *exploratory* testing.
   
       - Add new person (from [Adding a Person](#adding-a-person)) `add n/Johnny p/91234 e/joony@gmail.com a/3 Kent Ridge Rd`
 
-      - Add person to Group `add-to-group n/Johnny g/G12`
+      - Add the person to the group `add-to-group n/Johnny g/G12`
 
       - Expected: Person Johnny should show up inside group G12 when using either `list-group` or `find-group` commands
 
