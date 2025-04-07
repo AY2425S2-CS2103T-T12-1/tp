@@ -418,6 +418,21 @@ Format: `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE`
 
 - `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025` adds an assignment named `HW 1` to the group `CS2103T T12` with a deadline of `21-04-2025`.
 
+### Deleting an assignment in a group: `delete-assignment`
+
+Deletes an assignment in the specified group.
+
+Format: `delete-assignment n/ASSIGNMENT_NAME g/GROUP_NAME`
+
+#### Notes
+
+- `ASSIGNMENT_NAME` is the name of the assignment.
+- `GROUP_NAME` is the name of the group.
+
+#### Examples
+
+- `delete-assignment n/HW 1 g/CS2103T T12` deletes the assignment named `HW 1` in the group `CS2103T T12`.
+
 ### Editing an assignment in a group: `edit-assignment`
 
 Edits details of the specified assignment in the specified group.
@@ -434,21 +449,6 @@ Format: `edit-assignment n/ASSIGNMENT_NAME g/GROUP [N/NEW NAME] [d/DEADLINE]`
 #### Examples
 
 - `edit-assignment n/HW 1 g/CS2103T T12 N/Assignment 1 d/21-04-2025` renames the assignment named `HW 1` in the group `CS2103T T12` to `Assignment 1` with a deadline of `21-04-2025`.
-
-### Deleting an assignment in a group: `delete-assignment`
-
-Deletes an assignment in the specified group.
-
-Format: `delete-assignment n/ASSIGNMENT_NAME g/GROUP_NAME`
-
-#### Notes
-
-- `ASSIGNMENT_NAME` is the name of the assignment.
-- `GROUP_NAME` is the name of the group.
-
-#### Examples
-
-- `delete-assignment n/HW 1 g/CS2103T T12` deletes the assignment named `HW 1` in the group `CS2103T T12`.
 
 ### Exiting the program: `exit`
 
@@ -513,6 +513,6 @@ Therefore, edit the data file only if you are confident that you can update it c
 | **Unmark Attendance**  | `unmark-attendance n/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER` <br> e.g. `unmark-attendance n/Jensen Huang g/CS2103T T12 w/10`                                      |
 | **Show Attendance**    | `show-attendance n/PERSON_NAME g/GROUP_NAME` <br> e.g. `show-attendance n/Jensen Huang g/CS2103T T12`                                                             |
 | **Add Assignment**     | `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE` <br> e.g. `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025`                                           |
-| **Edit Assignment**    | `edit-assignment n/ASSIGNMENT NAME g/GROUP [N/NEW NAME] [d/DEADLINE]` <br> e.g. `edit-assignment n/HW 1 g/CS2103T T12 N/Assignment 1 d/21-04-2025`                |
 | **Delete Assignment**  | `delete-assignment n/ASSIGNMENT_NAME g/GROUP_NAME` <br> e.g. `delete-assignment n/HW 1 g/CS2103T T12`                                                             |
+| **Edit Assignment**    | `edit-assignment n/ASSIGNMENT NAME g/GROUP [N/NEW NAME] [d/DEADLINE]` <br> e.g. `edit-assignment n/HW 1 g/CS2103T T12 N/Assignment 1 d/21-04-2025`                |
 | **Exit**               | `exit`                                                                                                                                                            |
