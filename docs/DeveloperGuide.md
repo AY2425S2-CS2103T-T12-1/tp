@@ -209,7 +209,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Adding a person to a group
 
-The sequence diagram below illustrate the process of adding a Person to a Group by writing the command `add-to-group P/ p g/ g`.
+The sequence diagram below illustrate the process of adding a Person to a Group by writing the command `add-to-group n/ p g/ g`.
 
 1. First the command will go through the standard logic sequence. Creating a Unique Command parser to parse input data to create
    a `AddPersonToGroupCommand` object
@@ -882,14 +882,17 @@ _{More to be added}_
 
 ### Glossary
 
-- **Mainstream OS**: Windows, Linux, Unix, MacOS
+- **Assignment**: A deliverable that students in a tutorial group have to submit; typically comes with a grade
+- **Attendance**: A record of whether a student attended the tutorial session of a tutorial group for a week.
 - **Contact**: An entry with details of a person of interest, i.e., a student, a teacher, or a teaching assistant
+- **Exam**: A formal test of a student's understanding of the content in a course; typically comes with a grade
+- **Group**: A tutorial group that can contain multiple students, TAs, and lecturers.
+- **Head TA**: The teaching assistant(s) in charge of all other teaching assistants for a particular course
+- **Mainstream OS**: Windows, Linux, Unix, MacOS
+- **Person**: Any one whose contact details you would want to store in the address book. They are typically students, teaching assistants, or lecturers.
 - **Private contact detail**: A contact detail that is not meant to be shared with others
 - **Teaching assistant (TA)**: A person who assists in teaching a class; they are typically also a full-time student
-- **Head TA**: The teaching assistant(s) in charge of all other teaching assistants for a particular course
 - **Tutorial**: Lessons that students attend which complement the content taught in lectures; typically taught by TAs
-- **Assignment/homework**: A set of deliverables that students have to submit regularly; typically comes with a grade
-- **Exam**: A formal test of a student's understanding of the content in a course; typically comes with a grade
 
 ---
 
@@ -950,19 +953,19 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a Person to a Group
    1. Prerequisites: `p:Person` is not a member of `g:Group`
-   2. Test case: `add-to-group P/ p g/ g` <br>
+   2. Test case: `add-to-group n/ p g/ g` <br>
       Expected: Person should show up inside `g:Group` when using either `list-group` or `find-group` commands
 2. Adding a Person who already exist in the Group
    1. Prerequisite: `p:Person` is already a member of `g:Group`
-   2. Test case: `add-to-group P/ p g/ g` <br>
+   2. Test case: `add-to-group n/ p g/ g` <br>
       Expected: Error message indicating `p:Person` is already in `g:Group`. No duplicate entry should be created.
 3. Deleting a Person from a Group
    1. Prerequisites: `p:Person` is already a member of `g:Group`
-   2. Test case: `delete-from-group P/ p g/ g` <br>
+   2. Test case: `delete-from-group n/ p g/ g` <br>
       Expected: Person should no longer show up inside `g:Group` when using either `list-group` or `find-group` commands
 4. Deleting a Person who is not a member of Group
    1. Prerequisite: `p:Person` is not a member of `g:Group`
-   2. Test case: `delete-from-group P/ p g/ g` <br>
+   2. Test case: `delete-from-group n/ p g/ g` <br>
       Expected: Error message indicating `p:Person` does not exist in `g:Group`
 
 ## **Appendix: Effort**
@@ -1013,16 +1016,16 @@ Team size: 5
 Currently, the app allows TAs to add, delete and edit assignments, but there is no support for submission and grading of assignments. We plan to allow TAs to add and grade student submissions for assignments. TAs will also be able to add submission deadlines and set penalties for late submissions. Ultimately, the goal is for TAs to be able to create assignment deadlines, record down their students' time of submission, and grade students' work while also penalizing late submissions.
 
 ### Display of assignment data
-Currently assignments cannot be viewed as there is not much to be done with them without a grading feature. We plan to make them displayable together with the implementation of grading of assignments in the future so that the information is meaningful. This will be done via some sort of `list-assignments` command that will show what assignments are in the group, and for each student if they have submitted or not.
+Currently, assignments cannot be viewed as there is not much to be done with them without a grading feature. We plan to make them displayable together with the implementation of grading of assignments in the future so that the information is meaningful. This will be done via some sort of `list-assignments` command that will show what assignments are in the group, and for each student if they have submitted or not.
 
 ### Nicer UI and output of command feedback
-Currently shows JSON output which is informative and clear for a technically inclined person, but does not look as nice on the UI. Future plan is to enhance the output format to be more visually appealing alongside a UI visual upgrade to display both person and group lists side-by-side for better information tracking. We also intend to make the feedback window dynamically sized so that error messages fit within the box and users will not need to scroll through, thus reducing friction when inputting wrong commands.
+Currently, shows JSON output which is informative and clear for a technically inclined person, but does not look as nice on the UI. Future plan is to enhance the output format to be more visually appealing alongside a UI visual upgrade to display both person and group lists side-by-side for better information tracking. We also intend to make the feedback window dynamically sized so that error messages fit within the box and users will not need to scroll through, thus reducing friction when inputting wrong commands.
 
 ### Support for TA and Lecturer roles
-Currently all persons in the application are assumed to be students which is most important to track for a TA. We plan to add support for TA and Professor roles which would facilitate the feature on grading and submission of assignments. 
+Currently, all persons in the application are assumed to be students which is most important to track for a TA. We plan to add support for TA and Professor roles which would facilitate the feature on grading and submission of assignments.
 
 ### Listing students in sorted name order
-Currently students in groups are indexed arbitrarily. For a future enhancement, we intend to list them in sorted name order for easier lookup.
+Currently, students in groups are indexed arbitrarily. For a future enhancement, we intend to list them in sorted name order for easier lookup.
 
 ### Marking the attendance of multiple students for multiple weeks at once
 Currently, `mark-attendance` only allows the attendance of a single student and for a single week to be marked. This can be time-consuming when marking attendance for larger classes. To make the experience more efficient, we plan to allow TAs to mark multiple students' attendance for multiple weeks at once. The command would look like `mark-all-attendance g/GROUP w/WEEK1[,WEEK2,WEEK3,...] n/PERSON1 [n/PERSON2 n/PERSON3 ...]`.
@@ -1030,3 +1033,7 @@ Currently, `mark-attendance` only allows the attendance of a single student and 
 ### Display groups that students are in
 When listing students currently, the list does not show which groups they are in. We plan to add this information in for this command so that tutors can see which group each student belongs to without going through all the groups he is in charge of.
 
+### Precise validation for phone numbers
+Currently, the app allows any string of digits with between 3 and 15 digits to be entered as a phone number.
+We plan to add more precise validation to ensure that the phone number is in a valid format and length.
+This will help prevent errors when trying to contact students.

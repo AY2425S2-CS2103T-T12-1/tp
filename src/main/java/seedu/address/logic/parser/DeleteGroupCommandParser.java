@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -25,7 +23,7 @@ public class DeleteGroupCommandParser implements Parser<DeleteGroupCommand> {
             return new DeleteGroupCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGroupCommand.MESSAGE_USAGE), pe);
+                    pe.getMessage() + "\n" + DeleteGroupCommand.MESSAGE_USAGE, pe);
         }
     }
 }

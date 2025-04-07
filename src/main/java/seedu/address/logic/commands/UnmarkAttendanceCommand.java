@@ -105,7 +105,8 @@ public class UnmarkAttendanceCommand extends Command {
             throw new CommandException(MESSAGE_PERSON_NOT_IN_GROUP);
         }
 
-        return new CommandResult(String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, personName, groupName, week));
+        return new CommandResult(String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, personName, groupName, week),
+                true, group);
     }
 
 

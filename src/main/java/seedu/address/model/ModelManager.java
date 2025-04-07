@@ -178,6 +178,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedGroup);
 
         addressBook.setGroup(target, editedGroup);
+        showGroupDetails(editedGroup);
     }
 
     @Override
@@ -220,13 +221,14 @@ public class ModelManager implements Model {
     public void addPersonToGroup(Person personToAdd, Group groupToBeAddedTo) {
         requireAllNonNull(personToAdd, groupToBeAddedTo);
         addressBook.addPersonToGroup(personToAdd, groupToBeAddedTo);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        showGroupDetails(groupToBeAddedTo);
     }
 
     @Override
     public void deletePersonFromGroup(Person personToRemove, Group groupToRemoveFrom) {
         requireAllNonNull(personToRemove, groupToRemoveFrom);
         addressBook.deletePersonFromGroup(personToRemove, groupToRemoveFrom);
+        showGroupDetails(groupToRemoveFrom);
     }
 
     @Override
@@ -274,12 +276,14 @@ public class ModelManager implements Model {
     public void markAttendance(Person person, Group group, int week) {
         requireAllNonNull(person, group, week);
         addressBook.markAttendance(person, group, week);
+        showGroupDetails(group);
     }
 
     @Override
     public void unmarkAttendance(Person person, Group group, int week) {
         requireAllNonNull(person, group, week);
         addressBook.unmarkAttendance(person, group, week);
+        showGroupDetails(group);
     }
 
     @Override

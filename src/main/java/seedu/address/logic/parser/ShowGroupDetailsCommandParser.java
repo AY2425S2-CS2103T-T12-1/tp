@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ShowGroupDetailsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -25,7 +23,7 @@ public class ShowGroupDetailsCommandParser implements Parser<ShowGroupDetailsCom
             return new ShowGroupDetailsCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowGroupDetailsCommand.MESSAGE_USAGE), pe);
+                    pe.getMessage() + "\n" + ShowGroupDetailsCommand.MESSAGE_USAGE, pe);
         }
     }
 }

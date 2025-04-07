@@ -34,7 +34,7 @@ public class Group implements Result {
     /**
      * Message to indicate the constraints for group names.
      */
-    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Group names must be non-empty and alphanumeric";
 
     /**
      * Regular expression to validate group names.
@@ -133,6 +133,10 @@ public class Group implements Result {
         this.assignments = assignments == null ? new ArrayList<>() : new ArrayList<>(assignments);
     }
 
+    public Group createEditedGroup(String newGroupName, Collection<Tag> tags) {
+        return new Group(newGroupName, groupMembers, tags, assignments);
+    }
+
     /**
      * Checks if the given string is a valid group name.
      *
@@ -189,6 +193,7 @@ public class Group implements Result {
             throw new PersonNotFoundException();
         }
         groupMembers.replaceKey(target, editedPerson);
+        groupMembers.computeIfPresent(editedPerson, (k, v) -> v.copy(editedPerson));
     }
 
     /**

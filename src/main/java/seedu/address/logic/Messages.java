@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
@@ -70,14 +71,17 @@ public class Messages {
                 .append("\nTags: [");
         group.getTags().forEach(builder::append);
         builder.append("]\nMembers: [\n");
-        group.getGroupMembersMap().forEach((key, value) -> builder.append(key)
-                .append(" (")
+        group.getGroupMembersMap().forEach((key, value) -> builder.append(Messages.format(key))
+                .append("; Role: ")
                 .append(value.getRole())
-                .append(", ")
+                .append(", Attendance: ")
                 .append(Arrays.toString(value.getAttendance()))
-                .append(");\n"));
+                .append("\n"));
         builder.append("]");
         return builder.toString();
     }
 
+    public static String format(Assignment assignment) {
+        return assignment.getName() + "; Deadline: " + assignment.getDeadline();
+    }
 }

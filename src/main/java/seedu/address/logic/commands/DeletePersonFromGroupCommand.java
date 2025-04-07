@@ -82,7 +82,8 @@ public class DeletePersonFromGroupCommand extends Command {
 
         if (groupToBeDeletedFrom.contains(personToDelete)) {
             model.deletePersonFromGroup(personToDelete, groupToBeDeletedFrom);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToDelete)));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToDelete)),
+                    true, groupToBeDeletedFrom);
         } else {
             throw new CommandException(MESSAGE_PERSON_NOT_IN_GROUP);
         }

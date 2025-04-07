@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.time.LocalDate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
@@ -89,7 +90,7 @@ public class AddAssignmentCommand extends Command {
 
         try {
             Assignment assignment = model.addAssignmentToGroup(name, deadline, group, penalty);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, assignment));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, Messages.format(assignment)));
         } catch (DuplicateAssignmentException d) {
             throw new CommandException(d.getMessage());
         }

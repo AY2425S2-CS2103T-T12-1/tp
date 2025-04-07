@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 public class GroupCard extends UiPart<Region> {
 
     private static final String FXML = "GroupListCard.fxml";
-    private static final int MAX_MEMBERS_TO_DISPLAY = 3;
+    private static final int MAX_MEMBERS_TO_DISPLAY = 999;
     private static final String MORE_MEMBERS_LABEL = "...and %d more";
 
     /**
