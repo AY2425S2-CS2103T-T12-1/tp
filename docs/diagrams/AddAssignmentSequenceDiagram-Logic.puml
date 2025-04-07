@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddAssignmentCommandParser" as AddAssignmentCommandParser LOGIC_COLOR
+participant ":AddAssignmentCommand" as AddAssignmentCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add-assignment n/ a g/ g d/ d")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add-assignment n/ a g/ g d/ d")
+activate AddressBookParser
+
+create AddAssignmentCommandParser
+AddressBookParser -> AddAssignmentCommandParser
+activate AddAssignmentCommandParser
+
+AddAssignmentCommandParser --> AddressBookParser
+deactivate AddAssignmentCommandParser
+
+AddressBookParser -> AddAssignmentCommandParser : parse("n/ a g/ g d/ d")
+activate AddAssignmentCommandParser
+
+create AddAssignmentCommand
+AddAssignmentCommandParser -> AddAssignmentCommand
+activate AddAssignmentCommand
+
+AddAssignmentCommand --> AddAssignmentCommandParser :
+deactivate AddAssignmentCommand
+
+AddAssignmentCommandParser --> AddressBookParser
+deactivate AddAssignmentCommandParser
+AddAssignmentCommandParser -[hidden]-> AddressBookParser
+destroy AddAssignmentCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> AddAssignmentCommand : execute(c)
+activate AddAssignmentCommand
+
+AddAssignmentCommand -> Model : getGroup("g")
+activate Model
+
+Model --> AddAssignmentCommand : group
+deactivate Model
+
+AddAssignmentCommand -> Model : addAssignmentToGroup("n", d, group)
+activate Model
+
+Model --> AddAssignmentCommand : assignment
+deactivate Model
+
+create CommandResult
+AddAssignmentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddAssignmentCommand
+deactivate CommandResult
+
+AddAssignmentCommand --> LogicManager : r
+deactivate AddAssignmentCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

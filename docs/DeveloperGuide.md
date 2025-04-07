@@ -222,7 +222,23 @@ The sequence diagram below illustrate the process of adding a Person to a Group 
 
 The `Group` object will create a new `GroupMemberDetail` object tied to the newly added `Person` object and stored into the Map as a key-value pair. 6. After `addPersonToGroup` is called, the `Model` will call on the `VersionedAddressBook` to which adds `p:Person` to `g:Group` 7. `Group` will create a new `GroupMemberDetails` object that corresponds to `p:Person` object 8. Both the `p:Person` and the newly created `GroupMemberDetails` objects will be stored in an `ArrayListMap` within the `Group` object
 
-![AddPersonToGroupSeqeunceDiagram-Model](images/AddPersonToGroupSequenceDiagram-Model.png)
+![AddPersonToGroupSequenceDiagram-Model](images/AddPersonToGroupSequenceDiagram-Model.png)
+
+### Adding a new assignment
+
+The sequence diagram below illustrates the process of adding an Assignment to a Group using the command `add-assignment n/a g/g d/d`.
+
+1. As will all commands, the command will go through the standard logic sequence. A unique command parser is created to parse the input data and construct an `AddAssignmentCommand` object.
+2. The `LogicManager` then executes the command by calling `execute(m)
+3. The `AddAssignmentCommand` retrieves the target `Group` object from the `Model`
+4. The `Model`'s `addAssignmentToGroup` method is called with the necessary parameters.
+5. A `CommandResult` is returned for `Ui` purposes.
+
+![AddAssignmentSequenceDiagram-Logic](images/AddAssignmentSequenceDiagram-Logic.png)
+
+Inside the `Group` object, the `Assignment` constructor is called to create a new `Assignment` object using the parsed name and deadline. The new `Assignment` object is then added to the assignments `ArrayList` field of the `Group` object.
+
+![AddAssignmentSequenceDiagram-Model](images/AddAssignmentSequenceDiagram-Model.png)
 
 ### \[Proposed\] Undo/redo feature
 

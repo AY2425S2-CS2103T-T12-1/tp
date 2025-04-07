@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+participant "g:Group" as Group MODEL_COLOR
+participant ":Assignment" as Assignment MODEL_COLOR
+participant ":ArrayList" as ArrayList MODEL_COLOR
+end box
+
+[-> Model : addAssignmentToGroup(n, d, group)
+activate Model
+
+Model -> VersionedAddressBook : addAssignmentToGroup(n, d, group)
+activate VersionedAddressBook
+
+VersionedAddressBook -> Group : addAssignment(n, d)
+activate Group
+
+create Assignment
+Group -> Assignment : new Assignment(n, d)
+activate Assignment
+
+Assignment --> Group : assignment
+deactivate Assignment
+
+Group -> ArrayList: add(assignment)
+
+activate ArrayList
+
+ArrayList --> Group
+
+deactivate ArrayList
+deactivate Assignment
+Group --> VersionedAddressBook
+deactivate Group
+
+VersionedAddressBook --> Model
+deactivate VersionedAddressBook
+
+[<-- Model
+deactivate Model
+@enduml
+
