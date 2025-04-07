@@ -49,17 +49,16 @@ At a glance, TAbby Dabby allows you to:
 
 ## Features
 
+### Common notes about command formats and common fields
+
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes about command format**<br>
 
-- Items in `UPPER_CASE` are compulsory fields you have to fill in.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which you can fill in as `add n/Jensen Huang`.
+- Fields in square brackets are optional; every other field is compulsory.<br>
+  e.g You can fill in `n/NAME [t/TAG]` as `n/Jensen Huang t/friend` or as `n/Jensen Huang`, but not as `t/friend`.
 
-- Items in square brackets are optional.<br>
-  e.g You can fill in `n/NAME [t/TAG]` as `n/Jensen Huang t/friend` or as `n/Jensen Huang`.
-
-- Items with `…`​ after them can be used multiple times including zero times.<br>
+- Fields with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 - You can fill in fields in any order.<br>
@@ -68,12 +67,27 @@ At a glance, TAbby Dabby allows you to:
 - Redundant parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-- Unless stated otherwise, all NAME-related fields are case-sensitive. This includes the `n/` and `g/` fields.<br>
-  e.g. `n/Jensen Huang` and `n/jensen huang` are different.
-
 - If you type a command with a wrong format, TAbby Dabby will display an example to guide you to re-input the command correctly.
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
+Many of our commands also share similar fields.
+Here are some notes on them:
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about common fields**<br>
+
+- Unless stated otherwise, NAME-related fields are case-sensitive. This includes the `n/` and `g/` fields.<br>
+  e.g. The fields `n/Jensen Huang` and `n/jensen huang` are different.
+
+- NAME-related fields must contain only contain alphanumeric characters, spaces, backslashes, or dashes. This includes the `n/` and `g/` fields.<br>
+  e.g. `CS2103T-T12` and `Jensen Huang s/o Michael` are valid names, but not `CS2103T_T12`.
+
+- NAME-related fields must be unique within the same category.<br>
+  e.g. If you add a person with the name `Jensen Huang`, you cannot add another person with the same name. Same goes for groups.
+
 </div>
 
 ### Viewing help: `help`
@@ -97,7 +111,6 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 A person can have any number of tags (including 0)
 </div>
 
-- Person names must be unique, alphanumeric, and they can contain spaces, e.g., `Jensen Huang`, `Jeff Bezos`.
 - Phone numbers must have between 3 and 15 digits; they need not be unique.
 
 #### Examples
@@ -138,8 +151,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed, e.g., if the person at index `2` currently has the tag `frenemy`, and we run the command `edit 2 t/enemy`, the tag `frenemy` will be removed, and a new tag `enemy` will be added.
 - You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-- Person names must be alphanumeric and can contain spaces, e.g., `Jensen Huang`, `Jeff Bezos`.
-- Person names must be unique.
 
 #### Examples
 
@@ -197,9 +208,6 @@ Format: `add-group n/GROUP_NAME [t/TAG]...`
 A group can have any number of tags (including 0)
 </div>
 
-- Group names must be alphanumeric and can contain spaces, e.g., `CS2103T T12`, `CS2101 T13`.
-- Group names must be unique.
-
 #### Examples
 
 - `add-group n/CS2103T T12 t/CS` creates a group with name `CS2103T T12` and the tag `CS`.
@@ -232,8 +240,6 @@ Format: `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​`
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the group will be removed, e.g., if the group at index `2` currently has the tag `gaming`, and we run the command `edit-group 2 t/study`, the tag `gaming` will be removed, and a new tag `study` will be added.
 - You can remove all the group’s tags by typing `t/` without specifying any tags after it.
-- Group names must be alphanumeric and can contain spaces, e.g., `CS2103T T12`, `CS2101 T13`.
-- Group names must be unique.
 
 #### Examples
 
