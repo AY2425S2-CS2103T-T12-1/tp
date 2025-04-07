@@ -307,12 +307,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   - Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -982,31 +976,11 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 
+### Group and GroupMemberDetail
+
 The project introduced a new object: `Group`, alongside a relational object `GroupMemberDetail` that describes students' details inside a particular group. This requires us to ensure that data is synchronized through the user workflow by making sure that our Maps and Lists point to the same object by reference. In particular, since `Person` is hashed by name, we had to take caution when allowing editing of name. To deal with this, we introduced 2 new data structures: `ArrayListSet` and `ArrayListMap`. These classes have the interface of `Set` and `Map` respectively, but are internally stored in `ArrayList` objects so that editing the key objects does not change our key values. This is important since we use `Person` as a key for our Map of `GroupMemberDetail` and that `hashCode()` hashes `Person` based off its name.
 
-### Key Challenges and Effort
-
-- **Designing a New Entity Model**: Introducing `Group` was not a simple data addition — it required a full-fledged model (`Group.java`) capable of:
-
-  - Maintaining its own identity and validation rules.
-  - Tracking a collection of `Person` instances with unique roles and contextual data.
-  - Persisting group-member-specific data such as attendance and assignment grades.
-
-- **Extending Existing Entities**: To maintain separation of concerns, we introduced a new class `GroupMemberDetail.java` which bridges a `Person` and a `Group` and stores contextual information like:
-
-  - Weekly attendance (`boolean[13]` per student).
-  - Assignment grades (via a custom `ArrayListMap`).
-  - Roles (e.g., Student, Teaching Assistant, Lecturer).
-
-- **Cross-Entity Logic**: Unlike AB3's flat command structure, many features required verifying the existence and relationship of both `Person` and `Group` during execution (e.g., `mark-attendance`, `add-to-group`, `show-attendance`).
-
-- **Storage Complexity**: Extending the storage layer to support nested structures like `Group -> GroupMemberDetail -> Person` required:
-
-  - Custom serialization and deserialization logic.
-  - Managing consistency between group membership and person identity.
-  - Updating the JSON format in a backward-compatible and testable way.
-
-- **UI Considerations**: We also needed to design new UI components like `GroupCard` and `GroupDetailCard` to present hierarchical data clearly, which required significant effort in FXML design and JavaFX integration.
+The introduction of a relation object `GroupMemberDetail` also made it important for us to agree on a source of truth for synchronizing data. We decided to keep the relation data inside the `Group` data, while keeping a name of the person referenced, whose reference will be looked up during the data loading stage. This design relies on the assumption made by AB3, which was that 2 persons are equal if they have the same name (mentioned under the implementation of Person::isSamePerson()). Hence, `Person` data is stored as one list, and `Group` data is stored as another list (which contains `GroupMemberDetail`). Data is loaded by first reading and creating `Person` objects, followed by `Groups`. Each `GroupMemberDetail` will then associate the referenced name with a `Person` object that should exist.
 
 ### Reuse and Adaptation
 
@@ -1016,9 +990,7 @@ The project introduced a new object: `Group`, alongside a relational object `Gro
 
 ### Summary
 
-Implementing Groups added substantial architectural and technical complexity, transforming the app from a flat contact book into a lightweight group management system with role-based semantics, performance tracking, and detailed inter-entity relationships.
-
-This shift from simple CRUD operations to relational logic and multi-level storage increased the overall effort significantly beyond AB3's scope.
+Implementing `Group` and `GroupMemberDetail` added substantial architectural and technical complexity, transforming the app from a simple JSON list data structure to one that required careful synchronization and development of new data structures to support our needs, requiring a significant portion of our effort.
 
 ## **Appendix: Planned Enhancements**
 
