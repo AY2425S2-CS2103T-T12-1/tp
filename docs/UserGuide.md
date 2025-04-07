@@ -122,11 +122,11 @@ Useful for adding details of your students.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-#### Notes
+**Notes**
 
 - Phone numbers must have between 3 and 15 digits; they need not be unique.
 
-#### Examples
+**Examples**
 
 - `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077 t/friend`
 - `add n/Jeff Bezos p/12345678 t/friend e/jeffb@amazon.com a/21 Lower Kent Ridge Rd, Singapore 119077`
@@ -142,11 +142,11 @@ Useful for removing the details of someone who is no longer a student.
 
 Format: `delete INDEX`
 
-#### Notes
+**Notes**
 
 - `INDEX` refers to the index number of the person in the last displayed person list. It **must be a positive integer** 1, 2, 3, …​
 
-#### Examples
+**Examples**
 
 - `list` followed by `delete 2` deletes the second person in the person list.
 - `find Jensen` followed by `delete 1` deletes the first person in the results of the `find` command. Find out more about the `find` command [here](#finding-persons-by-name-find).
@@ -157,7 +157,7 @@ Edits the details of the specified person in the person list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-#### Notes
+**Notes**
 
 - `INDEX` refers to the index number of the person in the last displayed person list. It **must be a positive integer** 1, 2, 3, …​
 - You must fill in at least one of the optional fields.
@@ -165,7 +165,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 - When editing tags, the existing tags of the person will be removed, e.g., if the person at index `2` currently has the tag `frenemy`, and we run the command `edit 2 t/enemy`, the tag `frenemy` will be removed, and a new tag `enemy` will be added.
 - You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
-#### Examples
+**Examples**
 
 - `edit 1 p/91234567 e/jensenh@yahoo.com` Edits the phone number and email address of the 1st person to be `91234567` and `jensenh@yahoo.com` respectively.
 - `edit 2 n/Jeff Bezos t/` Edits the name of the 2nd person to be `Jeff Bezos` and clears all existing tags.
@@ -183,7 +183,7 @@ Finds persons whose names contain any of the specified keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]...`
 
-#### Notes
+**Notes**
 
 - The search is case-insensitive, e.g., `jensen` will match `Jensen`.
 - The order of the keywords does not matter. e.g. `Huang Jensen` will match `Jensen Huang`.
@@ -191,12 +191,12 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 - Only full words will be matched, e.g., `Jen` will not match `Jens`.
 - Persons matching at least one keyword will be returned (i.e. `OR` search), e.g., `Jensen Bezos` will return `Jensen Huang` and `Jeff Bezos`.
 
-#### Examples
+**Examples**
 
 - `find huang jensen` may output `huang jensen`, `jensen huang`, and `Jensen Huang`.
 - `find huang bezos` may output `Jensen Huang` and `Jeff Bezos`.
 
-#### Expected output
+**Expected output**
 
 Example of executing the `find huang bezos` command:
 
@@ -215,7 +215,7 @@ Useful for adding new tutorial groups.
 
 Format: `add-group n/GROUP_NAME [t/TAG]...`
 
-#### Examples
+**Examples**
 
 - `add-group n/CS2103T T12 t/CS` creates a group with name `CS2103T T12` and the tag `CS`.
 
@@ -226,11 +226,11 @@ Useful for removing a tutorial group that is no longer needed.
 
 Format: `delete-group INDEX`
 
-#### Notes
+**Notes**
 
 - `INDEX` refers to the index number of the group in the last displayed group list. It **must be a positive integer** 1, 2, 3, …​
 
-#### Examples
+**Examples**
 
 - `delete-group 2` deletes the group with index `2` in the last shown group list.
 
@@ -240,7 +240,7 @@ Edits the specified group details in the group list.
 
 Format: `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​`
 
-#### Notes
+**Notes**
 
 - `INDEX` refers to the index number of the group in the last displayed group list. It **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
@@ -248,7 +248,7 @@ Format: `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​`
 - When editing tags, the existing tags of the group will be removed, e.g., if the group at index `2` currently has the tag `gaming`, and we run the command `edit-group 2 t/study`, the tag `gaming` will be removed, and a new tag `study` will be added.
 - You can remove all the group’s tags by typing `t/` without specifying any tags after it.
 
-#### Examples
+**Examples**
 
 - `edit-group 1 n/CS2103T T12` Edits the name of the first group to be `CS2103T T12`.
 - `edit-group 2 n/CS2103T T12 t/` Edits the name of the second group to be `CS2103T T12` and clears all existing tags.
@@ -260,7 +260,7 @@ Shows a list of all groups in the group list along with their information, e.g.,
 
 Format: `list-group`
 
-#### Expected output
+**Expected output**
 
 ![ResultOfList](images/listGroupResults.png)
 
@@ -270,7 +270,7 @@ Finds groups whose names contain any of the given keywords.
 
 Format: `find-group KEYWORD [MORE_KEYWORDS]`
 
-#### Notes
+**Notes**
 
 - The search is case-insensitive, e.g., `cs2103t t12` will match `CS2103T T12`.
 - The order of the keywords does not matter. e.g. `T12 CS2103T` will match `CS2103T T12`.
@@ -278,7 +278,7 @@ Format: `find-group KEYWORD [MORE_KEYWORDS]`
 - Only full words will be matched, e.g., `CS210` will not match `CS2103T`.
 - Groups matching at least one keyword will be returned (i.e. `OR` search), e.g., `CS2103T T13` will return `CS2103T T12` and `CS2101 T13`.
 
-#### Examples
+**Examples**
 
 - `find-group T12` may output `T12`, `t12`, and `CS2103T T12`.
 - `find-group t12 t13` may output `CS2103T T12` and `CS2103T T13`.
@@ -289,12 +289,12 @@ Adds the specified person to the specified group.
 
 Format: `add-to-group n/PERSON_NAME g/GROUP_NAME`
 
-#### Notes
+**Notes**
 
 - `PERSON_NAME` and `GROUP_NAME` are the names of a person and a group respectively.
 - For now, the person is assumed to be a student. We plan to support the addition of co-TAs and lecturers in the future.
 
-#### Examples
+**Examples**
 
 - `add-to-group n/Jensen Huang g/CS2103T T12` adds the person named `Jensen Huang` to the group named `CS2103T T12`.
 
@@ -304,15 +304,15 @@ Removes the specified person from the specified group.
 
 Format: `delete-from-group n/PERSON_NAME g/GROUP_NAME`
 
-#### Notes
+**Notes**
 
 - `PERSON_NAME` and `GROUP_NAME` are the names of a person and a group respectively.
 
-#### Examples
+**Examples**
 
 - `delete-from-group n/Jensen Huang g/CS2103T T12` removes the person named `Jensen Huang` from the group named `CS2103T T12`.
 
-#### Expected output
+**Expected output**
 
 - The GUI will display the updated details of the group.
 
@@ -322,15 +322,15 @@ Shows the key details regarding the specified group.
 
 Format: `show-group-details INDEX`
 
-#### Notes
+**Notes**
 
 - The index refers to the index number shown in the last displayed group list. The index **must be a positive integer** 1, 2, 3, …​
 
-#### Examples
+**Examples**
 
 - `show-group-details 2` shows all the details of the group with index `2` in the last shown group list.
 
-#### Expected output
+**Expected output**
 
 - Shows details including:
     - Group name and tags
@@ -343,17 +343,17 @@ Marks the attendance of the specified person in the specified group for the spec
 
 Format: `mark-attendance n/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER`
 
-#### Notes
+**Notes**
 
 - `PERSON_NAME` is the name of the student.
 - `GROUP_NAME` is the name of the group.
 - `WEEK_NUMBER` must be a positive integer between 1 and 13 (inclusive).
 
-#### Examples
+**Examples**
 
 - `mark-attendance n/Jensen Huang g/CS2103T T12 w/10` marks the attendance for `Jensen Huang` in `CS2103T T12` for week `10`.
 
-#### Expected output
+**Expected output**
 
 - The GUI will display the updated details of the group.
 
@@ -363,17 +363,17 @@ Removes the attendance record of the specified person in the specified group for
 
 Format: `unmark-attendance n/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER`
 
-#### Notes
+**Notes**
 
 - `PERSON_NAME` is the name of the student.
 - `GROUP_NAME` is the name of the group.
 - `WEEK_NUMBER` must be a positive integer between 1 and 13 (inclusive).
 
-#### Examples
+**Examples**
 
 - `unmark-attendance n/Jensen Huang g/CS2103T T12 w/10` unmarks the attendance for `Jensen Huang` in `CS2103T T12` for week `10`.
 
-#### Expected output
+**Expected output**
 
 - The GUI will display the updated details of the group.
 
@@ -383,12 +383,12 @@ Displays the attendance record of the specified person in the specified group.
 
 Format: `show-attendance n/PERSON_NAME g/GROUP_NAME`
 
-#### Notes
+**Notes**
 
 - `PERSON_NAME` is the name of the student.
 - `GROUP_NAME` is the name of the group.
 
-#### Examples
+**Examples**
 
 - `show-attendance n/Jensen Huang g/CS2103T T12` displays the attendance for `Jensen Huang` in `CS2103T T12`.
 
@@ -398,13 +398,13 @@ Adds a new assignment in the specified group.
 
 Format: `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE`
 
-#### Notes
+**Notes**
 
 - `ASSIGNMENT_NAME` is the name of the assignment.
 - `GROUP_NAME` is the name of the group.
 - `DEADLINE` is the deadline of the assignment in the format `DD-MM-YYYY`.
 
-#### Examples
+**Examples**
 
 - `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025` adds an assignment named `HW 1` to the group `CS2103T T12` with a deadline of `21-04-2025`.
 
@@ -414,12 +414,12 @@ Deletes an assignment in the specified group.
 
 Format: `delete-assignment n/ASSIGNMENT_NAME g/GROUP_NAME`
 
-#### Notes
+**Notes**
 
 - `ASSIGNMENT_NAME` is the name of the assignment.
 - `GROUP_NAME` is the name of the group.
 
-#### Examples
+**Examples**
 
 - `delete-assignment n/HW 1 g/CS2103T T12` deletes the assignment named `HW 1` in the group `CS2103T T12`.
 
@@ -429,14 +429,14 @@ Edits details of the specified assignment in the specified group.
 
 Format: `edit-assignment n/ASSIGNMENT_NAME g/GROUP [N/NEW NAME] [d/DEADLINE]`
 
-#### Notes
+**Notes**
 
 - `ASSIGNMENT_NAME` is the name of the assignment.
 - `GROUP_NAME` is the name of the group.
 - `NEW NAME` is the new name of the assignment.
 - `DEADLINE` is the new deadline of the assignment in the format `DD-MM-YYYY`.
 
-#### Examples
+**Examples**
 
 - `edit-assignment n/HW 1 g/CS2103T T12 N/Assignment 1 d/21-04-2025` renames the assignment named `HW 1` in the group `CS2103T T12` to `Assignment 1` with a deadline of `21-04-2025`.
 
