@@ -156,7 +156,7 @@ Format: `delete INDEX`
 #### Examples
 
 - `list` followed by `delete 2` deletes the second person in the person list.
-- `find Jensen` followed by `delete 1` deletes the first person in the results of the `find` command.
+- `find Jensen` followed by `delete 1` deletes the first person in the results of the `find` command. Find out more about the `find` command [here](#finding-persons-by-name-find).
 
 ### Editing a person: `edit`
 
