@@ -480,6 +480,7 @@ Therefore, edit the data file only if you are confident that you can update it c
 
 | Action                 | Format, Examples                                                                                                                                                  |
 | ---------------------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**               | `help`                                                                                                                                                            |
 | **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077` |
 | **Delete**             | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                |
 | **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/Jensen Huang e/jensenh@yahoo.com`                                       |
@@ -500,5 +501,4 @@ Therefore, edit the data file only if you are confident that you can update it c
 | **Add Assignment**     | `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE` <br> e.g. `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025`                                           |
 | **Edit Assignment**    | `edit-assignment n/ASSIGNMENT NAME g/GROUP [N/NEW NAME] [d/DEADLINE]` <br> e.g. `edit-assignment n/HW 1 g/CS2103T T12 N/Assignment 1 d/21-04-2025`                |
 | **Delete Assignment**  | `delete-assignment n/ASSIGNMENT_NAME g/GROUP_NAME` <br> e.g. `delete-assignment n/HW 1 g/CS2103T T12`                                                             |
-| **Help**               | `help`                                                                                                                                                            |
 | **Exit**               | `exit`                                                                                                                                                            |
