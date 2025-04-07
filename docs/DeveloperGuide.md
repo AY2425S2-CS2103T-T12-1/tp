@@ -882,14 +882,17 @@ _{More to be added}_
 
 ### Glossary
 
-- **Mainstream OS**: Windows, Linux, Unix, MacOS
+- **Assignment**: A deliverable that students in a tutorial group have to submit; typically comes with a grade
+- **Attendance**: A record of whether a student attended the tutorial session of a tutorial group for a week.
 - **Contact**: An entry with details of a person of interest, i.e., a student, a teacher, or a teaching assistant
+- **Exam**: A formal test of a student's understanding of the content in a course; typically comes with a grade
+- **Group**: A tutorial group that can contain multiple students, TAs, and lecturers.
+- **Head TA**: The teaching assistant(s) in charge of all other teaching assistants for a particular course
+- **Mainstream OS**: Windows, Linux, Unix, MacOS
+- **Person**: Any one whose contact details you would want to store in the address book. They are typically students, teaching assistants, or lecturers.
 - **Private contact detail**: A contact detail that is not meant to be shared with others
 - **Teaching assistant (TA)**: A person who assists in teaching a class; they are typically also a full-time student
-- **Head TA**: The teaching assistant(s) in charge of all other teaching assistants for a particular course
 - **Tutorial**: Lessons that students attend which complement the content taught in lectures; typically taught by TAs
-- **Assignment/homework**: A set of deliverables that students have to submit regularly; typically comes with a grade
-- **Exam**: A formal test of a student's understanding of the content in a course; typically comes with a grade
 
 ---
 
