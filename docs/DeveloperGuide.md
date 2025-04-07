@@ -905,7 +905,7 @@ testers are expected to do more *exploratory* testing.
 
     - `add n/Sean*Neil p/999 e/doe3@email.com a/Deer Street` (unsupported characters in name)
 
-    - Expected: Error messages for incorrect fields. Student not added.
+    - Expected result: The app displays error messages for the incorrect fields; the persons are not added.
 
 ### Deleting a person
 
