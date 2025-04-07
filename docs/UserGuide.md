@@ -97,8 +97,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 A person can have any number of tags (including 0)
 </div>
 
-- Person names must be alphanumeric and can contain spaces, e.g., `Jensen Huang`, `Jeff Bezos`.
-- Person names must be unique.
+- Person names must be unique, alphanumeric, and they can contain spaces, e.g., `Jensen Huang`, `Jeff Bezos`.
+- Phone numbers must have between 3 and 15 digits; they need not be unique.
 
 #### Examples
 

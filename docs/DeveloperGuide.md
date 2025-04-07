@@ -1013,19 +1013,24 @@ Team size: 5
 Currently, the app allows TAs to add, delete and edit assignments, but there is no support for submission and grading of assignments. We plan to allow TAs to add and grade student submissions for assignments. TAs will also be able to add submission deadlines and set penalties for late submissions. Ultimately, the goal is for TAs to be able to create assignment deadlines, record down their students' time of submission, and grade students' work while also penalizing late submissions.
 
 ### Display of assignment data
-Currently assignments cannot be viewed as there is not much to be done with them without a grading feature. We plan to make them displayable together with the implementation of grading of assignments in the future so that the information is meaningful. This will be done via some sort of `list-assignments` command that will show what assignments are in the group, and for each student if they have submitted or not.
+Currently, assignments cannot be viewed as there is not much to be done with them without a grading feature. We plan to make them displayable together with the implementation of grading of assignments in the future so that the information is meaningful. This will be done via some sort of `list-assignments` command that will show what assignments are in the group, and for each student if they have submitted or not.
 
 ### Nicer UI and output of command feedback
-Currently shows JSON output which is informative and clear for a technically inclined person, but does not look as nice on the UI. Future plan is to enhance the output format to be more visually appealing alongside a UI visual upgrade to display both person and group lists side-by-side for better information tracking. We also intend to make the feedback window dynamically sized so that error messages fit within the box and users will not need to scroll through, thus reducing friction when inputting wrong commands.
+Currently, shows JSON output which is informative and clear for a technically inclined person, but does not look as nice on the UI. Future plan is to enhance the output format to be more visually appealing alongside a UI visual upgrade to display both person and group lists side-by-side for better information tracking. We also intend to make the feedback window dynamically sized so that error messages fit within the box and users will not need to scroll through, thus reducing friction when inputting wrong commands.
 
 ### Support for TA and Lecturer roles
-Currently all persons in the application are assumed to be students which is most important to track for a TA. We plan to add support for TA and Professor roles which would facilitate the feature on grading and submission of assignments. 
+Currently, all persons in the application are assumed to be students which is most important to track for a TA. We plan to add support for TA and Professor roles which would facilitate the feature on grading and submission of assignments. 
 
 ### Listing students in sorted name order
-Currently students in groups are indexed arbitrarily. For a future enhancement, we intend to list them in sorted name order for easier lookup.
+Currently, students in groups are indexed arbitrarily. For a future enhancement, we intend to list them in sorted name order for easier lookup.
 
 ### Marking the attendance of multiple students for multiple weeks at once
 Currently, `mark-attendance` only allows the attendance of a single student and for a single week to be marked. This can be time-consuming when marking attendance for larger classes. To make the experience more efficient, we plan to allow TAs to mark multiple students' attendance for multiple weeks at once. The command would look like `mark-all-attendance g/GROUP w/WEEK1[,WEEK2,WEEK3,...] n/PERSON1 [n/PERSON2 n/PERSON3 ...]`.
 
 ### Display groups that students are in
 When listing students currently, the list does not show which groups they are in. We plan to add this information in for this command so that tutors can see which group each student belongs to without going through all the groups he is in charge of.
+
+### Precise validation for phone numbers
+Currently, the app allows any string of digits with between 3 and 15 digits to be entered as a phone number.
+We plan to add more precise validation to ensure that the phone number is in a valid format and length.
+This will help prevent errors when trying to contact students.
