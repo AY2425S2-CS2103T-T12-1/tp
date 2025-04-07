@@ -875,68 +875,114 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   - Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   - Double-click the jar file.
+   
+   - Expected: Shows the GUI with a set of sample contacts.
 
-1. Saving window preferences
+2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   - Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-      Expected: The most recent window size and location is retained.
+   - Re-launch the app by double-clicking the jar file.<br>
+      
+   - Expected: The most recent window size and location is retained.
+  
+### Adding a person
 
-1. _{ more test cases …​ }_
+1. Adding person with valid fields
+
+  - `add n/John Doe p/12345678 e/john@email.com a/123 Street`
+
+  - `add n/John S/O Jonathan p/2345 e/john2@email.com a/1234 Street`
+
+  - `add n/Doe O'Neil p/999 e/doe3@email.com a/Deer Street`
+
+  - `add n/Mary-Jane Williams p/9876543210 e/mjwilliams@email.com a/Spidey Street`
+
+  - Expected: Students with specified details are added.
+
+2. Adding person with invalid fields
+
+  - `add n/Shawn p/12 e/john@email.com a/12 Street` (invalid phone number)
+
+  - `add n/John Athan p/2345 e/john2.com a/34 Street` (invalid email)
+
+  - `add n/Sean*Neil p/999 e/doe3@email.com a/Deer Street` (unsupported characters in name)
+
+  - Expected: Error messages for incorrect fields. Student not added.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   - Prerequisites: List all persons using the `list` command. Group has at least 1 person.
 
-   1. Test case: `delete 1`<br>
+   - Test case: Delete first person on the list `delete 1`<br>
 
       - Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+
       - Person that was deleted from the list should also be removed from all group it was previously part of. Can be verified using `list-group` to see all the groups.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   - Test case: Delete with invalid index `delete 0`<br>
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+      - Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-1. _{ more test cases …​ }_
 
-### Saving data
+### Adding a Group
 
-1. Dealing with missing/corrupted data files
+1. Adding group with valid fields
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+  - `add-group n/G12`
 
-1. _{ more test cases …​ }_
+  - `add-group n/G13 t/CS2103`
 
 ### Manging Persons in Group
 
 1. Adding a Person to a Group
-   1. Prerequisites: `p:Person` is not a member of `g:Group`
-   2. Test case: `add-to-group n/ p g/ g` <br>
-      Expected: Person should show up inside `g:Group` when using either `list-group` or `find-group` commands
+
+   - Prerequisites: Group G12 exist (see Adding a Group)
+
+   - Test case: Add new person to existing group
+  
+      - Add new person (from Adding a Person) `add n/Johnny p/91234 e/joony@gmail.com a/3 Kent Ridge Rd`
+
+      - Add person to Group `add-to-group n/Johnny g/G12`
+
+      - Expected: Person Johnny should show up inside group G12 when using either `list-group` or `find-group` commands
+
 2. Adding a Person who already exist in the Group
-   1. Prerequisite: `p:Person` is already a member of `g:Group`
-   2. Test case: `add-to-group n/ p g/ g` <br>
-      Expected: Error message indicating `p:Person` is already in `g:Group`. No duplicate entry should be created.
+
+   - Prerequisite: Johnny is already in Group G12 (see point 1)
+
+   - Test case: Add existing person in group to existing group
+
+      - Add person to Group `add-to-group n/Johnny g/G12`
+
+      - Expected: Error message indicating Johnny is already in Group G12. 
+
 3. Deleting a Person from a Group
-   1. Prerequisites: `p:Person` is already a member of `g:Group`
-   2. Test case: `delete-from-group n/ p g/ g` <br>
-      Expected: Person should no longer show up inside `g:Group` when using either `list-group` or `find-group` commands
+
+   - Prerequisite: Johnny is already in Group G12 (see point 1)
+
+   - Test case: Remove Johnny from Group G12
+
+      - `delete-from-group n/Johnny g/G12` 
+
+      - Expected: Johnny should no longer show up inside Group G12 when using either `list-group` or `find-group` commands
+
 4. Deleting a Person who is not a member of Group
-   1. Prerequisite: `p:Person` is not a member of `g:Group`
-   2. Test case: `delete-from-group n/ p g/ g` <br>
-      Expected: Error message indicating `p:Person` does not exist in `g:Group`
+
+   - Prerequisite: Person `p` is not a member of Group G12
+
+   - Test case: `delete-from-group n/p g/G12`
+
+   - Expected: Error message indicating `p` does not exist in G12.
 
 ## **Appendix: Effort**
 
-The project required a considerable effort beyond the baseline AddressBook-Level3 (AB3), especially due to the introduction of a new domain entity: `Group`. While AB3 only deals with a flat structure of a single entity (`Person`), our project introduces a relational structure between `Group` and `Person`, along with additional responsibilities such as attendance tracking, role assignment, and performance logging through assignments.
+The project introduced a new object: `Group`, alongside a relational object `GroupMemberDetail` that describes students' details inside a particular group. This requires us to ensure that data is synchronized through the user workflow by making sure that our Maps and Lists point to the same object by reference. In particular, since `Person` is hashed by name, we had to take caution when allowing editing of name. To deal with this, we introduced 2 new data structures: `ArrayListSet` and `ArrayListMap`. These classes have the interface of `Set` and `Map` respectively, but are internally stored in `ArrayList` objects so that editing the key objects does not change our key values. This is important since we use `Person` as a key for our Map of `GroupMemberDetail` and that `hashCode()` hashes `Person` based off its name.
 
 ### Key Challenges and Effort
 
