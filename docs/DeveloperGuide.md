@@ -917,7 +917,7 @@ testers are expected to do more *exploratory* testing.
 
       - Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-      - Person that was deleted from the list should also be removed from all group it was previously part of. Can be verified using `list-group` to see all the groups.
+      - The deleted person should also be removed from all groups they were previously part of. This can be verified using `list-group` to see all the groups.
 
    - Test case: Delete with invalid index `delete 0`<br>
 
