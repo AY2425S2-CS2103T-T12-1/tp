@@ -124,10 +124,6 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 #### Notes
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-
 - Phone numbers must have between 3 and 15 digits; they need not be unique.
 
 #### Examples
@@ -218,12 +214,6 @@ Adds a new group to the group list.
 Useful for adding new tutorial groups.
 
 Format: `add-group n/GROUP_NAME [t/TAG]...`
-
-#### Notes
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A group can have any number of tags (including 0)
-</div>
 
 #### Examples
 
