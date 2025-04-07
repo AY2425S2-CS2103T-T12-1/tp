@@ -276,7 +276,7 @@ Format: `find-group KEYWORD [MORE_KEYWORDS]`
 - The order of the keywords does not matter. e.g. `T12 CS2103T` will match `CS2103T T12`.
 - Only the name is searched.
 - Only full words will be matched, e.g., `CS210` will not match `CS2103T`.
-- Persons matching at least one keyword will be returned (i.e. `OR` search), e.g., `CS2103T T13` will return `CS2103T T12` and `CS2101 T13`.
+- Groups matching at least one keyword will be returned (i.e. `OR` search), e.g., `CS2103T T13` will return `CS2103T T12` and `CS2101 T13`.
 
 #### Examples
 
