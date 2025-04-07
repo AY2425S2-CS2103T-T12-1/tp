@@ -104,7 +104,7 @@ public class EditGroupCommand extends Command {
         }
 
         model.setGroup(groupToEdit, editedGroup);
-        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, groupName));
+        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, groupName), true, editedGroup);
     }
 
     /**

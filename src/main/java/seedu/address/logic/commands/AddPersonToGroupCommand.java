@@ -74,6 +74,7 @@ public class AddPersonToGroupCommand extends Command {
         }
 
         model.addPersonToGroup(person, group);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(person), Messages.format(group)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(person), Messages.format(group)),
+                true, group);
     }
 }

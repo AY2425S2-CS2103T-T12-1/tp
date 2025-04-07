@@ -178,6 +178,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedGroup);
 
         addressBook.setGroup(target, editedGroup);
+        showGroupDetails(editedGroup);
     }
 
     @Override
@@ -220,7 +221,7 @@ public class ModelManager implements Model {
     public void addPersonToGroup(Person personToAdd, Group groupToBeAddedTo) {
         requireAllNonNull(personToAdd, groupToBeAddedTo);
         addressBook.addPersonToGroup(personToAdd, groupToBeAddedTo);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        showGroupDetails(groupToBeAddedTo);
     }
 
     @Override
