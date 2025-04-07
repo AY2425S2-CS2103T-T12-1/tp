@@ -16,7 +16,7 @@ activate Model
 Model -> VersionedAddressBook : addAssignmentToGroup(n, d, group)
 activate VersionedAddressBook
 
-VersionedAddressBook -> Group : addAssignment(n, d, group)
+VersionedAddressBook -> Group : addAssignment(n, d)
 activate Group
 
 create Assignment
