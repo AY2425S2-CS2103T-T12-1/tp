@@ -887,25 +887,25 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding person with valid fields
 
-  - `add n/John Doe p/12345678 e/john@email.com a/123 Street`
+   - `add n/John Doe p/12345678 e/john@email.com a/123 Street`
 
-  - `add n/John S/O Jonathan p/2345 e/john2@email.com a/1234 Street`
+   - `add n/John S/O Jonathan p/2345 e/john2@email.com a/1234 Street`
 
-  - `add n/Doe O'Neil p/999 e/doe3@email.com a/Deer Street`
+   - `add n/Doe O'Neil p/999 e/doe3@email.com a/Deer Street`
 
-  - `add n/Mary-Jane Williams p/9876543210 e/mjwilliams@email.com a/Spidey Street`
+   - `add n/Mary-Jane Williams p/9876543210 e/mjwilliams@email.com a/Spidey Street`
 
-  - Expected: Students with specified details are added.
+   - Expected: Students with specified details are added.
 
 2. Adding person with invalid fields
 
-  - `add n/Shawn p/12 e/john@email.com a/12 Street` (invalid phone number)
+    - `add n/Shawn p/12 e/john@email.com a/12 Street` (invalid phone number)
 
-  - `add n/John Athan p/2345 e/john2.com a/34 Street` (invalid email)
+    - `add n/John Athan p/2345 e/john2.com a/34 Street` (invalid email)
 
-  - `add n/Sean*Neil p/999 e/doe3@email.com a/Deer Street` (unsupported characters in name)
+    - `add n/Sean*Neil p/999 e/doe3@email.com a/Deer Street` (unsupported characters in name)
 
-  - Expected: Error messages for incorrect fields. Student not added.
+    - Expected: Error messages for incorrect fields. Student not added.
 
 ### Deleting a person
 
