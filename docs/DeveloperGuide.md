@@ -367,7 +367,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-### Use case: UC01 - Delete a person
+### UC01 - Delete a person
 
 **MSS**
 
@@ -390,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-### Use case: UC02 - Adding a person
+### UC02 - Adding a person
 
 **MSS**
 
@@ -409,7 +409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes from step 2.
 
-### Use case: UC03 - Editing a Contact
+### UC03 - Editing a Contact
 
 **MSS**
 
@@ -440,7 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes from step 4.
 
-### Use case: UC04 - Find a contact by name
+### UC04 - Find a contact by name
 
 **Preconditions:**
 
@@ -467,7 +467,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC05 - List all contacts
+### UC05 - List all contacts
 
 **MSS:**
 
@@ -484,7 +484,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC06 - Mark attendance for a student
+### UC06 - Mark attendance for a student
 
 **Preconditions:**
 
@@ -526,7 +526,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC07 - Unmark attendance for a student
+### UC07 - Unmark attendance for a student
 
 **Preconditions:**
 
@@ -568,7 +568,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC08 - Show a student's attendance in a group
+### UC08 - Show a student's attendance in a group
 
 **Preconditions:**
 
@@ -603,7 +603,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC09 - Add a group
+### UC09 - Add a group
 
 **Preconditions:**
 
@@ -625,7 +625,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC10 - Delete a group
+### UC10 - Delete a group
 
 **MSS:**
 
@@ -649,7 +649,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-### Use case: UC11 - Edit a group
+### UC11 - Edit a group
 
 **MSS:**
 
@@ -679,7 +679,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 3.
 
-### Use case: UC12 - Show group details
+### UC12 - Show group details
 
 **MSS:**
 
@@ -702,7 +702,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-### Use case: UC13 - Find a group by name
+### UC13 - Find a group by name
 
 **Preconditions:**
 
@@ -729,7 +729,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC14 - List all groups
+### UC14 - List all groups
 
 **MSS:**
 
@@ -746,7 +746,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC15 - Add a person to a group
+### UC15 - Add a person to a group
 
 **Preconditions:**
 
@@ -782,7 +782,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC16 - Remove a person from a group
+### UC16 - Remove a person from a group
 
 **Preconditions:**
 
@@ -818,7 +818,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC17 - View help information
+### UC17 - View help information
 
 **MSS:**
 
