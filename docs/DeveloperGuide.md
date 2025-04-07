@@ -323,12 +323,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   - Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -385,13 +379,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Teaching Assistant | Track the progress for preparations of my teaching material   | Ensure it is completed before tutorials                                  |
 | `*`      | Teaching Assistant | Plot a whisker plot of the current grade of my students       | Track their learning progress and identify stuggling students            |
 
-### Use cases
+## **Appendix: Use cases**
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-### Use case: UC01 - Delete a person
-
-{:.no_toc}
+### UC01 - Delete a person
 
 **MSS**
 
@@ -414,9 +406,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-### Use case: UC02 - Adding a person
-
-{:.no_toc}
+### UC02 - Adding a person
 
 **MSS**
 
@@ -435,9 +425,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes from step 2.
 
-### Use case: UC03 - Editing a Contact
-
-{:.no_toc}
+### UC03 - Editing a Contact
 
 **MSS**
 
@@ -468,9 +456,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes from step 4.
 
-### Use case: UC04 - Find a contact by name
-
-{:.no_toc}
+### UC04 - Find a contact by name
 
 **Preconditions:**
 
@@ -497,9 +483,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC05 - List all contacts
-
-{:.no_toc}
+### UC05 - List all contacts
 
 **MSS:**
 
@@ -516,9 +500,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC06 - Mark attendance for a student
-
-{:.no_toc}
+### UC06 - Mark attendance for a student
 
 **Preconditions:**
 
@@ -560,9 +542,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC07 - Unmark attendance for a student
-
-{:.no_toc}
+### UC07 - Unmark attendance for a student
 
 **Preconditions:**
 
@@ -604,9 +584,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC08 - Show a student's attendance in a group
-
-{:.no_toc}
+### UC08 - Show a student's attendance in a group
 
 **Preconditions:**
 
@@ -641,9 +619,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC09 - Add a group
-
-{:.no_toc}
+### UC09 - Add a group
 
 **Preconditions:**
 
@@ -665,9 +641,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC10 - Delete a group
-
-{:.no_toc}
+### UC10 - Delete a group
 
 **MSS:**
 
@@ -691,9 +665,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-### Use case: UC11 - Edit a group
-
-{:.no_toc}
+### UC11 - Edit a group
 
 **MSS:**
 
@@ -723,9 +695,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 3.
 
-### Use case: UC12 - Show group details
-
-{:.no_toc}
+### UC12 - Show group details
 
 **MSS:**
 
@@ -748,9 +718,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-### Use case: UC13 - Find a group by name
-
-{:.no_toc}
+### UC13 - Find a group by name
 
 **Preconditions:**
 
@@ -777,9 +745,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC14 - List all groups
-
-{:.no_toc}
+### UC14 - List all groups
 
 **MSS:**
 
@@ -796,9 +762,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC15 - Add a person to a group
-
-{:.no_toc}
+### UC15 - Add a person to a group
 
 **Preconditions:**
 
@@ -834,9 +798,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC16 - Remove a person from a group
-
-{:.no_toc}
+### UC16 - Remove a person from a group
 
 **Preconditions:**
 
@@ -872,9 +834,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC17 - View help information
-
-{:.no_toc}
+### UC17 - View help information
 
 **MSS:**
 
@@ -925,92 +885,119 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   - Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   - Double-click the jar file.
+   
+   - Expected result: Shows the GUI with a set of sample contacts.
 
-1. Saving window preferences
+2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   - Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-      Expected: The most recent window size and location is retained.
+   - Re-launch the app by double-clicking the jar file.<br>
+      
+   - Expected: The most recent window size and location is retained.
+  
+### Adding a person
 
-1. _{ more test cases …​ }_
+1. Adding person with valid fields
+
+   - `add n/John Doe p/12345678 e/john@email.com a/123 Street`
+
+   - `add n/John S/O Jonathan p/2345 e/john2@email.com a/1234 Street`
+
+   - `add n/Doe O'Neil p/999 e/doe3@email.com a/Deer Street`
+
+   - `add n/Mary-Jane Williams p/9876543210 e/mjwilliams@email.com a/Spidey Street`
+
+   - Expected result: The persons with the specified details are added.
+
+2. Adding person with invalid fields
+
+    - `add n/Shawn p/12 e/john@email.com a/12 Street` (invalid phone number)
+
+    - `add n/John Athan p/2345 e/john2.com a/34 Street` (invalid email)
+
+    - `add n/Sean*Neil p/999 e/doe3@email.com a/Deer Street` (unsupported characters in name)
+
+    - Expected result: The app displays error messages for the incorrect fields; the persons are not added.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   - Prerequisites: List all persons using the `list` command. Group has at least 1 person.
 
-   1. Test case: `delete 1`<br>
+   - Test case: Delete first person on the list `delete 1`<br>
 
       - Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-      - Person that was deleted from the list should also be removed from all group it was previously part of. Can be verified using `list-group` to see all the groups.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      - The deleted person should also be removed from all groups they were previously part of. This can be verified using `list-group` to see all the groups.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   - Test case: Delete with invalid index `delete 0`<br>
 
-1. _{ more test cases …​ }_
+      - Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-### Saving data
 
-1. Dealing with missing/corrupted data files
+### Adding a Group
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Adding group with valid fields
 
-1. _{ more test cases …​ }_
+   - `add-group n/G12`
+
+   - `add-group n/G13 t/CS2103`
+   - Expected result: The two groups are added and can be seen when running the `list-group` command.
 
 ### Manging Persons in Group
 
 1. Adding a Person to a Group
-   1. Prerequisites: `p:Person` is not a member of `g:Group`
-   2. Test case: `add-to-group n/ p g/ g` <br>
-      Expected: Person should show up inside `g:Group` when using either `list-group` or `find-group` commands
+
+   - Prerequisites: Group G12 exists (see [Adding a Group](#adding-a-group))
+
+   - Test case: Add new person to existing group
+  
+      - Add new person (from [Adding a Person](#adding-a-person)) `add n/Johnny p/91234 e/joony@gmail.com a/3 Kent Ridge Rd`
+
+      - Add the person to the group `add-to-group n/Johnny g/G12`
+
+      - Expected result: Person Johnny should show up inside group G12 when using either `list-group` or `show-group-details` commands
+
 2. Adding a Person who already exist in the Group
-   1. Prerequisite: `p:Person` is already a member of `g:Group`
-   2. Test case: `add-to-group n/ p g/ g` <br>
-      Expected: Error message indicating `p:Person` is already in `g:Group`. No duplicate entry should be created.
+
+   - Prerequisite: Johnny is already in Group G12 (see point 1)
+
+   - Test case: Add existing person in group to existing group
+
+      - Add person to Group `add-to-group n/Johnny g/G12`
+
+      - Expected: Error message indicating Johnny is already in Group G12. 
+
 3. Deleting a Person from a Group
-   1. Prerequisites: `p:Person` is already a member of `g:Group`
-   2. Test case: `delete-from-group n/ p g/ g` <br>
-      Expected: Person should no longer show up inside `g:Group` when using either `list-group` or `find-group` commands
+
+   - Prerequisite: Johnny is already in Group G12 (see point 1)
+
+   - Test case: Remove Johnny from Group G12
+
+      - `delete-from-group n/Johnny g/G12` 
+
+      - Expected: Johnny should no longer show up inside Group G12 when using either `list-group` or `find-group` commands
+
 4. Deleting a Person who is not a member of Group
-   1. Prerequisite: `p:Person` is not a member of `g:Group`
-   2. Test case: `delete-from-group n/ p g/ g` <br>
-      Expected: Error message indicating `p:Person` does not exist in `g:Group`
+
+   - Prerequisite: Person `p` is not a member of Group G12
+
+   - Test case: `delete-from-group n/p g/G12`
+
+   - Expected: Error message indicating `p` does not exist in G12.
 
 ## **Appendix: Effort**
 
-The project required a considerable effort beyond the baseline AddressBook-Level3 (AB3), especially due to the introduction of a new domain entity: `Group`. While AB3 only deals with a flat structure of a single entity (`Person`), our project introduces a relational structure between `Group` and `Person`, along with additional responsibilities such as attendance tracking, role assignment, and performance logging through assignments.
+### Group and GroupMemberDetail
 
-### Key Challenges and Effort
+The project introduced a new object: `Group`, alongside a relational object `GroupMemberDetail` that describes students' details inside a particular group. This requires us to ensure that data is synchronized through the user workflow by making sure that our Maps and Lists point to the same object by reference. In particular, since `Person` is hashed by name, we had to take caution when allowing editing of name. To deal with this, we introduced 2 new data structures: `ArrayListSet` and `ArrayListMap`. These classes have the interface of `Set` and `Map` respectively, but are internally stored in `ArrayList` objects so that editing the key objects does not change our key values. This is important since we use `Person` as a key for our Map of `GroupMemberDetail` and that `hashCode()` hashes `Person` based off its name.
 
-- **Designing a New Entity Model**: Introducing `Group` was not a simple data addition — it required a full-fledged model (`Group.java`) capable of:
-
-  - Maintaining its own identity and validation rules.
-  - Tracking a collection of `Person` instances with unique roles and contextual data.
-  - Persisting group-member-specific data such as attendance and assignment grades.
-
-- **Extending Existing Entities**: To maintain separation of concerns, we introduced a new class `GroupMemberDetail.java` which bridges a `Person` and a `Group` and stores contextual information like:
-
-  - Weekly attendance (`boolean[13]` per student).
-  - Assignment grades (via a custom `ArrayListMap`).
-  - Roles (e.g., Student, Teaching Assistant, Lecturer).
-
-- **Cross-Entity Logic**: Unlike AB3's flat command structure, many features required verifying the existence and relationship of both `Person` and `Group` during execution (e.g., `mark-attendance`, `add-to-group`, `show-attendance`).
-
-- **Storage Complexity**: Extending the storage layer to support nested structures like `Group -> GroupMemberDetail -> Person` required:
-
-  - Custom serialization and deserialization logic.
-  - Managing consistency between group membership and person identity.
-  - Updating the JSON format in a backward-compatible and testable way.
-
-- **UI Considerations**: We also needed to design new UI components like `GroupCard` and `GroupDetailCard` to present hierarchical data clearly, which required significant effort in FXML design and JavaFX integration.
+The introduction of a relation object `GroupMemberDetail` also made it important for us to agree on a source of truth for synchronizing data. We decided to keep the relation data inside the `Group` data, while keeping a name of the person referenced, whose reference will be looked up during the data loading stage. This design relies on the assumption made by AB3, which was that 2 persons are equal if they have the same name (mentioned under the implementation of `Person::isSamePerson()`). Hence, `Person` data is stored as one list, and `Group` data is stored as another list (which contains `GroupMemberDetail` for each group member). Data is loaded by first reading and creating `Person` objects, followed by `Groups`. Each `GroupMemberDetail` will then associate the referenced name with a `Person` object that should exist. This allows us to ensure that the references are created and referenced properly.
 
 ### Reuse and Adaptation
 
@@ -1020,9 +1007,7 @@ The project required a considerable effort beyond the baseline AddressBook-Level
 
 ### Summary
 
-Implementing Groups added substantial architectural and technical complexity, transforming the app from a flat contact book into a lightweight group management system with role-based semantics, performance tracking, and detailed inter-entity relationships.
-
-This shift from simple CRUD operations to relational logic and multi-level storage increased the overall effort significantly beyond AB3's scope.
+Implementing `Group` and `GroupMemberDetail` added substantial architectural and technical complexity, transforming the app from a simple JSON list data structure to one that required careful synchronization and development of new data structures to support our needs, requiring a significant portion of our effort.
 
 ## **Appendix: Planned Enhancements**
 
