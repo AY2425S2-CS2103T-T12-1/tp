@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
@@ -80,4 +81,7 @@ public class Messages {
         return builder.toString();
     }
 
+    public static String format(Assignment assignment) {
+        return assignment.getName() + "; Deadline: " + assignment.getDeadline();
+    }
 }
