@@ -1019,7 +1019,7 @@ Currently, assignments cannot be viewed as there is not much to be done with the
 Currently, shows JSON output which is informative and clear for a technically inclined person, but does not look as nice on the UI. Future plan is to enhance the output format to be more visually appealing alongside a UI visual upgrade to display both person and group lists side-by-side for better information tracking. We also intend to make the feedback window dynamically sized so that error messages fit within the box and users will not need to scroll through, thus reducing friction when inputting wrong commands.
 
 ### Support for TA and Lecturer roles
-Currently, all persons in the application are assumed to be students which is most important to track for a TA. We plan to add support for TA and Professor roles which would facilitate the feature on grading and submission of assignments. 
+Currently, all persons in the application are assumed to be students which is most important to track for a TA. We plan to add support for TA and Professor roles which would facilitate the feature on grading and submission of assignments.
 
 ### Listing students in sorted name order
 Currently, students in groups are indexed arbitrarily. For a future enhancement, we intend to list them in sorted name order for easier lookup.
