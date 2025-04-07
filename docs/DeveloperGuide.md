@@ -941,7 +941,7 @@ testers are expected to do more *exploratory* testing.
 
    - Test case: Add new person to existing group
   
-      - Add new person (from Adding a Person) `add n/Johnny p/91234 e/joony@gmail.com a/3 Kent Ridge Rd`
+      - Add new person (from [Adding a Person](#adding-a-person)) `add n/Johnny p/91234 e/joony@gmail.com a/3 Kent Ridge Rd`
 
       - Add person to Group `add-to-group n/Johnny g/G12`
 
