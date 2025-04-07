@@ -3,17 +3,34 @@ layout: page
 title: User Guide
 ---
 
-TAbby Dabby is a **desktop app designed for teaching assistants, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, it can get your administrative tasks done faster than traditional GUI apps.
-At a glance, TAbby Dabby allows you to:
-
-- Manage contacts of students in their tutorial groups
-- Track student attendance
-- Track students' assignment scores
+TAbby Dabby is a **desktop app to help teaching assistants (TAs) with their administrative duties**.
+It is optimised for TAs who are comfortable using a command line interface (CLI) but still want a graphical user interface (GUI).
+If you are a TA who can type fast, TAbby Dabby can get your administrative tasks done faster than traditional GUI apps.
 
 - Table of Contents
 {:toc}
 
 ---
+
+## Introduction
+
+TAbby Dabby helps TAs with four main tasks:
+- Managing the contact details of students, co-TAs, and lecturers. TAbby Dabby calls these people **Persons**.
+- Managing the tutorial groups that you are a part of. TAbby Dabby calls these tutorial groups **Groups**.
+- Tracking the attendance of students in your tutorial groups. TAbby Dabby calls this **Attendance**.
+- Tracking the assignments of your tutorial groups. TAbby Dabby calls these **Assignments**.
+
+This User Guide uses the terms **Persons**, **Groups**, **Attendance**, and **Assignment** frequently to refer to these entities.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Relationship between each entity**<br>
+
+- Each **Group** can have multiple **Persons** (members) in it, and each **Person** can be a member of multiple **Groups**.
+- Each **Group** can have multiple **Assignments** in it, but each **Assignment** can only belong to one **Group**.
+- Each **Person** has an **Attendance** record for each **Group** they belong to, and each **Group** has an **Attendance** record for each **Person** in it.
+
+</div>
 
 ## Quick start
 
