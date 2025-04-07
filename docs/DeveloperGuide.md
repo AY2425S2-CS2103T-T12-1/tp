@@ -873,7 +873,7 @@ testers are expected to do more *exploratory* testing.
 
    - Double-click the jar file.
    
-   - Expected: Shows the GUI with a set of sample contacts.
+   - Expected result: Shows the GUI with a set of sample contacts.
 
 2. Saving window preferences
 
