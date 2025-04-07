@@ -80,6 +80,29 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseGroupName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGroupName((String) null));
+    }
+
+    @Test
+    public void parseGroupName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGroupName(INVALID_NAME));
+    }
+
+    @Test
+    public void parseGroupName_validValueWithoutWhitespace_returnsName() throws Exception {
+        String expectedName = VALID_NAME;
+        assertEquals(expectedName, ParserUtil.parseGroupName(VALID_NAME));
+    }
+
+    @Test
+    public void parseGroupName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
+        String expectedName = VALID_NAME;
+        assertEquals(expectedName, ParserUtil.parseGroupName(nameWithWhitespace));
+    }
+
+    @Test
     public void parsePhone_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
     }
