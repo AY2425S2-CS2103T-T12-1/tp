@@ -895,7 +895,7 @@ testers are expected to do more *exploratory* testing.
 
    - `add n/Mary-Jane Williams p/9876543210 e/mjwilliams@email.com a/Spidey Street`
 
-   - Expected: Students with specified details are added.
+   - Expected result: The persons with the specified details are added.
 
 2. Adding person with invalid fields
 
