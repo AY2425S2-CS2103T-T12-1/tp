@@ -15,6 +15,7 @@ UniquePersonList -down-> Person
 
 Group *--> Person : "Key"
 Group *--> GroupMemberDetails : "Value"
+Group *--> Assignment
 
 Person *--> Name
 Person *--> Phone
