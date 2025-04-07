@@ -228,8 +228,8 @@ The `Group` object will create a new `GroupMemberDetail` object tied to the newl
 
 The sequence diagram below illustrates the process of adding an Assignment to a Group using the command `add-assignment n/a g/g d/d`.
 
-1. As will all commands, the command will go through the standard logic sequence. A unique command parser is created to parse the input data and construct an `AddAssignmentCommand` object.
-2. The `LogicManager` then executes the command by calling `execute(m)
+1. As with all commands, the command will go through the standard logic sequence. A unique command parser is created to parse the input data and construct an `AddAssignmentCommand` object.
+2. The `LogicManager` then executes the command by calling `execute(m)`
 3. The `AddAssignmentCommand` retrieves the target `Group` object from the `Model`
 4. The `Model`'s `addAssignmentToGroup` method is called with the necessary parameters.
 5. A `CommandResult` is returned for `Ui` purposes.

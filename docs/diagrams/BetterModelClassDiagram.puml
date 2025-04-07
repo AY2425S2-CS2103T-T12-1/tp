@@ -23,6 +23,7 @@ Person *--> Email
 Person *--> Address
 
 Group -up-> "*" Tag
+Group -up-> "*" Assignment
 
 Group *--> Name
 Group --> "*" Person
