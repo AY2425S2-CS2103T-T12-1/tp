@@ -937,7 +937,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a Person to a Group
 
-   - Prerequisites: Group G12 exist (see Adding a Group)
+   - Prerequisites: Group G12 exists (see [Adding a Group](#adding-a-group))
 
    - Test case: Add new person to existing group
   
