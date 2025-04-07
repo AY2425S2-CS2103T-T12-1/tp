@@ -92,10 +92,6 @@ public class GroupMemberDetail implements Result {
         this.grades = new ArrayListMap<>();
     }
 
-    public GroupMemberDetail copy(Person newPerson) {
-        return new GroupMemberDetail(newPerson, this.group, this.role, this.attendance);
-    }
-
     /**
      * Constructs a {@code GroupMemberDetail} with a specified group member {@code Person}.
      * Initializes an empty list of attendance.
@@ -114,6 +110,10 @@ public class GroupMemberDetail implements Result {
         this.role = role;
         this.attendance = attendance;
         this.grades = grades;
+    }
+
+    public GroupMemberDetail copy(Person newPerson) {
+        return new GroupMemberDetail(newPerson, this.group, this.role, this.attendance);
     }
 
     /**
