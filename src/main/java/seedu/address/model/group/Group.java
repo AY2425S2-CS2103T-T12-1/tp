@@ -35,8 +35,8 @@ public class Group implements Result {
      * Message to indicate the constraints for group names.
      */
     public static final String MESSAGE_CONSTRAINTS =
-            "Group names should only contain alphanumeric characters and spaces, and it should not be blank."
-                    + "\nSpecial characters like -, \', and / are supported.";
+            "Group name must not be blank, and it must contain only alphanumeric characters, spaces,"
+                    + " apostrophes, slashes, and dashes.";
 
     /**
      * Regular expression to validate group names.
