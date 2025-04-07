@@ -96,8 +96,8 @@ Here are some notes on them:
 
 **:information_source: Notes about common fields**<br>
 
-- NAME-related and TAG fields are case-sensitive, and must contain only alphanumeric characters, spaces, slashes, and dashes. This includes the `n/`, `g/`, and `t/` fields.<br>
-  e.g. `Jensen-Huang s/o Michael` and `jensen-huang s/o michael` are valid names and tags.
+- NAME-related and TAG fields are case-sensitive, and must contain only alphanumeric characters, spaces, apostrophes, slashes, and dashes. This includes the `n/`, `g/`, and `t/` fields.<br>
+  e.g. `Jensen-Huang s/o Michael O'Neil` and `jensen-huang s/o michael o'neil` are valid and distinct names and tags.
 
 - NAME-related fields must be unique within the same category.<br>
   e.g. If you add a person with the name `Jensen Huang`, you cannot add another person with the same name. Same goes for groups.
