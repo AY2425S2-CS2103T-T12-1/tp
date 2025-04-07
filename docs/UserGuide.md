@@ -88,6 +88,9 @@ Here are some notes on them:
 - NAME-related fields must be unique within the same category.<br>
   e.g. If you add a person with the name `Jensen Huang`, you cannot add another person with the same name. Same goes for groups.
 
+- Duplicate tags are merged.<br>
+  e.g. If you add a person with the fields `t/friend t/friend`, the person will only have one tag `friend`.
+
 </div>
 
 ### Viewing help: `help`
