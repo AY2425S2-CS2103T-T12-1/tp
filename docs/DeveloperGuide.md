@@ -928,9 +928,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding group with valid fields
 
-  - `add-group n/G12`
+   - `add-group n/G12`
 
-  - `add-group n/G13 t/CS2103`
+   - `add-group n/G13 t/CS2103`
 
 ### Manging Persons in Group
 
