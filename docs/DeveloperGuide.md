@@ -945,7 +945,7 @@ testers are expected to do more *exploratory* testing.
 
       - Add the person to the group `add-to-group n/Johnny g/G12`
 
-      - Expected: Person Johnny should show up inside group G12 when using either `list-group` or `find-group` commands
+      - Expected result: Person Johnny should show up inside group G12 when using either `list-group` or `show-group-details` commands
 
 2. Adding a Person who already exist in the Group
 
