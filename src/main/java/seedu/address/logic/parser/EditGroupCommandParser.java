@@ -39,7 +39,7 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
             throw new ParseException(String.format("%s\n%s", ive.getMessage(),
                     EditGroupCommand.MESSAGE_USAGE), ive);
         }
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TAG);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
 
         String newGroupName = null;
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
