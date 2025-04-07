@@ -374,7 +374,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
 ### Use case: UC01 - Delete a person
-
 {:.no_toc}
 
 **MSS**
@@ -399,7 +398,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 2.
 
 ### Use case: UC02 - Adding a person
-
 {:.no_toc}
 
 **MSS**
@@ -420,7 +418,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes from step 2.
 
 ### Use case: UC03 - Editing a Contact
-
 {:.no_toc}
 
 **MSS**
@@ -453,7 +450,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes from step 4.
 
 ### Use case: UC04 - Find a contact by name
-
 {:.no_toc}
 
 **Preconditions:**
@@ -482,7 +478,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 ### Use case: UC05 - List all contacts
-
 {:.no_toc}
 
 **MSS:**
@@ -501,7 +496,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 ### Use case: UC06 - Mark attendance for a student
-
 {:.no_toc}
 
 **Preconditions:**
