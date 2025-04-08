@@ -185,6 +185,15 @@ Format: `delete INDEX`
 **Expected output**
 
 The GUI displays the person list, just like with the [add](#adding-a-person-add) command, but with the specified person removed from it.
+The persons that came after the deleted person will shift up to fill the gap and their indices will be updated accordingly.
+
+Before running `delete 1`:
+
+![Before delete](images/DeleteCommandResultBefore.png)
+
+After running `delete 1`:
+
+![After delete](images/DeleteCommandResultAfter.png)
 
 #### Editing a person: `edit`
 
