@@ -45,15 +45,15 @@ The person list contains all the persons, while the group list contains all the 
     * Open a command terminal (Windows: search for _cmd_ , Mac: use Spotlight to find _Terminal_ )
     * Verify installation by typing `java -version` in your terminal; it should successfully output JDK version 17.
 
-2. Download the latest `TAbbyDabby.jar` file from [here](https://github.com/AY2425S2-CS2103T-T12-1/tp/releases).
+3. Download the latest `TAbbyDabby.jar` file from [here](https://github.com/AY2425S2-CS2103T-T12-1/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your TAbby Dabby.
+4. Copy the file to the folder you want to use as the _home folder_ for your TAbby Dabby.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAbbyDabby.jar` command to run the application.<br>
+5. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAbbyDabby.jar` command to run the application.<br>
    The following GUI should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    - `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077` : Adds a person named `Jensen Huang` to the list of persons.
@@ -68,7 +68,7 @@ The person list contains all the persons, while the group list contains all the 
 
    - `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the next section for more details on how to use the app.
 
 ---
 
