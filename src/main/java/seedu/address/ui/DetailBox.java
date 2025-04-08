@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.util.ArrayListMap;
+import seedu.address.logic.Messages;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupMemberDetail;
 import seedu.address.model.person.Person;
@@ -65,7 +66,9 @@ public class DetailBox extends UiPart<Region> {
         numStudent.setText("No. Students: " + numStudents);
         numTa.setText("No. TAs: " + numTAs);
         numProf.setText("No. Professors: " + numLecturer);
-        numAssignment.setText("No. Assignments: " + group.getAssignments().size());
+        final var assignments = group.getAssignments();
+        numAssignment.setText("Assignments (" + assignments.size() + "): [\n" + group.getAssignments().stream()
+                .map(Messages::format).reduce("", (a, b) -> a + "  " + b + "\n") + "]");
         tags.getChildren().clear();
         group.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
