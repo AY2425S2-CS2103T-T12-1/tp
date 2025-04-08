@@ -184,8 +184,9 @@ Format: `delete INDEX`
 
 **Expected output**
 
-The GUI displays the person list, just like with the [add](#adding-a-person-add) command, but with the specified person removed from it.
+The GUI displays the person list command, but with the specified person removed from it.
 The persons that came after the deleted person will shift up to fill the gap and their indices will be updated accordingly.
+See [add](#adding-a-person-add) for a similar example of the expected output.
 
 Before running `delete 1`:
 
@@ -301,7 +302,8 @@ Format: `delete-group INDEX`
 
 **Expected output**
 
-The GUI displays the group list, just like with the [add-group](#adding-a-new-group-add-group) command, but with the specified group removed from it.
+The GUI displays the group list command, but with the specified group removed from it.
+See [add-group](#adding-a-new-group-add-group) for a similar example of the expected output.
 
 #### Editing a group: `edit-group`
 
@@ -324,7 +326,8 @@ Format: `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​`
 
 **Expected output**
 
-The GUI displays the specified group's updated details, like with [show-group-details](#showing-group-details-show-group-details).
+The GUI displays the specified group's updated details.
+See [show-group-details](#showing-group-details-show-group-details) for a similar example of the expected output.
 
 Note: this differs from the output of the analogous `edit` command for persons, which displays the person list instead.
 
@@ -385,7 +388,7 @@ Format: `add-to-group n/PERSON_NAME g/GROUP_NAME`
 
 **Expected output**
 
-The GUI displays the specified group's updated details, like with [show-group-details](#showing-group-details-show-group-details), with the specified person added to it.
+The GUI displays the specified group's updated details with the specified person added to it.
 
 Example result of `add-to-group n/Jensen Huang g/CS2103T T12`:
 
@@ -407,7 +410,8 @@ Format: `delete-from-group n/PERSON_NAME g/GROUP_NAME`
 
 **Expected output**
 
-The GUI displays the specified group's updated details, like with [show-group-details](#showing-group-details-show-group-details), with the specified person removed from it.
+The GUI displays the specified group's updated details with the specified person removed from it.
+See [add-to-group](#adding-a-person-to-a-group-add-to-group) for a similar example of the expected output.
 
 #### Showing group details: `show-group-details`
 
@@ -449,6 +453,7 @@ Format: `mark-attendance n/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER`
 **Expected output**
 
 The GUI displays the specified group's updated details with the specified person's attendance marked for the specified week.
+See [show-group-details](#showing-group-details-show-group-details) for a similar example of the expected output.
 
 #### Unmarking the attendance of a person: `unmark-attendance`
 
@@ -467,6 +472,7 @@ Format: `unmark-attendance n/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER`
 **Expected output**
 
 The GUI displays the specified group's updated details with the specified person's attendance unmarked for the specified week.
+See [show-group-details](#showing-group-details-show-group-details) for a similar example of the expected output.
 
 #### Showing the attendance records for a person: `show-attendance`
 
@@ -530,6 +536,7 @@ Format: `delete-assignment n/ASSIGNMENT_NAME g/GROUP_NAME`
 **Expected output**
 
 The GUI displays the specified group's updated details with the specified assignment removed from it.
+See [add-assignment](#adding-an-assignment-in-a-group-add-assignment) for a similar example of the expected output.
 
 #### Editing an assignment in a group: `edit-assignment`
 
@@ -550,7 +557,8 @@ Format: `edit-assignment n/ASSIGNMENT_NAME g/GROUP [N/NEW NAME] [d/DEADLINE]`
 
 **Expected output**
 
-The GUI displays the specified group's updated details with the specified assignment's details updated.
+The GUI displays the specified group's updated details with the specified assignment updated.
+See [add-assignment](#adding-an-assignment-in-a-group-add-assignment) for a similar example of the expected output.
 
 ---
 
