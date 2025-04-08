@@ -241,7 +241,7 @@ public class ModelManager implements Model {
     public Assignment addAssignmentToGroup(String assignmentName, LocalDate deadline, Group group, Float penalty) {
         requireAllNonNull(assignmentName, deadline, group, penalty);
         Assignment assignment = addressBook.addAssignmentToGroup(assignmentName, deadline, group, penalty);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        showGroupDetails(group);
         return assignment;
     }
 
@@ -249,14 +249,14 @@ public class ModelManager implements Model {
     public void removeAssignmentFromGroup(String assignmentName, Group group) {
         requireAllNonNull(assignmentName, group);
         addressBook.removeAssignmentFromGroup(assignmentName, group);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        showGroupDetails(group);
     }
 
     @Override
     public void editAssignment(String assignmentName, String newName, LocalDate deadline, Group group, Float penalty) {
         requireAllNonNull(assignmentName, group);
         addressBook.editAssignment(assignmentName, newName, deadline, group, penalty);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        showGroupDetails(group);
     }
 
     @Override

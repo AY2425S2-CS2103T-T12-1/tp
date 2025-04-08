@@ -32,10 +32,18 @@ This User Guide uses the terms **Persons**, **Groups**, **Attendance**, and **As
 
 </div>
 
+There are two separate lists in this app: the person list and the group list.
+The person list contains all the persons, while the group list contains all the groups.
+
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
+1. Install the Java Development Kit version `17`.<br>
+   **Windows users:** Install JDK 17 installed from [here](https://www.oracle.com/java/technologies/downloads/#java17)<br>
    **Mac users:** Ensure you have the precise JDK version specified [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+
+2. Ensure that your installation works.<br>
+    * Open a command terminal (Windows: search for _cmd_ , Mac: use Spotlight to find _Terminal_ )
+    * Verify installation by typing `java -version` in your terminal; it should successfully output JDK version 17.
 
 2. Download the latest `TAbbyDabby.jar` file from [here](https://github.com/AY2425S2-CS2103T-T12-1/tp/releases).
 
@@ -64,9 +72,9 @@ This User Guide uses the terms **Persons**, **Groups**, **Attendance**, and **As
 
 ---
 
-## Features
+## General notes about using the app
 
-### Common notes about command formats and common fields
+### Command formats
 
 <div markdown="block" class="alert alert-info">
 
@@ -89,6 +97,8 @@ This User Guide uses the terms **Persons**, **Groups**, **Attendance**, and **As
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+### Common fields
+
 Many of our commands also share similar fields.
 Here are some notes on them:
 
@@ -96,26 +106,52 @@ Here are some notes on them:
 
 **:information_source: Notes about common fields**<br>
 
-- NAME-related and TAG fields are case-sensitive, and must contain only contain alphanumeric characters, spaces, slashes, and dashes. This includes the `n/`, `g/`, and `t/` fields.<br>
-  e.g. `Jensen-Huang s/o Michael` and `jensen-huang s/o michael` are valid names and tags.
+- NAME-related and TAG fields are case-sensitive, and must contain only alphanumeric characters, spaces, apostrophes, slashes, and dashes. This includes the `n/`, `g/`, and `t/` fields.<br>
+  e.g. `Jensen-Huang s/o Michael O'Neil` and `jensen-huang s/o michael o'neil` are valid and distinct names and tags.
 
 - NAME-related fields must be unique within the same category.<br>
   e.g. If you add a person with the name `Jensen Huang`, you cannot add another person with the same name. Same goes for groups.
 
-- Duplicate tags are merged.<br>
+- Duplicate TAGs are merged.<br>
   e.g. If you add a person with the fields `t/friend t/friend`, the person will only have one tag `friend`.
+
+- INDEX fields refer to the index number of the person (resp. group) in the person (resp. group) list that was last displayed. It **must be a positive integer** 1, 2, 3, …, up till the number of persons (resp. groups) in the list.
 
 </div>
 
-### Viewing help: `help`
+## Commands
+
+### General commands
+
+#### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+**Expected output**
 
 Format: `help`
 
-### Adding a person: `add`
+**Expected output**
+
+The GUI displays a pop-up window with a link to this User Guide.
+
+Example result of `help`:
+
+![help message](images/helpMessage.png)
+
+#### Exiting the program: `exit`
+
+Exits the program.
+
+Format: `exit`
+
+**Expected output**
+
+The GUI closes and the app terminates.
+
+### Person commands
+
+#### Adding a person: `add`
 
 Adds a person to the person list.
 Useful for adding details of your students.
@@ -131,27 +167,45 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 - `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077 t/friend`
 - `add n/Jeff Bezos p/12345678 t/friend e/jeffb@amazon.com a/21 Lower Kent Ridge Rd, Singapore 119077`
 
-Example of result of `add` command:
+**Expected output**
 
-![Add command](images/AddCommand.png)
+The GUI displays the person list with the new person added to the end of it.
 
-### Deleting a person: `delete`
+Example result of `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower Kent Ridge Rd, Singapore 119077 t/friends`:
+
+![Add command](images/AddCommandResult.png)
+
+**Known Limitations**
+
+Common names that contain slashes like S/O and D/O are supported, but not all slashes are supported, i.e., `p/ ``a/` `t/` `e/`, as they are not typically used in names. We plan to extend support for rarer names in the future.
+
+#### Deleting a person: `delete`
 
 Deletes the specified person from the person list.
 Useful for removing the details of someone who is no longer a student.
 
 Format: `delete INDEX`
 
-**Notes**
-
-- `INDEX` refers to the index number of the person in the last displayed person list. It **must be a positive integer** 1, 2, 3, …​
-
 **Examples**
 
 - `list` followed by `delete 2` deletes the second person in the person list.
 - `find Jensen` followed by `delete 1` deletes the first person in the results of the `find` command. Find out more about the `find` command [here](#finding-persons-by-name-find).
 
-### Editing a person: `edit`
+**Expected output**
+
+The GUI displays the person list command, but with the specified person removed from it.
+The persons that came after the deleted person will shift up to fill the gap and their indices will be updated accordingly.
+See [add](#adding-a-person-add) for a similar example of the expected output.
+
+Before running `delete 1`:
+
+![Before delete](images/DeleteCommandResultBefore.png)
+
+After running `delete 1`:
+
+![After delete](images/DeleteCommandResultAfter.png)
+
+#### Editing a person: `edit`
 
 Edits the details of the specified person in the person list.
 
@@ -159,7 +213,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 **Notes**
 
-- `INDEX` refers to the index number of the person in the last displayed person list. It **must be a positive integer** 1, 2, 3, …​
 - You must fill in at least one of the optional fields.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed, e.g., if the person at index `2` currently has the tag `frenemy`, and we run the command `edit 2 t/enemy`, the tag `frenemy` will be removed, and a new tag `enemy` will be added.
@@ -171,13 +224,23 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 - `edit 2 n/Jeff Bezos t/` Edits the name of the 2nd person to be `Jeff Bezos` and clears all existing tags.
 - `edit 2 n/Jeff Bezos t/friend` Edits the name of the 2nd person to be `Jeff Bezos`, clears all existing tags, and adds the tag `friend`.
 
-### Listing all persons: `list`
+**Expected output**
+
+Example result of `edit 1 p/91234567 e/jensenh@yahoo.com t/buddy`:
+
+![Result for `edit 1 p/91234567 e/jensenh@yahoo.com`](images/EditCommandResult.png)
+
+#### Listing all persons: `list`
 
 Shows a list of all persons in the person list.
 
 Format: `list`
 
-### Finding persons by name: `find`
+**Expected output**
+
+The GUI displays a list of all persons in the person list.
+
+#### Finding persons by name: `find`
 
 Finds persons whose names contain any of the specified keywords.
 
@@ -198,17 +261,25 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 **Expected output**
 
-Example of executing the `find huang bezos` command:
+The GUI displays a list of persons whose names contain any of the specified keywords.
+
+Example result of executing the `find huang bezos` command:
 
 ![Result for 'find huang bezos'](images/findHuangBezosResult.png)
 
-### Deleting all persons: `clear`
+#### Deleting all persons: `clear`
 
 Deletes all persons from the person list.
 
 Format: `clear`
 
-### Adding a new group: `add-group`
+**Expected output**
+
+The GUI displays an empty person list.
+
+### Group commands
+
+#### Adding a new group: `add-group`
 
 Adds a new group to the group list.
 Useful for adding new tutorial groups.
@@ -219,22 +290,31 @@ Format: `add-group n/GROUP_NAME [t/TAG]...`
 
 - `add-group n/CS2103T T12 t/CS` creates a group with name `CS2103T T12` and the tag `CS`.
 
-### Deleting a group: `delete-group`
+**Expected output**
+
+The GUI displays the group list with the new group added to the end of it.
+
+Example result of `add-group n/CS2103T T12 t/CS`:
+
+![Result of add-group](images/AddGroupCommandResult.png)
+
+#### Deleting a group: `delete-group`
 
 Deletes the specified group from the group list.
 Useful for removing a tutorial group that is no longer needed.
 
 Format: `delete-group INDEX`
 
-**Notes**
-
-- `INDEX` refers to the index number of the group in the last displayed group list. It **must be a positive integer** 1, 2, 3, …​
-
 **Examples**
 
 - `delete-group 2` deletes the group with index `2` in the last shown group list.
 
-### Editing a group: `edit-group`
+**Expected output**
+
+The GUI displays the group list, but with the specified group removed from it.
+See [add-group](#adding-a-new-group-add-group) for a similar example of the expected output.
+
+#### Editing a group: `edit-group`
 
 Edits the specified group details in the group list.
 
@@ -242,7 +322,6 @@ Format: `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​`
 
 **Notes**
 
-- `INDEX` refers to the index number of the group in the last displayed group list. It **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the group will be removed, e.g., if the group at index `2` currently has the tag `gaming`, and we run the command `edit-group 2 t/study`, the tag `gaming` will be removed, and a new tag `study` will be added.
@@ -254,7 +333,18 @@ Format: `edit-group INDEX [n/GROUP_NAME] [t/TAG]…​`
 - `edit-group 2 n/CS2103T T12 t/` Edits the name of the second group to be `CS2103T T12` and clears all existing tags.
 - `edit-group 2 n/CS2103T T12 t/study t/friends` Edits the name of the second group to be `CS2103T T12`, clears all existing tags, and adds the tags `study` and `friends`.
 
-### Listing all groups: `list-group`
+**Expected output**
+
+The GUI displays the specified group's updated details.
+See [show-group-details](#showing-group-details-show-group-details) for a similar example of the expected output.
+
+Note: this differs from the output of the analogous `edit` command for persons, which displays the person list instead.
+
+Example result of `edit-group 1 n/CS2103T T12 t/study t/friends`:
+
+![Result of edit-group](images/EditGroupCommandResult.png)
+
+#### Listing all groups: `list-group`
 
 Shows a list of all groups in the group list along with their information, e.g., indices and names.
 
@@ -262,9 +352,13 @@ Format: `list-group`
 
 **Expected output**
 
-![ResultOfList](images/listGroupResults.png)
+The GUI displays a list of all groups in the group list.
 
-### Finding a group by name: `find-group`
+Example result of `list-group`:
+
+![Result of list](images/ListGroupCommandResult.png)
+
+#### Finding a group by name: `find-group`
 
 Finds groups whose names contain any of the given keywords.
 
@@ -283,30 +377,41 @@ Format: `find-group KEYWORD [MORE_KEYWORDS]`
 - `find-group T12` may output `T12`, `t12`, and `CS2103T T12`.
 - `find-group t12 t13` may output `CS2103T T12` and `CS2103T T13`.
 
-### Adding a person to a group: `add-to-group`
+**Expected output**
+
+The GUI displays a list of groups whose names contain any of the specified keywords.
+
+Example result of executing the `find-group t12 t13` command:
+
+![Result of find-group](images/FindGroupCommandResult.png)
+
+#### Adding a person to a group: `add-to-group`
 
 Adds the specified person to the specified group.
 
 Format: `add-to-group n/PERSON_NAME g/GROUP_NAME`
 
-**Notes**
-
-- `PERSON_NAME` and `GROUP_NAME` are the names of a person and a group respectively.
-- For now, the person is assumed to be a student. We plan to support the addition of co-TAs and lecturers in the future.
-
 **Examples**
 
 - `add-to-group n/Jensen Huang g/CS2103T T12` adds the person named `Jensen Huang` to the group named `CS2103T T12`.
 
-### Removing a person from a group: `delete-from-group`
+**Expected output**
+
+The GUI displays the specified group's updated details with the specified person added to it.
+
+Example result of `add-to-group n/Jensen Huang g/CS2103T T12`:
+
+![Result of add-to-group](images/AddToGroupCommandResult.png)
+
+**Known limitations**
+
+- The person is assumed to be a student for now. We plan to support the addition of co-TAs and lecturers in the future.
+
+#### Removing a person from a group: `delete-from-group`
 
 Removes the specified person from the specified group.
 
 Format: `delete-from-group n/PERSON_NAME g/GROUP_NAME`
-
-**Notes**
-
-- `PERSON_NAME` and `GROUP_NAME` are the names of a person and a group respectively.
 
 **Examples**
 
@@ -314,17 +419,14 @@ Format: `delete-from-group n/PERSON_NAME g/GROUP_NAME`
 
 **Expected output**
 
-- The GUI will display the updated details of the group.
+The GUI displays the specified group's updated details with the specified person removed from it.
+See [add-to-group](#adding-a-person-to-a-group-add-to-group) for a similar example of the expected output.
 
-### Showing group details: `show-group-details`
+#### Showing group details: `show-group-details`
 
 Shows the key details regarding the specified group.
 
 Format: `show-group-details INDEX`
-
-**Notes**
-
-- The index refers to the index number shown in the last displayed group list. The index **must be a positive integer** 1, 2, 3, …​
 
 **Examples**
 
@@ -332,12 +434,18 @@ Format: `show-group-details INDEX`
 
 **Expected output**
 
-- Shows details including:
-    - Group name and tags
-    - Number of group members
-    - Name, role, and attendance of every group member
+The GUI shows the details of the specified group, including:
+  - Group name and tags
+  - Number of students, TAs, lecturers, and assignments
+  - Name, role, and attendance of every group member
 
-### Marking the attendance of a person: `mark-attendance`
+Example result of `show-group-details 1`:
+
+![Result of show-group-details](images/ShowGroupDetailsCommandResult.png)
+
+### Attendance commands
+
+#### Marking the attendance of a person: `mark-attendance`
 
 Marks the attendance of the specified person in the specified group for the specified week.
 
@@ -345,8 +453,6 @@ Format: `mark-attendance n/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER`
 
 **Notes**
 
-- `PERSON_NAME` is the name of the student.
-- `GROUP_NAME` is the name of the group.
 - `WEEK_NUMBER` must be a positive integer between 1 and 13 (inclusive).
 
 **Examples**
@@ -355,9 +461,10 @@ Format: `mark-attendance n/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER`
 
 **Expected output**
 
-- The GUI will display the updated details of the group.
+The GUI displays the specified group's updated details with the specified person's attendance marked for the specified week.
+See [show-group-details](#showing-group-details-show-group-details) for a similar example of the expected output.
 
-### Unmarking the attendance of a person: `unmark-attendance`
+#### Unmarking the attendance of a person: `unmark-attendance`
 
 Removes the attendance record of the specified person in the specified group for the specified week.
 
@@ -365,8 +472,6 @@ Format: `unmark-attendance n/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER`
 
 **Notes**
 
-- `PERSON_NAME` is the name of the student.
-- `GROUP_NAME` is the name of the group.
 - `WEEK_NUMBER` must be a positive integer between 1 and 13 (inclusive).
 
 **Examples**
@@ -375,24 +480,30 @@ Format: `unmark-attendance n/PERSON_NAME g/GROUP_NAME w/WEEK_NUMBER`
 
 **Expected output**
 
-- The GUI will display the updated details of the group.
+The GUI displays the specified group's updated details with the specified person's attendance unmarked for the specified week.
+See [show-group-details](#showing-group-details-show-group-details) for a similar example of the expected output.
 
-### Showing the attendance records for a person: `show-attendance`
+#### Showing the attendance records for a person: `show-attendance`
 
 Displays the attendance record of the specified person in the specified group.
 
 Format: `show-attendance n/PERSON_NAME g/GROUP_NAME`
 
-**Notes**
-
-- `PERSON_NAME` is the name of the student.
-- `GROUP_NAME` is the name of the group.
-
 **Examples**
 
 - `show-attendance n/Jensen Huang g/CS2103T T12` displays the attendance for `Jensen Huang` in `CS2103T T12`.
 
-### Adding an assignment in a group: `add-assignment`
+**Expected output**
+
+The GUI displays the specified person's attendance record for the specified group.
+
+Example result of `show-attendance n/Jensen Huang g/CS2103T T12`:
+
+![Result of show-attendance](images/ShowAttendanceCommandResult.png)
+
+### Assignment commands
+
+#### Adding an assignment in a group: `add-assignment`
 
 Adds a new assignment in the specified group.
 
@@ -408,7 +519,15 @@ Format: `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE`
 
 - `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025` adds an assignment named `HW 1` to the group `CS2103T T12` with a deadline of `21-04-2025`.
 
-### Deleting an assignment in a group: `delete-assignment`
+**Expected output**
+
+The GUI displays the specified group's updated details with the new assignment added to it.
+
+Example result of `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025`:
+
+![Result of add-assignment](images/AddAssignmentCommandResult.png)
+
+#### Deleting an assignment in a group: `delete-assignment`
 
 Deletes an assignment in the specified group.
 
@@ -423,7 +542,12 @@ Format: `delete-assignment n/ASSIGNMENT_NAME g/GROUP_NAME`
 
 - `delete-assignment n/HW 1 g/CS2103T T12` deletes the assignment named `HW 1` in the group `CS2103T T12`.
 
-### Editing an assignment in a group: `edit-assignment`
+**Expected output**
+
+The GUI displays the specified group's updated details with the specified assignment removed from it.
+See [add-assignment](#adding-an-assignment-in-a-group-add-assignment) for a similar example of the expected output.
+
+#### Editing an assignment in a group: `edit-assignment`
 
 Edits details of the specified assignment in the specified group.
 
@@ -440,11 +564,10 @@ Format: `edit-assignment n/ASSIGNMENT_NAME g/GROUP [N/NEW NAME] [d/DEADLINE]`
 
 - `edit-assignment n/HW 1 g/CS2103T T12 N/Assignment 1 d/21-04-2025` renames the assignment named `HW 1` in the group `CS2103T T12` to `Assignment 1` with a deadline of `21-04-2025`.
 
-### Exiting the program: `exit`
+**Expected output**
 
-Exits the program.
-
-Format: `exit`
+The GUI displays the specified group's updated details with the specified assignment updated.
+See [add-assignment](#adding-an-assignment-in-a-group-add-assignment) for a similar example of the expected output.
 
 ---
 

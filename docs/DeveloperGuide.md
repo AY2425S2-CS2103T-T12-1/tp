@@ -1029,7 +1029,7 @@ Currently, all persons in the application are assumed to be students which is mo
 Currently, students in groups are indexed arbitrarily. For a future enhancement, we intend to list them in sorted name order for easier lookup.
 
 ### Marking the attendance of multiple students for multiple weeks at once
-Currently, `mark-attendance` only allows the attendance of a single student and for a single week to be marked. This can be time-consuming when marking attendance for larger classes. To make the experience more efficient, we plan to allow TAs to mark multiple students' attendance for multiple weeks at once. The command would look like `mark-all-attendance g/GROUP w/WEEK1[,WEEK2,WEEK3,...] n/PERSON1 [n/PERSON2 n/PERSON3 ...]`.
+Currently, `mark-attendance` only allows the attendance of a single student and for a single week to be marked. This can be time-consuming when marking attendance for larger classes. To make the experience more efficient, we plan to allow TAs to mark multiple students' attendance for multiple weeks at once. The command would look like `mark-all-attendance g/GROUP w/WEEK_1 [w/WEEK_2]... n/PERSON_NAME_1 [n/PERSON_NAME_2]...`.
 
 ### Display groups that students are in
 When listing students currently, the list does not show which groups they are in. We plan to add this information in for this command so that tutors can see which group each student belongs to without going through all the groups he is in charge of.
@@ -1038,3 +1038,7 @@ When listing students currently, the list does not show which groups they are in
 Currently, the app allows any string of digits with between 3 and 15 digits to be entered as a phone number.
 We plan to add more precise validation to ensure that the phone number is in a valid format and length.
 This will help prevent errors when trying to contact students.
+
+### Support for more names
+Currently, not all characters are supported in names, like Cyrillic characters and some combinations of slashes (i.e., `p/` and `g/`).
+We plan to extend support for more names in the future.
