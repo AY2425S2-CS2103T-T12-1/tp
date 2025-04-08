@@ -101,7 +101,8 @@ public class EditAssignmentCommand extends Command {
             throw new CommandException(d.getMessage());
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, newName == null ? name : newName));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, newName == null ? name : newName),
+                true, group);
     }
 
     @Override

@@ -90,7 +90,7 @@ public class AddAssignmentCommand extends Command {
 
         try {
             Assignment assignment = model.addAssignmentToGroup(name, deadline, group, penalty);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, Messages.format(assignment)));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, Messages.format(assignment)), true, group);
         } catch (DuplicateAssignmentException d) {
             throw new CommandException(d.getMessage());
         }

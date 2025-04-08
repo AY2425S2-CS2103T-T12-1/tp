@@ -71,7 +71,7 @@ public class DeleteAssignmentCommand extends Command {
             throw new CommandException("Assignment not found in the group!");
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, name, groupName));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, name, groupName), true, group);
     }
 
     @Override
