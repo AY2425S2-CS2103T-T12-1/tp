@@ -1038,3 +1038,7 @@ When listing students currently, the list does not show which groups they are in
 Currently, the app allows any string of digits with between 3 and 15 digits to be entered as a phone number.
 We plan to add more precise validation to ensure that the phone number is in a valid format and length.
 This will help prevent errors when trying to contact students.
+
+### Support for more names
+Currently, not all characters are supported in names, like Cyrillic characters and some combinations of slashes (i.e., `p/` and `g/`).
+We plan to extend support for more names in the future.
