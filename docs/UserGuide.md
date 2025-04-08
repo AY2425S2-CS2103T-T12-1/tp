@@ -37,8 +37,13 @@ The person list contains all the persons, while the group list contains all the 
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
+1. Install the Java Development Kit version `17`.<br>
+   **Windows users:** Install JDK 17 installed from [here](https://www.oracle.com/java/technologies/downloads/#java17)<br>
    **Mac users:** Ensure you have the precise JDK version specified [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+
+2. Ensure that your installation works.<br>
+    * Open a command terminal (Windows: search for _cmd_ , Mac: use Spotlight to find _Terminal_ )
+    * Verify installation by typing `java -version` in your terminal; it should successfully output JDK version 17.
 
 2. Download the latest `TAbbyDabby.jar` file from [here](https://github.com/AY2425S2-CS2103T-T12-1/tp/releases).
 
