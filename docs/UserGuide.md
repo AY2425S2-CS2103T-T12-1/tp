@@ -491,11 +491,13 @@ Format: `add-assignment n/ASSIGNMENT_NAME g/GROUP_NAME d/DEADLINE`
 
 - `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025` adds an assignment named `HW 1` to the group `CS2103T T12` with a deadline of `21-04-2025`.
 
-#### TODO: add image
-
 **Expected output**
 
 The GUI displays the specified group's updated details with the new assignment added to it.
+
+Example result of `add-assignment n/HW 1 g/CS2103T T12 d/21-04-2025`:
+
+![Result of add-assignment](images/AddAssignmentCommandResult.png)
 
 #### Deleting an assignment in a group: `delete-assignment`
 
