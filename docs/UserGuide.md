@@ -175,6 +175,10 @@ Example result of `add n/Jensen Huang p/98765432 e/jensenh@nvidia.com a/21 Lower
 
 ![Add command](images/AddCommandResult.png)
 
+**Known Limitations**
+
+Common names that contain slashes like S/O and D/O are supported, but not all slashes are supported, i.e., `p/ ``a/` `t/` `e/`, as they are not typically used in names. We plan to extend support for rarer names in the future.
+
 #### Deleting a person: `delete`
 
 Deletes the specified person from the person list.
