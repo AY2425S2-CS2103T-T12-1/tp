@@ -32,6 +32,9 @@ This User Guide uses the terms **Persons**, **Groups**, **Attendance**, and **As
 
 </div>
 
+There are two separate lists in this app: the person list and the group list.
+The person list contains all the persons, while the group list contains all the groups.
+
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
@@ -273,6 +276,7 @@ Format: `add-group n/GROUP_NAME [t/TAG]...`
 The GUI displays the group list with the new group added to the end of it.
 
 Example result of `add-group n/CS2103T T12 t/CS`:
+
 ![Result of add-group](images/AddGroupCommandResult.png)
 
 #### Deleting a group: `delete-group`
