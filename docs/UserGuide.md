@@ -307,7 +307,7 @@ Format: `delete-group INDEX`
 
 **Expected output**
 
-The GUI displays the group list command, but with the specified group removed from it.
+The GUI displays the group list, but with the specified group removed from it.
 See [add-group](#adding-a-new-group-add-group) for a similar example of the expected output.
 
 #### Editing a group: `edit-group`
